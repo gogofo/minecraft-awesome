@@ -1,0 +1,35 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+    "textures": {
+        "0": "blocks/anvil_base",
+        "particle": "blocks/anvil_base"
+    },
+    "elements": [
+        {
+            "name": "Cube1",
+            "from": [ 3.0, 3.0, 0.0 ], 
+            "to": [ 13.0, 13.0, 16.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 10.0, 2.0 ] },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 4.0, 2.0 ] },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 10.0, 4.0 ] },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 2.0 ] },
+                "up": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 16.0 ] },
+                "down": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 16.0 ] }
+            }
+        },
+        {
+            "name": "Cube2",
+            "from": [ 13.0, 3.0, 3.0 ], 
+            "to": [ 16.0, 13.0, 13.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 10.0, 2.0 ] },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 4.0, 2.0 ] },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 10.0, 4.0 ] },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
+                "up": { "texture": "#0", "uv": [ 0.0, 0.0, 3.0, 2.0 ] },
+                "down": { "texture": "#0", "uv": [ 0.0, 0.0, 3.0, 2.0 ] }
+            }
+        }
+    ]
+}

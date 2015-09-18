@@ -1,0 +1,30 @@
+tile.generator.name=Generator
+tile.fuser.name=Fuser
+tile.electric_wire.name=Electric Wire
+tile.charger.name=Charger
+tile.grinder.name=Grinder
+tile.electric_furnace.name=Electric Furnace
+tile.teleport_portal.name=Teleport Portal
+tile.teleporter.name=Teleporter
+tile.pipe.name=Pipe
+tile.suction_pipe.name=Suction Pipe
+tile.sorting_pipe.name=Sorting Pipe
+tile.extractor.name=Extractor
+
+item.burnt_residue.name=Burnt Residue
+item.multimeter.name=Multimeter
+item.liquid_pump.name=Liquid Pump
+item.liquid_container.name=Liquid Container
+item.machine_core.name=Machine Core
+item.tool_core.name=Tool Core
+item.conductive.name=Conductive
+item.chainsaw.name=Chainsaw
+
+item.iron_dust.name=Iron Dust
+item.gold_dust.name=Gold Dust
+
+item.mob_essence.name=Mob Essence
+
+item.quartz_iron_ingot.name=Quartz Iron Ingot
+
+item.rich_melon.name=Rich Melon

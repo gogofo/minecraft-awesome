@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "facing=north,running=false": { "model": "awesome:generator" },
+        "facing=south,running=false": { "model": "awesome:generator", "y": 180 },
+        "facing=west,running=false":  { "model": "awesome:generator", "y": 270 },
+        "facing=east,running=false":  { "model": "awesome:generator", "y": 90 },
+        "facing=north,running=true": { "model": "awesome:generator_burning" },
+        "facing=south,running=true": { "model": "awesome:generator_burning", "y": 180 },
+        "facing=west,running=true":  { "model": "awesome:generator_burning", "y": 270 },
+        "facing=east,running=true":  { "model": "awesome:generator_burning", "y": 90 }
+    }
+}

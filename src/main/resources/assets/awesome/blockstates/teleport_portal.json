@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": { "model": "awesome:teleport_portal_ew" },
+        "axis=z": { "model": "awesome:teleport_portal_ew" },
+        "axis=x": { "model": "awesome:teleport_portal_ns" }
+    }
+}

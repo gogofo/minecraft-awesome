@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": {"model": "learning:test_block"}
+    }
+}

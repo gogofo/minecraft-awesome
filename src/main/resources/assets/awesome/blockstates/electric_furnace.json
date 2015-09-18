@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "facing=north,running=false": { "model": "awesome:electric_furnace" },
+        "facing=south,running=false": { "model": "awesome:electric_furnace", "y": 180 },
+        "facing=west,running=false":  { "model": "awesome:electric_furnace", "y": 270 },
+        "facing=east,running=false":  { "model": "awesome:electric_furnace", "y": 90 },
+        "facing=north,running=true": { "model": "awesome:electric_furnace_burning" },
+        "facing=south,running=true": { "model": "awesome:electric_furnace_burning", "y": 180 },
+        "facing=west,running=true":  { "model": "awesome:electric_furnace_burning", "y": 270 },
+        "facing=east,running=true":  { "model": "awesome:electric_furnace_burning", "y": 90 }
+    }
+}
