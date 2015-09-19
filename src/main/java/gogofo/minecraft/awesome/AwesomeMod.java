@@ -6,6 +6,8 @@ import gogofo.minecraft.awesome.init.Recipes;
 import gogofo.minecraft.awesome.init.TileEntities;
 import gogofo.minecraft.awesome.proxy.CommonProxy;
 import gogofo.minecraft.awesome.recipe.RecipeFuser.Recipe;
+import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -18,7 +20,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class AwesomeMod {
 	public final static String MODID = "awesome";
 	public final static String NAME = "awesome";
-	public final static String VERSION = "0.18";
+	public final static String VERSION = "0.19";
 	
 	public static final String CLIENT_PROXY_CLASS = "gogofo.minecraft.awesome.proxy.ClientProxy";
     public static final String SERVER_PROXY_CLASS = "gogofo.minecraft.awesome.proxy.CommonProxy";

@@ -6,11 +6,20 @@ import java.util.HashMap;
 import gogofo.minecraft.awesome.tileentity.TileEntityTeleporter;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 
 public class TeleporterManager {
 	public static TeleporterManager instance = new TeleporterManager();
 	
-	private HashMap<Item, ArrayList<BlockPos>> teleportMap = new HashMap<Item, ArrayList<BlockPos>>();
+	private HashMap<Item, ArrayList<BlockPos>> teleportMap;// = new HashMap<Item, ArrayList<BlockPos>>();
+	private AwesomeWorldData awesomeWorldData;
+	
+	private TeleporterManager() {
+		World world = DimensionManager.getWorld(0);
+		awesomeWorldData = AwesomeWorldData.get(world);
+		teleportMap = awesomeWorldData.getTeleporterMap();
+	}
 	
 	public void registerTeleporter(TileEntityTeleporter teleporter) {
 		Item key = teleporter.getKey();
@@ -24,6 +33,8 @@ public class TeleporterManager {
 		}
 		
 		teleportMap.get(key).add(teleporter.getPos());
+		
+		awesomeWorldData.markDirty();
 	}
 
 	public void unregisterTeleporter(TileEntityTeleporter teleporter) {
@@ -34,6 +45,8 @@ public class TeleporterManager {
 		}
 		
 		teleportMap.get(key).remove(teleporter.getPos());
+		
+		awesomeWorldData.markDirty();
 	}
 
 	public BlockPos getDestTeleport(TileEntityTeleporter teleporter) {
