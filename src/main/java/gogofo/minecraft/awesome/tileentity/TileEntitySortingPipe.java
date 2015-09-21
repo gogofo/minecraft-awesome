@@ -134,4 +134,15 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 		
 		return null;
 	}
+	
+	public boolean hasItems() {
+    	for (int i = 0; i < 27; i++) {
+    		ItemStack stack = itemStackArray[i];
+    		if (stack != null && stack.stackSize > 0) {
+    			return true;
+    		}
+    	}
+    	
+    	return false;
+    }
 }

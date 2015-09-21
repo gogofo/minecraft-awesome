@@ -8,6 +8,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 import gogofo.minecraft.awesome.PowerManager;
 import gogofo.minecraft.awesome.init.Blocks;
 import gogofo.minecraft.awesome.init.Items;
+import gogofo.minecraft.awesome.tileentity.AwesomeTileEntityContainer;
 import gogofo.minecraft.awesome.tileentity.AwesomeTileEntityMachine;
 import gogofo.minecraft.awesome.tileentity.TileEntityElectricWire;
 import gogofo.minecraft.awesome.tileentity.TileEntityPipe;
@@ -32,6 +33,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
@@ -259,5 +261,26 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
     public int getRenderType()
     {
         return 3;
+    }
+    
+    @Override
+    public boolean canProvidePower() {
+    	return true;
+    }
+    
+    @Override
+    public int isProvidingWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side) {
+    	TileEntity te = worldIn.getTileEntity(pos);
+    	
+    	if (te == null || !(te instanceof AwesomeTileEntityContainer)) {
+    		return 0;
+    	}
+
+    	return ((AwesomeTileEntityContainer)te).hasItems() ? 1 : 0;
+    }
+    
+    @Override
+    public int isProvidingStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side) {
+    	return 0;
     }
 }

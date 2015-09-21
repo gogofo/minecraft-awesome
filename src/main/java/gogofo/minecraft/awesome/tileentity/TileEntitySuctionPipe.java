@@ -22,6 +22,10 @@ public class TileEntitySuctionPipe extends TileEntityPipe {
     		return;
     	}
 		
+		if (worldObj.isBlockIndirectlyGettingPowered(pos) > 1) {
+			return;
+		}
+		
 		suctionCooldown -= 1;
 		
 		if (suctionCooldown <= 0) {

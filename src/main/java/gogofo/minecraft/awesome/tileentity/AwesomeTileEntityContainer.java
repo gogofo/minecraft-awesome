@@ -212,4 +212,14 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
 	public boolean hasCustomName() {
 		return false;
 	}
+    
+    public boolean hasItems() {
+    	for (ItemStack stack : itemStackArray) {
+    		if (stack != null && stack.stackSize > 0) {
+    			return true;
+    		}
+    	}
+    	
+    	return false;
+    }
 }
