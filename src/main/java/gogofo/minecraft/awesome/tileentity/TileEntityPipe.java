@@ -82,6 +82,10 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements IUpdat
 	}
 	
 	protected boolean canTransferTo(ItemStack stack, EnumFacing facing) {
+		return canTransferTo(stack, facing, false);
+	}
+	
+	protected boolean canTransferTo(ItemStack stack, EnumFacing facing, boolean allowOrigin) {
 		BlockPos origin = getStackOrigin(stack);
 		BlockPos dest = getPos().offset(facing);
 		
@@ -89,7 +93,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements IUpdat
 			return false;
 		}
 		
-		if (origin.equals(dest)) {
+		if (!allowOrigin && origin.equals(dest)) {
 			return false;
 		}
 		
@@ -124,7 +128,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements IUpdat
 		return slots;
 	}
 	
-	private EnumFacing facingForCloseBlock(BlockPos pos) {
+	protected EnumFacing facingForCloseBlock(BlockPos pos) {
 		if (getPos().up().equals(pos)) {
 			return EnumFacing.UP;
 		} else if (getPos().down().equals(pos)) {

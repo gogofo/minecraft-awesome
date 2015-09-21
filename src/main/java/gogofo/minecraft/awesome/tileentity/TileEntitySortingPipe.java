@@ -1,6 +1,7 @@
 package gogofo.minecraft.awesome.tileentity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import gogofo.minecraft.awesome.block.BlockPipe;
 import gogofo.minecraft.awesome.block.BlockSortingPipe;
@@ -55,7 +56,7 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 	}
 	
 	@Override
-	protected boolean canTransferTo(ItemStack stack, EnumFacing facing) {
+	protected boolean canTransferTo(ItemStack stack, EnumFacing facing, boolean allowOrigin) {
 		boolean canTransfer = false;
 		
 		int[] slots = getTrasferSlotsForFace(facing);
@@ -68,7 +69,7 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 			}
 		}
 		
-		return canTransfer && super.canTransferTo(stack, facing);
+		return canTransfer && super.canTransferTo(stack, facing, allowOrigin);
 	}
 	
 	@Override
@@ -76,11 +77,25 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 		ArrayList<BlockPos> dests = super.getSecondaryDestsWithoutChecks(stack);
 		
 		for (EnumFacing facing : EnumFacing.VALUES) {
-			if (super.canTransferTo(stack, facing) && 
+			if (super.canTransferTo(stack, facing, false) && 
 					canTransferAll(getTrasferSlotsForFace(facing))) {
 				dests.add(0, getPos().offset(facing));
 			}
 		}
+		
+		// Make sure the dests change if there are few with the same priority
+		Collections.shuffle(dests);
+		
+		ArrayList<BlockPos> priorityDest = new ArrayList<BlockPos>();
+		
+		for (BlockPos pos : dests) {
+			if (canTransferTo(stack, facingForCloseBlock(pos), true)) {
+				priorityDest.add(pos);
+			}
+		}
+		
+		dests.removeAll(priorityDest);
+		dests.addAll(0, priorityDest);
 		
 		return dests;
 	}
