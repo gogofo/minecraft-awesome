@@ -162,6 +162,13 @@ public class RecipeCrafting {
 				   "AAA",
 				   'A', net.minecraft.init.Items.iron_axe,
 				   'B', Items.tool_core);
+		
+		GameRegistry.addRecipe(stack(Items.drill, 1),
+				   "AAA",
+				   "ABA",
+				   "AAA",
+				   'A', net.minecraft.init.Items.iron_pickaxe,
+				   'B', Items.tool_core);
 	}
 	
 	private void registerStuff() {

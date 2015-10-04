@@ -19,6 +19,7 @@ item.machine_core.name=Machine Core
 item.tool_core.name=Tool Core
 item.conductive.name=Conductive
 item.chainsaw.name=Chainsaw
+item.drill.name=Drill
 
 item.iron_dust.name=Iron Dust
 item.gold_dust.name=Gold Dust

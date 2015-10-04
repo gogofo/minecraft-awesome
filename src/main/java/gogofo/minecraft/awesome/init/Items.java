@@ -6,6 +6,7 @@ import com.sun.org.apache.xpath.internal.operations.Mult;
 
 import gogofo.minecraft.awesome.AwesomeMod;
 import gogofo.minecraft.awesome.item.ItemChainsaw;
+import gogofo.minecraft.awesome.item.ItemDrill;
 import gogofo.minecraft.awesome.item.ItemLiquidContainer;
 import gogofo.minecraft.awesome.item.ItemLiquidPump;
 import gogofo.minecraft.awesome.item.ItemMultimeter;
@@ -25,6 +26,7 @@ public class Items {
 	public static Item tool_core;
 	public static Item conductive;
 	public static Item chainsaw;
+	public static Item drill;
 	
 	public static Item iron_dust;
 	public static Item gold_dust;
@@ -62,6 +64,9 @@ public class Items {
 		
 		chainsaw = new ItemChainsaw().setUnlocalizedName("chainsaw");
 		items.add(chainsaw);
+		
+		drill = new ItemDrill().setUnlocalizedName("drill");
+		items.add(drill);
 		
 		// Dusts
 		iron_dust = new Item().setUnlocalizedName("iron_dust");
