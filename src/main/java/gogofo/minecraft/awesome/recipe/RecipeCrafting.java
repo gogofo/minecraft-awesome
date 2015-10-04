@@ -3,6 +3,7 @@ package gogofo.minecraft.awesome.recipe;
 import gogofo.minecraft.awesome.init.Blocks;
 import gogofo.minecraft.awesome.init.Items;
 import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -169,6 +170,17 @@ public class RecipeCrafting {
 				   "AAA",
 				   'A', net.minecraft.init.Items.iron_pickaxe,
 				   'B', Items.tool_core);
+		
+		ItemStack enchantedDrill = stack(Items.drill, 1);
+		enchantedDrill.addEnchantment(Enchantment.efficiency, 5);
+		enchantedDrill.addEnchantment(Enchantment.fortune, 3);
+		GameRegistry.addRecipe(enchantedDrill,
+				   "AAA",
+				   "ABA",
+				   "ACA",
+				   'A', net.minecraft.init.Items.diamond,
+				   'B', Items.drill,
+				   'C', net.minecraft.init.Blocks.lapis_block);
 	}
 	
 	private void registerStuff() {
