@@ -1,10 +1,10 @@
 package gogofo.minecraft.awesome.tileentity;
 
 import gogofo.minecraft.awesome.PowerManager;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 
-public class TileEntityElectricWire extends TileEntity implements IUpdatePlayerListBox {
+public class TileEntityElectricWire extends TileEntity implements ITickable {
 	private boolean isFirstUpdate = true;
 	
 	@Override

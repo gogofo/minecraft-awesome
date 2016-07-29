@@ -8,17 +8,17 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,7 +28,7 @@ public class BlockTeleportPortal extends BlockBreakable implements ITileEntityPr
     public static final PropertyEnum AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class, new EnumFacing.Axis[] {EnumFacing.Axis.X, EnumFacing.Axis.Z});
 
 	public BlockTeleportPortal() {
-		super(Material.portal, false);
+		super(Material.PORTAL, false);
         this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
 	}
 	
@@ -37,25 +37,10 @@ public class BlockTeleportPortal extends BlockBreakable implements ITileEntityPr
         return null;
     }
 	
-	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
-    {
-//        EnumFacing.Axis axis = (EnumFacing.Axis)worldIn.getBlockState(pos).getValue(AXIS);
-//        float f = 0.125F;
-//        float f1 = 0.125F;
-//
-//        if (axis == EnumFacing.Axis.X)
-//        {
-//            f = 0.5F;
-//        }
-//
-//        if (axis == EnumFacing.Axis.Z)
-//        {
-//            f1 = 0.5F;
-//        }
-//
-//        this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f1, 0.5F + f, 1.0F, 0.5F + f1);
-        this.setBlockBounds(0, 0, 0, 0, 0, 0);
-    }
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return new AxisAlignedBB(0, 0, 0, 0, 0, 0);
+	}
 
     public boolean isFullCube()
     {
@@ -146,9 +131,9 @@ public class BlockTeleportPortal extends BlockBreakable implements ITileEntityPr
     }
 
     @SideOnly(Side.CLIENT)
-    public EnumWorldBlockLayer getBlockLayer()
+    public BlockRenderLayer getBlockLayer()
     {
-        return EnumWorldBlockLayer.TRANSLUCENT;
+        return BlockRenderLayer.TRANSLUCENT;
     }
 
     @SideOnly(Side.CLIENT)
@@ -157,9 +142,10 @@ public class BlockTeleportPortal extends BlockBreakable implements ITileEntityPr
         return null;
     }
 
-    protected BlockState createBlockState()
+    @Override
+    protected BlockStateContainer createBlockState()
     {
-        return new BlockState(this, new IProperty[] {AXIS});
+        return new BlockStateContainer(this, new IProperty[] {AXIS});
     }
 
 	@Override

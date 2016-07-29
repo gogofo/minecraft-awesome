@@ -7,8 +7,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -24,7 +27,7 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 	}
 	
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		int maxRequiredCharge = getMaxRequiredCharge(stack, playerIn, worldIn, pos, side, hitX, hitY, hitZ);
 		int charge = getTagCharge(stack);
 		if (charge >= maxRequiredCharge) {
@@ -33,11 +36,11 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 			setTagCharge(stack, charge);
 		}
 		
-		return false;
+		return EnumActionResult.PASS;
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn) {
+	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		int maxRequiredCharge = getMaxRequiredCharge(stack, worldIn, playerIn);
 		int charge = getTagCharge(stack);
 		if (charge >= maxRequiredCharge) {
@@ -46,7 +49,7 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 			setTagCharge(stack, charge);
 		}
 		
-		return stack;
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 	}
 	
 	@Override

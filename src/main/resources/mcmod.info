@@ -1,0 +1,16 @@
+[
+{
+  "modid": "awesome",
+  "name": "awesome",
+  "description": "Adds awesome stuff to Minecraft",
+  "version": "0.30",
+  "mcversion": "1.10",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Gogofo"],
+  "credits": "Tomer Orian",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

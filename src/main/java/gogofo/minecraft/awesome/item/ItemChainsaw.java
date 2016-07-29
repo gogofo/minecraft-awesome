@@ -11,7 +11,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
@@ -43,20 +43,20 @@ public class ItemChainsaw extends AwesomeItemChargable {
 		return 0;
 	}
 	
-    private static final Set LOGS = Sets.newHashSet(new Block[] {Blocks.log, Blocks.log2});
+    private static final Set LOGS = Sets.newHashSet(new Block[] {Blocks.LOG, Blocks.LOG2});
 	
-	public float getStrVsBlock(ItemStack stack, Block block)
+    @Override
+	public float getStrVsBlock(ItemStack stack, IBlockState blockState)
     {
 		if (getCharge(stack) == 0) {
 			return 0;
 		}
 		
-        return block.getMaterial() != Material.wood && block.getMaterial() != Material.plants && block.getMaterial() != Material.vine ? super.getStrVsBlock(stack, block) : 6.0f;
+        return blockState.getMaterial() != Material.WOOD && blockState.getMaterial() != Material.PLANTS && blockState.getMaterial() != Material.VINE ? super.getStrVsBlock(stack, blockState) : 6.0f;
     }
 	
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World worldIn, Block blockIn, BlockPos pos,
-			EntityLivingBase playerIn) {
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState blockState, BlockPos pos, EntityLivingBase playerIn) {
 		final int chargeCost = 1;
 		
 		if (worldIn.isRemote) {
@@ -67,7 +67,7 @@ public class ItemChainsaw extends AwesomeItemChargable {
 			return false;
 		}
 		
-		if (!LOGS.contains(blockIn)) {
+		if (!LOGS.contains(blockState.getBlock())) {
 			return false;
 		}
 		

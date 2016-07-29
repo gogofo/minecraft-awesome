@@ -6,7 +6,7 @@ import java.util.HashMap;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
 import scala.collection.generic.BitOperations.Int;
@@ -53,7 +53,7 @@ public class AwesomeWorldData extends WorldSavedData {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		NBTTagList teleportMapNBT = new NBTTagList();
 		for (Item key : teleportMap.keySet()) {
 			NBTTagList posListNBT = new NBTTagList();
@@ -75,6 +75,8 @@ public class AwesomeWorldData extends WorldSavedData {
 		}
 		
 		nbt.setTag("teleportMap", teleportMapNBT);
+		
+		return nbt;
 	}
 	
 	public static AwesomeWorldData get(World world) {

@@ -8,8 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,7 +28,7 @@ public class ItemMultimeter extends AwesomeItemChargable {
 		int power = PowerManager.instance.getPower(pos);
 		
 		if (!worldIn.isRemote) {
-			playerIn.addChatMessage(new ChatComponentText(String.format("Power: %d", power)));
+			playerIn.addChatMessage(new TextComponentString(String.format("Power: %d", power)));
 		}
 		
 		return 1;

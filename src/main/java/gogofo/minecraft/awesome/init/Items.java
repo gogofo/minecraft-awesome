@@ -11,7 +11,7 @@ import gogofo.minecraft.awesome.item.ItemLiquidContainer;
 import gogofo.minecraft.awesome.item.ItemLiquidPump;
 import gogofo.minecraft.awesome.item.ItemMultimeter;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraftforge.fml.common.registry.GameRegistry;

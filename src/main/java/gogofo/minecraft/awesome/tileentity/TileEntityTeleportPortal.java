@@ -4,11 +4,12 @@ import gogofo.minecraft.awesome.TeleporterManager;
 import gogofo.minecraft.awesome.block.BlockTeleportPortal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 
 public class TileEntityTeleportPortal extends TileEntity {
@@ -30,13 +31,15 @@ public class TileEntityTeleportPortal extends TileEntity {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound compound)
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         super.writeToNBT(compound);
 
         compound.setInteger("teleporter_x", teleporterPos.getX());
         compound.setInteger("teleporter_y", teleporterPos.getY());
         compound.setInteger("teleporter_z", teleporterPos.getZ());
+        
+        return compound;
     }
     
     private TileEntityTeleporter getTeleporter() {
@@ -51,8 +54,8 @@ public class TileEntityTeleportPortal extends TileEntity {
 
 	public void teleportIfPossible(EntityLivingBase entityIn, IBlockState state) {
 		if (entityIn != null && entityIn.worldObj != null && !entityIn.worldObj.isRemote) {
-			if (entityIn.isInvisible()) {
-				entityIn.addPotionEffect(new PotionEffect(Potion.invisibility.id, 10));
+			if (entityIn.isInvisible()) {	
+				entityIn.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 10));
 				return;
 			}
 			
@@ -82,7 +85,7 @@ public class TileEntityTeleportPortal extends TileEntity {
 				return;
 			}
 			
-			entityIn.addPotionEffect(new PotionEffect(Potion.invisibility.id, 10));
+			entityIn.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 10));
 			entityIn.setPositionAndUpdate(destTeleport.getX(), 
 										  destTeleport.getY(), 
 										  destTeleport.getZ());

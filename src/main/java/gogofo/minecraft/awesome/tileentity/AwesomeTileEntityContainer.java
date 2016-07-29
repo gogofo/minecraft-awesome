@@ -91,25 +91,18 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
         }
     }
 	
-	/**
-     * When some containers are closed they call this on each slot, then 
-     * drop whatever it returns as an EntityItem -
-     * like when you close a workbench GUI.
-     */
-    @Override
-    public ItemStack getStackInSlotOnClosing(int index)
-    {
-        if (itemStackArray[index] != null)
-        {
-            ItemStack itemstack = itemStackArray[index];
-            itemStackArray[index] = null;
-            return itemstack;
-        }
-        else
-        {
-            return null;
-        }
-    }
+	public ItemStack removeStackFromSlot(int index) {
+		if (itemStackArray[index] != null)
+		{
+	        ItemStack itemstack = itemStackArray[index];
+	        itemStackArray[index] = null;
+	        return itemstack;
+		}
+		else
+		{
+			return null;
+		}
+	}
     
     @Override
     public void readFromNBT(NBTTagCompound compound)
@@ -132,7 +125,7 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound compound)
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         super.writeToNBT(compound);
         NBTTagList nbttaglist = new NBTTagList();
@@ -149,6 +142,8 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
         }
 
         compound.setTag("Items", nbttaglist);
+        
+        return compound;
     }
     
     @Override

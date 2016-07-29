@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import gogofo.minecraft.awesome.tileentity.AwesomeTileEntityMachine;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 public class PowerManager {
 	public static PowerManager instance = new PowerManager();

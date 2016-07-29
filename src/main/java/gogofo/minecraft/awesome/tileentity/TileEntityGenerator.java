@@ -14,11 +14,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityLockable;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
 
 public class TileEntityGenerator extends AwesomeTileEntityMachine {
 
@@ -119,12 +116,12 @@ public class TileEntityGenerator extends AwesomeTileEntityMachine {
 			return 1000000;
 		}
 		
-		return TileEntityFurnace.getItemBurnTime(stack) * 50;
+		return TileEntityFurnace.getItemBurnTime(stack) * 10;
 	}
 
 	private static boolean isLava(Block liquidType) {
-		return liquidType == net.minecraft.init.Blocks.flowing_lava ||
-				liquidType == net.minecraft.init.Blocks.lava;
+		return liquidType == net.minecraft.init.Blocks.FLOWING_LAVA ||
+				liquidType == net.minecraft.init.Blocks.LAVA;
 	}
 
 	@Override
@@ -198,11 +195,13 @@ public class TileEntityGenerator extends AwesomeTileEntityMachine {
         this.currentItemBurnTime = getItemBurnTime(itemStackArray[0]);
     }
 
-    public void writeToNBT(NBTTagCompound compound)
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         super.writeToNBT(compound);
         compound.setShort("RemainingBurnTime", (short)remainingBurnTime);
         NBTTagList nbttaglist = new NBTTagList();
+        
+        return compound;
     }
 
 	@Override

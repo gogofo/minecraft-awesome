@@ -18,7 +18,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.entity.Entity;
@@ -29,18 +29,15 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tv.twitch.chat.Chat;
 
 public class BlockPipe extends BlockContainer implements ITileEntityProvider {
 	
@@ -52,7 +49,7 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
 	public static final PropertyBool WEST = PropertyBool.create("west");
 
 	public BlockPipe() {
-		super(Material.rock);
+		super(Material.ROCK);
 		
 		this.setHardness(0.5f);
 		this.setDefaultState(stateWithConnections(this.blockState.getBaseState(), false, false, false, false, false, false));
@@ -74,22 +71,27 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
 	}
 	
 	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.MODEL;
+	}
+	
+	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return Item.getItemFromBlock(Blocks.pipe);
 	}
 	
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube(IBlockState blockState) {
 		return false;
 	}
 	
 	@Override
-	public EnumWorldBlockLayer getBlockLayer() {
-		return EnumWorldBlockLayer.CUTOUT;
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.CUTOUT;
 	}
 	
 	@Override
-	public boolean isFullCube() {
+	public boolean isFullCube(IBlockState blockState) {
 		return false;
 	}
 	
@@ -126,9 +128,9 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
 	public IBlockState getStateFromMeta(int meta) {
 		return super.getStateFromMeta(meta);
 	}
-    protected BlockState createBlockState()
+    protected BlockStateContainer createBlockState()
     {
-        return new BlockState(this, new IProperty[] {UP, DOWN, NORTH, SOUTH, EAST, WEST});
+        return new BlockStateContainer(this, new IProperty[] {UP, DOWN, NORTH, SOUTH, EAST, WEST});
     }
 
 	@Override
@@ -137,12 +139,12 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
 	}
 	
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos) {
-		IBlockState state = getActualState(getDefaultState(), worldIn, pos);
-		setBoundingBoxByState(pos, state);
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		state = this.getActualState(state, source, pos);
+		return getBoundingBoxByState(pos, state);
 	}
 	
-	private void setBoundingBoxByState(BlockPos pos, IBlockState state) {
+	private AxisAlignedBB getBoundingBoxByState(BlockPos pos, IBlockState state) {
 		final float minConnected = 0.0f;
 		final float maxConnected = 1.0f;
 		final float minDisconnected = 3/16f;
@@ -222,12 +224,12 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
 			}
 		}
 		
-		setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+		return new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 	
 	@Override
-	public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list,
-			Entity collidingEntity) {
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox,
+			List<AxisAlignedBB> collidingBoxes, Entity entityIn) {
 	}
 	
 	@Override
@@ -255,22 +257,13 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
         super.breakBlock(worldIn, pos, state);
     }
     
-    /**
-     * The type of render function that is called for this block
-     */
-    public int getRenderType()
-    {
-        return 3;
-    }
-    
     @Override
-    public boolean canProvidePower() {
+    public boolean canProvidePower(IBlockState state) {
     	return true;
     }
-    
     @Override
-    public int isProvidingWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side) {
-    	TileEntity te = worldIn.getTileEntity(pos);
+    public int getWeakPower(IBlockState blockState, IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
+		TileEntity te = worldIn.getTileEntity(pos);
     	
     	if (te == null || !(te instanceof AwesomeTileEntityContainer)) {
     		return 0;
@@ -280,7 +273,7 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
     }
     
     @Override
-    public int isProvidingStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side) {
+    public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
     	return 0;
     }
 }

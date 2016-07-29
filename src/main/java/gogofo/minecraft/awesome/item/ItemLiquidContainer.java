@@ -7,13 +7,19 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class ItemLiquidContainer extends Item {
@@ -66,7 +72,7 @@ public class ItemLiquidContainer extends Item {
 		((NBTTagCompound)stack.getTagCompound().getTag("liquid_container")).setInteger("fill", amount);
 		
 		if (amount == 0) {
-			setLiquidType(stack, Blocks.air);
+			setLiquidType(stack, Blocks.AIR);
 		}
 	}
 	
@@ -83,7 +89,7 @@ public class ItemLiquidContainer extends Item {
 		
 		if (stack.getTagCompound().getTag("liquid_container") == null) {
 			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setInteger("material", Block.getIdFromBlock(Blocks.air));
+			nbt.setInteger("material", Block.getIdFromBlock(Blocks.AIR));
 			nbt.setInteger("fill", 0);
 			stack.getTagCompound().setTag("liquid_container", nbt);
 		}
@@ -91,7 +97,7 @@ public class ItemLiquidContainer extends Item {
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-		if (getLiquidType(stack) != Blocks.air) {
+		if (getLiquidType(stack) != Blocks.AIR) {
 			tooltip.add(String.format("Liquid Type: %s", getLiquidType(stack).getLocalizedName()));
 			tooltip.add(String.format("Amount: %d", getLiquidFill(stack)));
 		}
@@ -99,7 +105,7 @@ public class ItemLiquidContainer extends Item {
 	
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		if (getLiquidType(stack) != Blocks.air) {
+		if (getLiquidType(stack) != Blocks.AIR) {
 			return String.format("%s (%s)", super.getItemStackDisplayName(stack), getLiquidType(stack).getLocalizedName());
 		} else {
 			return super.getItemStackDisplayName(stack);
@@ -107,28 +113,28 @@ public class ItemLiquidContainer extends Item {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn) {
+	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (playerIn.isSneaking()) {
 			if (getLiquidFill(stack) > 0) {
 				setLiquidFill(stack, 0);
-				return stack;
+				return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 			}
 		}
 		
-		MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(worldIn, playerIn, false);
+		RayTraceResult rayTraceResult = this.rayTrace(worldIn, playerIn, false);
 
-        if (movingobjectposition == null)
+        if (rayTraceResult == null)
         {
-            return stack;
+        	return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
         }
         else
         {
-            if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+            if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK)
             {
-            	BlockPos blockpos = movingobjectposition.getBlockPos();
+            	BlockPos blockpos = rayTraceResult.getBlockPos();
             	
             	if (getLiquidFill(stack) > 0) {
-            		BlockPos sideBlockPos = blockpos.offset(movingobjectposition.sideHit);
+            		BlockPos sideBlockPos = blockpos.offset(rayTraceResult.sideHit);
             		if (tryPlaceContainedLiquid(stack, worldIn, sideBlockPos)) {
             			decLiquid(stack, 1);
             		}
@@ -136,18 +142,18 @@ public class ItemLiquidContainer extends Item {
             }
         }
         
-        return stack;
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 	}
 	
 	public boolean tryPlaceContainedLiquid(ItemStack stack, World worldIn, BlockPos pos)
     {
-        if (getLiquidType(stack) == Blocks.air)
+        if (getLiquidType(stack) == Blocks.AIR)
         {
             return false;
         }
         else
         {
-            Material material = worldIn.getBlockState(pos).getBlock().getMaterial();
+            Material material = worldIn.getBlockState(pos).getMaterial();
             boolean flag = !material.isSolid();
 
             if (!worldIn.isAirBlock(pos) && !flag)
@@ -156,12 +162,12 @@ public class ItemLiquidContainer extends Item {
             }
             else
             {
-                if (worldIn.provider.doesWaterVaporize() && getLiquidType(stack) == Blocks.flowing_water)
+                if (worldIn.provider.doesWaterVaporize() && getLiquidType(stack) == Blocks.FLOWING_WATER)
                 {
                     int i = pos.getX();
                     int j = pos.getY();
                     int k = pos.getZ();
-                    worldIn.playSoundEffect((double)((float)i + 0.5F), (double)((float)j + 0.5F), (double)((float)k + 0.5F), "random.fizz", 0.5F, 2.6F + (worldIn.rand.nextFloat() - worldIn.rand.nextFloat()) * 0.8F);
+                    worldIn.playSound((double)((float)i + 0.5F), (double)((float)j + 0.5F), (double)((float)k + 0.5F), SoundEvents.BLOCK_WATERLILY_PLACE, SoundCategory.BLOCKS, 0.5F, 2.6F + (worldIn.rand.nextFloat() - worldIn.rand.nextFloat()) * 0.8F, false);
 
                     for (int l = 0; l < 8; ++l)
                     {

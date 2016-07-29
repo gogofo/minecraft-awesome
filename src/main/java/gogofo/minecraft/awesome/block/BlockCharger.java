@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public class BlockCharger extends AwesomeBlockRunningMachine implements IElectricalBlock {
 
 	public BlockCharger() {
-		super(Material.iron);
+		super(Material.IRON);
 		
 		this.setHardness(1.0f);
 	}

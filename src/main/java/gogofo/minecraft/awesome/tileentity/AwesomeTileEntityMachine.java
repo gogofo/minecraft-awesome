@@ -9,18 +9,18 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContainer implements ISidedInventory, IUpdatePlayerListBox {
-	private ChatComponentText displayName;
+public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContainer implements ISidedInventory, ITickable {
+	private TextComponentString displayName;
 	
 	private int powerSupplied = 0;
 	private boolean isWorkingTmpFlag = true;
@@ -35,7 +35,7 @@ public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContaine
 	public abstract boolean isWorking();
 	
 	public AwesomeTileEntityMachine() {
-		displayName =  new ChatComponentText(getName());
+		displayName =  new TextComponentString(getName());
 	}
     
     public boolean hasPower() {

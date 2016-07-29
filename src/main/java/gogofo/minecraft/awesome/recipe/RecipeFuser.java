@@ -18,18 +18,18 @@ public class RecipeFuser {
 								new HashMap<Item, HashMap<Item, Recipe>>();
 	
 	public RecipeFuser() {
-		addRecipe(new Recipe(net.minecraft.init.Items.melon, 
-							 net.minecraft.init.Items.melon, 
+		addRecipe(new Recipe(net.minecraft.init.Items.MELON, 
+							 net.minecraft.init.Items.MELON, 
 							 Items.rich_melon,
 							 20));
 		
 		addRecipe(new Recipe(Items.iron_dust, 
-							 net.minecraft.init.Items.glowstone_dust, 
+							 net.minecraft.init.Items.GLOWSTONE_DUST, 
 							 Items.gold_dust,
 							 100));
 		
-		addRecipe(new Recipe(net.minecraft.init.Items.iron_ingot, 
-							 net.minecraft.init.Items.quartz, 
+		addRecipe(new Recipe(net.minecraft.init.Items.IRON_INGOT, 
+							 net.minecraft.init.Items.QUARTZ, 
 							 Items.quartz_iron_ingot,
 							 100));
 		
@@ -38,10 +38,10 @@ public class RecipeFuser {
 	
 	
 	private void addSpawnEggs() {
-		addSpawnEggRecipe(net.minecraft.init.Items.bone, new EntitySkeleton(null));
-		addSpawnEggRecipe(net.minecraft.init.Items.rotten_flesh, new EntityZombie(null));
-		addSpawnEggRecipe(net.minecraft.init.Items.gunpowder, new EntityCreeper(null));
-		addSpawnEggRecipe(net.minecraft.init.Items.spider_eye, new EntitySpider(null));
+		addSpawnEggRecipe(net.minecraft.init.Items.BONE, new EntitySkeleton(null));
+		addSpawnEggRecipe(net.minecraft.init.Items.ROTTEN_FLESH, new EntityZombie(null));
+		addSpawnEggRecipe(net.minecraft.init.Items.GUNPOWDER, new EntityCreeper(null));
+		addSpawnEggRecipe(net.minecraft.init.Items.SPIDER_EYE, new EntitySpider(null));
 	}
 	
 	private void addSpawnEggRecipe(Item item, Entity entity) {
@@ -104,7 +104,7 @@ public class RecipeFuser {
 	
 	private ItemStack spawnEgg(Entity entity) {
 		int id = EntityList.getEntityID(entity);
-		ItemStack egg = new ItemStack(net.minecraft.init.Items.spawn_egg, 2, id);
+		ItemStack egg = new ItemStack(net.minecraft.init.Items.SPAWN_EGG, 2, id);
 		return egg;
 	}
 }

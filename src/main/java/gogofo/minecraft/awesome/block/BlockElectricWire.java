@@ -15,7 +15,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.entity.Entity;
@@ -24,17 +24,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tv.twitch.chat.Chat;
 
 public class BlockElectricWire extends Block implements ITileEntityProvider, IElectricalBlock {
 	
@@ -46,7 +43,7 @@ public class BlockElectricWire extends Block implements ITileEntityProvider, IEl
 	public static final PropertyBool WEST = PropertyBool.create("west");
 
 	public BlockElectricWire() {
-		super(Material.grass);
+		super(Material.GRASS);
 		
 		this.setHardness(0.0f);
 		this.setDefaultState(stateWithConnections(this.blockState.getBaseState(), false, false, false, false, false, false));
@@ -73,17 +70,17 @@ public class BlockElectricWire extends Block implements ITileEntityProvider, IEl
 	}
 	
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube(IBlockState blockState) {
 		return false;
 	}
 	
 	@Override
-	public EnumWorldBlockLayer getBlockLayer() {
-		return EnumWorldBlockLayer.CUTOUT;
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.CUTOUT;
 	}
 	
 	@Override
-	public boolean isFullCube() {
+	public boolean isFullCube(IBlockState blockState) {
 		return false;
 	}
 	
@@ -112,9 +109,9 @@ public class BlockElectricWire extends Block implements ITileEntityProvider, IEl
 	public IBlockState getStateFromMeta(int meta) {
 		return super.getStateFromMeta(meta);
 	}
-    protected BlockState createBlockState()
+    protected BlockStateContainer createBlockState()
     {
-        return new BlockState(this, new IProperty[] {UP, DOWN, NORTH, SOUTH, EAST, WEST});
+        return new BlockStateContainer(this, new IProperty[] {UP, DOWN, NORTH, SOUTH, EAST, WEST});
     }
 
 	@Override
@@ -123,12 +120,12 @@ public class BlockElectricWire extends Block implements ITileEntityProvider, IEl
 	}
 	
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos) {
-		IBlockState state = getActualState(getDefaultState(), worldIn, pos);
-		setBoundingBoxByState(pos, state);
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		state = this.getActualState(state, source, pos);
+		return getBoundingBoxByState(pos, state);
 	}
 	
-	private void setBoundingBoxByState(BlockPos pos, IBlockState state) {
+	private AxisAlignedBB getBoundingBoxByState(BlockPos pos, IBlockState state) {
 		final float minConnected = 0.0f;
 		final float maxConnected = 1.0f;
 		final float minDisconnected = 1/16f;
@@ -208,12 +205,12 @@ public class BlockElectricWire extends Block implements ITileEntityProvider, IEl
 			}
 		}
 		
-		setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+		return new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 	
 	@Override
-	public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list,
-			Entity collidingEntity) {
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox,
+			List<AxisAlignedBB> collidingBoxes, Entity entityIn) {
 	}
 	
 	@Override

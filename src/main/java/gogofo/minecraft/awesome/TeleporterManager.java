@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import gogofo.minecraft.awesome.tileentity.TileEntityTeleporter;
 import net.minecraft.item.Item;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 

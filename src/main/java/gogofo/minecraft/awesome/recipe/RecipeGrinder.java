@@ -11,28 +11,28 @@ public class RecipeGrinder {
 	private HashMap<Item, Recipe> recipes = new HashMap<Item, Recipe>();
 	
 	public RecipeGrinder() {
-		addRecipe(new Recipe(net.minecraft.init.Items.iron_ingot, 
+		addRecipe(new Recipe(net.minecraft.init.Items.IRON_INGOT, 
 							 stack(Items.iron_dust, 1), 
 							 50));
 		
-		addRecipe(new Recipe(net.minecraft.init.Items.gold_ingot, 
+		addRecipe(new Recipe(net.minecraft.init.Items.GOLD_INGOT, 
 							 stack(Items.gold_dust, 1), 
 							 50));
 		
-		addRecipe(new Recipe(net.minecraft.init.Blocks.iron_ore, 
+		addRecipe(new Recipe(net.minecraft.init.Blocks.IRON_ORE, 
 							 stack(Items.iron_dust, 2), 
 							 100));
 		
-		addRecipe(new Recipe(net.minecraft.init.Blocks.gold_ore, 
+		addRecipe(new Recipe(net.minecraft.init.Blocks.GOLD_ORE, 
 							 stack(Items.gold_dust, 2), 
 							 100));
 		
-		addRecipe(new Recipe(net.minecraft.init.Blocks.cobblestone, 
-				 stack(net.minecraft.init.Blocks.sand, 1), 
+		addRecipe(new Recipe(net.minecraft.init.Blocks.COBBLESTONE, 
+				 stack(net.minecraft.init.Blocks.SAND, 1), 
 				 50));
 		
-		addRecipe(new Recipe(net.minecraft.init.Blocks.stone, 
-				 stack(net.minecraft.init.Blocks.sand, 1), 
+		addRecipe(new Recipe(net.minecraft.init.Blocks.STONE, 
+				 stack(net.minecraft.init.Blocks.SAND, 1), 
 				 50));
 	}
 	

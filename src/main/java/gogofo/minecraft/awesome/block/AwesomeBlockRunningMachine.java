@@ -5,12 +5,12 @@ import gogofo.minecraft.awesome.tileentity.AwesomeTileEntityMachine;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class AwesomeBlockRunningMachine extends AwesomeBlockContainer {
@@ -71,9 +71,9 @@ public abstract class AwesomeBlockRunningMachine extends AwesomeBlockContainer {
     }
 
     @Override
-    protected BlockState createBlockState()
+    protected BlockStateContainer createBlockState()
     {
-        return new BlockState(this, new IProperty[] {FACING, RUNNING});
+        return new BlockStateContainer(this, new IProperty[] {FACING, RUNNING});
     }
     
     @Override

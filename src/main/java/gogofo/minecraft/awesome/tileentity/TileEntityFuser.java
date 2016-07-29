@@ -226,7 +226,7 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
         this.currentRecpItem2 = compound.getInteger("currentRecpItem2");
     }
 
-    public void writeToNBT(NBTTagCompound compound)
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         super.writeToNBT(compound);
         compound.setInteger("remainingFuseTime", remainingFuseTime);
@@ -234,6 +234,8 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
         compound.setInteger("currentRecpItem1", currentRecpItem1);
         compound.setInteger("currentRecpItem2", currentRecpItem2);
         NBTTagList nbttaglist = new NBTTagList();
+        
+        return compound;
     }
 
 	@Override

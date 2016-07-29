@@ -16,12 +16,12 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 
-public class TileEntityPipe extends AwesomeTileEntityContainer implements IUpdatePlayerListBox {
+public class TileEntityPipe extends AwesomeTileEntityContainer implements ITickable {
 	public static final int TRANSFER_COOLDOWN = 8;
 	
 	@Override

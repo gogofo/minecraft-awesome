@@ -207,13 +207,15 @@ public class TileEntityGrinder extends AwesomeTileEntityMachine {
         this.currentGroundItem = compound.getInteger("currentGroundItem");
     }
 
-    public void writeToNBT(NBTTagCompound compound)
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         super.writeToNBT(compound);
         compound.setInteger("remainingGrindTime", remainingGrindTime);
         compound.setInteger("currentRecpGrindTime", currentRecpGrindTime);
         compound.setInteger("currentGroundItem", currentGroundItem);
         NBTTagList nbttaglist = new NBTTagList();
+        
+        return compound;
     }
 
 	@Override

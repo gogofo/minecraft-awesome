@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 public class BlockFuser extends AwesomeBlockRunningMachine implements IElectricalBlock {
 
 	public BlockFuser() {
-		super(Material.iron);
+		super(Material.IRON);
 		
 		this.setHardness(1.0f);
 	}

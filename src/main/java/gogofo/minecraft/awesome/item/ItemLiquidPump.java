@@ -2,17 +2,21 @@ package gogofo.minecraft.awesome.item;
 
 import java.util.ArrayList;
 
+import javax.annotation.Nullable;
+
 import gogofo.minecraft.awesome.init.Items;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 public class ItemLiquidPump extends AwesomeItemChargable {
@@ -41,20 +45,20 @@ public class ItemLiquidPump extends AwesomeItemChargable {
 
 	@Override
 	public int onChargeableItemUse(ItemStack stack, World worldIn, EntityPlayer playerIn) {
-		MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(worldIn, playerIn, true);
+		RayTraceResult rayTraceResult = this.rayTrace(worldIn, playerIn, true);
 
-        if (movingobjectposition == null)
+        if (rayTraceResult == null)
         {
             return 0;
         }
         else
         {
-            if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+            if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK)
             {
-                BlockPos blockpos = movingobjectposition.getBlockPos();
+                BlockPos blockpos = rayTraceResult.getBlockPos();
 
                 IBlockState iblockstate = worldIn.getBlockState(blockpos);
-                Material material = iblockstate.getBlock().getMaterial();
+                Material material = iblockstate.getMaterial();
 
                 if (material.isLiquid()) {
                 	if ((Integer)iblockstate.getValue(BlockLiquid.LEVEL) == 0) {
@@ -63,9 +67,9 @@ public class ItemLiquidPump extends AwesomeItemChargable {
                 		}
                 	} 
                 } else {
-                	blockpos = blockpos.offset(movingobjectposition.sideHit);
+                	blockpos = blockpos.offset(rayTraceResult.sideHit);
                 	iblockstate = worldIn.getBlockState(blockpos);
-                	material = iblockstate.getBlock().getMaterial();
+                	material = iblockstate.getMaterial();
                 	
                 	if (material.isLiquid()) {
                 		blockpos = traceSource(new ArrayList<BlockPos>(),
@@ -84,6 +88,37 @@ public class ItemLiquidPump extends AwesomeItemChargable {
         }
 	}
 	
+	private ItemStack findLiquidContainer(EntityPlayer player)
+    {
+        if (this.isLiquidContainer(player.getHeldItem(EnumHand.OFF_HAND)))
+        {
+            return player.getHeldItem(EnumHand.OFF_HAND);
+        }
+        else if (this.isLiquidContainer(player.getHeldItem(EnumHand.MAIN_HAND)))
+        {
+            return player.getHeldItem(EnumHand.MAIN_HAND);
+        }
+        else
+        {
+            for (int i = 0; i < player.inventory.getSizeInventory(); ++i)
+            {
+                ItemStack itemstack = player.inventory.getStackInSlot(i);
+
+                if (this.isLiquidContainer(itemstack))
+                {
+                    return itemstack;
+                }
+            }
+
+            return null;
+        }
+    }
+	
+	private boolean isLiquidContainer(@Nullable ItemStack stack)
+    {
+        return stack != null && stack.getItem() instanceof ItemLiquidContainer;
+    }
+	
 	private boolean harvestBlock(World worldIn, EntityPlayer playerIn, BlockPos pos) {
 		if (pos == null) {
 			return false;
@@ -94,9 +129,9 @@ public class ItemLiquidPump extends AwesomeItemChargable {
 			return false;
 		}
 		
-		Material material = iblockstate.getBlock().getMaterial();
+		Material material = iblockstate.getMaterial();
 		
-		if (playerIn.inventory.hasItem(Items.liquid_container)) {
+		if (findLiquidContainer(playerIn) != null) {
 			ItemStack container = selectContainer(playerIn, material);
 			
 			if (container != null) {
@@ -124,7 +159,7 @@ public class ItemLiquidPump extends AwesomeItemChargable {
 		IBlockState iblockstate = worldIn.getBlockState(pos);
 		if (iblockstate == null || 
 				!(iblockstate.getBlock() instanceof BlockLiquid) ||
-				iblockstate.getBlock().getMaterial() != material) {
+				iblockstate.getMaterial() != material) {
 			return null;
 		}
 		
@@ -156,11 +191,11 @@ public class ItemLiquidPump extends AwesomeItemChargable {
 				
 				Block liquidType = ItemLiquidContainer.getLiquidType(stack);
 				
-				if (liquidType.getMaterial() == material) {
+				if (liquidType.getDefaultState().getMaterial() == material) {
 					return stack;
 				}
 				
-				if (selectedContainer == null && liquidType.getMaterial() == Material.air) {
+				if (selectedContainer == null && liquidType.getDefaultState().getMaterial() == Material.AIR) {
 					selectedContainer = stack;
 				}
 			}

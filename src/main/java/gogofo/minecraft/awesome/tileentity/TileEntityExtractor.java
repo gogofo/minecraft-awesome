@@ -207,13 +207,15 @@ public class TileEntityExtractor extends AwesomeTileEntityMachine {
         this.currentExtractedItem = compound.getInteger("currentExtractedItem");
     }
 
-    public void writeToNBT(NBTTagCompound compound)
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         super.writeToNBT(compound);
         compound.setInteger("remainingExtractionTime", remainingExtractionTime);
         compound.setInteger("currentRecpExtractionTime", currentRecpExtractionTime);
         compound.setInteger("currentExtractedItem", currentExtractedItem);
         NBTTagList nbttaglist = new NBTTagList();
+        
+        return compound;
     }
 
 	@Override

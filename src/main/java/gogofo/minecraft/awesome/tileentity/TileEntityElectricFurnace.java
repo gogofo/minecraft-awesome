@@ -14,11 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityLockable;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
 
 public class TileEntityElectricFurnace extends AwesomeTileEntityMachine {
 
@@ -205,13 +202,15 @@ public class TileEntityElectricFurnace extends AwesomeTileEntityMachine {
         this.currentCookResult = compound.getInteger("currentCookResult");
     }
 
-    public void writeToNBT(NBTTagCompound compound)
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         super.writeToNBT(compound);
         compound.setInteger("RemainingCookTime", remainingCookTime);
         compound.setInteger("currentItemCookTime", currentItemCookTime);
         compound.setInteger("currentCookResult", currentCookResult);
         NBTTagList nbttaglist = new NBTTagList();
+        
+        return compound;
     }
 
 	@Override

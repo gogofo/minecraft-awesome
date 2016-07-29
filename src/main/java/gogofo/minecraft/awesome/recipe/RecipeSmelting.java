@@ -9,11 +9,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class RecipeSmelting {
 	public void registerRecipes() {
 		GameRegistry.addSmelting(Items.iron_dust, 
-								 stack(net.minecraft.init.Items.iron_ingot, 1), 
+								 stack(net.minecraft.init.Items.IRON_INGOT, 1), 
 								 10f);
 		
 		GameRegistry.addSmelting(Items.gold_dust, 
-								 stack(net.minecraft.init.Items.gold_ingot, 1), 
+								 stack(net.minecraft.init.Items.GOLD_INGOT, 1), 
 								 20f);
 	}
 	

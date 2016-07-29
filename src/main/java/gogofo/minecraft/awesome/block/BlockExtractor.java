@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 public class BlockExtractor extends AwesomeBlockRunningMachine implements IElectricalBlock {
 
 	public BlockExtractor() {
-		super(Material.iron);
+		super(Material.IRON);
 		
 		this.setHardness(1.0f);
 	}

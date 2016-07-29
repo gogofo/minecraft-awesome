@@ -2,6 +2,8 @@ package gogofo.minecraft.awesome.item;
 
 import java.util.Set;
 
+import javax.annotation.Nullable;
+
 import com.google.common.collect.Sets;
 
 import net.minecraft.block.Block;
@@ -13,11 +15,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArrow;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 public class ItemDrill extends AwesomeItemChargable {
@@ -42,21 +47,61 @@ public class ItemDrill extends AwesomeItemChargable {
 	public int getMaxRequiredCharge(ItemStack stack, World worldIn, EntityPlayer playerIn) {
 		return 0;
 	}
+	
+	private ItemStack findTorch(EntityPlayer player)
+    {
+        if (this.isTorch(player.getHeldItem(EnumHand.OFF_HAND)))
+        {
+            return player.getHeldItem(EnumHand.OFF_HAND);
+        }
+        else if (this.isTorch(player.getHeldItem(EnumHand.MAIN_HAND)))
+        {
+            return player.getHeldItem(EnumHand.MAIN_HAND);
+        }
+        else
+        {
+            for (int i = 0; i < player.inventory.getSizeInventory(); ++i)
+            {
+                ItemStack itemstack = player.inventory.getStackInSlot(i);
+
+                if (this.isTorch(itemstack))
+                {
+                    return itemstack;
+                }
+            }
+
+            return null;
+        }
+    }
+	
+	private boolean isTorch(@Nullable ItemStack stack)
+    {
+		// TODO: Check this
+        return stack != null && Item.getItemFromBlock(Blocks.TORCH).getClass().isInstance(stack.getItem());
+    }
 
 	@Override
 	public int onChargeableItemUse(ItemStack stack, World worldIn, EntityPlayer playerIn) {
-		MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(worldIn, playerIn, true);
+		RayTraceResult rayTraceResult = this.rayTrace(worldIn, playerIn, true);
 
-        if (movingobjectposition == null) {
+        if (rayTraceResult == null) {
             return 0;
         }
     
-        if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-    		BlockPos blockpos = movingobjectposition.getBlockPos().offset(movingobjectposition.sideHit);
+        if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
+    		BlockPos blockpos = rayTraceResult.getBlockPos().offset(rayTraceResult.sideHit);
     		
-    		if (worldIn.isAirBlock(blockpos) && Blocks.torch.canPlaceBlockAt(worldIn, blockpos)) {
-    			if (playerIn.inventory.consumeInventoryItem(Item.getItemFromBlock(Blocks.torch))) {
-    				IBlockState state = Blocks.torch.getDefaultState().withProperty(BlockTorch.FACING, movingobjectposition.sideHit);
+    		if (worldIn.isAirBlock(blockpos) && Blocks.TORCH.canPlaceBlockAt(worldIn, blockpos)) {
+    			ItemStack torchStack = findTorch(playerIn);
+    			if (torchStack.stackSize > 0) {
+    				--torchStack.stackSize;
+
+                    if (torchStack.stackSize == 0)
+                    {
+                    	playerIn.inventory.deleteStack(torchStack);
+                    }
+                    
+    				IBlockState state = Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, rayTraceResult.sideHit);
     				worldIn.setBlockState(blockpos, state);
     			}
     		}
@@ -66,25 +111,25 @@ public class ItemDrill extends AwesomeItemChargable {
 		return 0;
 	}
 	
-	public float getStrVsBlock(ItemStack stack, Block block)
+	@Override
+	public float getStrVsBlock(ItemStack stack, IBlockState blockState)
     {
 		if (getCharge(stack) == 0) {
 			return 0;
 		}
 		
-        return Math.max(Items.diamond_pickaxe.getStrVsBlock(stack, block),
-				 		Items.diamond_shovel.getStrVsBlock(stack, block));
+        return Math.max(Items.DIAMOND_PICKAXE.getStrVsBlock(stack, blockState),
+				 		Items.DIAMOND_SHOVEL.getStrVsBlock(stack, blockState));
     }
 	
 	@Override
-	public boolean canHarvestBlock(Block blockIn) {
-		return Items.diamond_pickaxe.canHarvestBlock(blockIn) || 
-			   Items.diamond_shovel.canHarvestBlock(blockIn);
+	public boolean canHarvestBlock(IBlockState blockState) {
+		return Items.DIAMOND_PICKAXE.canHarvestBlock(blockState) || 
+			   Items.DIAMOND_SHOVEL.canHarvestBlock(blockState);
 	}
 	
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World worldIn, Block blockIn, BlockPos pos,
-			EntityLivingBase playerIn) {
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState blockState, BlockPos pos, EntityLivingBase playerIn) {
 		final int chargeCost = 1;
 		
 		if (worldIn.isRemote) {

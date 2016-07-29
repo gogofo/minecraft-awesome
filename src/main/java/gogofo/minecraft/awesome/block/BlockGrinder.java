@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 public class BlockGrinder extends AwesomeBlockRunningMachine implements IElectricalBlock {
 
 	public BlockGrinder() {
-		super(Material.iron);
+		super(Material.IRON);
 		
 		this.setHardness(1.0f);
 	}

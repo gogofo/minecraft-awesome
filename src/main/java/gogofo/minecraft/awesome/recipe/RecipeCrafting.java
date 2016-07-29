@@ -4,6 +4,7 @@ import gogofo.minecraft.awesome.init.Blocks;
 import gogofo.minecraft.awesome.init.Items;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -21,51 +22,51 @@ public class RecipeCrafting {
 				   "AAA",
 				   "BBB",
 				   "AAA",
-				   'A', net.minecraft.init.Items.iron_ingot,
+				   'A', net.minecraft.init.Items.IRON_INGOT,
 				   'B', Items.conductive);
 
 		GameRegistry.addRecipe(stack(Items.machine_core, 1), 
 							   "AAA",
 							   "ABA",
 							   "AAA",
-							   'A', net.minecraft.init.Items.iron_ingot,
+							   'A', net.minecraft.init.Items.IRON_INGOT,
 							   'B', Items.conductive);
 		
 		GameRegistry.addShapelessRecipe(stack(Blocks.generator, 1),
-									    net.minecraft.init.Blocks.furnace,
+									    net.minecraft.init.Blocks.FURNACE,
 									    Items.machine_core);
 		
 		GameRegistry.addRecipe(stack(Blocks.charger, 1), 
 							   "ABA",
 							   "ACA",
 							   "ADA",
-							   'A', net.minecraft.init.Items.redstone,
-							   'B', net.minecraft.init.Blocks.iron_block,
+							   'A', net.minecraft.init.Items.REDSTONE,
+							   'B', net.minecraft.init.Blocks.IRON_BLOCK,
 							   'C', Items.machine_core,
-							   'D', net.minecraft.init.Blocks.redstone_torch);
+							   'D', net.minecraft.init.Blocks.REDSTONE_TORCH);
 		
 		GameRegistry.addRecipe(stack(Blocks.fuser, 1),
 							   "ABC",
 							   "DEF",
 							   "GHI",
-							   'A', net.minecraft.init.Blocks.planks,
-							   'B', net.minecraft.init.Blocks.coal_block,
-							   'C', net.minecraft.init.Blocks.redstone_block,
-							   'D', net.minecraft.init.Blocks.lapis_block,
+							   'A', net.minecraft.init.Blocks.PLANKS,
+							   'B', net.minecraft.init.Blocks.COAL_BLOCK,
+							   'C', net.minecraft.init.Blocks.REDSTONE_BLOCK,
+							   'D', net.minecraft.init.Blocks.LAPIS_BLOCK,
 							   'E', Items.machine_core,
-							   'F', net.minecraft.init.Blocks.iron_block,
-							   'G', net.minecraft.init.Blocks.gold_block,
-							   'H', net.minecraft.init.Items.lava_bucket,
-							   'I', net.minecraft.init.Blocks.diamond_block);
+							   'F', net.minecraft.init.Blocks.IRON_BLOCK,
+							   'G', net.minecraft.init.Blocks.GOLD_BLOCK,
+							   'H', net.minecraft.init.Items.LAVA_BUCKET,
+							   'I', net.minecraft.init.Blocks.DIAMOND_BLOCK);
 		
 		GameRegistry.addRecipe(stack(Blocks.grinder, 1), 
 							   "AAA",
 							   "BCB",
 							   "DDD",
-							   'A', net.minecraft.init.Items.diamond_pickaxe,
-							   'B', net.minecraft.init.Items.glowstone_dust,
+							   'A', net.minecraft.init.Items.DIAMOND_PICKAXE,
+							   'B', net.minecraft.init.Items.GLOWSTONE_DUST,
 							   'C', Items.machine_core,
-							   'D', net.minecraft.init.Items.redstone);
+							   'D', net.minecraft.init.Items.REDSTONE);
 		
 		GameRegistry.addRecipe(stack(Blocks.electric_furnace, 1), 
 							   "AAA",
@@ -78,21 +79,21 @@ public class RecipeCrafting {
 				   "AAA",
 				   "BCD",
 				   "FEF",
-				   'A', net.minecraft.init.Items.minecart,
-				   'B', net.minecraft.init.Items.diamond,
+				   'A', net.minecraft.init.Items.MINECART,
+				   'B', net.minecraft.init.Items.DIAMOND,
 				   'C', Items.machine_core,
-				   'D', net.minecraft.init.Items.gold_ingot,
+				   'D', net.minecraft.init.Items.GOLD_INGOT,
 				   'F', Items.quartz_iron_ingot,
-				   'E', net.minecraft.init.Items.redstone);
+				   'E', net.minecraft.init.Items.REDSTONE);
 		
 		GameRegistry.addRecipe(stack(Blocks.extractor, 1), 
 				   "ABA",
 				   "ACA",
 				   "ADA",
-				   'A', net.minecraft.init.Blocks.obsidian,
-				   'B', net.minecraft.init.Items.diamond,
+				   'A', net.minecraft.init.Blocks.OBSIDIAN,
+				   'B', net.minecraft.init.Items.DIAMOND,
 				   'C', Items.machine_core,
-				   'D', net.minecraft.init.Blocks.piston);
+				   'D', net.minecraft.init.Blocks.PISTON);
 	}
 	
 	private void registerPipes() {
@@ -100,25 +101,25 @@ public class RecipeCrafting {
 				   "AAA",
 				   "BCB",
 				   "AAA",
-				   'A', net.minecraft.init.Blocks.cobblestone,
-				   'B', net.minecraft.init.Blocks.glass,
-				   'C', net.minecraft.init.Blocks.hopper);
+				   'A', net.minecraft.init.Blocks.COBBLESTONE,
+				   'B', net.minecraft.init.Blocks.GLASS,
+				   'C', net.minecraft.init.Blocks.HOPPER);
 		
 		GameRegistry.addRecipe(stack(Blocks.suction_pipe, 6), 
 				   "AAA",
 				   "BCB",
 				   "AAA",
-				   'A', net.minecraft.init.Blocks.planks,
-				   'B', net.minecraft.init.Blocks.glass,
-				   'C', net.minecraft.init.Blocks.hopper);
+				   'A', net.minecraft.init.Blocks.PLANKS,
+				   'B', net.minecraft.init.Blocks.GLASS,
+				   'C', net.minecraft.init.Blocks.HOPPER);
 		
 		GameRegistry.addRecipe(stack(Blocks.sorting_pipe, 6), 
 				   "AAA",
 				   "BCB",
 				   "AAA",
-				   'A', net.minecraft.init.Blocks.glass,
-				   'B', net.minecraft.init.Items.diamond,
-				   'C', net.minecraft.init.Blocks.hopper);
+				   'A', net.minecraft.init.Blocks.GLASS,
+				   'B', net.minecraft.init.Items.DIAMOND,
+				   'C', net.minecraft.init.Blocks.HOPPER);
 	}
 	
 	private void registerTools() {
@@ -126,13 +127,13 @@ public class RecipeCrafting {
 							   "   ",
 							   "AAA",
 							   "   ",
-							   'A', net.minecraft.init.Items.iron_ingot);
+							   'A', net.minecraft.init.Items.IRON_INGOT);
 		
 		GameRegistry.addRecipe(stack(Items.tool_core, 1), 
 							   " A ",
 							   "ABA",
 							   " A ",
-							   'A', net.minecraft.init.Blocks.stone,
+							   'A', net.minecraft.init.Blocks.STONE,
 							   'B', Items.conductive);
 		
 		GameRegistry.addRecipe(stack(Items.multimeter, 1),
@@ -140,55 +141,55 @@ public class RecipeCrafting {
 							   "BCB",
 							   "BDB",
 							  	'A', Items.conductive,
-							  	'B', net.minecraft.init.Items.iron_ingot,
-							  	'C', net.minecraft.init.Items.compass,
+							  	'B', net.minecraft.init.Items.IRON_INGOT,
+							  	'C', net.minecraft.init.Items.COMPASS,
 							  	'D', Items.tool_core);
 		
 		GameRegistry.addRecipe(stack(Items.liquid_pump, 1),
 							   "ABA",
 							   " A ",
-							   'A', net.minecraft.init.Items.iron_ingot,
+							   'A', net.minecraft.init.Items.IRON_INGOT,
 							   'B', Items.tool_core);
 		
 		GameRegistry.addRecipe(stack(Items.liquid_container, 1),
 							   "AAA",
 							   "ABA",
 							   "AAA",
-							   'A', net.minecraft.init.Items.bucket,
+							   'A', net.minecraft.init.Items.BUCKET,
 							   'B', Items.tool_core);
 
 		GameRegistry.addRecipe(stack(Items.chainsaw, 1),
 				   "AAA",
 				   "ABA",
 				   "AAA",
-				   'A', net.minecraft.init.Items.iron_axe,
+				   'A', net.minecraft.init.Items.IRON_AXE,
 				   'B', Items.tool_core);
 		
 		GameRegistry.addRecipe(stack(Items.drill, 1),
 				   "AAA",
 				   "ABA",
 				   "AAA",
-				   'A', net.minecraft.init.Items.iron_pickaxe,
+				   'A', net.minecraft.init.Items.IRON_PICKAXE,
 				   'B', Items.tool_core);
 		
 		ItemStack enchantedDrill = stack(Items.drill, 1);
-		enchantedDrill.addEnchantment(Enchantment.efficiency, 5);
-		enchantedDrill.addEnchantment(Enchantment.fortune, 3);
+		enchantedDrill.addEnchantment(Enchantments.EFFICIENCY, 5);
+		enchantedDrill.addEnchantment(Enchantments.FORTUNE, 3);
 		GameRegistry.addRecipe(enchantedDrill,
 				   "AAA",
 				   "ABA",
 				   "ACA",
-				   'A', net.minecraft.init.Items.diamond,
+				   'A', net.minecraft.init.Items.DIAMOND,
 				   'B', Items.drill,
-				   'C', net.minecraft.init.Blocks.lapis_block);
+				   'C', net.minecraft.init.Blocks.LAPIS_BLOCK);
 	}
 	
 	private void registerStuff() {
-		GameRegistry.addRecipe(stack(net.minecraft.init.Blocks.torch, 2),
+		GameRegistry.addRecipe(stack(net.minecraft.init.Blocks.TORCH, 2),
 							   "A",
 							   "B",
 							   'A', Items.burnt_residue,
-							   'B', net.minecraft.init.Items.stick);
+							   'B', net.minecraft.init.Items.STICK);
 	}
 	
 	private ItemStack stack(Item item, int size) {

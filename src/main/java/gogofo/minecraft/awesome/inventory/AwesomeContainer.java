@@ -3,7 +3,7 @@ package gogofo.minecraft.awesome.inventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -49,12 +49,14 @@ public abstract class AwesomeContainer extends Container {
         }
     }
 	
-	@Override
-    public void addCraftingToCrafters(ICrafting listener)
-    {
-        super.addCraftingToCrafters(listener);
-        listener.func_175173_a(this, inventory);
-    }
+	
+	// TODO: Does this need replacing?
+//	@Override
+//    public void addCraftingToCrafters(ICrafting listener)
+//    {
+//        super.addCraftingToCrafters(listener);
+//        listener.func_175173_a(this, inventory);
+//    }
 	
 	/**
      * Looks for changes made in the container, sends them to every listener.
@@ -64,15 +66,15 @@ public abstract class AwesomeContainer extends Container {
     {
         super.detectAndSendChanges();
 
-        for (int i = 0; i < crafters.size(); ++i)
+        for (int i = 0; i < listeners.size(); ++i)
         {
-            ICrafting icrafting = (ICrafting)crafters.get(i);
+            IContainerListener listner = listeners.get(i);
 
             for (int j = 0; j < inventory.getFieldCount(); j++) {
             	int value = inventory.getField(j);
 	            if (getField(j) != value)
 	            {
-	                icrafting.sendProgressBarUpdate(this, j, value);
+	            	listner.sendProgressBarUpdate(this, j, value);
 	            }
 	            
 	            setField(j, value);

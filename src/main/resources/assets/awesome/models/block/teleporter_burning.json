@@ -1,5 +1,6 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+    "parent": "block/cube_all",
     "textures": {
         "0": "awesome:blocks/TeleporterFrontBurning",
         "1": "awesome:blocks/IronGradient",
