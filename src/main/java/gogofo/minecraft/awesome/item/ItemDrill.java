@@ -76,8 +76,7 @@ public class ItemDrill extends AwesomeItemChargable {
 	
 	private boolean isTorch(@Nullable ItemStack stack)
     {
-		// TODO: Check this
-        return stack != null && Item.getItemFromBlock(Blocks.TORCH).getClass().isInstance(stack.getItem());
+        return stack != null && Item.getItemFromBlock(Blocks.TORCH) == stack.getItem();
     }
 
 	@Override
@@ -93,7 +92,7 @@ public class ItemDrill extends AwesomeItemChargable {
     		
     		if (worldIn.isAirBlock(blockpos) && Blocks.TORCH.canPlaceBlockAt(worldIn, blockpos)) {
     			ItemStack torchStack = findTorch(playerIn);
-    			if (torchStack.stackSize > 0) {
+    			if (torchStack != null && torchStack.stackSize > 0) {
     				--torchStack.stackSize;
 
                     if (torchStack.stackSize == 0)
