@@ -84,6 +84,7 @@ public class Blocks {
 	
 	private static void registerBlock(Block block) {
 		GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
+		block.setCreativeTab(AwesomeMod.awesomeCreativeTab);
 	}
 	
 	public static void registerRenders() {

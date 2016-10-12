@@ -1,5 +1,6 @@
 package gogofo.minecraft.awesome;
 
+import gogofo.minecraft.awesome.creativetabs.AwesomeCreativeTab;
 import gogofo.minecraft.awesome.init.Blocks;
 import gogofo.minecraft.awesome.init.Items;
 import gogofo.minecraft.awesome.init.Recipes;
@@ -27,6 +28,8 @@ public class AwesomeMod {
     
     @SidedProxy(clientSide = CLIENT_PROXY_CLASS, serverSide = SERVER_PROXY_CLASS)
 	public static CommonProxy proxy;
+    
+    public static final AwesomeCreativeTab awesomeCreativeTab = new AwesomeCreativeTab(MODID);
 	
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)

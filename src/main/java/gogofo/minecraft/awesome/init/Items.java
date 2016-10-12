@@ -92,6 +92,7 @@ public class Items {
 	public static void register() {
 		for (Item item : items) {
 			GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
+			item.setCreativeTab(AwesomeMod.awesomeCreativeTab);
 		}
 	}
 	
