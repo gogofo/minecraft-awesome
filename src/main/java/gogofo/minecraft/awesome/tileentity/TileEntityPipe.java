@@ -24,6 +24,8 @@ import net.minecraft.util.ITickable;
 public class TileEntityPipe extends AwesomeTileEntityContainer implements ITickable {
 	public static final int TRANSFER_COOLDOWN = 8;
 	
+	private static final BlockPipe refBlockPipe = new BlockPipe();
+	
 	@Override
 	public void update() {
 		if (worldObj.isRemote) {
@@ -43,7 +45,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	}
 	
 	private void transferStack(ItemStack stack, int index) {
-		BlockPipe tmpBlock = getTmpPipeBlock();
+		BlockPipe refBlock = getRefPipeBlock();
 		
 		EnumFacing[] randomFacing = EnumFacing.VALUES.clone();
 		Collections.shuffle(Arrays.asList(randomFacing));
@@ -69,13 +71,13 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 				continue;
 			}
 			
-			if (tryToTransfer(tmpBlock, stack, index, dest)) {
+			if (tryToTransfer(refBlock, stack, index, dest)) {
 				return;
 			}
 		}
 		
 		for (BlockPos secondaryDest : getSecondaryDestsWithoutChecks(stack)) {
-			if (tryToTransfer(tmpBlock, stack, index, secondaryDest)) {
+			if (tryToTransfer(refBlock, stack, index, secondaryDest)) {
 				return;
 			}
 		}
@@ -146,13 +148,13 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		}
 	}
 	
-	private boolean tryToTransfer(BlockPipe tmpPipeBlock, ItemStack sentStack, int sentSlot, BlockPos pos) {
+	private boolean tryToTransfer(BlockPipe refPipeBlock, ItemStack sentStack, int sentSlot, BlockPos pos) {
 		EnumFacing facing = facingForCloseBlock(pos);
 		if (facing == null) {
 			return false;
 		}
 		
-		if (!tmpPipeBlock.canConnectTo(worldObj, pos)) {
+		if (!refPipeBlock.canConnectTo(worldObj, pos)) {
 			return false;
 		}
 		
@@ -301,8 +303,8 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		return transferredItem;
 	}
 	
-	protected BlockPipe getTmpPipeBlock() {
-		return new BlockPipe();
+	protected BlockPipe getRefPipeBlock() {
+		return refBlockPipe;
 	}
 
 	@Override

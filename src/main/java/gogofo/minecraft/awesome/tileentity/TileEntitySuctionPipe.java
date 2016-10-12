@@ -14,6 +14,8 @@ public class TileEntitySuctionPipe extends TileEntityPipe {
 	public static final int SUCTION_COOLDOWN = 8;
 	protected int suctionCooldown = -1;
 	
+	private static final BlockPipe refBlockPipe = new BlockSuctionPipe();
+	
 	@Override
 	public void update() {
 		super.update();
@@ -35,8 +37,8 @@ public class TileEntitySuctionPipe extends TileEntityPipe {
 	}
 	
 	@Override
-	protected BlockPipe getTmpPipeBlock() {
-		return new BlockSuctionPipe();
+	protected BlockPipe getRefPipeBlock() {
+		return refBlockPipe;
 	}
 	
 	private void doSuction() {
@@ -45,7 +47,7 @@ public class TileEntitySuctionPipe extends TileEntityPipe {
 			return;
 		}
 		
-		BlockPipe tmpBlock = getTmpPipeBlock();
+		BlockPipe tmpBlock = getRefPipeBlock();
 		
 		for (EnumFacing facing : EnumFacing.VALUES) {
 			if (tryToSuckFromPos(tmpBlock, recvSlot, getPos().offset(facing), facing)) {

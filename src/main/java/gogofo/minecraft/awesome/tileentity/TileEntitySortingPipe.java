@@ -23,6 +23,8 @@ import net.minecraft.util.EnumFacing;
 
 public class TileEntitySortingPipe extends TileEntityPipe {
 	
+	private static final BlockPipe refBlockPipe = new BlockSortingPipe();
+	
 	private static final int[] up_slots = {27, 28, 29, 30, 31, 32, 33, 34, 35};
 	private static final int[] down_slots = {36, 37, 38, 39, 40, 41, 42, 43, 44};
 	private static final int[] north_slots = {45, 46, 47, 48, 49, 50, 51, 52, 53};
@@ -31,8 +33,8 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 	private static final int[] west_slots = {72, 73, 74, 75, 76, 77, 78, 79, 80};
 	
 	@Override
-	protected BlockPipe getTmpPipeBlock() {
-		return new BlockSortingPipe();
+	protected BlockPipe getRefPipeBlock() {
+		return refBlockPipe;
 	}
 	
 	@Override
