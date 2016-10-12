@@ -12,6 +12,9 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.datafix.walkers.EntityTag;
 
 public class RecipeFuser {
 	private HashMap<Item, HashMap<Item, Recipe>> recipes = 
@@ -104,7 +107,12 @@ public class RecipeFuser {
 	
 	private ItemStack spawnEgg(Entity entity) {
 		int id = EntityList.getEntityID(entity);
-		ItemStack egg = new ItemStack(net.minecraft.init.Items.SPAWN_EGG, 2, id);
+		ItemStack egg = new ItemStack(net.minecraft.init.Items.SPAWN_EGG);
+		NBTTagCompound tagCompound = new NBTTagCompound();
+		NBTTagCompound entityTag = new NBTTagCompound();
+		entityTag.setString("id", entity.getName());
+		tagCompound.setTag("EntityTag", entityTag);
+		egg.setTagCompound(tagCompound);
 		return egg;
 	}
 }
