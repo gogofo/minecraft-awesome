@@ -243,17 +243,17 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
 	public int[] getSlotsForFace(EnumFacing side) {
 		switch (side) {
 		case UP:
-			return new int[] {0, 1};
+			return new int[] {2};
 		case DOWN:
 			return new int[] {2};
 		case NORTH:
-			return new int[] {};
+			return new int[] {0};
 		case SOUTH:
-			return new int[] {};
+			return new int[] {1};
 		case EAST:
-			return new int[] {};
+			return new int[] {0};
 		case WEST:
-			return new int[] {};
+			return new int[] {1};
 		default:
 			return new int[] {};
 		}
