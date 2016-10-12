@@ -349,18 +349,23 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	}
 	
 	@Override
-	protected int[] getSlotsTop() {
-		return getSlotsGeneric(27);
-	}
-
-	@Override
-	protected int[] getSlotsBottom() {
-		return getSlotsGeneric(27);
-	}
-
-	@Override
-	protected int[] getSlotsSides() {
-		return getSlotsGeneric(27);
+	public int[] getSlotsForFace(EnumFacing side) {
+		switch (side) {
+		case UP:
+			return getSlotsGeneric(27);
+		case DOWN:
+			return getSlotsGeneric(27);
+		case NORTH:
+			return getSlotsGeneric(27);
+		case SOUTH:
+			return getSlotsGeneric(27);
+		case EAST:
+			return getSlotsGeneric(27);
+		case WEST:
+			return getSlotsGeneric(27);
+		default:
+			return new int[] {};
+		}
 	}
 
 	@Override

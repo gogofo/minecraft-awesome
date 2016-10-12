@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityLockable;
+import net.minecraft.util.EnumFacing;
 
 public class TileEntityElectricFurnace extends AwesomeTileEntityMachine {
 
@@ -212,20 +213,25 @@ public class TileEntityElectricFurnace extends AwesomeTileEntityMachine {
         
         return compound;
     }
-
-	@Override
-	protected int[] getSlotsTop() {
-		return new int[] {0};
-	}
-
-	@Override
-	protected int[] getSlotsBottom() {
-		return new int[] {1};
-	}
-
-	@Override
-	protected int[] getSlotsSides() {
-		return new int[] {};
+    
+    @Override
+	public int[] getSlotsForFace(EnumFacing side) {
+		switch (side) {
+		case UP:
+			return new int[] {0};
+		case DOWN:
+			return new int[] {1};
+		case NORTH:
+			return new int[] {};
+		case SOUTH:
+			return new int[] {};
+		case EAST:
+			return new int[] {};
+		case WEST:
+			return new int[] {};
+		default:
+			return new int[] {};
+		}
 	}
 
 	@Override

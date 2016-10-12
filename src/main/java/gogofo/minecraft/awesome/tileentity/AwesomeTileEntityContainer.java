@@ -17,16 +17,9 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
 	private int[] slotsSides;
 	protected ItemStack[] itemStackArray;
 	
-	protected abstract int[] getSlotsTop();
-	protected abstract int[] getSlotsBottom();
-	protected abstract int[] getSlotsSides();
 	protected abstract int getSlotCount();
 	
 	public AwesomeTileEntityContainer() {
-		slotsTop = getSlotsTop();
-		slotsBottom = getSlotsBottom();
-		slotsSides = getSlotsSides();
-		
 		itemStackArray = new ItemStack[getSlotCount()];
 	}
 	
@@ -172,13 +165,6 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
 
     @Override
     public void closeInventory(EntityPlayer playerIn) {}
-    
-    @Override
-    public int[] getSlotsForFace(EnumFacing side)
-    {
-        return side == EnumFacing.DOWN ? slotsBottom : 
-              (side == EnumFacing.UP ? slotsTop : slotsSides);
-    }
     
     @Override
     public boolean canInsertItem(int index, ItemStack itemStackIn, 

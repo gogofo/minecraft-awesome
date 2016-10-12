@@ -280,20 +280,25 @@ public class TileEntityTeleporter extends AwesomeTileEntityMachine {
 			recursivePortalDestruction(pos.offset(direction), directions);
 		}
 	}
-
+	
 	@Override
-	protected int[] getSlotsTop() {
-		return new int[] {0};
-	}
-
-	@Override
-	protected int[] getSlotsBottom() {
-		return new int[] {};
-	}
-
-	@Override
-	protected int[] getSlotsSides() {
-		return new int[] {};
+	public int[] getSlotsForFace(EnumFacing side) {
+		switch (side) {
+		case UP:
+			return new int[] {0};
+		case DOWN:
+			return new int[] {};
+		case NORTH:
+			return new int[] {};
+		case SOUTH:
+			return new int[] {};
+		case EAST:
+			return new int[] {};
+		case WEST:
+			return new int[] {};
+		default:
+			return new int[] {};
+		}
 	}
 
 	@Override
