@@ -107,7 +107,7 @@ public class RecipeFuser {
 	
 	private ItemStack spawnEgg(Entity entity) {
 		int id = EntityList.getEntityID(entity);
-		ItemStack egg = new ItemStack(net.minecraft.init.Items.SPAWN_EGG);
+		ItemStack egg = new ItemStack(net.minecraft.init.Items.SPAWN_EGG, 2);
 		NBTTagCompound tagCompound = new NBTTagCompound();
 		NBTTagCompound entityTag = new NBTTagCompound();
 		entityTag.setString("id", entity.getName());
