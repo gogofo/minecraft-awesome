@@ -4,7 +4,7 @@ import gogofo.minecraft.awesome.inventory.ContainerTeleporter;
 import gogofo.minecraft.awesome.tileentity.TileEntityTeleporter;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class GuiTeleporter extends AwesomeGui {
+public class GuiTeleporter extends AwesomeGuiWithControls {
 	
 	private final TileEntityTeleporter tileEntity;
 	private InventoryPlayer playerInventory;

@@ -1,5 +1,7 @@
 package gogofo.minecraft.awesome.tileentity;
 
+import java.util.List;
+
 import gogofo.minecraft.awesome.block.BlockCharger;
 import gogofo.minecraft.awesome.gui.GuiEnum;
 import gogofo.minecraft.awesome.interfaces.IAwesomeChargable;
@@ -115,27 +117,32 @@ public class TileEntityCharger extends AwesomeTileEntityMachine {
 	}
 	
 	@Override
-	public int[] getSlotsForFace(EnumFacing side) {
-		switch (side) {
+	protected Integer[] getDefaultSlotForFace(EnumFacing face) {
+		switch (face) {
 		case UP:
-			return new int[] {0};
+			return new Integer[] {0};
 		case DOWN:
-			return new int[] {};
+			return new Integer[] {};
 		case NORTH:
-			return new int[] {};
+			return new Integer[] {};
 		case SOUTH:
-			return new int[] {};
+			return new Integer[] {};
 		case EAST:
-			return new int[] {};
+			return new Integer[] {};
 		case WEST:
-			return new int[] {};
+			return new Integer[] {};
 		default:
-			return new int[] {};
+			return new Integer[] {};
 		}
 	}
 
 	@Override
 	protected int getSlotCount() {
+		return 1;
+	}
+	
+	@Override
+	public int getCustomSlotCount() {
 		return 1;
 	}
 

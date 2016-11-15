@@ -1,26 +1,50 @@
 package gogofo.minecraft.awesome.tileentity;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.ToIntFunction;
+
+import gogofo.minecraft.awesome.interfaces.IConfigurableSidedInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.client.model.b3d.B3DModel.Face;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import scala.actors.threadpool.Arrays;
 
-public abstract class AwesomeTileEntityContainer extends TileEntityLockable implements ISidedInventory {
-	private int[] slotsTop;
-	private int[] slotsBottom;
-	private int[] slotsSides;
+public abstract class AwesomeTileEntityContainer extends TileEntityLockable implements IConfigurableSidedInventory {
 	protected ItemStack[] itemStackArray;
+	private ArrayList<ArrayList<Integer>> slotsForFace;
 	
+	protected abstract Integer[] getDefaultSlotForFace(EnumFacing face);
 	protected abstract int getSlotCount();
+	public abstract int getCustomSlotCount();
 	
 	public AwesomeTileEntityContainer() {
 		itemStackArray = new ItemStack[getSlotCount()];
+		
+		initSlotsFotFace(true);
+	}
+	
+	private void initSlotsFotFace(boolean defaults) {
+		slotsForFace = new ArrayList<ArrayList<Integer>>();
+		
+		for (EnumFacing face : EnumFacing.values()) {
+			slotsForFace.add(new ArrayList<Integer>());
+			
+			if (defaults) {
+				slotsForFace.get(face.getIndex()).addAll(Arrays.asList(getDefaultSlotForFace(face)));
+			}
+		}
 	}
 	
 	@Override
@@ -115,6 +139,21 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
                       nbtTagCompound);
             }
         }
+        
+        if (compound.hasKey("SlotFacing")) {
+	        NBTTagCompound nbtTagCompound = compound.getCompoundTag("SlotFacing");
+	        initSlotsFotFace(false);
+	        
+	        for (EnumFacing face : EnumFacing.values()) {
+	        	int[] slots = nbtTagCompound.getIntArray(face.toString());
+	        	
+	        	for (int slot : slots) {
+	        		addSlotToFace(slot, face);
+	        	}
+	        }
+        } else {
+        	initSlotsFotFace(true);
+        }
     }
 
     @Override
@@ -135,6 +174,15 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
         }
 
         compound.setTag("Items", nbttaglist);
+        
+        
+        NBTTagCompound nbtTagCompound = new NBTTagCompound();
+        
+        for (EnumFacing face : EnumFacing.values()) {
+            nbtTagCompound.setIntArray(face.toString(), getSlotsForFace(face));
+        }
+        
+        compound.setTag("SlotFacing", nbtTagCompound);
         
         return compound;
     }
@@ -202,5 +250,41 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
     	}
     	
     	return false;
+    }
+    
+    @Override
+    public int[] getSlotsForFace(EnumFacing side) {
+		return slotsForFace.get(side.getIndex()).stream().mapToInt(new ToIntFunction<Integer>() {
+			@Override
+			public int applyAsInt(Integer i) {
+				return i;
+			}
+		}).toArray();
+    }
+    
+    public void addSlotToFace(Integer slot, EnumFacing face) {
+    	slotsForFace.get(face.getIndex()).add(slot);
+    	markDirty();
+    }
+    
+    public void removeSlotFromFace(Integer slot, EnumFacing face) {
+    	slotsForFace.get(face.getIndex()).remove(slot);
+    	markDirty();
+    }
+    
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+    	NBTTagCompound nbttagcompound = this.writeToNBT(new NBTTagCompound());
+        return new SPacketUpdateTileEntity(this.pos, getBlockMetadata(), nbttagcompound);
+    }
+    
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+    	readFromNBT(pkt.getNbtCompound());
+    }
+    
+    @Override
+    public NBTTagCompound getUpdateTag() {
+    	return writeToNBT(new NBTTagCompound());
     }
 }

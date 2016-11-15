@@ -1,8 +1,12 @@
 package gogofo.minecraft.awesome.gui;
 
 import gogofo.minecraft.awesome.AwesomeMod;
+import gogofo.minecraft.awesome.interfaces.IConfigurableSidedInventory;
+import gogofo.minecraft.awesome.inventory.AwesomeSlot;
 import gogofo.minecraft.awesome.inventory.AwesomeSlotBig;
 import gogofo.minecraft.awesome.inventory.ContainerGenerator;
+import gogofo.minecraft.awesome.inventory.SlotCategoryIdToColor;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -16,16 +20,15 @@ public abstract class AwesomeGui extends GuiContainer {
 	private static final int INBOX_HIGHT = 83;
 	
 	private ResourceLocation guiTextures;
-    private final InventoryPlayer playerInventory;
-    private final IInventory customInventory;
-    
+    protected final InventoryPlayer playerInventory;
+    protected final IConfigurableSidedInventory customInventory;   
     
     protected abstract void drawCustomGui();
     
 
     public AwesomeGui(Container container,
     				  InventoryPlayer playerInventory, 
-    				  IInventory customInventory)
+    				  IConfigurableSidedInventory customInventory)
     {
         super(container);
         this.playerInventory = playerInventory;
@@ -66,22 +69,23 @@ public abstract class AwesomeGui extends GuiContainer {
         drawCustomGui();
     }
     
-    private int guiX() {
+    protected int guiX() {
     	return (width - xSize) / 2;
     }
     
-    private int guiY() {
+    protected int guiY() {
     	return (height - ySize) / 2;
     }
     
-    
     private void drawEmptyBackground() {
+    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     	drawTexturedModalRect(guiX(), guiY(), 
 				  0, 0, 
-			  	  xSize, ySize - INBOX_HIGHT);
+			  	  xSize, ySize);
     }
     
     private void drawInventory() {
+    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     	drawTexturedModalRect(guiX(), guiY() + (ySize-INBOX_HIGHT), 
 				  0, getInboxStartY(), 
 			  	  xSize, INBOX_HIGHT);
@@ -95,49 +99,74 @@ public abstract class AwesomeGui extends GuiContainer {
     	return 166-INBOX_HIGHT;
     }
     
-    protected void drawSlot(int x, int y) {
+    protected void drawSlot(int x, int y, int color) {
+    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     	drawTexturedModalRect(guiX() + x, guiY() + y, 
 				  176, 0, 
 				  20, 20);
+    	
+    	drawRect(guiX() + x + 2, 
+    			guiY() + y + 2, 
+    			guiX() + x + 18, 
+    			guiY() + y + 18, 
+    			color);
     }
     
     protected void drawSlotsByCustomContainer(Container container) {
+    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+    	
     	int slots = container.getInventory().size();
     	
     	for (int i = 0; i < slots; i++) {
     		Slot slot = container.getSlot(i);
     		
     		if (slot instanceof AwesomeSlotBig) {
-    			drawBigSlot(slot.xDisplayPosition-6, slot.yDisplayPosition-6);
+    			int color = SlotCategoryIdToColor.convert(((AwesomeSlotBig) slot).getCategoryId());
+    			drawBigSlot(slot.xDisplayPosition-6, slot.yDisplayPosition-6, color);
+    		} else if (slot instanceof AwesomeSlot) {
+    			int color = SlotCategoryIdToColor.convert(((AwesomeSlot) slot).getCategoryId());
+    			drawSlot(slot.xDisplayPosition-2, slot.yDisplayPosition-2, color);
     		} else {
-    			drawSlot(slot.xDisplayPosition-2, slot.yDisplayPosition-2);
+    			drawSlot(slot.xDisplayPosition-2, slot.yDisplayPosition-2, 0);
     		}
     	}
     }
     
-    protected void drawBigSlot(int x, int y) {
+    protected void drawBigSlot(int x, int y, int color) {
+    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     	drawTexturedModalRect(guiX() + x, guiY() + y, 
 				  176, 20, 
 				  28, 28);
+    	
+    	drawRect(guiX() + x + 2, 
+    			guiY() + y + 2, 
+    			guiX() + x + 26, 
+    			guiY() + y + 26, 
+    			color);
     }
     
     protected void drawArrow(int x, int y) {
+    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     	drawTexturedModalRect(guiX() + x, guiY() + y, 
 				  176, 48, 
 				  22, 15);
     }
     
     protected void drawFilledArrow(int x, int y) {
+    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     	drawFilledArrow(x, y, 1.0f);
     }
     
     protected void drawFilledArrow(int x, int y, float percent) {
+    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     	drawTexturedModalRect(guiX() + x, guiY() + y, 
 				  176, 63,
 				  Math.round(22*percent), 15);
     }
     
     protected void drawHorizontalLine(int x, int y, int len) {
+    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+    	
     	final int MAX_LEN = 28;
   
     	int offset = 0;
@@ -153,6 +182,8 @@ public abstract class AwesomeGui extends GuiContainer {
     }
     
     protected void drawFilledHorizontalLine(int x, int y, int len) {
+    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+    	
     	final int MAX_LEN = 28;
   	  
     	int offset = 0;
@@ -168,6 +199,8 @@ public abstract class AwesomeGui extends GuiContainer {
     }
     
     protected void drawVerticalLine(int x, int y, int len) {
+    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+    	
     	final int MAX_LEN = 29;
   	  
     	int offset = 0;
@@ -183,6 +216,8 @@ public abstract class AwesomeGui extends GuiContainer {
     }
     
 	protected void drawFilledVerticalLine(int x, int y, int len) {
+    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+    	
 		final int MAX_LEN = 29;
   	  
     	int offset = 0;

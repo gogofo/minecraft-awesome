@@ -16,6 +16,7 @@ public abstract class AwesomeContainer extends Container {
 	protected final IInventory inventory;
 	
 	private int fields[];
+	private int nextSlotCategoryId = 0;
 	
 	protected abstract int getCustomSlotCount();
 	
@@ -136,5 +137,15 @@ public abstract class AwesomeContainer extends Container {
     
     private void setField(int i, int value) {
     	fields[i] = value;
+    }
+    
+    @Override
+    protected Slot addSlotToContainer(Slot slotIn) {
+    	if (slotIn instanceof AwesomeSlot) {
+    		((AwesomeSlot) slotIn).setCategoryId(nextSlotCategoryId);
+    		nextSlotCategoryId += 1;
+    	}
+    	
+    	return super.addSlotToContainer(slotIn);
     }
 }

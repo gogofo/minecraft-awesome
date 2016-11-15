@@ -4,7 +4,7 @@ import gogofo.minecraft.awesome.inventory.ContainerElectricFurnace;
 import gogofo.minecraft.awesome.tileentity.TileEntityElectricFurnace;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class GuiElectricFurnace extends AwesomeGui {
+public class GuiElectricFurnace extends AwesomeGuiWithControls {
 	
 	private final TileEntityElectricFurnace tileEntityElectricFurnace;
 	private InventoryPlayer playerInventory;

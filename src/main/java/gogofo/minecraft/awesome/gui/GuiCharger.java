@@ -6,7 +6,7 @@ import gogofo.minecraft.awesome.tileentity.TileEntityCharger;
 import gogofo.minecraft.awesome.tileentity.TileEntityGenerator;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class GuiCharger extends AwesomeGui {
+public class GuiCharger extends AwesomeGuiWithControls {
 	
 	private final TileEntityCharger tileEntity;
 	private InventoryPlayer playerInventory;

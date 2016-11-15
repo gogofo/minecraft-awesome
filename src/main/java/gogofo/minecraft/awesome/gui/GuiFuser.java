@@ -4,7 +4,7 @@ import gogofo.minecraft.awesome.inventory.ContainerFuser;
 import gogofo.minecraft.awesome.tileentity.TileEntityFuser;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class GuiFuser extends AwesomeGui {
+public class GuiFuser extends AwesomeGuiWithControls {
 	private final TileEntityFuser tileEntityFuser;
 	private InventoryPlayer playerInventory;
 	

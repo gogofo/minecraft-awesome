@@ -5,7 +5,7 @@ import gogofo.minecraft.awesome.tileentity.TileEntityExtractor;
 import gogofo.minecraft.awesome.tileentity.TileEntityGrinder;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class GuiExtractor extends AwesomeGui {
+public class GuiExtractor extends AwesomeGuiWithControls {
 	
 	private final TileEntityExtractor tileEntity;
 	private InventoryPlayer playerInventory;

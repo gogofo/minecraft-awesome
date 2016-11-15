@@ -19,7 +19,7 @@ import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContainer implements ISidedInventory, ITickable {
+public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContainer implements ITickable {
 	private TextComponentString displayName;
 	
 	private int powerSupplied = 0;

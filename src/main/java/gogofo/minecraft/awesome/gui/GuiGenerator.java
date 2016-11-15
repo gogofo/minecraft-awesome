@@ -10,7 +10,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiGenerator extends AwesomeGui {
+public class GuiGenerator extends AwesomeGuiWithControls {
 	
 	private final TileEntityGenerator tileEntityGenerator;
 	private InventoryPlayer playerInventory;

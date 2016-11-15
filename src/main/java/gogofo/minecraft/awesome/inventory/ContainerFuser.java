@@ -16,8 +16,8 @@ public class ContainerFuser extends AwesomeContainer {
     {
     	super(inventoryPlayer, generatorInventory);
     	
-        this.addSlotToContainer(new Slot(generatorInventory, 0, 56, 20));
-        this.addSlotToContainer(new Slot(generatorInventory, 1, 56, 45));
+        this.addSlotToContainer(new AwesomeSlot(generatorInventory, 0, 56, 20));
+        this.addSlotToContainer(new AwesomeSlot(generatorInventory, 1, 56, 45));
         this.addSlotToContainer(new AwesomeSlotBigOutput(generatorInventory, 2, 116, 38));
     }
 

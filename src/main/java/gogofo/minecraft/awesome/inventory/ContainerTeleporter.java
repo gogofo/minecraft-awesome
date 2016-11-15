@@ -10,7 +10,7 @@ public class ContainerTeleporter extends AwesomeContainer
     {
     	super(inventoryPlayer, customInventory);
     	
-        this.addSlotToContainer(new Slot(customInventory, 0, 50, 38));
+        this.addSlotToContainer(new AwesomeSlot(customInventory, 0, 50, 38));
     }
 
 	@Override

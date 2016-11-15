@@ -220,27 +220,32 @@ public class TileEntityGrinder extends AwesomeTileEntityMachine {
     }
     
     @Override
-	public int[] getSlotsForFace(EnumFacing side) {
-		switch (side) {
+    protected Integer[] getDefaultSlotForFace(EnumFacing face) {
+    	switch (face) {
 		case UP:
-			return new int[] {0};
+			return new Integer[] {0};
 		case DOWN:
-			return new int[] {1};
+			return new Integer[] {1};
 		case NORTH:
-			return new int[] {};
+			return new Integer[] {};
 		case SOUTH:
-			return new int[] {};
+			return new Integer[] {};
 		case EAST:
-			return new int[] {};
+			return new Integer[] {};
 		case WEST:
-			return new int[] {};
+			return new Integer[] {};
 		default:
-			return new int[] {};
+			return new Integer[] {};
 		}
-	}
+    }
 
 	@Override
 	protected int getSlotCount() {
+		return 2;
+	}
+	
+	@Override
+	public int getCustomSlotCount() {
 		return 2;
 	}
 

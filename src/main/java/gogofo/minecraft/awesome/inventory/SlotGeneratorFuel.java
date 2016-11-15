@@ -7,7 +7,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 
-public class SlotGeneratorFuel extends Slot {
+public class SlotGeneratorFuel extends AwesomeSlot {
 
 	public SlotGeneratorFuel(IInventory inventoryIn, int index, int xPosition, int yPosition) {
 		super(inventoryIn, index, xPosition, yPosition);

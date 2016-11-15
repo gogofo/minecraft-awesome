@@ -5,7 +5,10 @@ import net.minecraft.item.ItemStack;
 
 public class AwesomeSlotBigOutput extends AwesomeSlotBig {
 
-	public AwesomeSlotBigOutput(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+	public AwesomeSlotBigOutput(IInventory inventoryIn, 
+							    int index,
+							    int xPosition, 
+							    int yPosition) {
 		super(inventoryIn, index, xPosition, yPosition);
 	}
 

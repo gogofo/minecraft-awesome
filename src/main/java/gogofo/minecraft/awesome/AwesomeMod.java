@@ -3,6 +3,7 @@ package gogofo.minecraft.awesome;
 import gogofo.minecraft.awesome.creativetabs.AwesomeCreativeTab;
 import gogofo.minecraft.awesome.init.Blocks;
 import gogofo.minecraft.awesome.init.Items;
+import gogofo.minecraft.awesome.init.Messages;
 import gogofo.minecraft.awesome.init.Recipes;
 import gogofo.minecraft.awesome.init.TileEntities;
 import gogofo.minecraft.awesome.proxy.CommonProxy;
@@ -39,6 +40,7 @@ public class AwesomeMod {
     	Blocks.init();
     	Blocks.register();
     	TileEntities.register();
+    	Messages.init();
     }
     
     @EventHandler

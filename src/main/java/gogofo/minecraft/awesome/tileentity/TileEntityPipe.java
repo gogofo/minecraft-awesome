@@ -342,8 +342,8 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		return "minecraft:chest";
 	}
 
-	protected int[] getSlotsGeneric(int count) {
-		int [] slots = new int[count];
+	protected Integer[] getSlotsGeneric(int count) {
+		Integer [] slots = new Integer[count];
 		for (int i = 0; i < count; i++) {
 			slots[i] = i;
 		}
@@ -351,8 +351,8 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	}
 	
 	@Override
-	public int[] getSlotsForFace(EnumFacing side) {
-		switch (side) {
+	protected Integer[] getDefaultSlotForFace(EnumFacing face) {
+		switch (face) {
 		case UP:
 			return getSlotsGeneric(27);
 		case DOWN:
@@ -366,13 +366,18 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		case WEST:
 			return getSlotsGeneric(27);
 		default:
-			return new int[] {};
+			return new Integer[] {};
 		}
 	}
 
 	@Override
 	protected int getSlotCount() {
 		return 27;
+	}
+	
+	@Override
+	public int getCustomSlotCount() {
+		return 0;
 	}
 	
 	@Override
