@@ -1,6 +1,7 @@
 package gogofo.minecraft.awesome.tileentity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
@@ -19,7 +20,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.client.model.b3d.B3DModel.Face;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import scala.actors.threadpool.Arrays;
 
 public abstract class AwesomeTileEntityContainer extends TileEntityLockable implements IConfigurableSidedInventory {
 	protected ItemStack[] itemStackArray;
