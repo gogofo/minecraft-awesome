@@ -1,0 +1,29 @@
+{
+    "display": {
+        "icon": {
+            "item": "awesome:drill"
+        },
+        "title": "Industrialize!",
+        "description": "Welcome to the industrial age"
+    },
+    "criteria": {
+        "industrialize": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "awesome:machine_core",
+                        "data": 0
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "recipes": [
+            "awesome:generator",
+            "awesome:charger",
+            "awesome:tool_core"
+        ]
+    }
+}
