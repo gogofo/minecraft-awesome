@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AAA",
+		"BCB",
+		"DDD"
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:diamond_pickaxe"
+		},
+		"C": {
+			"item": "awesome:machine_core"
+		},
+		"B": {
+			"item": "minecraft:glowstone_dust"
+		},
+		"D": {
+			"item": "minecraft:redstone"
+		}
+	},
+	"result": {
+		"item": "awesome:grinder",
+		"count": 1
+	}
+}

@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AAA",
+		"BCB",
+		"AAA"
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:glass"
+		},
+		"C": {
+			"item": "minecraft:hopper"
+		},
+		"B": {
+			"item": "minecraft:diamond"
+		}
+	},
+	"result": {
+		"item": "awesome:sorting_pipe",
+		"count": 6
+	}
+}

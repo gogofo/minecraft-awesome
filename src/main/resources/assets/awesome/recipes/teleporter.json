@@ -1,0 +1,32 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AAA",
+		"BCD",
+		"FEF"
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:minecart"
+		},
+		"C": {
+			"item": "awesome:machine_core"
+		},
+		"B": {
+			"item": "minecraft:diamond"
+		},
+		"E": {
+			"item": "minecraft:redstone"
+		},
+		"D": {
+			"item": "minecraft:gold_ingot"
+		},
+		"F": {
+			"item": "awesome:quartz_iron_ingot"
+		}
+	},
+	"result": {
+		"item": "awesome:teleporter",
+		"count": 1
+	}
+}

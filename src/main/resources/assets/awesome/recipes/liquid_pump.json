@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"ABA",
+		" A "
+	],
+	"key": {
+	   "A": {
+	       "item": "minecraft:iron_ingot"
+       },
+		"B": {
+			"item": "awesome:tool_core"
+		}
+	},
+	"result": {
+		"item": "awesome:liquid_pump",
+		"count": 1
+	}
+}

@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"ABA",
+		"ACA",
+		"ADA"
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:obsidian"
+		},
+		"C": {
+			"item": "awesome:machine_core"
+		},
+		"B": {
+			"item": "minecraft:diamond"
+		},
+		"D": {
+			"item": "minecraft:piston"
+		}
+	},
+	"result": {
+		"item": "awesome:extractor",
+		"count": 1
+	}
+}

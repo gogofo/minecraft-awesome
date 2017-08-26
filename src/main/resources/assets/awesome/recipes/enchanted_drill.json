@@ -1,0 +1,23 @@
+{
+	"type": "awesome:drill_enchant_shaped",
+	"pattern": [
+		"AAA",
+		"ABA",
+		"ACA"
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:diamond"
+		},
+		"B": {
+			"item": "awesome:drill"
+		},
+		"C": {
+            "item": "minecraft:lapis_block"
+        }
+	},
+	"result": {
+		"item": "awesome:drill",
+		"count": 1
+	}
+}

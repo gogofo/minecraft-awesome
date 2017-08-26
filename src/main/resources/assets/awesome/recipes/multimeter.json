@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"  A",
+		"BCB",
+		"BDB"
+	],
+	"key": {
+		"A": {
+			"item": "awesome:conductive"
+		},
+		"C": {
+			"item": "minecraft:compass"
+		},
+		"B": {
+			"item": "minecraft:iron_ingot"
+		},
+		"D": {
+			"item": "awesome:tool_core"
+		}
+	},
+	"result": {
+		"item": "awesome:multimeter",
+		"count": 1
+	}
+}

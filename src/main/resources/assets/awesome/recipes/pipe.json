@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AAA",
+		"BCB",
+		"AAA"
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:cobblestone"
+		},
+		"C": {
+			"item": "minecraft:hopper"
+		},
+		"B": {
+			"item": "minecraft:glass"
+		}
+	},
+	"result": {
+		"item": "awesome:pipe",
+		"count": 6
+	}
+}

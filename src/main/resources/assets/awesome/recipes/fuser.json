@@ -1,0 +1,42 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"ABC",
+		"DEF",
+		"GHI"
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:planks",
+			"data": 0
+		},
+		"C": {
+			"item": "minecraft:redstone_block"
+		},
+		"B": {
+			"item": "minecraft:coal_block"
+		},
+		"E": {
+			"item": "awesome:machine_core"
+		},
+		"D": {
+			"item": "minecraft:lapis_block"
+		},
+		"G": {
+			"item": "minecraft:gold_block"
+		},
+		"F": {
+			"item": "minecraft:iron_block"
+		},
+		"I": {
+			"item": "minecraft:diamond_block"
+		},
+		"H": {
+			"item": "minecraft:lava_bucket"
+		}
+	},
+	"result": {
+		"item": "awesome:fuser",
+		"count": 1
+	}
+}

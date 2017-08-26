@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" A ",
+		"ABA",
+		" A "
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:stone",
+			"data": 0
+		},
+		"B": {
+			"item": "awesome:conductive"
+		}
+	},
+	"result": {
+		"item": "awesome:tool_core",
+		"count": 1
+	}
+}
