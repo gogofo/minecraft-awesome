@@ -33,10 +33,10 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
 		itemStackArray = new ItemStack[getSlotCount()];
 		Arrays.fill(itemStackArray, ItemStack.EMPTY);
 		
-		initSlotsFotFace(true);
+		initSlotsForFace(true);
 	}
 	
-	private void initSlotsFotFace(boolean defaults) {
+	private void initSlotsForFace(boolean defaults) {
 		slotsForFace = new ArrayList<ArrayList<Integer>>();
 		
 		for (EnumFacing face : EnumFacing.values()) {
@@ -144,7 +144,7 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
         
         if (compound.hasKey("SlotFacing")) {
 	        NBTTagCompound nbtTagCompound = compound.getCompoundTag("SlotFacing");
-	        initSlotsFotFace(false);
+	        initSlotsForFace(false);
 	        
 	        for (EnumFacing face : EnumFacing.values()) {
 	        	int[] slots = nbtTagCompound.getIntArray(face.toString());
@@ -154,7 +154,7 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
 	        	}
 	        }
         } else {
-        	initSlotsFotFace(true);
+        	initSlotsForFace(true);
         }
     }
 
