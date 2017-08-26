@@ -69,7 +69,7 @@ public class TileEntitySuctionPipe extends TileEntityPipe {
 		
 		for (int i : getSlotIndexesForInventoryFacing(inventory, facing)) {
 			ItemStack stack = inventory.getStackInSlot(i);
-			if (stack.isEmpty()) {
+			if (!stack.isEmpty()) {
 				setInventorySlotContents(recvSlot, createTransfferedItem(stack, pos, true));
 				inventory.decrStackSize(i, 1);
 				return true;
