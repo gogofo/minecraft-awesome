@@ -63,10 +63,10 @@ public abstract class AwesomeBlockContainer extends BlockContainer {
     }
 	
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
-			ItemStack stack) {
-        fillDefaultStateProperties(this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()));
-    }
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+		return fillDefaultStateProperties(this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()));
+	}
 	
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
