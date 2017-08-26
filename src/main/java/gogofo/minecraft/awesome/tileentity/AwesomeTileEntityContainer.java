@@ -166,13 +166,10 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
 
         for (int i = 0; i < itemStackArray.length; ++i)
         {
-            if (!itemStackArray[i].isEmpty())
-            {
-                NBTTagCompound nbtTagCompound = new NBTTagCompound();
-                nbtTagCompound.setByte("Slot", (byte)i);
-                itemStackArray[i].writeToNBT(nbtTagCompound);
-                nbttaglist.appendTag(nbtTagCompound);
-            }
+            NBTTagCompound nbtTagCompound = new NBTTagCompound();
+            nbtTagCompound.setByte("Slot", (byte)i);
+            itemStackArray[i].writeToNBT(nbtTagCompound);
+            nbttaglist.appendTag(nbtTagCompound);
         }
 
         compound.setTag("Items", nbttaglist);
