@@ -101,12 +101,12 @@ public class RecipeFuser {
 	
 	private ItemStack stack(Item item, int size) {
 		ItemStack stack = new ItemStack(item);
-		stack.stackSize = size;
+		stack.setCount(size);
 		return stack;
 	}
 	
 	private ItemStack spawnEgg(Entity entity) {
-		int id = EntityList.getEntityID(entity);
+		int id = EntityList.getID(entity.getClass());
 		ItemStack egg = new ItemStack(net.minecraft.init.Items.SPAWN_EGG, 2);
 		NBTTagCompound tagCompound = new NBTTagCompound();
 		NBTTagCompound entityTag = new NBTTagCompound();

@@ -27,7 +27,7 @@ public class BlockSortingPipe extends BlockPipe {
 	
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-			EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
 			playerIn.openGui(AwesomeMod.MODID, 
                     GuiEnum.SORTING_PIPE.ordinal(), 

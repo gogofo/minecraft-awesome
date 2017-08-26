@@ -10,11 +10,16 @@ import gogofo.minecraft.awesome.item.ItemDrill;
 import gogofo.minecraft.awesome.item.ItemLiquidContainer;
 import gogofo.minecraft.awesome.item.ItemLiquidPump;
 import gogofo.minecraft.awesome.item.ItemMultimeter;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class Items {
 	
@@ -41,59 +46,52 @@ public class Items {
 	private static ArrayList<Item> items = new ArrayList<Item>();
 	
 	public static void init() {
-		burnt_residue = new Item().setUnlocalizedName("burnt_residue");
+		burnt_residue = registryItem(new Item(), "burnt_residue");
 		items.add(burnt_residue);
 		
-		multimeter =  new ItemMultimeter().setUnlocalizedName("multimeter");
+		multimeter =  registryItem(new ItemMultimeter(), "multimeter");
 		items.add(multimeter);
 		
-		liquid_pump = new ItemLiquidPump().setUnlocalizedName("liquid_pump");
+		liquid_pump = registryItem(new ItemLiquidPump(), "liquid_pump");
 		items.add(liquid_pump);
 		
-		liquid_container = new ItemLiquidContainer().setUnlocalizedName("liquid_container");
+		liquid_container = registryItem(new ItemLiquidContainer(), "liquid_container");
 		items.add(liquid_container);
 		
-		machine_core = new Item().setUnlocalizedName("machine_core");
+		machine_core = registryItem(new Item(), "machine_core");
 		items.add(machine_core);
 		
-		tool_core = new Item().setUnlocalizedName("tool_core");
+		tool_core = registryItem(new Item(), "tool_core");
 		items.add(tool_core);
 		
-		conductive = new Item().setUnlocalizedName("conductive");
+		conductive = registryItem(new Item(), "conductive");
 		items.add(conductive);
 		
-		chainsaw = new ItemChainsaw().setUnlocalizedName("chainsaw");
+		chainsaw = registryItem(new ItemChainsaw(), "chainsaw");
 		items.add(chainsaw);
 		
-		drill = new ItemDrill().setUnlocalizedName("drill");
+		drill = registryItem(new ItemDrill(), "drill");
 		items.add(drill);
 		
 		// Dusts
-		iron_dust = new Item().setUnlocalizedName("iron_dust");
+		iron_dust = registryItem(new Item(), "iron_dust");
 		items.add(iron_dust);
 		
-		gold_dust = new Item().setUnlocalizedName("gold_dust");
+		gold_dust = registryItem(new Item(), "gold_dust");
 		items.add(gold_dust);
 		
 		// Ingots
-		quartz_iron_ingot = new Item().setUnlocalizedName("quartz_iron_ingot");
+		quartz_iron_ingot = registryItem(new Item(), "quartz_iron_ingot");
 		items.add(quartz_iron_ingot);
 		
 		// Food
-		rich_melon = new ItemFood(2, 0.9F, false).setUnlocalizedName("rich_melon");
+		rich_melon = registryItem(new ItemFood(2, 0.9F, false), "rich_melon");
 		items.add(rich_melon);
 		
 		// Extractions
 		
-		mob_essence = new Item().setUnlocalizedName("mob_essence");
+		mob_essence = registryItem(new Item(), "mob_essence");
 		items.add(mob_essence);
-	}
-	
-	public static void register() {
-		for (Item item : items) {
-			GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
-			item.setCreativeTab(AwesomeMod.awesomeCreativeTab);
-		}
 	}
 	
 	public static void registerRenders() {
@@ -107,5 +105,21 @@ public class Items {
 																				0, 
 																				new ModelResourceLocation(AwesomeMod.MODID + ":" + item.getUnlocalizedName().substring(5), 
 																										  "Inventory"));
+	}
+	
+	private static Item registryItem(Item item, String name) {
+		return item.setUnlocalizedName(name).setRegistryName(name).setCreativeTab(AwesomeMod.awesomeCreativeTab);
+	}
+	
+	@Mod.EventBusSubscriber(modid = AwesomeMod.MODID)
+	public static class RegistrationHandler {
+		@SubscribeEvent
+		public static void registerBlocks(final RegistryEvent.Register<Item> event) {
+			final IForgeRegistry<Item> registry = event.getRegistry();
+			
+			for (Item item : items) {
+				registry.register(item);
+			}
+		}
 	}
 }

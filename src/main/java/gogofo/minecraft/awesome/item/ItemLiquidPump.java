@@ -110,13 +110,13 @@ public class ItemLiquidPump extends AwesomeItemChargable {
                 }
             }
 
-            return null;
+            return ItemStack.EMPTY;
         }
     }
 	
 	private boolean isLiquidContainer(@Nullable ItemStack stack)
     {
-        return stack != null && stack.getItem() instanceof ItemLiquidContainer;
+        return !stack.isEmpty() && stack.getItem() instanceof ItemLiquidContainer;
     }
 	
 	private boolean harvestBlock(World worldIn, EntityPlayer playerIn, BlockPos pos) {
@@ -131,10 +131,10 @@ public class ItemLiquidPump extends AwesomeItemChargable {
 		
 		Material material = iblockstate.getMaterial();
 		
-		if (findLiquidContainer(playerIn) != null) {
+		if (!findLiquidContainer(playerIn).isEmpty()) {
 			ItemStack container = selectContainer(playerIn, material);
 			
-			if (container != null) {
+			if (!container.isEmpty()) {
     			ItemLiquidContainer.setLiquidType(container, iblockstate.getBlock());
     			((ItemLiquidContainer)container.getItem()).incLiquid(container, 1);
     			
@@ -179,12 +179,12 @@ public class ItemLiquidPump extends AwesomeItemChargable {
 	}
 
 	public ItemStack selectContainer(EntityPlayer player, Material material) {
-		ItemStack selectedContainer = null;
+		ItemStack selectedContainer = ItemStack.EMPTY;
 		
 		for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
 			ItemStack stack = player.inventory.getStackInSlot(i);
 			
-			if (stack != null && stack.getItem() instanceof ItemLiquidContainer) {
+			if (!stack.isEmpty() && stack.getItem() instanceof ItemLiquidContainer) {
 				if (ItemLiquidContainer.getLiquidFill(stack) >= ((ItemLiquidContainer)stack.getItem()).getMaxLiquid()) {
 					continue;
 				}
@@ -195,7 +195,7 @@ public class ItemLiquidPump extends AwesomeItemChargable {
 					return stack;
 				}
 				
-				if (selectedContainer == null && liquidType.getDefaultState().getMaterial() == Material.AIR) {
+				if (selectedContainer.isEmpty() && liquidType.getDefaultState().getMaterial() == Material.AIR) {
 					selectedContainer = stack;
 				}
 			}

@@ -28,7 +28,7 @@ public class ItemMultimeter extends AwesomeItemChargable {
 		int power = PowerManager.instance.getPower(pos);
 		
 		if (!worldIn.isRemote) {
-			playerIn.addChatMessage(new TextComponentString(String.format("Power: %d", power)));
+			playerIn.sendMessage(new TextComponentString(String.format("Power: %d", power)));
 		}
 		
 		return 1;

@@ -40,7 +40,7 @@ public class AwesomeControlSidesUpdateMessage implements IMessage {
 
 		@Override
 		public IMessage onMessage(AwesomeControlSidesUpdateMessage message, MessageContext ctx) {
-			World world = ctx.getServerHandler().playerEntity.worldObj;
+			World world = ctx.getServerHandler().player.world;
 			TileEntity tileEntity = world.getTileEntity(message.pos);
 			
 			if (tileEntity == null || 
@@ -60,7 +60,7 @@ public class AwesomeControlSidesUpdateMessage implements IMessage {
 				aTileEntity.addSlotToFace(nextSlot, face);
 			}
 			
-			ctx.getServerHandler().playerEntity
+			ctx.getServerHandler().player
 						.getServerWorld()
 						.getPlayerChunkMap()
 						.markBlockForUpdate(aTileEntity.getPos());

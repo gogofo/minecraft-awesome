@@ -65,7 +65,7 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 		
 		for (int i : slots) {
 			ItemStack sortStack = getStackInSlot(i);
-			if (sortStack != null && sortStack.getItem().equals(stack.getItem())) {
+			if (!sortStack.isEmpty() && sortStack.getItem().equals(stack.getItem())) {
 				canTransfer = true;
 				break;
 			}
@@ -106,7 +106,7 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 		ItemStack stack1 = getStackInSlot(slots[0]);
 		ItemStack stack2 = getStackInSlot(slots[1]);
 		
-		return stack1 != null && stack2 != null && stack1.getItem().equals(stack2.getItem());
+		return !stack1.isEmpty() && !stack2.isEmpty() && stack1.getItem().equals(stack2.getItem());
 	}
 	
 	private int[] getTrasferSlotsForFace(EnumFacing face) {
@@ -140,7 +140,7 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 	public boolean hasItems() {
     	for (int i = 0; i < 27; i++) {
     		ItemStack stack = itemStackArray[i];
-    		if (stack != null && stack.stackSize > 0) {
+    		if (stack.isEmpty() && stack.getCount() > 0) {
     			return true;
     		}
     	}

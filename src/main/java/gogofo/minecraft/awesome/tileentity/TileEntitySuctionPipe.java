@@ -20,11 +20,11 @@ public class TileEntitySuctionPipe extends TileEntityPipe {
 	public void update() {
 		super.update();
 		
-		if (worldObj.isRemote) {
+		if (world.isRemote) {
     		return;
     	}
 		
-		if (worldObj.isBlockIndirectlyGettingPowered(pos) > 1) {
+		if (world.isBlockIndirectlyGettingPowered(pos) > 1) {
 			return;
 		}
 		
@@ -58,7 +58,7 @@ public class TileEntitySuctionPipe extends TileEntityPipe {
 	}
 	
 	private boolean tryToSuckFromPos(BlockPipe tmpBlock, int recvSlot, BlockPos pos, EnumFacing facing) {
-		if (!tmpBlock.canConnectTo(worldObj, pos) || worldObj.getBlockState(pos).getBlock() instanceof BlockPipe) {
+		if (!tmpBlock.canConnectTo(world, pos) || world.getBlockState(pos).getBlock() instanceof BlockPipe) {
 			return false;
 		}
 		
@@ -69,7 +69,7 @@ public class TileEntitySuctionPipe extends TileEntityPipe {
 		
 		for (int i : getSlotIndexesForInventoryFacing(inventory, facing)) {
 			ItemStack stack = inventory.getStackInSlot(i);
-			if (stack != null) {
+			if (stack.isEmpty()) {
 				setInventorySlotContents(recvSlot, createTransfferedItem(stack, pos, true));
 				inventory.decrStackSize(i, 1);
 				return true;

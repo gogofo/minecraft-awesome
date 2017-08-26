@@ -19,7 +19,12 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class Blocks {
 
@@ -37,67 +42,86 @@ public class Blocks {
 	public static Block extractor;
 	
 	private static ArrayList<Block> blocks = new ArrayList<Block>();
+	private static ArrayList<ItemBlock> itemBlocks = new ArrayList<>();
 
 	public static void init() {
-		generator = new BlockGenerator().setUnlocalizedName("generator");
+		generator = registryBlock(new BlockGenerator(), "generator");
 		blocks.add(generator);
 		
-		electric_wire = new BlockElectricWire().setUnlocalizedName("electric_wire");
+		electric_wire = registryBlock(new BlockElectricWire(), "electric_wire");
 		blocks.add(electric_wire);
 		
-		fuser = new BlockFuser().setUnlocalizedName("fuser");
+		fuser = registryBlock(new BlockFuser(), "fuser");
 		blocks.add(fuser);
 		
-		charger = new BlockCharger().setUnlocalizedName("charger");
+		charger = registryBlock(new BlockCharger(), "charger");
 		blocks.add(charger);
 		
-		grinder = new BlockGrinder().setUnlocalizedName("grinder");
+		grinder = registryBlock(new BlockGrinder(), "grinder");
 		blocks.add(grinder);
 		
-		electric_furnace = new BlockElectricFurnace().setUnlocalizedName("electric_furnace");
+		electric_furnace = registryBlock(new BlockElectricFurnace(), "electric_furnace");
 		blocks.add(electric_furnace);
 		
-		teleport_portal = new BlockTeleportPortal().setUnlocalizedName("teleport_portal");
+		teleport_portal = registryBlock(new BlockTeleportPortal(), "teleport_portal");
 		blocks.add(teleport_portal);
 		
-		teleporter = new BlockTeleporter().setUnlocalizedName("teleporter");
+		teleporter = registryBlock(new BlockTeleporter(), "teleporter");
 		blocks.add(teleporter);
 		
-		pipe = new BlockPipe().setUnlocalizedName("pipe");
+		pipe = registryBlock(new BlockPipe(), "pipe");
 		blocks.add(pipe);
 
-		suction_pipe = new BlockSuctionPipe().setUnlocalizedName("suction_pipe");
+		suction_pipe = registryBlock(new BlockSuctionPipe(), "suction_pipe");
 		blocks.add(suction_pipe);
 		
-		sorting_pipe = new BlockSortingPipe().setUnlocalizedName("sorting_pipe");
+		sorting_pipe = registryBlock(new BlockSortingPipe(), "sorting_pipe");
 		blocks.add(sorting_pipe);
 		
-		extractor = new BlockExtractor().setUnlocalizedName("extractor");
+		extractor = registryBlock(new BlockExtractor(), "extractor");
 		blocks.add(extractor);
-	}
-	
-	public static void register() {
+		
 		for (Block block : blocks) {
-			registerBlock(block);
+			ItemBlock itemBlock = new ItemBlock(block);
+			itemBlock.setRegistryName(block.getRegistryName());
+			itemBlocks.add(itemBlock);
 		}
-	}
-	
-	private static void registerBlock(Block block) {
-		GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
-		block.setCreativeTab(AwesomeMod.awesomeCreativeTab);
 	}
 	
 	public static void registerRenders() {
-		for (Block block : blocks) {
-			registerRender(block);
+		for (ItemBlock itemBlock : itemBlocks) {
+			registerRender(itemBlock);
 		}
 	}
 	
-	private static void registerRender(Block block) {
-		Item item = Item.getItemFromBlock(block);
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 
+	private static void registerRender(ItemBlock itemBlock) {
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 
 				0, 
-				new ModelResourceLocation(AwesomeMod.MODID + ":" + item.getUnlocalizedName().substring(5), 
-										  "inventory"));
+				new ModelResourceLocation(itemBlock.getRegistryName(), "inventory"));
+	}
+	
+	private static Block registryBlock(Block block, String name) {
+		return block.setUnlocalizedName(name).setRegistryName(name).setCreativeTab(AwesomeMod.awesomeCreativeTab);
+	}
+	
+	@Mod.EventBusSubscriber(modid = AwesomeMod.MODID)
+	public static class RegistrationHandler {
+		@SubscribeEvent
+		public static void registerBlocks(final RegistryEvent.Register<Block> event) {
+			final IForgeRegistry<Block> registry = event.getRegistry();
+			
+			for (Block block : blocks) {
+				registry.register(block);
+			}
+		}
+		
+		@SubscribeEvent
+		public static void registerItemBlocks(final RegistryEvent.Register<Item> event) {
+			final IForgeRegistry<Item> registry = event.getRegistry();
+			
+			for (ItemBlock itemBlock : itemBlocks) {
+				registry.register(itemBlock);
+			}
+		}
 	}
 }

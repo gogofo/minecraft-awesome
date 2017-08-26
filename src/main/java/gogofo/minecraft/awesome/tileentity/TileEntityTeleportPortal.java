@@ -43,7 +43,7 @@ public class TileEntityTeleportPortal extends TileEntity {
     }
     
     private TileEntityTeleporter getTeleporter() {
-    	TileEntity te = worldObj.getTileEntity(teleporterPos);
+    	TileEntity te = world.getTileEntity(teleporterPos);
         
         if (te == null || !(te instanceof TileEntityTeleporter)) {
         	return null;
@@ -53,7 +53,7 @@ public class TileEntityTeleportPortal extends TileEntity {
     }
 
 	public void teleportIfPossible(EntityLivingBase entityIn, IBlockState state) {
-		if (entityIn != null && entityIn.worldObj != null && !entityIn.worldObj.isRemote) {
+		if (entityIn != null && entityIn.world != null && !entityIn.world.isRemote) {
 			if (entityIn.isInvisible()) {	
 				entityIn.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 10));
 				return;
@@ -72,7 +72,7 @@ public class TileEntityTeleportPortal extends TileEntity {
 			}
 			
 			EnumFacing.Axis localAxis = (EnumFacing.Axis)state.getValue(BlockTeleportPortal.AXIS);
-			EnumFacing.Axis remoteAxis = (EnumFacing.Axis)worldObj.getBlockState(destTeleport.up()).getValue(BlockTeleportPortal.AXIS);
+			EnumFacing.Axis remoteAxis = (EnumFacing.Axis)world.getBlockState(destTeleport.up()).getValue(BlockTeleportPortal.AXIS);
 			
 			int x = 0;
 			int y = 1;
@@ -81,7 +81,7 @@ public class TileEntityTeleportPortal extends TileEntity {
 			destTeleport = destTeleport.add(x, y, z);
 			
 			BlockPos prevPos = new BlockPos(entityIn.lastTickPosX, entityIn.lastTickPosY, entityIn.lastTickPosZ);
-			if (worldObj.getTileEntity(prevPos) instanceof TileEntityTeleportPortal) {
+			if (world.getTileEntity(prevPos) instanceof TileEntityTeleportPortal) {
 				return;
 			}
 			

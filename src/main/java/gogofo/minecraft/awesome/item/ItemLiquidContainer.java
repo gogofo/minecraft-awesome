@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -96,7 +97,7 @@ public class ItemLiquidContainer extends Item {
 	}
 	
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		if (getLiquidType(stack) != Blocks.AIR) {
 			tooltip.add(String.format("Liquid Type: %s", getLiquidType(stack).getLocalizedName()));
 			tooltip.add(String.format("Amount: %d", getLiquidFill(stack)));
@@ -113,7 +114,8 @@ public class ItemLiquidContainer extends Item {
 	}
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+		ItemStack stack = playerIn.getHeldItem(handIn);
 		if (playerIn.isSneaking()) {
 			if (getLiquidFill(stack) > 0) {
 				setLiquidFill(stack, 0);

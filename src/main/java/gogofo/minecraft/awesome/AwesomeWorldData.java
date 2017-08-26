@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSavedData;
+import net.minecraft.world.storage.WorldSavedData;
 import scala.collection.generic.BitOperations.Int;
 
 public class AwesomeWorldData extends WorldSavedData {
@@ -80,10 +80,10 @@ public class AwesomeWorldData extends WorldSavedData {
 	}
 	
 	public static AwesomeWorldData get(World world) {
-		AwesomeWorldData data = (AwesomeWorldData)world.loadItemData(AwesomeWorldData.class, IDENTIFIER);
+		AwesomeWorldData data = (AwesomeWorldData)world.loadData(AwesomeWorldData.class, IDENTIFIER);
 		if (data == null) {
 			data = new AwesomeWorldData();
-			world.setItemData(IDENTIFIER, data);
+			world.setData(IDENTIFIER, data);
 		}
 		return data;
 	}

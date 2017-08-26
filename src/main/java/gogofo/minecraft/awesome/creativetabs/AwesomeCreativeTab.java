@@ -4,6 +4,7 @@ import gogofo.minecraft.awesome.init.Blocks;
 import gogofo.minecraft.awesome.init.Items;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class AwesomeCreativeTab extends CreativeTabs {
 
@@ -12,7 +13,7 @@ public class AwesomeCreativeTab extends CreativeTabs {
 	}
 
 	@Override
-	public Item getTabIconItem() {
-		return Items.drill;
+	public ItemStack getTabIconItem() {
+		return new ItemStack(Items.drill);
 	}
 }

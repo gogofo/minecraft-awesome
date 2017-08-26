@@ -35,8 +35,8 @@ public abstract class AwesomeBlockContainer extends BlockContainer {
 	}
 	
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {		
 		if (!worldIn.isRemote) {
 			playerIn.openGui(AwesomeMod.MODID, 
                     getGuiId(), 
@@ -63,9 +63,9 @@ public abstract class AwesomeBlockContainer extends BlockContainer {
     }
 	
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-    {
-        return fillDefaultStateProperties(this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()));
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
+			ItemStack stack) {
+        fillDefaultStateProperties(this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()));
     }
 	
 	@Override
@@ -101,7 +101,7 @@ public abstract class AwesomeBlockContainer extends BlockContainer {
                 enumfacing = EnumFacing.WEST;
             }
 
-            worldIn.setBlockState(pos, fillDefaultStateProperties(state.withProperty(FACING, enumfacing)), 2);
+			worldIn.setBlockState(pos, fillDefaultStateProperties(state.withProperty(FACING, enumfacing)), 2);
         }
     }
 	

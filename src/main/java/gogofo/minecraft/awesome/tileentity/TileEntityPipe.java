@@ -28,13 +28,13 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	
 	@Override
 	public void update() {
-		if (worldObj.isRemote) {
+		if (world.isRemote) {
     		return;
     	}
 		
 		for (int i = 0; i < getTransferSlotCount(); i++) {
 			ItemStack stack = super.getStackInSlot(i);
-			if (stack != null) {
+			if (!stack.isEmpty()) {
 				decStackCooldown(stack);
 				
 				if (getStackCooldown(stack) <= 0) {
@@ -56,7 +56,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		for (EnumFacing facing : randomFacing) {
 			BlockPos dest = getPos().offset(facing);
 			
-			if (worldObj.getBlockState(dest).getBlock() instanceof BlockPipe) {
+			if (world.getBlockState(dest).getBlock() instanceof BlockPipe) {
 				checkOrder.add(facing);
 			} else {
 				checkOrder.add(nonPipeIndex, facing);
@@ -91,7 +91,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		BlockPos origin = getStackOrigin(stack);
 		BlockPos dest = getPos().offset(facing);
 		
-		if (worldObj.getBlockState(dest).getBlock() instanceof BlockSuctionPipe) {
+		if (world.getBlockState(dest).getBlock() instanceof BlockSuctionPipe) {
 			return false;
 		}
 		
@@ -107,7 +107,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		
 		BlockPos origin = getStackOrigin(stack);
 		
-		if (!(worldObj.getBlockState(origin).getBlock() instanceof BlockSuctionPipe)) {
+		if (!(world.getBlockState(origin).getBlock() instanceof BlockSuctionPipe)) {
 			dests.add(getStackOrigin(stack));
 		}
 		
@@ -154,7 +154,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 			return false;
 		}
 		
-		if (!refPipeBlock.canConnectTo(worldObj, pos)) {
+		if (!refPipeBlock.canConnectTo(world, pos)) {
 			return false;
 		}
 		
@@ -169,11 +169,11 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 			}
 			
 			ItemStack stack = inventory.getStackInSlot(i);
-			if (stack == null) {
+			if (stack.isEmpty()) {
 				inventory.setInventorySlotContents(i, 
 												   createTransfferedItem(sentStack, 
 														   				 getPos(),
-														   				 worldObj.getBlockState(pos).getBlock() instanceof BlockPipe));
+														   				 world.getBlockState(pos).getBlock() instanceof BlockPipe));
 				decrStackSize(sentSlot, 1);
 				markDirty();
 				
@@ -181,9 +181,9 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 			} else if (stack.getItem() == sentStack.getItem() && 
 					   stack.isItemEqual(sentStack) &&
 					   stack.getMetadata() == sentStack.getMetadata() &&
-					   stack.stackSize < inventory.getInventoryStackLimit() &&
-					   stack.stackSize < stack.getMaxStackSize()) {
-				stack.stackSize += 1;
+					   stack.getCount() < inventory.getInventoryStackLimit() &&
+					   stack.getCount() < stack.getMaxStackSize()) {
+				stack.grow(1);
 				inventory.setInventorySlotContents(i, stack);
 				decrStackSize(sentSlot, 1);
 				markDirty();
@@ -258,7 +258,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	
 	protected int getEmptySlotIndex() {
 		for (int i = 0; i < getTransferSlotCount(); i++) {
-			if (super.getStackInSlot(i) == null) {
+			if (super.getStackInSlot(i).isEmpty()) {
 				return i;
 			}
 		}
@@ -271,7 +271,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	}
 	
 	protected IInventory getInventoryAt(BlockPos pos) {
-		TileEntity te = worldObj.getTileEntity(pos);
+		TileEntity te = world.getTileEntity(pos);
 		
 		if (!(te instanceof IInventory)) {
 			return null;
@@ -389,12 +389,12 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	@Override
     public ItemStack getStackInSlot(int index)
     {
-		if (itemStackArray[index] == null) {
-			return null;
+		if (itemStackArray[index].isEmpty()) {
+			return ItemStack.EMPTY;
 		}
 		
 		ItemStack stack = new ItemStack(itemStackArray[index].getItem(), 
-										itemStackArray[index].stackSize, 
+										itemStackArray[index].getCount(), 
 										itemStackArray[index].getMetadata());
         return stack;
     }

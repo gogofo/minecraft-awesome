@@ -18,50 +18,50 @@ public class ColorGuiButton extends GuiButton {
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		if (visible) {
-			drawRect(xPosition + 1, 
-	    			yPosition + 1, 
-	    			xPosition + width - 1, 
-	    			yPosition + height - 1, 
+			drawRect(this.x + 1, 
+					this.y + 1, 
+					this.x + width - 1, 
+					this.y + height - 1, 
 	    			color);
 			
 			drawBorder();
 			
-			drawCenteredString(mc.fontRendererObj, 
+			drawCenteredString(mc.fontRenderer, 
 					           this.displayString, 
-					           this.xPosition + this.width / 2, 
-					           this.yPosition + (this.height - 8) / 2, 
+					           this.x + this.width / 2, 
+					           this.y + (this.height - 8) / 2, 
 					           0xFFFFFFFF);
 		}
 	}
 	
 	private void drawBorder() {
 		// Black line
-		drawHorizontalLine(xPosition + 2, xPosition + width - 3, yPosition, 0xFF000000);
-		drawHorizontalLine(xPosition + 3, xPosition + width - 2, yPosition + height, 0xFF000000);
-		drawVerticalLine(xPosition, yPosition + 1, yPosition + height - 2, 0xFF000000);
-		drawVerticalLine(xPosition + width, yPosition + 2, yPosition + height - 1, 0xFF000000);
-		drawDot(xPosition + 1, yPosition + 1, 0xFF000000);
-		drawDot(xPosition + width - 2, yPosition + 1, 0xFF000000);
-		drawDot(xPosition + width - 1, yPosition + 2, 0xFF000000);
-		drawDot(xPosition + 1, yPosition + height - 2, 0xFF000000);
-		drawDot(xPosition + 2, yPosition + height - 1, 0xFF000000);
-		drawDot(xPosition + width - 1, yPosition + height - 1, 0xFF000000);
+		drawHorizontalLine(this.x + 2, this.x + width - 3, this.y, 0xFF000000);
+		drawHorizontalLine(this.x + 3, this.x + width - 2, this.y + height, 0xFF000000);
+		drawVerticalLine(this.x, this.y + 1, this.y + height - 2, 0xFF000000);
+		drawVerticalLine(this.x + width, this.y + 2, this.y + height - 1, 0xFF000000);
+		drawDot(this.x + 1, this.y + 1, 0xFF000000);
+		drawDot(this.x + width - 2, this.y + 1, 0xFF000000);
+		drawDot(this.x + width - 1, this.y + 2, 0xFF000000);
+		drawDot(this.x + 1, this.y + height - 2, 0xFF000000);
+		drawDot(this.x + 2, this.y + height - 1, 0xFF000000);
+		drawDot(this.x + width - 1, this.y + height - 1, 0xFF000000);
 
 		// White lines
-		drawRect(xPosition + 2, yPosition + 1, xPosition + width - 2, yPosition + 2, 0xFFFFFFFF);
-		drawRect(xPosition + 1, yPosition + 2, xPosition + 2, yPosition + height - 2, 0xFFFFFFFF);
-		drawDot(xPosition + 2, yPosition + 2, 0xFFFFFFFF);
+		drawRect(this.x + 2, this.y + 1, this.x + width - 2, this.y + 2, 0xFFFFFFFF);
+		drawRect(this.x + 1, this.y + 2, this.x + 2, this.y + height - 2, 0xFFFFFFFF);
+		drawDot(this.x + 2, this.y + 2, 0xFFFFFFFF);
 		
 		// Grey corners
-		drawDot(xPosition + 2, yPosition + height - 2, 0xFFC6C6C6);
-		drawDot(xPosition + width - 2, yPosition + 2, 0xFFC6C6C6);
+		drawDot(this.x + 2, this.y + height - 2, 0xFFC6C6C6);
+		drawDot(this.x + width - 2, this.y + 2, 0xFFC6C6C6);
 		
 		// Dark grey lines
-		drawRect(xPosition + 3, yPosition + height - 1, xPosition + width - 1, yPosition + height, 0xFF555555);
-		drawRect(xPosition + width, yPosition + 3, xPosition + width - 1, yPosition + height - 1, 0xFF555555);
-		drawDot(xPosition + width - 2, yPosition + height - 2, 0xFF555555);
+		drawRect(this.x + 3, this.y + height - 1, this.x + width - 1, this.y + height, 0xFF555555);
+		drawRect(this.x + width, this.y + 3, this.x + width - 1, this.y + height - 1, 0xFF555555);
+		drawDot(this.x + width - 2, this.y + height - 2, 0xFF555555);
 	}
 	
 	private void drawDot(int x, int y, int color) {

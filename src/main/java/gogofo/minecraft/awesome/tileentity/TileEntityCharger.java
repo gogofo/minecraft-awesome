@@ -25,12 +25,12 @@ public class TileEntityCharger extends AwesomeTileEntityMachine {
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
-		boolean itemIsSame = stack != null && stack.isItemEqual(this.itemStackArray[index]) && ItemStack.areItemStackTagsEqual(stack, this.itemStackArray[index]);
+		boolean itemIsSame = !stack.isEmpty() && stack.isItemEqual(this.itemStackArray[index]) && ItemStack.areItemStackTagsEqual(stack, this.itemStackArray[index]);
         this.itemStackArray[index] = stack;
 
-        if (stack != null && stack.stackSize > this.getInventoryStackLimit())
+        if (!stack.isEmpty() && stack.getCount() > this.getInventoryStackLimit())
         {
-            stack.stackSize = this.getInventoryStackLimit();
+            stack.setCount(this.getInventoryStackLimit());
         }
 
         if (index == 0 && !itemIsSame)
@@ -67,7 +67,7 @@ public class TileEntityCharger extends AwesomeTileEntityMachine {
 	public void clear() {
 		for (int i = 0; i < this.itemStackArray.length; ++i)
         {
-            this.itemStackArray[i] = null;
+            this.itemStackArray[i] = ItemStack.EMPTY;
         }
 	}
 	
@@ -102,7 +102,7 @@ public class TileEntityCharger extends AwesomeTileEntityMachine {
 	private IAwesomeChargable getChargedItem() {
 		ItemStack stack = itemStackArray[0];
 		
-		if (stack != null && stack.getItem() instanceof IAwesomeChargable) {
+		if (!stack.isEmpty() && stack.getItem() instanceof IAwesomeChargable) {
 			return (IAwesomeChargable)stack.getItem();
 		}
 		

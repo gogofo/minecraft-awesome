@@ -31,6 +31,7 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
 	
 	public AwesomeTileEntityContainer() {
 		itemStackArray = new ItemStack[getSlotCount()];
+		Arrays.fill(itemStackArray, ItemStack.EMPTY);
 		
 		initSlotsFotFace(true);
 	}
@@ -61,12 +62,12 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
 	
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
-		boolean itemIsSame = stack != null && stack.isItemEqual(this.itemStackArray[index]) && ItemStack.areItemStackTagsEqual(stack, this.itemStackArray[index]);
+		boolean itemIsSame = !stack.isEmpty() && stack.isItemEqual(this.itemStackArray[index]) && ItemStack.areItemStackTagsEqual(stack, this.itemStackArray[index]);
         this.itemStackArray[index] = stack;
 
-        if (stack != null && stack.stackSize > this.getInventoryStackLimit())
+        if (!stack.isEmpty() && stack.getCount() > this.getInventoryStackLimit())
         {
-            stack.stackSize = this.getInventoryStackLimit();
+            stack.setCount(this.getInventoryStackLimit());
         }
 
         if (index == 0 && !itemIsSame)
@@ -78,14 +79,14 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
 	@Override
     public ItemStack decrStackSize(int index, int count)
     {
-        if (itemStackArray[index] != null)
+        if (!itemStackArray[index].isEmpty())
         {
             ItemStack itemstack;
 
-            if (itemStackArray[index].stackSize <= count)
+            if (itemStackArray[index].getCount() <= count)
             {
                 itemstack = itemStackArray[index];
-                itemStackArray[index] = null;
+                itemStackArray[index] = ItemStack.EMPTY;
                 this.markDirty();
                 return itemstack;
             }
@@ -93,9 +94,9 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
             {
                 itemstack = itemStackArray[index].splitStack(count);
 
-                if (itemStackArray[index].stackSize == 0)
+                if (itemStackArray[index].isEmpty())
                 {
-                    itemStackArray[index] = null;
+                    itemStackArray[index] = ItemStack.EMPTY;
                 }
 
                 this.markDirty();
@@ -104,20 +105,20 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
         }
         else
         {
-            return null;
+            return ItemStack.EMPTY;
         }
     }
 	
 	public ItemStack removeStackFromSlot(int index) {
-		if (itemStackArray[index] != null)
+		if (!itemStackArray[index].isEmpty())
 		{
 	        ItemStack itemstack = itemStackArray[index];
-	        itemStackArray[index] = null;
+	        itemStackArray[index] = ItemStack.EMPTY;
 	        return itemstack;
 		}
 		else
 		{
-			return null;
+			return ItemStack.EMPTY;
 		}
 	}
     
@@ -135,7 +136,8 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
 
             if (b0 >= 0 && b0 < itemStackArray.length)
             {
-                itemStackArray[b0] = ItemStack.loadItemStackFromNBT(
+            	
+                itemStackArray[b0] = new ItemStack(
                       nbtTagCompound);
             }
         }
@@ -164,7 +166,7 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
 
         for (int i = 0; i < itemStackArray.length; ++i)
         {
-            if (itemStackArray[i] != null)
+            if (!itemStackArray[i].isEmpty())
             {
                 NBTTagCompound nbtTagCompound = new NBTTagCompound();
                 nbtTagCompound.setByte("Slot", (byte)i);
@@ -201,9 +203,9 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
     }
     
     @Override
-    public boolean isUseableByPlayer(EntityPlayer playerIn)
+    public boolean isUsableByPlayer(EntityPlayer playerIn)
     {
-        return worldObj.getTileEntity(pos) != this ? false : 
+        return world.getTileEntity(pos) != this ? false : 
               playerIn.getDistanceSq(pos.getX()+0.5D, pos.getY()+0.5D, 
               pos.getZ()+0.5D) <= 64.0D;
     }
@@ -233,7 +235,7 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
     {
         for (int i = 0; i < itemStackArray.length; ++i)
         {
-            itemStackArray[i] = null;
+            itemStackArray[i] = ItemStack.EMPTY;
         }
     }
     
@@ -244,7 +246,7 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
     
     public boolean hasItems() {
     	for (ItemStack stack : itemStackArray) {
-    		if (stack != null && stack.stackSize > 0) {
+    		if (!stack.isEmpty()) {
     			return true;
     		}
     	}
@@ -286,5 +288,18 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
     @Override
     public NBTTagCompound getUpdateTag() {
     	return writeToNBT(new NBTTagCompound());
+    }
+    
+    @Override
+    public boolean isEmpty() {
+    	for (int i = 0; i < itemStackArray.length; ++i)
+        {
+            if (!itemStackArray[i].isEmpty())
+            {
+            	return false;
+            }
+        }
+    	
+    	return true;
     }
 }

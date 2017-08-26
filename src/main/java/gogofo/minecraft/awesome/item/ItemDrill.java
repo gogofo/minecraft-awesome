@@ -70,13 +70,13 @@ public class ItemDrill extends AwesomeItemChargable {
                 }
             }
 
-            return null;
+            return ItemStack.EMPTY;
         }
     }
 	
 	private boolean isTorch(@Nullable ItemStack stack)
     {
-        return stack != null && Item.getItemFromBlock(Blocks.TORCH) == stack.getItem();
+        return !stack.isEmpty() && Item.getItemFromBlock(Blocks.TORCH) == stack.getItem();
     }
 
 	@Override
@@ -92,10 +92,10 @@ public class ItemDrill extends AwesomeItemChargable {
     		
     		if (worldIn.isAirBlock(blockpos) && Blocks.TORCH.canPlaceBlockAt(worldIn, blockpos)) {
     			ItemStack torchStack = findTorch(playerIn);
-    			if (torchStack != null && torchStack.stackSize > 0) {
-    				--torchStack.stackSize;
+    			if (!torchStack.isEmpty()) {
+    				torchStack.shrink(1);
 
-                    if (torchStack.stackSize == 0)
+                    if (torchStack.isEmpty())
                     {
                     	playerIn.inventory.deleteStack(torchStack);
                     }

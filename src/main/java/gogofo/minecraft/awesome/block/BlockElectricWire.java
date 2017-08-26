@@ -210,7 +210,7 @@ public class BlockElectricWire extends Block implements ITileEntityProvider, IEl
 	
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox,
-			List<AxisAlignedBB> collidingBoxes, Entity entityIn) {
+			List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean p_185477_7_) {
 	}
 	
 	@Override

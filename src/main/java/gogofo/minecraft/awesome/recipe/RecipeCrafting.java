@@ -1,5 +1,8 @@
 package gogofo.minecraft.awesome.recipe;
 
+import javax.annotation.Nonnull;
+
+import gogofo.minecraft.awesome.AwesomeMod;
 import gogofo.minecraft.awesome.init.Blocks;
 import gogofo.minecraft.awesome.init.Items;
 import net.minecraft.block.Block;
@@ -7,6 +10,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class RecipeCrafting {
@@ -18,25 +22,28 @@ public class RecipeCrafting {
 	}
 	
 	private void registerMachines() {
-		GameRegistry.addRecipe(stack(Blocks.electric_wire, 6), 
-				   "AAA",
-				   "BBB",
-				   "AAA",
-				   'A', net.minecraft.init.Items.IRON_INGOT,
-				   'B', Items.conductive);
+		addShapedRecipe(Blocks.electric_wire, 6, 
+				   		"AAA",
+			   			"BBB",
+		   				"AAA",
+	   					'A', net.minecraft.init.Items.IRON_INGOT,
+   						'B', Items.conductive);
 
-		GameRegistry.addRecipe(stack(Items.machine_core, 1), 
+		addShapedRecipe(Items.machine_core, 1, 
 							   "AAA",
 							   "ABA",
 							   "AAA",
 							   'A', net.minecraft.init.Items.IRON_INGOT,
 							   'B', Items.conductive);
 		
-		GameRegistry.addShapelessRecipe(stack(Blocks.generator, 1),
-									    net.minecraft.init.Blocks.FURNACE,
-									    Items.machine_core);
+		addShapedRecipe(Blocks.generator, 1,
+						" A ",
+						" B ",
+						"   ",
+						'A', net.minecraft.init.Blocks.FURNACE,
+						'B', Items.machine_core);
 		
-		GameRegistry.addRecipe(stack(Blocks.charger, 1), 
+		addShapedRecipe(Blocks.charger, 1, 
 							   "ABA",
 							   "ACA",
 							   "ADA",
@@ -45,7 +52,7 @@ public class RecipeCrafting {
 							   'C', Items.machine_core,
 							   'D', net.minecraft.init.Blocks.REDSTONE_TORCH);
 		
-		GameRegistry.addRecipe(stack(Blocks.fuser, 1),
+		addShapedRecipe(Blocks.fuser, 1,
 							   "ABC",
 							   "DEF",
 							   "GHI",
@@ -59,7 +66,7 @@ public class RecipeCrafting {
 							   'H', net.minecraft.init.Items.LAVA_BUCKET,
 							   'I', net.minecraft.init.Blocks.DIAMOND_BLOCK);
 		
-		GameRegistry.addRecipe(stack(Blocks.grinder, 1), 
+		addShapedRecipe(Blocks.grinder, 1, 
 							   "AAA",
 							   "BCB",
 							   "DDD",
@@ -68,14 +75,14 @@ public class RecipeCrafting {
 							   'C', Items.machine_core,
 							   'D', net.minecraft.init.Items.REDSTONE);
 		
-		GameRegistry.addRecipe(stack(Blocks.electric_furnace, 1), 
+		addShapedRecipe(Blocks.electric_furnace, 1, 
 							   "AAA",
 							   "ABA",
 							   "AAA",
 							   'A', Items.quartz_iron_ingot,
 							   'B', Items.machine_core);
 		
-		GameRegistry.addRecipe(stack(Blocks.teleporter, 1), 
+		addShapedRecipe(Blocks.teleporter, 1, 
 				   "AAA",
 				   "BCD",
 				   "FEF",
@@ -86,7 +93,7 @@ public class RecipeCrafting {
 				   'F', Items.quartz_iron_ingot,
 				   'E', net.minecraft.init.Items.REDSTONE);
 		
-		GameRegistry.addRecipe(stack(Blocks.extractor, 1), 
+		addShapedRecipe(Blocks.extractor, 1, 
 				   "ABA",
 				   "ACA",
 				   "ADA",
@@ -97,7 +104,7 @@ public class RecipeCrafting {
 	}
 	
 	private void registerPipes() {
-		GameRegistry.addRecipe(stack(Blocks.pipe, 6), 
+		addShapedRecipe(Blocks.pipe, 6, 
 				   "AAA",
 				   "BCB",
 				   "AAA",
@@ -105,7 +112,7 @@ public class RecipeCrafting {
 				   'B', net.minecraft.init.Blocks.GLASS,
 				   'C', net.minecraft.init.Blocks.HOPPER);
 		
-		GameRegistry.addRecipe(stack(Blocks.suction_pipe, 6), 
+		addShapedRecipe(Blocks.suction_pipe, 6, 
 				   "AAA",
 				   "BCB",
 				   "AAA",
@@ -113,7 +120,7 @@ public class RecipeCrafting {
 				   'B', net.minecraft.init.Blocks.GLASS,
 				   'C', net.minecraft.init.Blocks.HOPPER);
 		
-		GameRegistry.addRecipe(stack(Blocks.sorting_pipe, 6), 
+		addShapedRecipe(Blocks.sorting_pipe, 6, 
 				   "AAA",
 				   "BCB",
 				   "AAA",
@@ -123,20 +130,20 @@ public class RecipeCrafting {
 	}
 	
 	private void registerTools() {
-		GameRegistry.addRecipe(stack(Items.conductive, 3),
+		addShapedRecipe(Items.conductive, 3,
 							   "   ",
 							   "AAA",
 							   "   ",
 							   'A', net.minecraft.init.Items.IRON_INGOT);
 		
-		GameRegistry.addRecipe(stack(Items.tool_core, 1), 
+		addShapedRecipe(Items.tool_core, 1, 
 							   " A ",
 							   "ABA",
 							   " A ",
 							   'A', net.minecraft.init.Blocks.STONE,
 							   'B', Items.conductive);
 		
-		GameRegistry.addRecipe(stack(Items.multimeter, 1),
+		addShapedRecipe(Items.multimeter, 1,
 							   "  A",
 							   "BCB",
 							   "BDB",
@@ -145,27 +152,27 @@ public class RecipeCrafting {
 							  	'C', net.minecraft.init.Items.COMPASS,
 							  	'D', Items.tool_core);
 		
-		GameRegistry.addRecipe(stack(Items.liquid_pump, 1),
+		addShapedRecipe(Items.liquid_pump, 1,
 							   "ABA",
 							   " A ",
 							   'A', net.minecraft.init.Items.IRON_INGOT,
 							   'B', Items.tool_core);
 		
-		GameRegistry.addRecipe(stack(Items.liquid_container, 1),
+		addShapedRecipe(Items.liquid_container, 1,
 							   "AAA",
 							   "ABA",
 							   "AAA",
 							   'A', net.minecraft.init.Items.BUCKET,
 							   'B', Items.tool_core);
 
-		GameRegistry.addRecipe(stack(Items.chainsaw, 1),
+		addShapedRecipe(Items.chainsaw, 1,
 				   "AAA",
 				   "ABA",
 				   "AAA",
 				   'A', net.minecraft.init.Items.IRON_AXE,
 				   'B', Items.tool_core);
 		
-		GameRegistry.addRecipe(stack(Items.drill, 1),
+		addShapedRecipe(Items.drill, 1,
 				   "AAA",
 				   "ABA",
 				   "AAA",
@@ -175,7 +182,9 @@ public class RecipeCrafting {
 		ItemStack enchantedDrill = stack(Items.drill, 1);
 		enchantedDrill.addEnchantment(Enchantments.EFFICIENCY, 5);
 		enchantedDrill.addEnchantment(Enchantments.FORTUNE, 3);
-		GameRegistry.addRecipe(enchantedDrill,
+		addShapedRecipe(Items.drill.getUnlocalizedName(),
+				"Industrial",
+				enchantedDrill,
 				   "AAA",
 				   "ABA",
 				   "ACA",
@@ -185,22 +194,34 @@ public class RecipeCrafting {
 	}
 	
 	private void registerStuff() {
-		GameRegistry.addRecipe(stack(net.minecraft.init.Blocks.TORCH, 2),
+		addShapedRecipe(net.minecraft.init.Blocks.TORCH, 2,
 							   "A",
 							   "B",
 							   'A', Items.burnt_residue,
 							   'B', net.minecraft.init.Items.STICK);
 	}
 	
+	private void addShapedRecipe(String name, String group, ItemStack output, Object... params) {
+		GameRegistry.addShapedRecipe(new ResourceLocation(AwesomeMod.MODID, name), new ResourceLocation(AwesomeMod.MODID, group), output, params);
+	}
+	
+	private void addShapedRecipe(Block block, int amount, Object... params) {
+		addShapedRecipe(block.getUnlocalizedName().substring(5), "Industrial", stack(block, amount), params);
+	}
+	
+	private void addShapedRecipe(Item item, int amount, Object... params) {
+		addShapedRecipe(item.getUnlocalizedName(), "Industrial", stack(item, amount), params);
+	}
+	
 	private ItemStack stack(Item item, int size) {
 		ItemStack stack = new ItemStack(item);
-		stack.stackSize = size;
+		stack.setCount(size);
 		return stack;
 	}
 	
 	private ItemStack stack(Block block, int size) {
 		ItemStack stack = new ItemStack(block);
-		stack.stackSize = size;
+		stack.setCount(size);
 		return stack;
 	}
 }

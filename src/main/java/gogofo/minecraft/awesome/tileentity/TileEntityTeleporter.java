@@ -59,12 +59,12 @@ public class TileEntityTeleporter extends AwesomeTileEntityMachine {
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
-		boolean itemIsSame = stack != null && stack.isItemEqual(this.itemStackArray[index]) && ItemStack.areItemStackTagsEqual(stack, this.itemStackArray[index]);
+		boolean itemIsSame = !stack.isEmpty() && stack.isItemEqual(this.itemStackArray[index]) && ItemStack.areItemStackTagsEqual(stack, this.itemStackArray[index]);
         this.itemStackArray[index] = stack;
 
-        if (stack != null && stack.stackSize > this.getInventoryStackLimit())
+        if (!stack.isEmpty() && stack.getCount() > this.getInventoryStackLimit())
         {
-            stack.stackSize = this.getInventoryStackLimit();
+            stack.setCount(this.getInventoryStackLimit());
         }
 
         if (index == 0 && !itemIsSame)
@@ -101,7 +101,7 @@ public class TileEntityTeleporter extends AwesomeTileEntityMachine {
 	public void clear() {
 		for (int i = 0; i < this.itemStackArray.length; ++i)
         {
-            this.itemStackArray[i] = null;
+            this.itemStackArray[i] = ItemStack.EMPTY;
         }
 	}
 	
@@ -117,15 +117,15 @@ public class TileEntityTeleporter extends AwesomeTileEntityMachine {
 	
 	@Override
 	public void electricUpdate() {
-		if (worldObj.isRemote) {
+		if (world.isRemote) {
 			return;
 		}
 		
-		if (itemStackArray[0] == null && key == null) {
+		if (itemStackArray[0].isEmpty() && key == null) {
 			return;
 		}
 		
-		if (itemStackArray[0] == null) {
+		if (itemStackArray[0].isEmpty()) {
 			destroyPortal();
 		} else if (itemStackArray[0].getItem() != key) {
 			if (key != null) {
@@ -144,7 +144,7 @@ public class TileEntityTeleporter extends AwesomeTileEntityMachine {
 	
 	@Override
 	public void electricPowerlessUpdate() {
-		if (worldObj.isRemote) {
+		if (world.isRemote) {
 			return;
 		}
 		
@@ -186,7 +186,7 @@ public class TileEntityTeleporter extends AwesomeTileEntityMachine {
 			return false;
 		}
 		
-		if (worldObj.isAirBlock(pos)) {
+		if (world.isAirBlock(pos)) {
 			return false;
 		}
 		
@@ -198,7 +198,7 @@ public class TileEntityTeleporter extends AwesomeTileEntityMachine {
 			BlockPos nextBlockPos = pos.offset(directions[curDir]);
 			BlockPos turnBlockPos = pos.offset(directions[curDir+1]);
 			
-			if (!worldObj.isAirBlock(turnBlockPos) && !isPortalBlock(turnBlockPos)) {
+			if (!world.isAirBlock(turnBlockPos) && !isPortalBlock(turnBlockPos)) {
 				return checkPortalShape(directions, turnBlockPos, curDir+1, safty+1);
 			} else {
 				return checkPortalShape(directions, nextBlockPos, curDir, safty+1);
@@ -213,12 +213,12 @@ public class TileEntityTeleporter extends AwesomeTileEntityMachine {
 		BlockPos pos1 = pos.up();
 		BlockPos pos2 = pos1.up();
 		
-		return (worldObj.isAirBlock(pos1) || isPortalBlock(pos1)) && 
-				(worldObj.isAirBlock(pos2) || isPortalBlock(pos2));
+		return (world.isAirBlock(pos1) || isPortalBlock(pos1)) && 
+				(world.isAirBlock(pos2) || isPortalBlock(pos2));
 	}
 	
 	private boolean isPortalBlock(BlockPos pos) {
-		return worldObj.getBlockState(pos).getBlock() instanceof BlockTeleportPortal;
+		return world.getBlockState(pos).getBlock() instanceof BlockTeleportPortal;
 	}
 	
 	private void constructPortal() {
@@ -236,7 +236,7 @@ public class TileEntityTeleporter extends AwesomeTileEntityMachine {
 	}
 	
 	private void recursivePortalConstruction(BlockPos pos, EnumFacing[] directions) {
-		if (!worldObj.isAirBlock(pos)) {
+		if (!world.isAirBlock(pos)) {
 			return;
 		}
 		
@@ -248,9 +248,9 @@ public class TileEntityTeleporter extends AwesomeTileEntityMachine {
 	}
 	
 	private void createTeleportPortal(BlockPos pos) {
-		worldObj.setBlockState(pos,
+		world.setBlockState(pos,
 				   gogofo.minecraft.awesome.init.Blocks.teleport_portal.getDefaultState().withProperty(BlockTeleportPortal.AXIS, axis));
-		((TileEntityTeleportPortal)worldObj.getTileEntity(pos)).setTeleporter(this.pos);
+		((TileEntityTeleportPortal)world.getTileEntity(pos)).setTeleporter(this.pos);
 	}
 	
 	public void destroyPortal() {
@@ -274,7 +274,7 @@ public class TileEntityTeleporter extends AwesomeTileEntityMachine {
 			return;
 		}
 		
-		worldObj.setBlockToAir(pos);
+		world.setBlockToAir(pos);
 		
 		for (EnumFacing direction : directions) {
 			recursivePortalDestruction(pos.offset(direction), directions);

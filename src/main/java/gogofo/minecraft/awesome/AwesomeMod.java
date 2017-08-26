@@ -36,9 +36,7 @@ public class AwesomeMod {
     public void preInit(FMLPreInitializationEvent event)
     {
     	Items.init();
-    	Items.register();
     	Blocks.init();
-    	Blocks.register();
     	TileEntities.register();
     	Messages.init();
     }

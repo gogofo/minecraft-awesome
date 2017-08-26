@@ -19,13 +19,13 @@ public class RecipeSmelting {
 	
 	private ItemStack stack(Item item, int size) {
 		ItemStack stack = new ItemStack(item);
-		stack.stackSize = size;
+		stack.setCount(size);
 		return stack;
 	}
 	
 	private ItemStack stack(Block block, int size) {
 		ItemStack stack = new ItemStack(block);
-		stack.stackSize = size;
+		stack.setCount(size);
 		return stack;
 	}
 }

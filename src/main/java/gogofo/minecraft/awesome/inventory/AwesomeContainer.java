@@ -75,7 +75,7 @@ public abstract class AwesomeContainer extends Container {
             	int value = inventory.getField(j);
 	            if (getField(j) != value)
 	            {
-	            	listner.sendProgressBarUpdate(this, j, value);
+	            	listner.sendWindowProperty(this, j, value);
 	            }
 	            
 	            setField(j, value);
@@ -93,12 +93,12 @@ public abstract class AwesomeContainer extends Container {
     @Override
     public boolean canInteractWith(EntityPlayer playerIn)
     {
-        return inventory.isUseableByPlayer(playerIn);
+        return inventory.isUsableByPlayer(playerIn);
     }
     
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int index) {
-    	ItemStack itemstack = null;
+    	ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = (Slot)this.inventorySlots.get(index);
 
         if (slot != null && slot.getHasStack())
@@ -110,17 +110,17 @@ public abstract class AwesomeContainer extends Container {
             {
                 if (!this.mergeItemStack(itemstack1, getCustomSlotCount(), this.inventorySlots.size(), true))
                 {
-                    return null;
+                    return ItemStack.EMPTY;
                 }
             }
             else if (!this.mergeItemStack(itemstack1, 0, getCustomSlotCount(), false))
             {
-                return null;
+                return ItemStack.EMPTY;
             }
 
-            if (itemstack1.stackSize == 0)
+            if (itemstack1.getCount() == 0)
             {
-                slot.putStack((ItemStack)null);
+                slot.putStack(ItemStack.EMPTY);
             }
             else
             {

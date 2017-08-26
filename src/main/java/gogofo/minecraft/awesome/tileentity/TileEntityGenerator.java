@@ -36,12 +36,12 @@ public class TileEntityGenerator extends AwesomeTileEntityMachine {
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
-		boolean itemIsSame = stack != null && stack.isItemEqual(this.itemStackArray[index]) && ItemStack.areItemStackTagsEqual(stack, this.itemStackArray[index]);
+		boolean itemIsSame = !stack.isEmpty() && stack.isItemEqual(this.itemStackArray[index]) && ItemStack.areItemStackTagsEqual(stack, this.itemStackArray[index]);
         this.itemStackArray[index] = stack;
 
-        if (stack != null && stack.stackSize > this.getInventoryStackLimit())
+        if (!stack.isEmpty() && stack.getCount() > this.getInventoryStackLimit())
         {
-            stack.stackSize = this.getInventoryStackLimit();
+            stack.setCount(this.getInventoryStackLimit());
         }
 
         if (index == 0 && !itemIsSame)
@@ -88,7 +88,7 @@ public class TileEntityGenerator extends AwesomeTileEntityMachine {
 	public void clear() {
 		for (int i = 0; i < this.itemStackArray.length; ++i)
         {
-            this.itemStackArray[i] = null;
+            this.itemStackArray[i] = ItemStack.EMPTY;
         }
 	}
 	
@@ -107,7 +107,7 @@ public class TileEntityGenerator extends AwesomeTileEntityMachine {
 	}
 	
 	public static int getItemBurnTime(ItemStack stack) {
-		if (stack == null) {
+		if (stack.isEmpty()) {
 			return 0;
 		}
 		
@@ -146,11 +146,11 @@ public class TileEntityGenerator extends AwesomeTileEntityMachine {
 				int newFill = ItemLiquidContainer.getLiquidFill(itemStackArray[0]) - 1;
 				ItemLiquidContainer.setLiquidFill(itemStackArray[0], newFill);
 			} else {
-				itemStackArray[0].stackSize -= 1;
+				itemStackArray[0].shrink(1);
 			}
 			
-			if (itemStackArray[0].stackSize == 0) {
-				itemStackArray[0] = null;
+			if (itemStackArray[0].isEmpty()) {
+				itemStackArray[0] = ItemStack.EMPTY;
 			}
 		}
 		
@@ -160,12 +160,12 @@ public class TileEntityGenerator extends AwesomeTileEntityMachine {
 	}
 	
 	public void generateResidue() {
-		if (itemStackArray[1] == null) {
+		if (itemStackArray[1].isEmpty()) {
 			itemStackArray[1] = new ItemStack(Items.burnt_residue, 0);
 		}
 		
-		if (itemStackArray[1].stackSize < getInventoryStackLimit()) {
-			itemStackArray[1].stackSize += 1;
+		if (itemStackArray[1].getCount() < getInventoryStackLimit()) {
+			itemStackArray[1].grow(1);
 		}
 	}
 	
@@ -178,10 +178,10 @@ public class TileEntityGenerator extends AwesomeTileEntityMachine {
 	}
 	
 	private boolean canBurn() {
-		return itemStackArray[0] != null && 
+		return !itemStackArray[0].isEmpty() && 
 				isItemFuel(itemStackArray[0]) && 
-				(itemStackArray[1] == null || 
-				itemStackArray[1].stackSize < getInventoryStackLimit());
+				(itemStackArray[1].isEmpty() || 
+				itemStackArray[1].getCount() < getInventoryStackLimit());
 	}
 	
 	private boolean isBurning() {

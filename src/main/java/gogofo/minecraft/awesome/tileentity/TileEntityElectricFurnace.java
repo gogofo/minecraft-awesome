@@ -38,12 +38,12 @@ public class TileEntityElectricFurnace extends AwesomeTileEntityMachine {
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
-		boolean itemIsSame = stack != null && stack.isItemEqual(this.itemStackArray[index]) && ItemStack.areItemStackTagsEqual(stack, this.itemStackArray[index]);
+		boolean itemIsSame = !stack.isEmpty() && stack.isItemEqual(this.itemStackArray[index]) && ItemStack.areItemStackTagsEqual(stack, this.itemStackArray[index]);
         this.itemStackArray[index] = stack;
 
-        if (stack != null && stack.stackSize > this.getInventoryStackLimit())
+        if (!stack.isEmpty() && stack.getCount() > this.getInventoryStackLimit())
         {
-            stack.stackSize = this.getInventoryStackLimit();
+            stack.setCount(this.getInventoryStackLimit());
         }
 
         if (index == 0 && !itemIsSame)
@@ -95,7 +95,7 @@ public class TileEntityElectricFurnace extends AwesomeTileEntityMachine {
 	public void clear() {
 		for (int i = 0; i < this.itemStackArray.length; ++i)
         {
-            this.itemStackArray[i] = null;
+            this.itemStackArray[i] = ItemStack.EMPTY;
         }
 	}
 	
@@ -110,7 +110,7 @@ public class TileEntityElectricFurnace extends AwesomeTileEntityMachine {
 	}
 	
 	public static boolean isItemCookable(ItemStack stack) {
-		if (stack == null) {
+		if (stack.isEmpty()) {
 			return false;
 		}
 		
@@ -118,7 +118,7 @@ public class TileEntityElectricFurnace extends AwesomeTileEntityMachine {
 	}
 	
 	public static int getItemCookTime(ItemStack stack) {
-		if (stack == null) {
+		if (stack.isEmpty()) {
 			return 0;
 		}
 		
@@ -143,10 +143,10 @@ public class TileEntityElectricFurnace extends AwesomeTileEntityMachine {
 			remainingCookTime = currentItemCookTime = getItemCookTime(itemStackArray[0]);
 			currentCookResult = Item.getIdFromItem(FurnaceRecipes.instance().getSmeltingResult(itemStackArray[0]).getItem());
 			
-			itemStackArray[0].stackSize -= 1;
+			itemStackArray[0].shrink(1);
 			
-			if (itemStackArray[0].stackSize == 0) {
-				itemStackArray[0] = null;
+			if (itemStackArray[0].isEmpty()) {
+				itemStackArray[0] = ItemStack.EMPTY;
 			}
 		}
 		
@@ -156,7 +156,7 @@ public class TileEntityElectricFurnace extends AwesomeTileEntityMachine {
 	}
 	
 	public void cookItem() {
-		if (itemStackArray[1] == null) {
+		if (itemStackArray[1].isEmpty()) {
 			itemStackArray[1] = new ItemStack(Item.getItemById(currentCookResult), 0);
 		}
 		
@@ -165,8 +165,8 @@ public class TileEntityElectricFurnace extends AwesomeTileEntityMachine {
 			return;
 		}
 		
-		if (itemStackArray[1].stackSize < getInventoryStackLimit()) {
-			itemStackArray[1].stackSize += 1;
+		if (itemStackArray[1].getCount() < getInventoryStackLimit()) {
+			itemStackArray[1].grow(1);
 		}
 	}
 	
@@ -179,14 +179,14 @@ public class TileEntityElectricFurnace extends AwesomeTileEntityMachine {
 	}
 	
 	private boolean canCook() {
-		if (itemStackArray[0] == null) {
+		if (itemStackArray[0].isEmpty()) {
 			return false;
 		}
 		
 		ItemStack result = FurnaceRecipes.instance().getSmeltingResult(itemStackArray[0]);
-		return result != null &&
-				(itemStackArray[1] == null || 
-				(itemStackArray[1].stackSize < getInventoryStackLimit() &&
+		return !result.isEmpty() &&
+				(itemStackArray[1].isEmpty() || 
+				(itemStackArray[1].getCount() < getInventoryStackLimit() &&
 				itemStackArray[1].getItem() == result.getItem()));
 	}
 	

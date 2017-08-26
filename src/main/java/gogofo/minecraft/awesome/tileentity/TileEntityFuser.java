@@ -34,12 +34,12 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
-		boolean itemIsSame = stack != null && stack.isItemEqual(this.itemStackArray[index]) && ItemStack.areItemStackTagsEqual(stack, this.itemStackArray[index]);
+		boolean itemIsSame = !stack.isEmpty() && stack.isItemEqual(this.itemStackArray[index]) && ItemStack.areItemStackTagsEqual(stack, this.itemStackArray[index]);
         this.itemStackArray[index] = stack;
 
-        if (stack != null && stack.stackSize > this.getInventoryStackLimit())
+        if (!stack.isEmpty() && stack.getCount() > this.getInventoryStackLimit())
         {
-            stack.stackSize = this.getInventoryStackLimit();
+            stack.setCount(this.getInventoryStackLimit());
         }
         
 
@@ -97,7 +97,7 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
 	public void clear() {
 		for (int i = 0; i < this.itemStackArray.length; ++i)
         {
-            this.itemStackArray[i] = null;
+            this.itemStackArray[i] = ItemStack.EMPTY;
         }
 	}
 	
@@ -115,7 +115,7 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
 		ItemStack stack1 = itemStackArray[0]; 
 		ItemStack stack2 = itemStackArray[1];
 		
-		if (stack1 == null || stack2 == null) {
+		if (stack1.isEmpty() || stack2.isEmpty()) {
 			return 0;
 		}
 		
@@ -149,16 +149,8 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
 			currentRecpItem1 = Item.getIdFromItem(recipe.item1);
 			currentRecpItem2 = Item.getIdFromItem(recipe.item2);
 			
-			itemStackArray[0].stackSize -= 1;
-			itemStackArray[1].stackSize -= 1;
-			
-			if (itemStackArray[0].stackSize == 0) {
-				itemStackArray[0] = null;
-			}
-			
-			if (itemStackArray[1].stackSize == 0) {
-				itemStackArray[1] = null;
-			}
+			itemStackArray[0].shrink(1);
+			itemStackArray[1].shrink(1);
 		}
 		
 		if (isDirty) {
@@ -174,15 +166,15 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
 			return;
 		}
 		
-		if (itemStackArray[2] == null) {
+		if (itemStackArray[2].isEmpty()) {
 			itemStackArray[2] = result.copy();
-			itemStackArray[2].stackSize = 0;
+			itemStackArray[2].setCount(0);
 		}
 		
-		itemStackArray[2].stackSize += result.stackSize;
+		itemStackArray[2].grow(result.getCount());
 		
-		if (itemStackArray[2].stackSize > getInventoryStackLimit()) {
-			itemStackArray[2].stackSize = getInventoryStackLimit();
+		if (itemStackArray[2].getCount() > getInventoryStackLimit()) {
+			itemStackArray[2].setCount(getInventoryStackLimit());
 		}
 	}
 	
@@ -195,7 +187,7 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
 	}
 	
 	private RecipeFuser.Recipe getCurrRecipe() {
-		if (itemStackArray[0] == null || itemStackArray[1] == null) {
+		if (itemStackArray[0].isEmpty() || itemStackArray[1].isEmpty()) {
 			return null;
 		}
 		
@@ -207,10 +199,10 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
 		Recipe recipe = getCurrRecipe();
 		
 		return recipe != null &&
-				(itemStackArray[2] == null ||
+				(itemStackArray[2].isEmpty() ||
 				(recipe.result.getItem() == itemStackArray[2].getItem() && 
 				recipe.result.getMetadata() == itemStackArray[2].getMetadata() &&
-				itemStackArray[2].stackSize < itemStackArray[2].getMaxStackSize()));
+				itemStackArray[2].getCount() < itemStackArray[2].getMaxStackSize()));
 	}
 
 	private boolean isFusing() {

@@ -44,7 +44,7 @@ public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContaine
     
     @Override
     public void update() {
-    	if (worldObj.isRemote) {
+    	if (world.isRemote) {
     		return;
     	}
     	
@@ -69,7 +69,7 @@ public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContaine
     		
     		isWorkingTmpFlag = true;
     		
-    		AwesomeBlockRunningMachine.setState(isActuallyWorking(), worldObj, pos);
+    		AwesomeBlockRunningMachine.setState(isActuallyWorking(), world, pos);
     		markDirty();
     		
     		wasWorking = isActuallyWorking();

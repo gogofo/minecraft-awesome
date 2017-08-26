@@ -229,7 +229,7 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
 	
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox,
-			List<AxisAlignedBB> collidingBoxes, Entity entityIn) {
+			List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean p_185477_7_) {
 	}
 	
 	@Override

@@ -47,10 +47,10 @@ public abstract class AwesomeGui extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
         String title = customInventory.getDisplayName().getUnformattedText();
-        fontRendererObj.drawString(title, xSize/2-fontRendererObj
+        fontRenderer.drawString(title, xSize/2-fontRenderer
               .getStringWidth(title)/2, 6, 4210752);
         
-        fontRendererObj.drawString(playerInventory.getDisplayName()
+        fontRenderer.drawString(playerInventory.getDisplayName()
               .getUnformattedText(), 8, ySize - 96 + 2, 4210752);
     }
 
@@ -122,12 +122,12 @@ public abstract class AwesomeGui extends GuiContainer {
     		
     		if (slot instanceof AwesomeSlotBig) {
     			int color = SlotCategoryIdToColor.convert(((AwesomeSlotBig) slot).getCategoryId());
-    			drawBigSlot(slot.xDisplayPosition-6, slot.yDisplayPosition-6, color);
+    			drawBigSlot(slot.xPos-6, slot.yPos-6, color);
     		} else if (slot instanceof AwesomeSlot) {
     			int color = SlotCategoryIdToColor.convert(((AwesomeSlot) slot).getCategoryId());
-    			drawSlot(slot.xDisplayPosition-2, slot.yDisplayPosition-2, color);
+    			drawSlot(slot.xPos-2, slot.yPos-2, color);
     		} else {
-    			drawSlot(slot.xDisplayPosition-2, slot.yDisplayPosition-2, 0);
+    			drawSlot(slot.xPos-2, slot.yPos-2, 0);
     		}
     	}
     }
