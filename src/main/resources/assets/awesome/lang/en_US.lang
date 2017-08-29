@@ -10,6 +10,9 @@ tile.pipe.name=Pipe
 tile.suction_pipe.name=Suction Pipe
 tile.sorting_pipe.name=Sorting Pipe
 tile.extractor.name=Extractor
+tile.oil.name=Oil
+
+fluid.oil=Oil
 
 item.burnt_residue.name=Burnt Residue
 item.multimeter.name=Multimeter

@@ -1,15 +1,12 @@
 package gogofo.minecraft.awesome;
 
 import gogofo.minecraft.awesome.creativetabs.AwesomeCreativeTab;
-import gogofo.minecraft.awesome.init.Blocks;
-import gogofo.minecraft.awesome.init.Items;
-import gogofo.minecraft.awesome.init.Messages;
-import gogofo.minecraft.awesome.init.Recipes;
-import gogofo.minecraft.awesome.init.TileEntities;
+import gogofo.minecraft.awesome.init.*;
 import gogofo.minecraft.awesome.proxy.CommonProxy;
 import gogofo.minecraft.awesome.recipe.RecipeFuser.Recipe;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -31,21 +28,28 @@ public class AwesomeMod {
 	public static CommonProxy proxy;
     
     public static final AwesomeCreativeTab awesomeCreativeTab = new AwesomeCreativeTab(MODID);
+
+    static {
+        FluidRegistry.enableUniversalBucket();
+    }
 	
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        Fluids.init();
+        Fluids.registerFluids();
     	Items.init();
     	Blocks.init();
-    	TileEntities.register();
+        TileEntities.register();
     	Messages.init();
+    	proxy.renderFluids();
     }
     
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
     	Recipes.registerRecipes();
-    	
+
     	proxy.registerGui();
     	proxy.registerRenders();
     }

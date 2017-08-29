@@ -1,20 +1,7 @@
 package gogofo.minecraft.awesome.init;
 
-import java.util.ArrayList;
-
 import gogofo.minecraft.awesome.AwesomeMod;
-import gogofo.minecraft.awesome.block.BlockCharger;
-import gogofo.minecraft.awesome.block.BlockElectricFurnace;
-import gogofo.minecraft.awesome.block.BlockElectricWire;
-import gogofo.minecraft.awesome.block.BlockExtractor;
-import gogofo.minecraft.awesome.block.BlockFuser;
-import gogofo.minecraft.awesome.block.BlockGenerator;
-import gogofo.minecraft.awesome.block.BlockGrinder;
-import gogofo.minecraft.awesome.block.BlockPipe;
-import gogofo.minecraft.awesome.block.BlockSortingPipe;
-import gogofo.minecraft.awesome.block.BlockSuctionPipe;
-import gogofo.minecraft.awesome.block.BlockTeleportPortal;
-import gogofo.minecraft.awesome.block.BlockTeleporter;
+import gogofo.minecraft.awesome.block.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -23,8 +10,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import java.util.ArrayList;
 
 public class Blocks {
 
@@ -40,6 +28,7 @@ public class Blocks {
 	public static Block suction_pipe;
 	public static Block sorting_pipe;
 	public static Block extractor;
+	public static BlockOil oil;
 	
 	private static ArrayList<Block> blocks = new ArrayList<Block>();
 	private static ArrayList<ItemBlock> itemBlocks = new ArrayList<>();
@@ -80,6 +69,9 @@ public class Blocks {
 		
 		extractor = registryBlock(new BlockExtractor(), "extractor");
 		blocks.add(extractor);
+
+		oil = (BlockOil) registryBlock(new BlockOil(), "oil");
+		blocks.add(oil);
 		
 		for (Block block : blocks) {
 			ItemBlock itemBlock = new ItemBlock(block);
@@ -92,6 +84,10 @@ public class Blocks {
 		for (ItemBlock itemBlock : itemBlocks) {
 			registerRender(itemBlock);
 		}
+	}
+
+	public static void renderFluids() {
+		oil.render();
 	}
 	
 	private static void registerRender(ItemBlock itemBlock) {
