@@ -52,6 +52,7 @@ public class AwesomeMod {
 
     	proxy.registerGui();
     	proxy.registerRenders();
+    	proxy.registerWorldGenerators();
     }
     
     @EventHandler
