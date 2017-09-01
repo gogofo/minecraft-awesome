@@ -9,7 +9,9 @@ public class Ores {
     private static ArrayList<Ore> ores = new ArrayList<>();
 
     public static void init() {
-        ores.add(new Ore("copper", 0xFFDA8A67, true, true, true, 2));
+        Ore ore = new Ore("copper", 0xFFDA8A67, true, true, true, 2)
+                .addGenerationConfig(new Ore.GenerationConfig(0, 200, 100, 25, 8));
+        ores.add(ore);
     }
 
     public static ArrayList<Ore> getOres() {
@@ -23,6 +25,7 @@ public class Ores {
         private boolean hasIngot;
         private boolean hasDust;
         private int grindsToAmount;
+        private ArrayList<GenerationConfig> generationConfigs;
 
         private Block block;
         private Item Ingot;
@@ -35,6 +38,12 @@ public class Ores {
             this.hasIngot = hasIngot;
             this.hasDust = hasDust;
             this.grindsToAmount = grindsToAmount;
+            this.generationConfigs = new ArrayList<>();
+        }
+
+        public Ore addGenerationConfig(GenerationConfig config) {
+            generationConfigs.add(config);
+            return this;
         }
 
         public String getName() {
@@ -87,6 +96,62 @@ public class Ores {
 
         public void setDust(Item dust) {
             this.dust = dust;
+        }
+
+        public ArrayList<GenerationConfig> getGenerationConfigs() {
+            return generationConfigs;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Ore ore = (Ore) o;
+
+            return name != null ? name.equals(ore.name) : ore.name == null;
+        }
+
+        @Override
+        public int hashCode() {
+            return name != null ? name.hashCode() : 0;
+        }
+
+        public static class GenerationConfig {
+
+            private int minHeight;
+            private int maxHeight;
+            private int chanceToSpawn;
+            private int maxSpawns;
+            private int maxOrePerSpawn;
+
+            public GenerationConfig(int minHeight, int maxHeight, int chanceToSpawn, int maxSpawns, int maxOrePerSpawn) {
+                this.minHeight = minHeight;
+                this.maxHeight = maxHeight;
+                this.chanceToSpawn = chanceToSpawn;
+                this.maxSpawns = maxSpawns;
+                this.maxOrePerSpawn = maxOrePerSpawn;
+            }
+
+            public int getMinHeight() {
+                return minHeight;
+            }
+
+            public int getMaxHeight() {
+                return maxHeight;
+            }
+
+            public int getChanceToSpawn() {
+                return chanceToSpawn;
+            }
+
+            public int getMaxSpawns() {
+                return maxSpawns;
+            }
+
+            public int getMaxOrePerSpawn() {
+                return maxOrePerSpawn;
+            }
         }
     }
 }
