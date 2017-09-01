@@ -9,7 +9,7 @@ public class Ores {
     private static ArrayList<Ore> ores = new ArrayList<>();
 
     public static void init() {
-        ores.add(new Ore("copper", 0xFFFF00FF, true, true, true, 2));
+        ores.add(new Ore("copper", 0xFFDA8A67, true, true, true, 2));
     }
 
     public static ArrayList<Ore> getOres() {

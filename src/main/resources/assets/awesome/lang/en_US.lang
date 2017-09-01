@@ -32,3 +32,7 @@ item.mob_essence.name=Mob Essence
 item.quartz_iron_ingot.name=Quartz Iron Ingot
 
 item.rich_melon.name=Rich Melon
+
+tile.copper_ore.name=Copper Ore
+item.copper_ingot.name=Copper Ingot
+item.copper_dust.name=Copper Dust
