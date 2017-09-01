@@ -49,11 +49,11 @@ public class AwesomeMod {
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-    	Recipes.registerRecipes();
-
     	proxy.registerGui();
     	proxy.registerRenders();
     	proxy.registerWorldGenerators();
+
+        Recipes.registerRecipes();
     }
     
     @EventHandler

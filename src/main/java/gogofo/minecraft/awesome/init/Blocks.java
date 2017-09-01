@@ -81,8 +81,7 @@ public class Blocks {
 			if (ore.isHasBlock()) {
 				Block oreBlock = registryBlock(new BlockGenericOre(ore.getColor()), ore.getName() + "_ore");
 				blocks.add(oreBlock);
-
-				OreDictionary.registerOre("ore" + ore.getDictName(), oreBlock);
+				ore.setBlock(oreBlock);
 			}
 		}
 		
@@ -101,6 +100,12 @@ public class Blocks {
 		for (Block block : blocks) {
 			if (block instanceof IBlockColor) {
 				Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockColor) block, block);
+			}
+		}
+
+		for (Ores.Ore ore : Ores.getOres()) {
+			if (ore.isHasBlock()) {
+				OreDictionary.registerOre(ore.getDictName("ore"), ore.getBlock());
 			}
 		}
 	}

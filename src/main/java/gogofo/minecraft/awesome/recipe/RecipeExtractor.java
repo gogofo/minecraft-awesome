@@ -36,11 +36,11 @@ public class RecipeExtractor {
 			net.minecraft.init.Items.RABBIT_HIDE
 	};
 	
-	public RecipeExtractor() {
+	public void registerRecipes() {
 		for (Item item : mobEssenceItems) {
-			addRecipe(new Recipe(item, 
-								 stack(Items.mob_essence, 1), 
-								 50));
+			addRecipe(new Recipe(item,
+					stack(Items.mob_essence, 1),
+					50));
 		}
 	}
 	

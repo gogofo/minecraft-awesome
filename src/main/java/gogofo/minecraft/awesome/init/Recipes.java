@@ -13,5 +13,7 @@ public class Recipes {
 	
 	public static void registerRecipes() {
 		smelting.registerRecipes();
+		grinder.registerRecipes();
+		extractor.registerRecipes();
 	}
 }

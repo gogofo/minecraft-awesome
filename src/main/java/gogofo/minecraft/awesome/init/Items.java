@@ -78,8 +78,7 @@ public class Items {
 			if (ore.isHasDust()) {
 				Item dust = registryItem(new ItemOneColored(ore.getColor()), ore.getName() + "_dust");
 				items.add(dust);
-
-				OreDictionary.registerOre("dust" + ore.getDictName(), dust);
+				ore.setDust(dust);
 			}
 		}
 		
@@ -100,6 +99,16 @@ public class Items {
 	public static void registerRenders() {
 		for (Item item : items) {
 			registerRender(item);
+		}
+
+		for (Ores.Ore ore : Ores.getOres()) {
+			if (ore.isHasDust()) {
+				OreDictionary.registerOre(ore.getDictName("dust"), ore.getDust());
+			}
+
+			if (ore.isHasIngot()) {
+				OreDictionary.registerOre(ore.getDictName("ingot"), ore.getIngot());
+			}
 		}
 	}
 	
