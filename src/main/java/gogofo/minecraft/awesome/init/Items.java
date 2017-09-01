@@ -1,15 +1,12 @@
 package gogofo.minecraft.awesome.init;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import com.sun.org.apache.xpath.internal.operations.Mult;
 
 import gogofo.minecraft.awesome.AwesomeMod;
-import gogofo.minecraft.awesome.item.ItemChainsaw;
-import gogofo.minecraft.awesome.item.ItemDrill;
-import gogofo.minecraft.awesome.item.ItemLiquidContainer;
-import gogofo.minecraft.awesome.item.ItemLiquidPump;
-import gogofo.minecraft.awesome.item.ItemMultimeter;
+import gogofo.minecraft.awesome.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -74,10 +71,10 @@ public class Items {
 		items.add(drill);
 		
 		// Dusts
-		iron_dust = registryItem(new Item(), "iron_dust");
+		iron_dust = registryItem(new OneColoredItem(0xFFDEDEDE), "iron_dust");
 		items.add(iron_dust);
 		
-		gold_dust = registryItem(new Item(), "gold_dust");
+		gold_dust = registryItem(new OneColoredItem(0xFFE721), "gold_dust");
 		items.add(gold_dust);
 		
 		// Ingots
@@ -105,6 +102,10 @@ public class Items {
 																				0, 
 																				new ModelResourceLocation(AwesomeMod.MODID + ":" + item.getUnlocalizedName().substring(5), 
 																										  "Inventory"));
+
+		if (item instanceof OneColoredItem) {
+			Minecraft.getMinecraft().getItemColors().registerItemColorHandler((OneColoredItem)item, item);
+		}
 	}
 	
 	private static Item registryItem(Item item, String name) {
