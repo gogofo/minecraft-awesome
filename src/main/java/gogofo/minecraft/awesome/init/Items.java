@@ -6,6 +6,7 @@ import gogofo.minecraft.awesome.AwesomeMod;
 import gogofo.minecraft.awesome.item.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraftforge.event.RegistryEvent;
@@ -98,8 +99,8 @@ public class Items {
 																				new ModelResourceLocation(AwesomeMod.MODID + ":" + item.getUnlocalizedName().substring(5), 
 																										  "Inventory"));
 
-		if (item instanceof ItemOneColored) {
-			Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemOneColored)item, item);
+		if (item instanceof IItemColor) {
+			Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor)item, item);
 		}
 	}
 	

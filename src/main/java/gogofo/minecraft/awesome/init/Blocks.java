@@ -3,8 +3,11 @@ package gogofo.minecraft.awesome.init;
 import gogofo.minecraft.awesome.AwesomeMod;
 import gogofo.minecraft.awesome.block.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
@@ -29,6 +32,8 @@ public class Blocks {
 	public static Block sorting_pipe;
 	public static Block extractor;
 	public static BlockOil oil;
+
+	public static Block copper_ore;
 	
 	private static ArrayList<Block> blocks = new ArrayList<Block>();
 	private static ArrayList<ItemBlock> itemBlocks = new ArrayList<>();
@@ -72,6 +77,9 @@ public class Blocks {
 
 		oil = (BlockOil) registryBlock(new BlockOil(), "oil");
 		blocks.add(oil);
+
+		copper_ore = registryBlock(new BlockGenericOre(0xFFFF00FF), "copper_ore");
+		blocks.add(copper_ore);
 		
 		for (Block block : blocks) {
 			ItemBlock itemBlock = new ItemBlock(block);
@@ -84,6 +92,12 @@ public class Blocks {
 		for (ItemBlock itemBlock : itemBlocks) {
 			registerRender(itemBlock);
 		}
+
+		for (Block block : blocks) {
+			if (block instanceof IBlockColor) {
+				Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockColor) block, block);
+			}
+		}
 	}
 
 	public static void renderFluids() {
@@ -94,6 +108,10 @@ public class Blocks {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 
 				0, 
 				new ModelResourceLocation(itemBlock.getRegistryName(), "inventory"));
+
+		if (itemBlock.getBlock() instanceof IItemColor) {
+			Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor)itemBlock.getBlock(), itemBlock);
+		}
 	}
 	
 	private static Block registryBlock(Block block, String name) {
@@ -105,7 +123,7 @@ public class Blocks {
 		@SubscribeEvent
 		public static void registerBlocks(final RegistryEvent.Register<Block> event) {
 			final IForgeRegistry<Block> registry = event.getRegistry();
-			
+
 			for (Block block : blocks) {
 				registry.register(block);
 			}
