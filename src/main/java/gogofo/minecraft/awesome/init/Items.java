@@ -1,13 +1,9 @@
 package gogofo.minecraft.awesome.init;
 
-import java.awt.*;
 import java.util.ArrayList;
-
-import com.sun.org.apache.xpath.internal.operations.Mult;
 
 import gogofo.minecraft.awesome.AwesomeMod;
 import gogofo.minecraft.awesome.item.*;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -15,7 +11,6 @@ import net.minecraft.item.ItemFood;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class Items {
@@ -71,10 +66,10 @@ public class Items {
 		items.add(drill);
 		
 		// Dusts
-		iron_dust = registryItem(new OneColoredItem(0xFFDEDEDE), "iron_dust");
+		iron_dust = registryItem(new ItemOneColored(0xFFDEDEDE), "iron_dust");
 		items.add(iron_dust);
 		
-		gold_dust = registryItem(new OneColoredItem(0xFFE721), "gold_dust");
+		gold_dust = registryItem(new ItemOneColored(0xFFE721), "gold_dust");
 		items.add(gold_dust);
 		
 		// Ingots
@@ -103,8 +98,8 @@ public class Items {
 																				new ModelResourceLocation(AwesomeMod.MODID + ":" + item.getUnlocalizedName().substring(5), 
 																										  "Inventory"));
 
-		if (item instanceof OneColoredItem) {
-			Minecraft.getMinecraft().getItemColors().registerItemColorHandler((OneColoredItem)item, item);
+		if (item instanceof ItemOneColored) {
+			Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemOneColored)item, item);
 		}
 	}
 	

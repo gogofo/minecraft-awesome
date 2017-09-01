@@ -4,11 +4,11 @@ import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class OneColoredItem extends Item implements IItemColor{
+public class ItemOneColored extends Item implements IItemColor {
 
     private int color;
 
-    public OneColoredItem(int color) {
+    public ItemOneColored(int color) {
 
         this.color = color;
     }
