@@ -13,6 +13,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
@@ -32,8 +33,6 @@ public class Blocks {
 	public static Block sorting_pipe;
 	public static Block extractor;
 	public static BlockOil oil;
-
-	public static Block copper_ore;
 	
 	private static ArrayList<Block> blocks = new ArrayList<Block>();
 	private static ArrayList<ItemBlock> itemBlocks = new ArrayList<>();
@@ -78,8 +77,14 @@ public class Blocks {
 		oil = (BlockOil) registryBlock(new BlockOil(), "oil");
 		blocks.add(oil);
 
-		copper_ore = registryBlock(new BlockGenericOre(0xFFFF00FF), "copper_ore");
-		blocks.add(copper_ore);
+		for (Ores.Ore ore : Ores.getOres()) {
+			if (ore.isHasBlock()) {
+				Block oreBlock = registryBlock(new BlockGenericOre(ore.getColor()), ore.getName() + "_ore");
+				blocks.add(oreBlock);
+
+				OreDictionary.registerOre("ore" + ore.getDictName(), oreBlock);
+			}
+		}
 		
 		for (Block block : blocks) {
 			ItemBlock itemBlock = new ItemBlock(block);

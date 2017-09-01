@@ -12,6 +12,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class Items {
@@ -72,6 +73,15 @@ public class Items {
 		
 		gold_dust = registryItem(new ItemOneColored(0xFFE721), "gold_dust");
 		items.add(gold_dust);
+
+		for (Ores.Ore ore : Ores.getOres()) {
+			if (ore.isHasDust()) {
+				Item dust = registryItem(new ItemOneColored(ore.getColor()), ore.getName() + "_dust");
+				items.add(dust);
+
+				OreDictionary.registerOre("dust" + ore.getDictName(), dust);
+			}
+		}
 		
 		// Ingots
 		quartz_iron_ingot = registryItem(new Item(), "quartz_iron_ingot");

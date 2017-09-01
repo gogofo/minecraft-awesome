@@ -36,6 +36,7 @@ public class AwesomeMod {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        Ores.init();
         Fluids.init();
         Fluids.registerFluids();
     	Items.init();
