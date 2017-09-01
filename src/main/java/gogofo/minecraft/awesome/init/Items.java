@@ -85,6 +85,14 @@ public class Items {
 		// Ingots
 		quartz_iron_ingot = registryItem(new Item(), "quartz_iron_ingot");
 		items.add(quartz_iron_ingot);
+
+		for (Ores.Ore ore : Ores.getOres()) {
+			if (ore.isHasIngot()) {
+				Item ingot = registryItem(new ItemOneColored(ore.getColor()), ore.getName() + "_ingot");
+				items.add(ingot);
+				ore.setIngot(ingot);
+			}
+		}
 		
 		// Food
 		rich_melon = registryItem(new ItemFood(2, 0.9F, false), "rich_melon");
