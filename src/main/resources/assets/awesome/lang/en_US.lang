@@ -36,3 +36,7 @@ item.rich_melon.name=Rich Melon
 tile.copper_ore.name=Copper Ore
 item.copper_ingot.name=Copper Ingot
 item.copper_dust.name=Copper Dust
+
+tile.tin_ore.name=Tin Ore
+item.tin_ingot.name=Tin Ingot
+item.tin_dust.name=Tin Dust

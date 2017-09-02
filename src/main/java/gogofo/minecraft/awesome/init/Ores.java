@@ -10,7 +10,11 @@ public class Ores {
 
     public static void init() {
         Ore ore = new Ore("copper", 0xFFDA8A67, true, true, true, 2)
-                .addGenerationConfig(new Ore.GenerationConfig(0, 200, 100, 25, 8));
+                .addGenerationConfig(new Ore.GenerationConfig(0, 200, 100, 35, 8));
+        ores.add(ore);
+
+        ore = new Ore("tin", 0xFFD8D8D8, true, true, true, 2)
+                .addGenerationConfig(new Ore.GenerationConfig(0, 200, 100, 35, 8));
         ores.add(ore);
     }
 
