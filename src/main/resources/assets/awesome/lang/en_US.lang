@@ -1,3 +1,4 @@
+# Machine Tiles
 tile.generator.name=Generator
 tile.fuser.name=Fuser
 tile.electric_wire.name=Electric Wire
@@ -10,10 +11,12 @@ tile.pipe.name=Pipe
 tile.suction_pipe.name=Suction Pipe
 tile.sorting_pipe.name=Sorting Pipe
 tile.extractor.name=Extractor
-tile.oil.name=Oil
 
+# Liquids
+tile.oil.name=Oil
 fluid.oil=Oil
 
+# Items
 item.burnt_residue.name=Burnt Residue
 item.multimeter.name=Multimeter
 item.liquid_pump.name=Liquid Pump
@@ -24,15 +27,18 @@ item.conductive.name=Conductive
 item.chainsaw.name=Chainsaw
 item.drill.name=Drill
 
+# Minecraft dusts
 item.iron_dust.name=Iron Dust
 item.gold_dust.name=Gold Dust
 
+# Additional ingredients
 item.mob_essence.name=Mob Essence
-
 item.quartz_iron_ingot.name=Quartz Iron Ingot
 
+# Food
 item.rich_melon.name=Rich Melon
 
+# Ores
 tile.copper_ore.name=Copper Ore
 item.copper_ingot.name=Copper Ingot
 item.copper_dust.name=Copper Dust
@@ -40,3 +46,5 @@ item.copper_dust.name=Copper Dust
 tile.tin_ore.name=Tin Ore
 item.tin_ingot.name=Tin Ingot
 item.tin_dust.name=Tin Dust
+
+## ORE_ADD_MARKER
