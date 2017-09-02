@@ -1,0 +1,13 @@
+0.39
+-------------------
+
+Sorry for not keeping a changelog until now...
+Here are the changes from last version.
+
+- Oil was added as a new liquid
+- Fixed a bug where the tooltips were not showing when in the machine UI
+- Copper Ore was added
+- Tin Ore was added
+- Scripts and helpers where added for development
+- Mechanism for easy generic ore addition were created. new simple ores will be added easily now
+- The mod now manipulates world generation to generate Oil lakes and the new ores
