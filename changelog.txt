@@ -1,3 +1,10 @@
+0.40
+-------------------
+
+- Fix machine core model
+- Test new deploy system (internal)
+
+-------------------
 0.39
 -------------------
 
