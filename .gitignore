@@ -26,3 +26,5 @@ options.txt
 saves
 usercache.json
 usernamecache.json
+*.pyc
+scripts/config.py

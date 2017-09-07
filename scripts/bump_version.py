@@ -1,3 +1,5 @@
+from utils import *
+
 JAVA_FILE_PATH = "../src/main/java/gogofo/minecraft/awesome/AwesomeMod.java"
 GRADLE_FILE_PATH = "../build.gradle"
 
@@ -13,11 +15,7 @@ def replace_in_file(path, original, new):
     f.close()
 
 if __name__ == "__main__":
-    f = open(JAVA_FILE_PATH, "r+")
-
-    for l in f:
-        if l.find("public final static String VERSION") >= 0:
-            cur_version = l.split('"')[1]
+    cur_version = get_mod_version(JAVA_FILE_PATH)
 
     major, minor = [int(x) for x in cur_version.split(".")]
     minor += 1
