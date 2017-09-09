@@ -1,10 +1,9 @@
 package gogofo.minecraft.awesome.item;
 
-import net.minecraft.client.renderer.color.IItemColor;
+import gogofo.minecraft.awesome.colorize.ISingleColoredObject;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
-public class ItemOneColored extends Item implements IItemColor {
+public class ItemOneColored extends Item implements ISingleColoredObject {
 
     private int color;
 
@@ -14,7 +13,7 @@ public class ItemOneColored extends Item implements IItemColor {
     }
 
     @Override
-    public int getColorFromItemstack(ItemStack stack, int tintIndex) {
+    public int getColor() {
         return color;
     }
 }

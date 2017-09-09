@@ -3,11 +3,6 @@ package gogofo.minecraft.awesome.init;
 import gogofo.minecraft.awesome.AwesomeMod;
 import gogofo.minecraft.awesome.block.*;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
@@ -34,7 +29,7 @@ public class Blocks {
 	public static Block extractor;
 	public static BlockOil oil;
 	
-	private static ArrayList<Block> blocks = new ArrayList<Block>();
+	private static ArrayList<Block> blocks = new ArrayList<>();
 	private static ArrayList<ItemBlock> itemBlocks = new ArrayList<>();
 
 	public static void init() {
@@ -91,22 +86,14 @@ public class Blocks {
 			itemBlocks.add(itemBlock);
 		}
 	}
-	
+
 	public static void registerRenders() {
 		for (ItemBlock itemBlock : itemBlocks) {
-			registerRender(itemBlock);
+			RendersRegisterer.registerRender(itemBlock);
 		}
 
 		for (Block block : blocks) {
-			if (block instanceof IBlockColor) {
-				Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockColor) block, block);
-			}
-		}
-
-		for (Ores.Ore ore : Ores.getOres()) {
-			if (ore.isHasBlock()) {
-				OreDictionary.registerOre(ore.getDictName("ore"), ore.getBlock());
-			}
+			RendersRegisterer.registerColorProviderIfNeeded(block);
 		}
 	}
 
@@ -114,20 +101,18 @@ public class Blocks {
 		oil.render();
 	}
 	
-	private static void registerRender(ItemBlock itemBlock) {
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 
-				0, 
-				new ModelResourceLocation(itemBlock.getRegistryName(), "inventory"));
-
-		if (itemBlock.getBlock() instanceof IItemColor) {
-			Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor)itemBlock.getBlock(), itemBlock);
-		}
-	}
-	
 	private static Block registryBlock(Block block, String name) {
 		return block.setUnlocalizedName(name).setRegistryName(name).setCreativeTab(AwesomeMod.awesomeCreativeTab);
 	}
-	
+
+	public static void registerOreDictEntries() {
+		for (Ores.Ore ore : Ores.getOres()) {
+			if (ore.isHasBlock()) {
+				OreDictionary.registerOre(ore.getDictName("ore"), ore.getBlock());
+			}
+		}
+	}
+
 	@Mod.EventBusSubscriber(modid = AwesomeMod.MODID)
 	public static class RegistrationHandler {
 		@SubscribeEvent

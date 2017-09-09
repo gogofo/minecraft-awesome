@@ -3,6 +3,8 @@ package gogofo.minecraft.awesome.init;
 import java.util.ArrayList;
 
 import gogofo.minecraft.awesome.AwesomeMod;
+import gogofo.minecraft.awesome.colorize.ISingleColoredObject;
+import gogofo.minecraft.awesome.colorize.SingleColorProvider;
 import gogofo.minecraft.awesome.item.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -106,9 +108,15 @@ public class Items {
 	
 	public static void registerRenders() {
 		for (Item item : items) {
-			registerRender(item);
+			RendersRegisterer.registerRender(item);
 		}
+	}
+	
+	private static Item registryItem(Item item, String name) {
+		return item.setUnlocalizedName(name).setRegistryName(name).setCreativeTab(AwesomeMod.awesomeCreativeTab);
+	}
 
+	public static void registerOreDictEntries() {
 		for (Ores.Ore ore : Ores.getOres()) {
 			if (ore.isHasDust()) {
 				OreDictionary.registerOre(ore.getDictName("dust"), ore.getDust());
@@ -119,22 +127,7 @@ public class Items {
 			}
 		}
 	}
-	
-	private static void registerRender(Item item) {
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 
-																				0, 
-																				new ModelResourceLocation(AwesomeMod.MODID + ":" + item.getUnlocalizedName().substring(5), 
-																										  "Inventory"));
 
-		if (item instanceof IItemColor) {
-			Minecraft.getMinecraft().getItemColors().registerItemColorHandler((IItemColor)item, item);
-		}
-	}
-	
-	private static Item registryItem(Item item, String name) {
-		return item.setUnlocalizedName(name).setRegistryName(name).setCreativeTab(AwesomeMod.awesomeCreativeTab);
-	}
-	
 	@Mod.EventBusSubscriber(modid = AwesomeMod.MODID)
 	public static class RegistrationHandler {
 		@SubscribeEvent
