@@ -50,38 +50,37 @@ public class BlockGenerator extends AwesomeBlockRunningMachine implements IElect
 		return GuiEnum.GENERATOR.ordinal();
 	}
 
-    @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-    {
-        if (this.isRunning(state))
-        {
-            EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
-            double d0 = (double)pos.getX() + 0.5D;
-            double d1 = (double)pos.getY() + rand.nextDouble() * 10.0D / 16.0D + 0.2D;
-            double d2 = (double)pos.getZ() + 0.5D;
-            double d3 = 0.52D;
-            double d4 = rand.nextDouble() * 0.6D - 0.3D;
+	@Override
+	public void randomDisplayTick(IBlockState state, World worldIn, BlockPos pos, Random rand) {
+		if (this.isRunning(state))
+		{
+			EnumFacing enumfacing = state.getValue(FACING);
+			double d0 = (double)pos.getX() + 0.5D;
+			double d1 = (double)pos.getY() + rand.nextDouble() * 10.0D / 16.0D + 0.2D;
+			double d2 = (double)pos.getZ() + 0.5D;
+			double d3 = 0.52D;
+			double d4 = rand.nextDouble() * 0.6D - 0.3D;
 
-            switch (BlockGenerator.SwitchEnumFacing.FACING_LOOKUP[enumfacing.ordinal()])
-            {
-                case 1:
-                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-                    worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-                    break;
-                case 2:
-                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-                    worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
-                    break;
-                case 3:
-                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D, new int[0]);
-                    worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D, new int[0]);
-                    break;
-                case 4:
-                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D, new int[0]);
-                    worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D, new int[0]);
-            }
-        }
-    }
+			switch (BlockGenerator.SwitchEnumFacing.FACING_LOOKUP[enumfacing.ordinal()])
+			{
+				case 1:
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
+					worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 - d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
+					break;
+				case 2:
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
+					worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d3, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
+					break;
+				case 3:
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D, new int[0]);
+					worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 - d3, 0.0D, 0.0D, 0.0D, new int[0]);
+					break;
+				case 4:
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D, new int[0]);
+					worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 + d3, 0.0D, 0.0D, 0.0D, new int[0]);
+			}
+		}
+	}
     
     @SideOnly(Side.CLIENT)
     static final class SwitchEnumFacing

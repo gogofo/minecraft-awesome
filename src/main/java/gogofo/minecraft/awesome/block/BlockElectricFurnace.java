@@ -39,9 +39,8 @@ public class BlockElectricFurnace extends AwesomeBlockRunningMachine implements 
 		return GuiEnum.ELECTRIC_FURNACE.ordinal();
 	}
 
-    @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-    {
+	@Override
+	public void randomDisplayTick(IBlockState state, World worldIn, BlockPos pos, Random rand) {
         if (this.isRunning(state))
         {
             EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
