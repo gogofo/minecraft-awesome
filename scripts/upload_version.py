@@ -19,4 +19,4 @@ if __name__ == "__main__":
     f.close()
 
     changelog = changelog.replace("\n", "\\n")
-    os.system("java -jar KSPCurse.jar --game minecraft --key {key} --mod 236166 --version 1.12 --changelog \"{changelog}\" ../build/libs/awesome-{version}.jar".format(key=config.key, changelog=changelog, version=cur_version))
+    os.system("java -jar KSPCurse.jar --game minecraft --key {key} --mod 236166 --version 1.12,1.12.1 --changelog \"{changelog}\" ../build/libs/awesome-{version}.jar".format(key=config.key, changelog=changelog, version=cur_version))
