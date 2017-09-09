@@ -125,14 +125,12 @@ public abstract class AwesomeBlockContainer extends BlockContainer {
 	@Override
     public IBlockState getStateFromMeta(int meta)
     {
-        EnumFacing enumfacing = EnumFacing.getFront(meta);
+        EnumFacing enumfacing = EnumFacing.getFront(meta & 0x7);
 
         if (enumfacing.getAxis() == EnumFacing.Axis.Y)
         {
             enumfacing = EnumFacing.NORTH;
         }
-        
-        boolean isBurning = (meta & 0x8) > 0;
 
         return this.getDefaultState().withProperty(FACING, enumfacing);
     }
