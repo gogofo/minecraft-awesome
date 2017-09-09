@@ -1,3 +1,10 @@
+0.42
+-------------------
+
+- Fix issues with server loading (hopefully now the server works)
+- Fix machines facing issue when on when using a client-server setup
+
+-------------------
 0.41
 -------------------
 
