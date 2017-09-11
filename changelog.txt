@@ -3,6 +3,8 @@
 
 - Fix furnace and generator particles
 - Add Uranium
+- Add Platinum
+- Change ore ratios
 
 -------------------
 0.42

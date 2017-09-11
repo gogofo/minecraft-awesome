@@ -51,4 +51,8 @@ tile.uranium_ore.name=Uranium Ore
 item.uranium_ingot.name=Uranium Ingot
 item.uranium_dust.name=Uranium Dust
 
+tile.platinum_ore.name=Platinum Ore
+item.platinum_ingot.name=Platinum Ingot
+item.platinum_dust.name=Platinum Dust
+
 ## ORE_ADD_MARKER
