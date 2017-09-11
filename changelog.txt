@@ -2,6 +2,7 @@
 -------------------
 
 - Fix furnace and generator particles
+- Add Uranium
 
 -------------------
 0.42

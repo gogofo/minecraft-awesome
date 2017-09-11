@@ -47,4 +47,8 @@ tile.tin_ore.name=Tin Ore
 item.tin_ingot.name=Tin Ingot
 item.tin_dust.name=Tin Dust
 
-## ORE_ADD_MARKER
+tile.uranium_ore.name=Uranium Ore
+item.uranium_ingot.name=Uranium Ingot
+item.uranium_dust.name=Uranium Dust
+
+## ORE_ADD_MAKER

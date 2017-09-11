@@ -16,6 +16,10 @@ public class Ores {
         ore = new Ore("tin", 0xFFD8D8D8, true, true, true, 2)
                 .addGenerationConfig(new Ore.GenerationConfig(0, 200, 100, 35, 8));
         ores.add(ore);
+
+        ore = new Ore("uranium", 0x32CD32, true, true, true, 1)
+                .addGenerationConfig(new Ore.GenerationConfig(0, 40, 100, 1, 3));
+        ores.add(ore);
     }
 
     public static ArrayList<Ore> getOres() {
