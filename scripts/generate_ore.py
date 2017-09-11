@@ -17,7 +17,7 @@ def edit_lang(ore_name):
     lang_add = """tile.template_ore.name=Template Ore
 item.template_ingot.name=Template Ingot
 item.template_dust.name=Template Dust""".replace("template", camel_name(ore_name)).replace("Template", ore_name.title())
-    lang = lang.replace("## ORE_ADD_MARKER", lang_add + "\n\n## ORE_ADD_MAKER")
+    lang = lang.replace("## ORE_ADD_MARKER", lang_add + "\n\n## ORE_ADD_MARKER")
 
     f = open(LANG_FILE_PATH, "w+")
     f.write(lang)
