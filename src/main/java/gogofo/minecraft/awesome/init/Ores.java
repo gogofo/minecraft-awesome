@@ -22,7 +22,11 @@ public class Ores {
         ores.add(ore);
 
         ore = new Ore("platinum", 0xE5E4E2, true, true, true, 2)
-                .addGenerationConfig(new Ore.GenerationConfig(0, 54, 100, 8, 8));
+                .addGenerationConfig(new Ore.GenerationConfig(0, 54, 100, 8, 6));
+        ores.add(ore);
+
+        ore = new Ore("aluminium", 0x848789, true, true, true, 2)
+                .addGenerationConfig(new Ore.GenerationConfig(0, 54, 100, 8, 6));
         ores.add(ore);
     }
 

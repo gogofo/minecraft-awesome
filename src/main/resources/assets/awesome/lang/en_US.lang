@@ -55,4 +55,8 @@ tile.platinum_ore.name=Platinum Ore
 item.platinum_ingot.name=Platinum Ingot
 item.platinum_dust.name=Platinum Dust
 
+tile.aluminium_ore.name=Aluminium Ore
+item.aluminium_ingot.name=Aluminium Ingot
+item.aluminium_dust.name=Aluminium Dust
+
 ## ORE_ADD_MARKER

@@ -5,6 +5,7 @@
 - Add Uranium
 - Add Platinum
 - Change ore ratios
+- Add Aluminium
 
 -------------------
 0.42
