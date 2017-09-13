@@ -1,6 +1,12 @@
 0.44
 -------------------
 
+- Fix pipes model
+
+-------------------
+0.44
+-------------------
+
 - Make salt drop at least 1
 - Make shovel effective on salt
 
