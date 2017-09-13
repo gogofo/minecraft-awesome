@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class AwesomeMod {
 	public final static String MODID = "awesome";
 	public final static String NAME = "awesome";
-	public final static String VERSION = "0.43";
+	public final static String VERSION = "0.44";
 	
 	public static final String CLIENT_PROXY_CLASS = "gogofo.minecraft.awesome.proxy.ClientProxy";
     public static final String SERVER_PROXY_CLASS = "gogofo.minecraft.awesome.proxy.CommonProxy";
