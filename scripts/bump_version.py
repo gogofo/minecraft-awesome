@@ -2,6 +2,7 @@ from utils import *
 
 JAVA_FILE_PATH = "../src/main/java/gogofo/minecraft/awesome/AwesomeMod.java"
 GRADLE_FILE_PATH = "../build.gradle"
+CHANGELOG_FILE_PATH = "../changelog.txt"
 
 def replace_in_file(path, original, new):
     f = open(path, "r+")
@@ -14,6 +15,19 @@ def replace_in_file(path, original, new):
     f.write(content)
     f.close()
 
+def update_changelog(new_version):
+    f = open(CHANGELOG_FILE_PATH, "r+")
+    content = "".join([l for l in f])
+    f.close()
+
+    f = open(CHANGELOG_FILE_PATH, "w+")
+    f.write(new_version + """
+-------------------
+
+
+-------------------\n""" + content)
+    f.close()
+
 if __name__ == "__main__":
     cur_version = get_mod_version(JAVA_FILE_PATH)
 
@@ -24,3 +38,5 @@ if __name__ == "__main__":
 
     replace_in_file(JAVA_FILE_PATH, cur_version, new_version)
     replace_in_file(GRADLE_FILE_PATH, cur_version, new_version)
+
+    update_changelog(new_version)
