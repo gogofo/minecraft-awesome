@@ -1,7 +1,8 @@
-package gogofo.minecraft.awesome;
+package gogofo.minecraft.awesome.WorldGen;
 
 import gogofo.minecraft.awesome.init.Blocks;
 import gogofo.minecraft.awesome.init.Ores;
+import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -11,16 +12,19 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 public class AwesomeWorldGenerator implements IWorldGenerator {
     private WorldGenerator gen_oil;
     private HashMap<Ores.Ore, WorldGenerator> gen_ores = new HashMap<>();
+    private WorldGenerator gen_salt_shore;
+    private WorldGenerator gen_salt_desert;
 
     public AwesomeWorldGenerator() {
         gen_oil = new WorldGenLakes(Blocks.oil);
+        gen_salt_shore = new WorldGenSalt(Blocks.salt_block.getDefaultState(), 10);
+        gen_salt_desert = new WorldGenSalt(Blocks.salt_block.getDefaultState(), 40);
 
         for (Ores.Ore ore : Ores.getOres()) {
             for (Ores.Ore.GenerationConfig config : ore.getGenerationConfigs()) {
@@ -35,6 +39,12 @@ public class AwesomeWorldGenerator implements IWorldGenerator {
         switch (world.provider.getDimension()) {
             case 0: //Overworld
                 runGenerator(gen_oil, world, random, chunkX, chunkZ, 30, 1, 0, 50, 8);
+
+                if (world.getBiomeForCoordsBody(new BlockPos(chunkX * 16 + 8, 0, chunkZ * 16 + 8)) == Biomes.DESERT) {
+                    runGenerator(gen_salt_desert, world, random, chunkX, chunkZ, 100, 2, 60, 250, 0);
+                } else {
+                    runGenerator(gen_salt_shore, world, random, chunkX, chunkZ, 100, 40, 60, 250, 0);
+                }
 
                 for (Ores.Ore ore : Ores.getOres()) {
                     for (Ores.Ore.GenerationConfig config : ore.getGenerationConfigs()) {

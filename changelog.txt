@@ -6,6 +6,7 @@
 - Add Platinum
 - Change ore ratios
 - Add Aluminium
+- Add Salt
 
 -------------------
 0.42

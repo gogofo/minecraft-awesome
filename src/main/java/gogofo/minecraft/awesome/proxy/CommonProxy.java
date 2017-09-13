@@ -1,7 +1,7 @@
 package gogofo.minecraft.awesome.proxy;
 
 import gogofo.minecraft.awesome.AwesomeMod;
-import gogofo.minecraft.awesome.AwesomeWorldGenerator;
+import gogofo.minecraft.awesome.WorldGen.AwesomeWorldGenerator;
 import gogofo.minecraft.awesome.gui.GuiHandler;
 import gogofo.minecraft.awesome.init.Blocks;
 import gogofo.minecraft.awesome.init.Items;
