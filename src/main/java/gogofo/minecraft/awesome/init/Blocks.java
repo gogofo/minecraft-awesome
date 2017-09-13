@@ -28,6 +28,7 @@ public class Blocks {
 	public static Block sorting_pipe;
 	public static Block extractor;
 	public static BlockOil oil;
+	public static Block salt_block;
 	
 	private static ArrayList<Block> blocks = new ArrayList<>();
 	private static ArrayList<ItemBlock> itemBlocks = new ArrayList<>();
@@ -71,6 +72,9 @@ public class Blocks {
 
 		oil = (BlockOil) registryBlock(new BlockOil(), "oil");
 		blocks.add(oil);
+
+		salt_block = registryBlock(new BlockSaltBlock(), "salt_block");
+		blocks.add(salt_block);
 
 		for (Ores.Ore ore : Ores.getOres()) {
 			if (ore.isHasBlock()) {

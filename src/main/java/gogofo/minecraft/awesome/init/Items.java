@@ -38,6 +38,7 @@ public class Items {
 	
 	// Food
 	public static Item rich_melon;
+	public static Item salt;
 	
 	private static ArrayList<Item> items = new ArrayList<Item>();
 	
@@ -99,6 +100,9 @@ public class Items {
 		// Food
 		rich_melon = registryItem(new ItemFood(2, 0.9F, false), "rich_melon");
 		items.add(rich_melon);
+
+		salt = registryItem(new ItemFood(-1, -0.5F, false), "salt");
+		items.add(salt);
 		
 		// Extractions
 		
