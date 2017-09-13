@@ -1,3 +1,10 @@
+0.44
+-------------------
+
+- Make salt drop at least 1
+- Make shovel effective on salt
+
+-------------------
 0.43
 -------------------
 
