@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "awesome:liquid_storage_container" }
+    }
+}

@@ -1,17 +1,6 @@
 package gogofo.minecraft.awesome.init;
 
-import gogofo.minecraft.awesome.tileentity.TileEntityCharger;
-import gogofo.minecraft.awesome.tileentity.TileEntityElectricFurnace;
-import gogofo.minecraft.awesome.tileentity.TileEntityElectricWire;
-import gogofo.minecraft.awesome.tileentity.TileEntityExtractor;
-import gogofo.minecraft.awesome.tileentity.TileEntityFuser;
-import gogofo.minecraft.awesome.tileentity.TileEntityGenerator;
-import gogofo.minecraft.awesome.tileentity.TileEntityGrinder;
-import gogofo.minecraft.awesome.tileentity.TileEntityPipe;
-import gogofo.minecraft.awesome.tileentity.TileEntitySortingPipe;
-import gogofo.minecraft.awesome.tileentity.TileEntitySuctionPipe;
-import gogofo.minecraft.awesome.tileentity.TileEntityTeleportPortal;
-import gogofo.minecraft.awesome.tileentity.TileEntityTeleporter;
+import gogofo.minecraft.awesome.tileentity.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class TileEntities {
@@ -28,5 +17,6 @@ public class TileEntities {
 		GameRegistry.registerTileEntity(TileEntitySuctionPipe.class, "awesomeTileEntitySuctionPipe");
 		GameRegistry.registerTileEntity(TileEntitySortingPipe.class, "awesomeTileEntitySortingPipe");
 		GameRegistry.registerTileEntity(TileEntityExtractor.class, "awesomeTileEntityExtractor");
+		GameRegistry.registerTileEntity(TileEntityLiquideStorageContainer.class, "awesomeTileEntityLiquidStorageContainer");
 	}
 }

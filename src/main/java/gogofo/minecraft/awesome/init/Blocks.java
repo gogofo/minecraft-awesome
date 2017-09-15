@@ -1,13 +1,17 @@
 package gogofo.minecraft.awesome.init;
 
 import gogofo.minecraft.awesome.AwesomeMod;
+import gogofo.minecraft.awesome.TileEntitySpecialRenderer.TesrLiquidStorageContainer;
 import gogofo.minecraft.awesome.block.*;
+import gogofo.minecraft.awesome.tileentity.TileEntityLiquideStorageContainer;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -29,6 +33,7 @@ public class Blocks {
 	public static Block extractor;
 	public static BlockOil oil;
 	public static Block salt_block;
+	public static Block liquid_storage_container;
 	
 	private static ArrayList<Block> blocks = new ArrayList<>();
 	private static ArrayList<ItemBlock> itemBlocks = new ArrayList<>();
@@ -76,6 +81,9 @@ public class Blocks {
 		salt_block = registryBlock(new BlockSaltBlock(), "salt_block");
 		blocks.add(salt_block);
 
+		liquid_storage_container = registryBlock(new BlockLiquidStorageContainer(), "liquid_storage_container");
+		blocks.add(liquid_storage_container);
+
 		for (Ores.Ore ore : Ores.getOres()) {
 			if (ore.isHasBlock()) {
 				Block oreBlock = registryBlock(new BlockGenericOre(ore.getColor()), ore.getName() + "_ore");
@@ -99,6 +107,8 @@ public class Blocks {
 		for (Block block : blocks) {
 			RendersRegisterer.registerColorProviderIfNeeded(block);
 		}
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLiquideStorageContainer.class, new TesrLiquidStorageContainer());
 	}
 
 	public static void renderFluids() {
