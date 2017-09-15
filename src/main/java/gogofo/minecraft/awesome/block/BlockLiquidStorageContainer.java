@@ -1,6 +1,6 @@
 package gogofo.minecraft.awesome.block;
 
-import gogofo.minecraft.awesome.tileentity.TileEntityLiquideStorageContainer;
+import gogofo.minecraft.awesome.tileentity.TileEntityLiquidStorageContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -22,7 +22,7 @@ public class BlockLiquidStorageContainer extends Block implements ITileEntityPro
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEntityLiquideStorageContainer();
+        return new TileEntityLiquidStorageContainer();
     }
 
     @Override

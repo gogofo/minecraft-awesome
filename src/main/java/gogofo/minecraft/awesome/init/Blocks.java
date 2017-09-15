@@ -3,7 +3,7 @@ package gogofo.minecraft.awesome.init;
 import gogofo.minecraft.awesome.AwesomeMod;
 import gogofo.minecraft.awesome.TileEntitySpecialRenderer.TesrLiquidStorageContainer;
 import gogofo.minecraft.awesome.block.*;
-import gogofo.minecraft.awesome.tileentity.TileEntityLiquideStorageContainer;
+import gogofo.minecraft.awesome.tileentity.TileEntityLiquidStorageContainer;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -11,7 +11,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -108,7 +107,7 @@ public class Blocks {
 			RendersRegisterer.registerColorProviderIfNeeded(block);
 		}
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLiquideStorageContainer.class, new TesrLiquidStorageContainer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLiquidStorageContainer.class, new TesrLiquidStorageContainer());
 	}
 
 	public static void renderFluids() {
