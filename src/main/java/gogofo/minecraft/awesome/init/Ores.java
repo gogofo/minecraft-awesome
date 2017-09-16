@@ -11,7 +11,7 @@ public class Ores {
 
     public static void init() {
         Ore ore = new Ore("copper", 0xFFDA8A67, true, true, true, 2)
-                .setToolsConfig(new Ore.ToolsConfig(true, true, false, Materials.COPPER_TOOL, null))
+                .setToolsConfig(new Ore.ToolsConfig(true, true, true, Materials.COPPER_TOOL, Materials.COPPER_ARMOR))
                 .addGenerationConfig(new Ore.GenerationConfig(0, 200, 100, 25, 10));
         ores.add(ore);
 

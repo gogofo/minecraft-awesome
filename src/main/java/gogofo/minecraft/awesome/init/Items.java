@@ -9,7 +9,9 @@ import gogofo.minecraft.awesome.item.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemFood;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -138,6 +140,11 @@ public class Items {
 				Item shovel = registryItem(new ItemAwesomeShovel(config.getToolMaterial(), ore.getColor()), ore.getName() + "_shovel");
 				items.add(shovel);
 				ore.setShovel(shovel);
+			}
+
+			if (config.isHasArmors()) {
+				Item chestplate = registryItem(new ItemAwesomeArmor(Materials.COPPER_ARMOR, 2, EntityEquipmentSlot.CHEST, ore.getColor()), ore.getName() + "_chestplate");
+				items.add(chestplate);
 			}
 		}
 	}
