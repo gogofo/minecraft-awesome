@@ -27,6 +27,10 @@ public class SingleColorProvider implements IBlockColor, IItemColor {
 
     @Override
     public int getColorFromItemstack(ItemStack stack, int tintIndex) {
-        return singleColoredObject.getColor();
+        if (tintIndex == 0) {
+            return singleColoredObject.getColor();
+        } else {
+            return -1;
+        }
     }
 }

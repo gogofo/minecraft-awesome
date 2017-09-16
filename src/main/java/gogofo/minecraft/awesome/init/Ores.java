@@ -2,6 +2,7 @@ package gogofo.minecraft.awesome.init;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 
 import java.util.ArrayList;
 
@@ -10,6 +11,7 @@ public class Ores {
 
     public static void init() {
         Ore ore = new Ore("copper", 0xFFDA8A67, true, true, true, 2)
+                .setToolsConfig(new Ore.ToolsConfig(true, false, false, Materials.COPPER_TOOL, null))
                 .addGenerationConfig(new Ore.GenerationConfig(0, 200, 100, 25, 10));
         ores.add(ore);
 
@@ -42,6 +44,7 @@ public class Ores {
         private boolean hasDust;
         private int grindsToAmount;
         private ArrayList<GenerationConfig> generationConfigs;
+        private ToolsConfig toolsConfig;
 
         private Block block;
         private Item Ingot;
@@ -55,10 +58,16 @@ public class Ores {
             this.hasDust = hasDust;
             this.grindsToAmount = grindsToAmount;
             this.generationConfigs = new ArrayList<>();
+            this.toolsConfig = null;
         }
 
-        public Ore addGenerationConfig(GenerationConfig config) {
+        Ore addGenerationConfig(GenerationConfig config) {
             generationConfigs.add(config);
+            return this;
+        }
+
+        Ore setToolsConfig(ToolsConfig toolsConfig) {
+            this.toolsConfig = toolsConfig;
             return this;
         }
 
@@ -118,6 +127,10 @@ public class Ores {
             return generationConfigs;
         }
 
+        public ToolsConfig getToolsConfig() {
+            return toolsConfig;
+        }
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -167,6 +180,42 @@ public class Ores {
 
             public int getMaxOrePerSpawn() {
                 return maxOrePerSpawn;
+            }
+        }
+
+        public static class ToolsConfig {
+            private boolean hasSword;
+            private boolean hasWorkingTools;
+            private boolean hasArmors;
+            private Item.ToolMaterial toolMaterial;
+            private ItemArmor.ArmorMaterial armorMaterial;
+
+            public ToolsConfig(boolean hasSword, boolean hasWorkingTools, boolean hasArmors, Item.ToolMaterial toolMaterial, ItemArmor.ArmorMaterial armorMaterial) {
+                this.hasSword = hasSword;
+                this.hasWorkingTools = hasWorkingTools;
+                this.hasArmors = hasArmors;
+                this.toolMaterial = toolMaterial;
+                this.armorMaterial = armorMaterial;
+            }
+
+            public boolean isHasSword() {
+                return hasSword;
+            }
+
+            public boolean isHasWorkingTools() {
+                return hasWorkingTools;
+            }
+
+            public boolean isHasArmors() {
+                return hasArmors;
+            }
+
+            public Item.ToolMaterial getToolMaterial() {
+                return toolMaterial;
+            }
+
+            public ItemArmor.ArmorMaterial getArmorMaterial() {
+                return armorMaterial;
             }
         }
     }

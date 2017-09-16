@@ -108,6 +108,19 @@ public class Items {
 		
 		mob_essence = registryItem(new Item(), "mob_essence");
 		items.add(mob_essence);
+
+		// Swords, tools and armors
+		for (Ores.Ore ore : Ores.getOres()) {
+			Ores.Ore.ToolsConfig config = ore.getToolsConfig();
+			if (config == null) {
+				continue;
+			}
+
+			if (config.isHasSword()) {
+				Item sword = registryItem(new ItemAwesomeSword(config.getToolMaterial(), ore.getColor()), ore.getName() + "_sword");
+				items.add(sword);
+			}
+		}
 	}
 	
 	public static void registerRenders() {
