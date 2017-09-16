@@ -34,6 +34,13 @@ public class RecipeGenericTools {
                 addHoeRecipe(registry, ore);
                 addShovelRecipe(registry, ore);
             }
+
+            if (config.isHasArmors()) {
+                addChestplateRecipe(registry, ore);
+                addHelmetRecipe(registry, ore);
+                addLeggingsRecipe(registry, ore);
+                addBootsRecipe(registry, ore);
+            }
         }
     }
 
@@ -97,6 +104,52 @@ public class RecipeGenericTools {
                 " B ",
                 'A', ore.getIngot(),
                 'B', net.minecraft.init.Items.STICK);
+        recipe.setRegistryName(location);
+
+        registry.register(recipe);
+    }
+
+    private static void addChestplateRecipe(IForgeRegistry<IRecipe> registry, Ores.Ore ore) {
+        ResourceLocation location = new ResourceLocation(AwesomeMod.MODID, ore.getName() + "_chestplate_recipe");
+        ShapedOreRecipe recipe = new ShapedOreRecipe(location, new ItemStack(ore.getChestplate()),
+                "A A",
+                "AAA",
+                "AAA",
+                'A', ore.getIngot());
+        recipe.setRegistryName(location);
+
+        registry.register(recipe);
+    }
+
+    private static void addHelmetRecipe(IForgeRegistry<IRecipe> registry, Ores.Ore ore) {
+        ResourceLocation location = new ResourceLocation(AwesomeMod.MODID, ore.getName() + "_helmet_recipe");
+        ShapedOreRecipe recipe = new ShapedOreRecipe(location, new ItemStack(ore.getHelmet()),
+                "AAA",
+                "A A",
+                'A', ore.getIngot());
+        recipe.setRegistryName(location);
+
+        registry.register(recipe);
+    }
+
+    private static void addLeggingsRecipe(IForgeRegistry<IRecipe> registry, Ores.Ore ore) {
+        ResourceLocation location = new ResourceLocation(AwesomeMod.MODID, ore.getName() + "_leggings_recipe");
+        ShapedOreRecipe recipe = new ShapedOreRecipe(location, new ItemStack(ore.getLeggings()),
+                "AAA",
+                "A A",
+                "A A",
+                'A', ore.getIngot());
+        recipe.setRegistryName(location);
+
+        registry.register(recipe);
+    }
+
+    private static void addBootsRecipe(IForgeRegistry<IRecipe> registry, Ores.Ore ore) {
+        ResourceLocation location = new ResourceLocation(AwesomeMod.MODID, ore.getName() + "_boots_recipe");
+        ShapedOreRecipe recipe = new ShapedOreRecipe(location, new ItemStack(ore.getBoots()),
+                "A A",
+                "A A",
+                'A', ore.getIngot());
         recipe.setRegistryName(location);
 
         registry.register(recipe);

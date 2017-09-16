@@ -54,6 +54,10 @@ public class Ores {
         private Item axe;
         private Item hoe;
         private Item shovel;
+        private Item chestplate;
+        private Item helmet;
+        private Item leggings;
+        private Item boots;
 
         public Ore(String name, int color, boolean hasBlock, boolean hasIngot, boolean hasDust, int grindsToAmount) {
             this.name = name;
@@ -174,6 +178,38 @@ public class Ores {
 
         public void setShovel(Item shovel) {
             this.shovel = shovel;
+        }
+
+        public Item getChestplate() {
+            return chestplate;
+        }
+
+        public void setChestplate(Item chestplate) {
+            this.chestplate = chestplate;
+        }
+
+        public Item getHelmet() {
+            return helmet;
+        }
+
+        public void setHelmet(Item helmet) {
+            this.helmet = helmet;
+        }
+
+        public Item getLeggings() {
+            return leggings;
+        }
+
+        public void setLeggings(Item leggings) {
+            this.leggings = leggings;
+        }
+
+        public Item getBoots() {
+            return boots;
+        }
+
+        public void setBoots(Item boots) {
+            this.boots = boots;
         }
 
         @Override
