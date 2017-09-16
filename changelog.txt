@@ -1,7 +1,13 @@
+0.45
+-------------------
+
+
+-------------------
 0.44
 -------------------
 
 - Fix pipes model
+- Add generic items and armor for some of the ores
 
 -------------------
 0.44
