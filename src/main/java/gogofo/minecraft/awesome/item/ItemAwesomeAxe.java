@@ -1,14 +1,14 @@
 package gogofo.minecraft.awesome.item;
 
 import gogofo.minecraft.awesome.colorize.ISingleColoredObject;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemAxe;
 
-public class ItemAwesomePickaxe extends ItemPickaxe implements ISingleColoredObject {
+public class ItemAwesomeAxe extends ItemAxe implements ISingleColoredObject {
 
     private final int color;
 
-    public ItemAwesomePickaxe(ToolMaterial material, int color) {
-        super(material);
+    public ItemAwesomeAxe(ToolMaterial material, int color) {
+        super(material, 8.0F, -3.1F);
         this.color = color;
     }
 

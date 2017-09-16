@@ -66,5 +66,8 @@ item.aluminium_dust.name=Aluminium Dust
 # Ore Items
 item.copper_sword.name=Copper Sword
 item.copper_pickaxe.name=Copper Pickaxe
+item.copper_axe.name=Copper Axe
+item.copper_hoe.name=Copper Hoe
+item.copper_shovel.name=Copper Shovel
 
 ## ORE_ITEM_ADD_MARKER

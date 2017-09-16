@@ -124,6 +124,15 @@ public class Items {
 			if (config.isHasWorkingTools()) {
 				Item pickaxe = registryItem(new ItemAwesomePickaxe(config.getToolMaterial(), ore.getColor()), ore.getName() + "_pickaxe");
 				items.add(pickaxe);
+
+				Item axe = registryItem(new ItemAwesomeAxe(config.getToolMaterial(), ore.getColor()), ore.getName() + "_axe");
+				items.add(axe);
+
+				Item hoe = registryItem(new ItemAwesomeHoe(config.getToolMaterial(), ore.getColor()), ore.getName() + "_hoe");
+				items.add(hoe);
+
+				Item shovel = registryItem(new ItemAwesomeShovel(config.getToolMaterial(), ore.getColor()), ore.getName() + "_shovel");
+				items.add(shovel);
 			}
 		}
 	}
