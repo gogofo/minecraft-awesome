@@ -14,21 +14,21 @@ public class Materials {
     static {
         COPPER_TOOL = EnumHelper.addToolMaterial("COPPER",
                 ToolMaterial.IRON.getHarvestLevel(),
-                ToolMaterial.IRON.getMaxUses(),
+                200, // Less than iron
                 ToolMaterial.IRON.getEfficiencyOnProperMaterial(),
                 ToolMaterial.IRON.getDamageVsEntity(),
                 ToolMaterial.IRON.getEnchantability());
 
         PLATINUM_TOOL = EnumHelper.addToolMaterial("PLATINUM",
                 ToolMaterial.IRON.getHarvestLevel(),
-                ToolMaterial.IRON.getMaxUses(),
+                500, // Double from iron
                 ToolMaterial.IRON.getEfficiencyOnProperMaterial(),
                 ToolMaterial.IRON.getDamageVsEntity(),
                 ToolMaterial.IRON.getEnchantability());
 
         COPPER_ARMOR = EnumHelper.addArmorMaterial("COPPER",
                 "awesome:generic",
-                15,
+                10, // Less than iron
                 new int[]{2, 5, 6, 2},
                 ArmorMaterial.IRON.getEnchantability(),
                 ArmorMaterial.IRON.getSoundEvent(),
@@ -36,10 +36,10 @@ public class Materials {
 
         PLATINUM_ARMOR = EnumHelper.addArmorMaterial("PLATINUM",
                 "awesome:generic",
-                15,
+                20, // More than iron, less than diamond
                 new int[]{2, 5, 6, 2},
-                ArmorMaterial.IRON.getEnchantability(),
+                10, // More than iron, like diamond
                 ArmorMaterial.IRON.getSoundEvent(),
-                ArmorMaterial.IRON.getToughness());
+                0.5F); // More than iron, less than diamond
     }
 }
