@@ -35,8 +35,9 @@ if __name__ == "__main__":
     minor += 1
 
     new_version = str(major) + "." + str(minor)
+    next_version = str(major) + "." + str(minor+1)
 
     replace_in_file(JAVA_FILE_PATH, cur_version, new_version)
     replace_in_file(GRADLE_FILE_PATH, cur_version, new_version)
 
-    update_changelog(new_version)
+    update_changelog(next_version)
