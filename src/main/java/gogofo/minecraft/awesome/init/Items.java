@@ -145,6 +145,15 @@ public class Items {
 			if (config.isHasArmors()) {
 				Item chestplate = registryItem(new ItemAwesomeArmor(Materials.COPPER_ARMOR, 2, EntityEquipmentSlot.CHEST, ore.getColor()), ore.getName() + "_chestplate");
 				items.add(chestplate);
+
+				Item helmet = registryItem(new ItemAwesomeArmor(Materials.COPPER_ARMOR, 2, EntityEquipmentSlot.HEAD, ore.getColor()), ore.getName() + "_helmet");
+				items.add(helmet);
+
+				Item leggings = registryItem(new ItemAwesomeArmor(Materials.COPPER_ARMOR, 2, EntityEquipmentSlot.LEGS, ore.getColor()), ore.getName() + "_leggings");
+				items.add(leggings);
+
+				Item boots = registryItem(new ItemAwesomeArmor(Materials.COPPER_ARMOR, 2, EntityEquipmentSlot.FEET, ore.getColor()), ore.getName() + "_boots");
+				items.add(boots);
 			}
 		}
 	}

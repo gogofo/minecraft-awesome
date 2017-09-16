@@ -69,5 +69,9 @@ item.copper_pickaxe.name=Copper Pickaxe
 item.copper_axe.name=Copper Axe
 item.copper_hoe.name=Copper Hoe
 item.copper_shovel.name=Copper Shovel
+item.copper_chestplate.name=Copper Chestplate
+item.copper_helmet.name=Copper Helmet
+item.copper_leggings.name=Copper Leggings
+item.copper_boots.name=Copper Boots
 
 ## ORE_ITEM_ADD_MARKER
