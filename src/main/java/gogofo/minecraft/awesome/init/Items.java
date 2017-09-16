@@ -120,6 +120,11 @@ public class Items {
 				Item sword = registryItem(new ItemAwesomeSword(config.getToolMaterial(), ore.getColor()), ore.getName() + "_sword");
 				items.add(sword);
 			}
+
+			if (config.isHasWorkingTools()) {
+				Item pickaxe = registryItem(new ItemAwesomePickaxe(config.getToolMaterial(), ore.getColor()), ore.getName() + "_pickaxe");
+				items.add(pickaxe);
+			}
 		}
 	}
 	
