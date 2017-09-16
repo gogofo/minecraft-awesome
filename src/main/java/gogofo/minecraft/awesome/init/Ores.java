@@ -49,6 +49,11 @@ public class Ores {
         private Block block;
         private Item Ingot;
         private Item dust;
+        private Item sword;
+        private Item pickaxe;
+        private Item axe;
+        private Item hoe;
+        private Item shovel;
 
         public Ore(String name, int color, boolean hasBlock, boolean hasIngot, boolean hasDust, int grindsToAmount) {
             this.name = name;
@@ -129,6 +134,46 @@ public class Ores {
 
         public ToolsConfig getToolsConfig() {
             return toolsConfig;
+        }
+
+        public Item getSword() {
+            return sword;
+        }
+
+        public void setSword(Item sword) {
+            this.sword = sword;
+        }
+
+        public Item getPickaxe() {
+            return pickaxe;
+        }
+
+        public void setPickaxe(Item pickaxe) {
+            this.pickaxe = pickaxe;
+        }
+
+        public Item getAxe() {
+            return axe;
+        }
+
+        public void setAxe(Item axe) {
+            this.axe = axe;
+        }
+
+        public Item getHoe() {
+            return hoe;
+        }
+
+        public void setHoe(Item hoe) {
+            this.hoe = hoe;
+        }
+
+        public Item getShovel() {
+            return shovel;
+        }
+
+        public void setShovel(Item shovel) {
+            this.shovel = shovel;
         }
 
         @Override

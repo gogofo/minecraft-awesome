@@ -119,20 +119,25 @@ public class Items {
 			if (config.isHasSword()) {
 				Item sword = registryItem(new ItemAwesomeSword(config.getToolMaterial(), ore.getColor()), ore.getName() + "_sword");
 				items.add(sword);
+				ore.setSword(sword);
 			}
 
 			if (config.isHasWorkingTools()) {
 				Item pickaxe = registryItem(new ItemAwesomePickaxe(config.getToolMaterial(), ore.getColor()), ore.getName() + "_pickaxe");
 				items.add(pickaxe);
+				ore.setPickaxe(pickaxe);
 
 				Item axe = registryItem(new ItemAwesomeAxe(config.getToolMaterial(), ore.getColor()), ore.getName() + "_axe");
 				items.add(axe);
+				ore.setAxe(axe);
 
 				Item hoe = registryItem(new ItemAwesomeHoe(config.getToolMaterial(), ore.getColor()), ore.getName() + "_hoe");
 				items.add(hoe);
+				ore.setHoe(hoe);
 
 				Item shovel = registryItem(new ItemAwesomeShovel(config.getToolMaterial(), ore.getColor()), ore.getName() + "_shovel");
 				items.add(shovel);
+				ore.setShovel(shovel);
 			}
 		}
 	}
