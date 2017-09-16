@@ -6,8 +6,10 @@ import net.minecraftforge.common.util.EnumHelper;
 
 public class Materials {
     public static ToolMaterial COPPER_TOOL;
+    public static ToolMaterial PLATINUM_TOOL;
 
     public static ArmorMaterial COPPER_ARMOR;
+    public static ArmorMaterial PLATINUM_ARMOR;
 
     static {
         COPPER_TOOL = EnumHelper.addToolMaterial("COPPER",
@@ -17,6 +19,27 @@ public class Materials {
                 ToolMaterial.IRON.getDamageVsEntity(),
                 ToolMaterial.IRON.getEnchantability());
 
-        COPPER_ARMOR = EnumHelper.addArmorMaterial("COPPER", "awesome:generic", 15, new int[]{2, 5, 6, 2}, ArmorMaterial.IRON.getEnchantability(), ArmorMaterial.IRON.getSoundEvent(), ArmorMaterial.IRON.getToughness());
+        PLATINUM_TOOL = EnumHelper.addToolMaterial("PLATINUM",
+                ToolMaterial.IRON.getHarvestLevel(),
+                ToolMaterial.IRON.getMaxUses(),
+                ToolMaterial.IRON.getEfficiencyOnProperMaterial(),
+                ToolMaterial.IRON.getDamageVsEntity(),
+                ToolMaterial.IRON.getEnchantability());
+
+        COPPER_ARMOR = EnumHelper.addArmorMaterial("COPPER",
+                "awesome:generic",
+                15,
+                new int[]{2, 5, 6, 2},
+                ArmorMaterial.IRON.getEnchantability(),
+                ArmorMaterial.IRON.getSoundEvent(),
+                ArmorMaterial.IRON.getToughness());
+
+        PLATINUM_ARMOR = EnumHelper.addArmorMaterial("PLATINUM",
+                "awesome:generic",
+                15,
+                new int[]{2, 5, 6, 2},
+                ArmorMaterial.IRON.getEnchantability(),
+                ArmorMaterial.IRON.getSoundEvent(),
+                ArmorMaterial.IRON.getToughness());
     }
 }

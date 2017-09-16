@@ -74,4 +74,14 @@ item.copper_helmet.name=Copper Helmet
 item.copper_leggings.name=Copper Leggings
 item.copper_boots.name=Copper Boots
 
+item.platinum_sword.name=Platinum Sword
+item.platinum_pickaxe.name=Platinum Pickaxe
+item.platinum_axe.name=Platinum Axe
+item.platinum_hoe.name=Platinum Hoe
+item.platinum_shovel.name=Platinum Shovel
+item.platinum_chestplate.name=Platinum Chestplate
+item.platinum_helmet.name=Platinum Helmet
+item.platinum_leggings.name=Platinum Leggings
+item.platinum_boots.name=Platinum Boots
+
 ## ORE_ITEM_ADD_MARKER

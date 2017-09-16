@@ -24,6 +24,7 @@ public class Ores {
         ores.add(ore);
 
         ore = new Ore("platinum", 0xE5E4E2, true, true, true, 2)
+                .setToolsConfig(new Ore.ToolsConfig(true, true, true, Materials.PLATINUM_TOOL, Materials.PLATINUM_ARMOR))
                 .addGenerationConfig(new Ore.GenerationConfig(0, 54, 100, 8, 6));
         ores.add(ore);
 
