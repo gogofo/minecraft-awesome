@@ -25,7 +25,9 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	public static final int TRANSFER_COOLDOWN = 8;
 	
 	private static final BlockPipe refBlockPipe = new BlockPipe();
-	
+
+	private boolean transparent = false;
+
 	@Override
 	public void update() {
 		if (world.isRemote) {
@@ -398,4 +400,8 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 										itemStackArray[index].getMetadata());
         return stack;
     }
+
+	public boolean isTransparent() {
+		return transparent;
+	}
 }
