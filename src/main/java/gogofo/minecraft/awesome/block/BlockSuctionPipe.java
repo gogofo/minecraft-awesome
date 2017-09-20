@@ -30,6 +30,6 @@ public class BlockSuctionPipe extends BlockPipe {
 
 	@Override
 	public int getColor() {
-		return 0xFFFF0000;
+		return 0xBA6337;
 	}
 }

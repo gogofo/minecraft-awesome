@@ -47,6 +47,6 @@ public class BlockSortingPipe extends BlockPipe {
 
 	@Override
 	public int getColor() {
-		return 0xFF0000FF;
+		return 0x2CCDB1;
 	}
 }
