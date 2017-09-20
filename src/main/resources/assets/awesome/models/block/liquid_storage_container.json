@@ -1,8 +1,8 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "0": "minecraft:blocks/sand",
-        "particle": "minecraft:blocks/sand"
+        "0": "minecraft:blocks/glass",
+        "particle": "minecraft:blocks/glass"
     },
     "elements": [
         {
