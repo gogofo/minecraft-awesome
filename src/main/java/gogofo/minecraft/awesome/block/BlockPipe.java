@@ -280,6 +280,6 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider, IS
 
 	@Override
 	public int getColor() {
-		return 0xFF0000;
+		return 0xFF000000;
 	}
 }

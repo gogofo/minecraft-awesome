@@ -27,4 +27,9 @@ public class BlockSuctionPipe extends BlockPipe {
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return Item.getItemFromBlock(Blocks.suction_pipe);
 	}
+
+	@Override
+	public int getColor() {
+		return 0xFFFF0000;
+	}
 }
