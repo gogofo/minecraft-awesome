@@ -8,13 +8,11 @@ import gogofo.minecraft.awesome.block.BlockPipe;
 import gogofo.minecraft.awesome.block.BlockSuctionPipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -23,10 +21,12 @@ import net.minecraft.util.ITickable;
 
 public class TileEntityPipe extends AwesomeTileEntityContainer implements ITickable {
 	public static final int TRANSFER_COOLDOWN = 8;
+
+	public final static int IS_TRANSPARENT_IDX = 0;
 	
 	private static final BlockPipe refBlockPipe = new BlockPipe();
 
-	private boolean transparent = false;
+	private boolean isTransparent = false;
 
 	@Override
 	public void update() {
@@ -316,17 +316,25 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 
 	@Override
 	public int getField(int id) {
+		switch (id) {
+			case IS_TRANSPARENT_IDX:
+				return isTransparent ? 1 : 0;
+		}
+
 		return 0;
 	}
 
 	@Override
 	public void setField(int id, int value) {
-		
+		switch (id) {
+			case IS_TRANSPARENT_IDX:
+				isTransparent = value == 1;
+		}
 	}
 
 	@Override
 	public int getFieldCount() {
-		return 0;
+		return 1;
 	}
 
 	@Override
@@ -402,6 +410,27 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
     }
 
 	public boolean isTransparent() {
-		return transparent;
+		return isTransparent;
+	}
+
+	public void setTransparent(boolean isTransparent) {
+		this.isTransparent = isTransparent;
+		BlockPipe.setState(isTransparent, world, pos);
+		markDirty();
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+
+		isTransparent = compound.getBoolean("isTransparent");
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
+		compound.setBoolean("isTransparent", isTransparent);
+
+		return compound;
 	}
 }

@@ -114,9 +114,26 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider, IS
 		boolean west = canConnectTo(worldIn, pos.west());
 
 		TileEntityPipe pipe = (TileEntityPipe) worldIn.getTileEntity(pos);
-		boolean transparent = pipe.isTransparent();
+		boolean transparent = pipe != null ? pipe.isTransparent() : false;
 
 		return stateWithConnections(state, up, down, north, south, east, west, transparent);
+	}
+
+	public static void setState(boolean transparent, World worldIn, BlockPos pos)
+	{
+		IBlockState iblockstate = worldIn.getBlockState(pos);
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+
+		worldIn.setBlockState(
+				pos,
+				iblockstate.withProperty(TRANSPARENT, transparent),
+				3);
+
+		if (tileentity != null)
+		{
+			tileentity.validate();
+			worldIn.setTileEntity(pos, tileentity);
+		}
 	}
 	
 	public boolean canConnectTo(IBlockAccess world, BlockPos pos) {
@@ -129,12 +146,13 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider, IS
 	
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return 0;
+		return state.getValue(TRANSPARENT) ? 1 : 0;
 	}
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return super.getStateFromMeta(meta);
+		return super.getStateFromMeta(meta)
+				.withProperty(TRANSPARENT, (meta & 0x1) == 1 ? true : false);
 	}
 
     @Override
