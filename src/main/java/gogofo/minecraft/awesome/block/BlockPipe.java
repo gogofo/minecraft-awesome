@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 
 import gogofo.minecraft.awesome.PowerManager;
+import gogofo.minecraft.awesome.colorize.ISingleColoredObject;
 import gogofo.minecraft.awesome.init.Blocks;
 import gogofo.minecraft.awesome.init.Items;
 import gogofo.minecraft.awesome.tileentity.AwesomeTileEntityContainer;
@@ -39,7 +40,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockPipe extends BlockContainer implements ITileEntityProvider {
+public class BlockPipe extends BlockContainer implements ITileEntityProvider, ISingleColoredObject {
 	
 	public static final PropertyBool UP = PropertyBool.create("up");
 	public static final PropertyBool DOWN = PropertyBool.create("down");
@@ -276,4 +277,9 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
     public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
     	return 0;
     }
+
+	@Override
+	public int getColor() {
+		return 0xFF0000;
+	}
 }
