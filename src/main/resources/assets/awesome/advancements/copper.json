@@ -29,7 +29,8 @@
             "awesome:copper_chestplate_recipe",
             "awesome:copper_leggings_recipe",
             "awesome:copper_helmet_recipe",
-            "awesome:copper_boots_recipe"
+            "awesome:copper_boots_recipe",
+            "awesome:wrench"
         ]
     }
 }
