@@ -21,7 +21,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 
 public class TileEntityPipe extends AwesomeTileEntityContainer implements ITickable {
-	public static final int TRANSFER_COOLDOWN = 8;
+	public static final int TRANSFER_COOLDOWN = 20;
 
 	public final static int IS_TRANSPARENT_IDX = 0;
 	
@@ -228,7 +228,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		stack.getTagCompound().removeTag("pipe");
 	}
 	
-	private int getStackCooldown(ItemStack stack) {
+	public int getStackCooldown(ItemStack stack) {
 		return getTagCompound(stack).getInteger("transferCooldown");
 	}
 	
@@ -411,6 +411,8 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		ItemStack stack = new ItemStack(itemStackArray[index].getItem(), 
 										itemStackArray[index].getCount(), 
 										itemStackArray[index].getMetadata());
+		stack.setTagCompound(itemStackArray[index].getTagCompound());
+
         return stack;
     }
 
