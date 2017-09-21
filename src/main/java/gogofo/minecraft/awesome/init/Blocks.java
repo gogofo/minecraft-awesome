@@ -2,13 +2,10 @@ package gogofo.minecraft.awesome.init;
 
 import gogofo.minecraft.awesome.AwesomeMod;
 import gogofo.minecraft.awesome.block.*;
-import gogofo.minecraft.awesome.tileentity.TileEntityPipe;
-import gogofo.minecraft.awesome.tileentity.renderer.TileEntityRendererPipe;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
@@ -102,8 +99,6 @@ public class Blocks {
 		for (Block block : blocks) {
 			RendersRegisterer.registerColorProviderIfNeeded(block);
 		}
-
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, new TileEntityRendererPipe());
 	}
 
 	public static void renderFluids() {
