@@ -9,6 +9,11 @@ if __name__ == "__main__":
 
     changelog = ""
     f = open("../changelog.txt")
+
+    # Skip new version
+    for i in xrange(0, 5):
+        f.readline()
+
     changelog_version = f.readline()
     if changelog_version.strip() == cur_version.strip():
         f.readline() # skip "------" line
