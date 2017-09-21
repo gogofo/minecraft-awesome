@@ -37,6 +37,16 @@ public class Ores {
         return ores;
     }
 
+    public static Ore getByName(String name) {
+        for (Ore ore : ores) {
+            if (ore.name.equals(name)) {
+                return ore;
+            }
+        }
+
+        return null;
+    }
+
     public static class Ore {
         private String name;
         private int color;

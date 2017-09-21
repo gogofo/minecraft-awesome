@@ -30,6 +30,7 @@ public class Items {
 	public static Item conductive;
 	public static Item chainsaw;
 	public static Item drill;
+	public static Item wrench;
 	
 	public static Item iron_dust;
 	public static Item gold_dust;
@@ -71,6 +72,9 @@ public class Items {
 		
 		drill = registryItem(new ItemDrill(), "drill");
 		items.add(drill);
+
+		wrench = registryItem(new ItemWrench(), "wrench");
+		items.add(wrench);
 		
 		// Dusts
 		iron_dust = registryItem(new ItemOneColored(0xFFDEDEDE), "iron_dust");

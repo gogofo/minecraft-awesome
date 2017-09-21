@@ -6,6 +6,7 @@ import java.util.Collections;
 
 import gogofo.minecraft.awesome.block.BlockPipe;
 import gogofo.minecraft.awesome.block.BlockSuctionPipe;
+import gogofo.minecraft.awesome.interfaces.IWrenchable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -20,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 
-public class TileEntityPipe extends AwesomeTileEntityContainer implements ITickable {
+public class TileEntityPipe extends AwesomeTileEntityContainer implements ITickable, IWrenchable {
 	public static final int TRANSFER_COOLDOWN = 20;
 
 	public final static int IS_TRANSPARENT_IDX = 0;
@@ -444,5 +445,10 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	protected void notifyUpdate(BlockPos blockPos) {
 		IBlockState state = world.getBlockState(blockPos);
 		world.notifyBlockUpdate(blockPos, state, state, 3);
+	}
+
+	@Override
+	public void onWrenchRightClicked(EntityPlayer player, ItemStack wrench) {
+		setTransparent(!isTransparent);
 	}
 }
