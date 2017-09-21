@@ -20,18 +20,19 @@ public class TileEntityRendererPipe extends TileEntitySpecialRenderer<TileEntity
         for (int i = 0; i < te.getTransferSlotCount(); i++) {
             ItemStack stack = te.getStackInSlot(i);
             if (!stack.isEmpty()) {
-                drawStack(stack, x, y, z);
+                drawStack(stack, x, y, z, te);
             }
         }
     }
 
-    private void drawStack(ItemStack stack, double x, double y, double z) {
+    private void drawStack(ItemStack stack, double x, double y, double z, TileEntityPipe te) {
         EntityItem item = new EntityItem(Minecraft.getMinecraft().world, 0, 0, 0, stack);
         item.hoverStart = 0;
 
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, z);
         GlStateManager.translate(0.5, 0.125, 0.45);
+        GlStateManager.rotate((180 / TileEntityPipe.TRANSFER_COOLDOWN * te.getStackCooldown(stack)) % 360, 0, 1, 0);
         Minecraft.getMinecraft().getRenderManager().doRenderEntity(item, 0, 0, 0, 0, 0, true);
         GlStateManager.popMatrix();
     }
