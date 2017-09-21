@@ -3,6 +3,7 @@
 
 - Fix Aluminium color to not blend with the background
 - Add everything into an advancement
+- Fix wrench name
 
 -------------------
 0.46

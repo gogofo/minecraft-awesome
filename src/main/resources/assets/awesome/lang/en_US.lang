@@ -27,6 +27,7 @@ item.tool_core.name=Tool Core
 item.conductive.name=Conductive
 item.chainsaw.name=Chainsaw
 item.drill.name=Drill
+item.wrench.name=Wrench
 
 # Minecraft dusts
 item.iron_dust.name=Iron Dust
