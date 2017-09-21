@@ -1,6 +1,7 @@
 0.47
 -------------------
 
+- Fix Aluminium color to not blend with the background
 
 -------------------
 0.46

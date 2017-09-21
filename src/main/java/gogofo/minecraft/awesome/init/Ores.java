@@ -28,7 +28,7 @@ public class Ores {
                 .addGenerationConfig(new Ore.GenerationConfig(0, 54, 100, 8, 6));
         ores.add(ore);
 
-        ore = new Ore("aluminium", 0x848789, true, true, true, 2)
+        ore = new Ore("aluminium", 0xD2D3D3, true, true, true, 2)
                 .addGenerationConfig(new Ore.GenerationConfig(0, 54, 100, 8, 6));
         ores.add(ore);
     }
