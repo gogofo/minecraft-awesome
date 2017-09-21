@@ -1,6 +1,9 @@
 0.46
 -------------------
 
+- Upgrade the pipes to have a transparent mode (set with a wrench)
+- Add wrench
+- Change some pipe settings
 
 -------------------
 0.45
