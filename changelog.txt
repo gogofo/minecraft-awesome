@@ -2,6 +2,7 @@
 -------------------
 
 - Fix Aluminium color to not blend with the background
+- Add everything into an advancement
 
 -------------------
 0.46

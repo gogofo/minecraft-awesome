@@ -23,7 +23,16 @@
         "recipes": [
             "awesome:generator",
             "awesome:charger",
-            "awesome:tool_core"
+            "awesome:electric_wire",
+            "awesome:extractor",
+            "awesome:fuser",
+            "awesome:grinder",
+            "awesome:pipe",
+            "awesome:suction_pipe",
+            "awesome:sorting_pipe",
+            "awesome:teleporter",
+            "awesome:electric_furnace",
+            "awesome:torch"
         ]
     }
 }
