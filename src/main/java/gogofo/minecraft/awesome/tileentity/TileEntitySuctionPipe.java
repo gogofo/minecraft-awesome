@@ -2,6 +2,7 @@ package gogofo.minecraft.awesome.tileentity;
 
 import gogofo.minecraft.awesome.block.BlockPipe;
 import gogofo.minecraft.awesome.block.BlockSuctionPipe;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -52,6 +53,8 @@ public class TileEntitySuctionPipe extends TileEntityPipe {
 		for (EnumFacing facing : EnumFacing.VALUES) {
 			if (tryToSuckFromPos(tmpBlock, recvSlot, getPos().offset(facing), facing)) {
 				markDirty();
+				notifyUpdate(pos);
+				notifyUpdate(getPos().offset(facing));
 				break;
 			}
 		}

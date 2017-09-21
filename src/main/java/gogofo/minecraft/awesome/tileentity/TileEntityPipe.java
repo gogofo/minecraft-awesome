@@ -6,6 +6,7 @@ import java.util.Collections;
 
 import gogofo.minecraft.awesome.block.BlockPipe;
 import gogofo.minecraft.awesome.block.BlockSuctionPipe;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -178,6 +179,8 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 														   				 world.getBlockState(pos).getBlock() instanceof BlockPipe));
 				decrStackSize(sentSlot, 1);
 				markDirty();
+				notifyUpdate(getPos());
+				notifyUpdate(pos);
 				
 				return true;
 			} else if (stack.getItem() == sentStack.getItem() && 
@@ -189,7 +192,9 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 				inventory.setInventorySlotContents(i, stack);
 				decrStackSize(sentSlot, 1);
 				markDirty();
-				
+				notifyUpdate(getPos());
+				notifyUpdate(pos);
+
 				return true;
 			}
 		}
@@ -267,8 +272,8 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		
 		return -1;
 	}
-	
-	protected int getTransferSlotCount() {
+
+	public int getTransferSlotCount() {
 		return 27;
 	}
 	
@@ -432,5 +437,10 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		compound.setBoolean("isTransparent", isTransparent);
 
 		return compound;
+	}
+
+	protected void notifyUpdate(BlockPos blockPos) {
+		IBlockState state = world.getBlockState(blockPos);
+		world.notifyBlockUpdate(blockPos, state, state, 3);
 	}
 }
