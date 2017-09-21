@@ -1,6 +1,7 @@
 0.48
 -------------------
 
+- Fix crash when placing a torch with the drill on the bottom side of a block
 
 -------------------
 0.47

@@ -87,7 +87,7 @@ public class ItemDrill extends AwesomeItemChargable {
             return 0;
         }
     
-        if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
+        if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK && rayTraceResult.sideHit != EnumFacing.DOWN) {
     		BlockPos blockpos = rayTraceResult.getBlockPos().offset(rayTraceResult.sideHit);
     		
     		if (worldIn.isAirBlock(blockpos) && Blocks.TORCH.canPlaceBlockAt(worldIn, blockpos)) {
