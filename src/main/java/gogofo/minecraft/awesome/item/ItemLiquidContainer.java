@@ -148,7 +148,7 @@ public class ItemLiquidContainer extends Item {
 					int liquidPlaced = container.tryPlaceLiquid(getLiquidType(stack), 1);
 					decLiquid(stack, liquidPlaced);
 				}
-			} else {
+			} else if (getLiquidFill(stack) < getMaxLiquid()){
 				Block liquidType = getLiquidType(stack);
 				if (liquidType == Blocks.AIR) {
 					liquidType = container.getSubstance();
