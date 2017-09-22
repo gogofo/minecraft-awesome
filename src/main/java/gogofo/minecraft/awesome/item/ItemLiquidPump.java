@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import gogofo.minecraft.awesome.init.Items;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -62,7 +63,7 @@ public class ItemLiquidPump extends AwesomeItemChargable {
                 Material material = iblockstate.getMaterial();
 
                 if (material.isLiquid()) {
-                	if ((Integer)iblockstate.getValue(BlockLiquid.LEVEL) == 0) {
+                	if (iblockstate.getValue(BlockLiquid.LEVEL) == 0 && !(iblockstate.getBlock() instanceof BlockDynamicLiquid)) {
                 		if (harvestBlock(worldIn, playerIn, blockpos)) {
                 			return 10;
                 		}
@@ -164,7 +165,7 @@ public class ItemLiquidPump extends AwesomeItemChargable {
 			return null;
 		}
 		
-		if ((Integer)iblockstate.getValue(BlockLiquid.LEVEL) == 0) {
+		if (iblockstate.getValue(BlockLiquid.LEVEL) == 0 && !(iblockstate.getBlock() instanceof BlockDynamicLiquid)) {
 			return pos;
 		}
 		
