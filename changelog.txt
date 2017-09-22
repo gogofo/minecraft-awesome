@@ -2,6 +2,8 @@
 -------------------
 
 - Fix crash when placing a torch with the drill on the bottom side of a block
+- Add liquid storage containers blocks
+- Add separate material for oil (cause a bug with the pump)
 
 -------------------
 0.47

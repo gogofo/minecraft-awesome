@@ -1,5 +1,8 @@
 package gogofo.minecraft.awesome.init;
 
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
@@ -10,6 +13,8 @@ public class Materials {
 
     public static ArmorMaterial COPPER_ARMOR;
     public static ArmorMaterial PLATINUM_ARMOR;
+
+    public static Material OIL = (new MaterialLiquid(MapColor.WATER));
 
     static {
         COPPER_TOOL = EnumHelper.addToolMaterial("COPPER",
