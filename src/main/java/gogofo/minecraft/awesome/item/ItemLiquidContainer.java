@@ -2,6 +2,7 @@ package gogofo.minecraft.awesome.item;
 
 import java.util.List;
 
+import gogofo.minecraft.awesome.tileentity.TileEntityLiquidStorageContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
@@ -13,6 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.ActionResult;
@@ -136,10 +138,18 @@ public class ItemLiquidContainer extends Item {
             	BlockPos blockpos = rayTraceResult.getBlockPos();
             	
             	if (getLiquidFill(stack) > 0) {
-            		BlockPos sideBlockPos = blockpos.offset(rayTraceResult.sideHit);
-            		if (tryPlaceContainedLiquid(stack, worldIn, sideBlockPos)) {
-            			decLiquid(stack, 1);
-            		}
+
+					TileEntity tileEntity = worldIn.getTileEntity(blockpos);
+					if (tileEntity instanceof TileEntityLiquidStorageContainer) {
+						TileEntityLiquidStorageContainer container = (TileEntityLiquidStorageContainer) tileEntity;
+						int liquidPlaced = container.tryPlaceLiquid(getLiquidType(stack), 1);
+						decLiquid(stack, liquidPlaced);
+					} else {
+						BlockPos sideBlockPos = blockpos.offset(rayTraceResult.sideHit);
+						if (tryPlaceContainedLiquid(stack, worldIn, sideBlockPos)) {
+							decLiquid(stack, 1);
+						}
+					}
             	}
             }
         }

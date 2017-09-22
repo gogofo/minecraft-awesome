@@ -14,11 +14,18 @@ public class TileEntityRendererLiquidStorageContainer extends FastTESR<TileEntit
 
     @Override
     public void renderTileEntityFast(TileEntityLiquidStorageContainer te, double x, double y, double z, float partialTicks, int destroyStage, float partial, BufferBuilder buffer) {
+
+        if (te.getContainedSubstance() == null || te.getContainedAmount() == 0) {
+            return;
+        }
+
+        float percentFilled = te.getContainedAmount() * 1f / TileEntityLiquidStorageContainer.MAX_AMOUNT;
+
         final float PX = 1f / 16f;
 
         // Y
         final float DOWN = 1 * PX;
-        final float UP = (15 - 12) * PX;
+        final float UP = (15 * percentFilled) * PX;
 
         // Z
         final float NORTH = 1 * PX;
@@ -28,7 +35,7 @@ public class TileEntityRendererLiquidStorageContainer extends FastTESR<TileEntit
         final float WEST = 1 * PX;
         final float EAST = 15 * PX;
 
-        Block liquidBlock = gogofo.minecraft.awesome.init.Blocks.oil;
+        Block liquidBlock = te.getContainedSubstance();
 
         BlockModelShapes bm = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes();
         TextureAtlasSprite still =  bm.getTexture(liquidBlock.getDefaultState());
