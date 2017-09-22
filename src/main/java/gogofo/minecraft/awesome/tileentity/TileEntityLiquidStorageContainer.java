@@ -1,5 +1,6 @@
 package gogofo.minecraft.awesome.tileentity;
 
+import gogofo.minecraft.awesome.interfaces.ILiquidContainer;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -7,7 +8,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityLiquidStorageContainer extends TileEntity {
+public class TileEntityLiquidStorageContainer extends TileEntity implements ILiquidContainer {
 
     public static final int MAX_AMOUNT = 15;
 
@@ -27,17 +28,9 @@ public class TileEntityLiquidStorageContainer extends TileEntity {
         return containedAmount;
     }
 
-    /**
-     * Tries to place liquid in the container
-     * @param substance The substance to place
-     * @param amount The amount to place
-     * @return The amount of substance actually placed
-     */
+    @Override
     public int tryPlaceLiquid(Block substance, int amount) {
-        if ((containedSubstance != Blocks.AIR && substance != containedSubstance) ||
-                substance == null ||
-                substance == Blocks.AIR ||
-                amount <= 0) {
+        if (!isInputOk(substance, amount) || substance == Blocks.AIR) {
             return 0;
         }
 
@@ -52,6 +45,35 @@ public class TileEntityLiquidStorageContainer extends TileEntity {
         markDirty();
 
         return actualAmount;
+    }
+
+    @Override
+    public int tryTakeLiquid(Block substance, int amount) {
+        if (!isInputOk(substance, amount) || containedSubstance == Blocks.AIR) {
+            return 0;
+        }
+
+        int actualAmount = amount;
+        if (amount > containedAmount) {
+            actualAmount = containedAmount;
+        }
+
+        containedAmount -= actualAmount;
+
+        markDirty();
+
+        return actualAmount;
+    }
+
+    @Override
+    public Block getSubstance() {
+        return containedSubstance;
+    }
+
+    private boolean isInputOk(Block substance, int amount) {
+        return (containedSubstance == Blocks.AIR || substance == Blocks.AIR || substance == containedSubstance) &&
+                substance != null &&
+                amount > 0;
     }
 
     @Override

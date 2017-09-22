@@ -2,6 +2,7 @@ package gogofo.minecraft.awesome.item;
 
 import java.util.List;
 
+import gogofo.minecraft.awesome.interfaces.ILiquidContainer;
 import gogofo.minecraft.awesome.tileentity.TileEntityLiquidStorageContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -118,12 +119,6 @@ public class ItemLiquidContainer extends Item {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		ItemStack stack = playerIn.getHeldItem(handIn);
-		if (playerIn.isSneaking()) {
-			if (getLiquidFill(stack) > 0) {
-				setLiquidFill(stack, 0);
-				return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
-			}
-		}
 		
 		RayTraceResult rayTraceResult = this.rayTrace(worldIn, playerIn, false);
 
@@ -136,25 +131,42 @@ public class ItemLiquidContainer extends Item {
             if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK)
             {
             	BlockPos blockpos = rayTraceResult.getBlockPos();
-            	
-            	if (getLiquidFill(stack) > 0) {
-
-					TileEntity tileEntity = worldIn.getTileEntity(blockpos);
-					if (tileEntity instanceof TileEntityLiquidStorageContainer) {
-						TileEntityLiquidStorageContainer container = (TileEntityLiquidStorageContainer) tileEntity;
-						int liquidPlaced = container.tryPlaceLiquid(getLiquidType(stack), 1);
-						decLiquid(stack, liquidPlaced);
-					} else {
-						BlockPos sideBlockPos = blockpos.offset(rayTraceResult.sideHit);
-						if (tryPlaceContainedLiquid(stack, worldIn, sideBlockPos)) {
-							decLiquid(stack, 1);
-						}
-					}
-            	}
-            }
+				onBlockHit(worldIn, playerIn, stack, rayTraceResult, blockpos);
+			}
         }
         
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+	}
+
+	private void onBlockHit(World worldIn, EntityPlayer playerIn, ItemStack stack, RayTraceResult rayTraceResult, BlockPos blockpos) {
+		TileEntity tileEntity = worldIn.getTileEntity(blockpos);
+		if (tileEntity instanceof ILiquidContainer) {
+			ILiquidContainer container = (ILiquidContainer) tileEntity;
+
+			if (!playerIn.isSneaking()) {
+				if (getLiquidFill(stack) > 0) {
+					int liquidPlaced = container.tryPlaceLiquid(getLiquidType(stack), 1);
+					decLiquid(stack, liquidPlaced);
+				}
+			} else {
+				Block liquidType = getLiquidType(stack);
+				if (liquidType == Blocks.AIR) {
+					liquidType = container.getSubstance();
+				}
+
+				int liquidTaken = container.tryTakeLiquid(liquidType, 1);
+
+				if (liquidTaken > 0) {
+					incLiquid(stack, liquidTaken);
+					setLiquidType(stack, liquidType);
+				}
+			}
+		} else if (getLiquidFill(stack) > 0) {
+			BlockPos sideBlockPos = blockpos.offset(rayTraceResult.sideHit);
+			if (tryPlaceContainedLiquid(stack, worldIn, sideBlockPos)) {
+				decLiquid(stack, 1);
+			}
+		}
 	}
 	
 	public boolean tryPlaceContainedLiquid(ItemStack stack, World worldIn, BlockPos pos)
