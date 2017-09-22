@@ -1,7 +1,7 @@
 package gogofo.minecraft.awesome.init;
 
 import gogofo.minecraft.awesome.AwesomeMod;
-import gogofo.minecraft.awesome.TileEntitySpecialRenderer.TesrLiquidStorageContainer;
+import gogofo.minecraft.awesome.tileentity.renderer.TileEntityRendererLiquidStorageContainer;
 import gogofo.minecraft.awesome.block.*;
 import gogofo.minecraft.awesome.tileentity.TileEntityLiquidStorageContainer;
 import net.minecraft.block.Block;
@@ -107,7 +107,7 @@ public class Blocks {
 			RendersRegisterer.registerColorProviderIfNeeded(block);
 		}
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLiquidStorageContainer.class, new TesrLiquidStorageContainer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLiquidStorageContainer.class, new TileEntityRendererLiquidStorageContainer());
 	}
 
 	public static void renderFluids() {
