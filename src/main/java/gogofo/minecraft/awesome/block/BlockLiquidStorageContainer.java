@@ -1,5 +1,6 @@
 package gogofo.minecraft.awesome.block;
 
+import gogofo.minecraft.awesome.colorize.ISingleColoredObject;
 import gogofo.minecraft.awesome.tileentity.TileEntityLiquidStorageContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -12,7 +13,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockLiquidStorageContainer extends Block implements ITileEntityProvider {
+public class BlockLiquidStorageContainer extends Block implements ITileEntityProvider, ISingleColoredObject {
 
     public BlockLiquidStorageContainer() {
         super(Material.IRON);
@@ -43,5 +44,10 @@ public class BlockLiquidStorageContainer extends Block implements ITileEntityPro
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
+    }
+
+    @Override
+    public int getColor() {
+        return 0x000000;
     }
 }
