@@ -60,6 +60,10 @@ public class TileEntityLiquidStorageContainer extends TileEntity implements ILiq
 
         containedAmount -= actualAmount;
 
+        if (containedAmount == 0) {
+            containedSubstance = Blocks.AIR;
+        }
+
         markDirty();
 
         return actualAmount;
