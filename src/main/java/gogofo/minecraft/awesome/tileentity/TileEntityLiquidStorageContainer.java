@@ -7,6 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 
 public class TileEntityLiquidStorageContainer extends TileEntity implements ILiquidContainer {
 
@@ -20,6 +21,55 @@ public class TileEntityLiquidStorageContainer extends TileEntity implements ILiq
         return true;
     }
 
+    @Override
+    public int tryPlaceLiquid(Block substance, int amount) {
+        Block collaborativeSubstance = getCollaborativeSubstance();
+        if ((collaborativeSubstance != Blocks.AIR && substance != Blocks.AIR && substance != collaborativeSubstance) ||
+                substance == null ||
+                amount <= 0) {
+            return 0;
+        }
+
+        int amountToPlace = amount;
+        TileEntity te = getEdgeContainer(EnumFacing.DOWN);
+
+        while (amountToPlace > 0 && te instanceof TileEntityLiquidStorageContainer) {
+            TileEntityLiquidStorageContainer container = (TileEntityLiquidStorageContainer) te;
+
+            amountToPlace -= container.innerTryPlaceLiquid(substance, amountToPlace);
+            te = world.getTileEntity(te.getPos().offset(EnumFacing.UP));
+        }
+
+        return amount - amountToPlace;
+    }
+
+    @Override
+    public int tryTakeLiquid(Block substance, int amount) {
+        Block collaborativeSubstance = getCollaborativeSubstance();
+        if ((collaborativeSubstance != Blocks.AIR && substance != Blocks.AIR && substance != collaborativeSubstance) ||
+                substance == null ||
+                amount <= 0) {
+            return 0;
+        }
+
+        int amountToTake = amount;
+        TileEntity te = getEdgeContainer(EnumFacing.UP);
+
+        while (amountToTake > 0 && te instanceof TileEntityLiquidStorageContainer) {
+            TileEntityLiquidStorageContainer container = (TileEntityLiquidStorageContainer) te;
+
+            amountToTake -= container.innerTryTakeLiquid(substance, amountToTake);
+            te = world.getTileEntity(te.getPos().offset(EnumFacing.DOWN));
+        }
+
+        return amount - amountToTake;
+    }
+
+    @Override
+    public Block getSubstance() {
+        return getCollaborativeSubstance();
+    }
+
     public Block getContainedSubstance() {
         return containedSubstance;
     }
@@ -28,8 +78,40 @@ public class TileEntityLiquidStorageContainer extends TileEntity implements ILiq
         return containedAmount;
     }
 
-    @Override
-    public int tryPlaceLiquid(Block substance, int amount) {
+    private Block getCollaborativeSubstance() {
+        if (containedSubstance != Blocks.AIR) {
+            return containedSubstance;
+        }
+
+        TileEntity te = this;
+
+        while (te instanceof TileEntityLiquidStorageContainer) {
+            TileEntityLiquidStorageContainer container = (TileEntityLiquidStorageContainer) te;
+
+            if (container.containedSubstance != Blocks.AIR) {
+                return container.containedSubstance;
+            }
+
+            te = world.getTileEntity(te.getPos().offset(EnumFacing.DOWN));
+        }
+
+        return Blocks.AIR;
+    }
+
+    private TileEntity getEdgeContainer(EnumFacing facing) {
+        TileEntity te = this;
+        TileEntityLiquidStorageContainer container = null;
+
+        while (te instanceof TileEntityLiquidStorageContainer) {
+            container = (TileEntityLiquidStorageContainer) te;
+
+            te = world.getTileEntity(te.getPos().offset(facing));
+        }
+
+        return container;
+    }
+
+    private int innerTryPlaceLiquid(Block substance, int amount) {
         if (!isInputOk(substance, amount) || substance == Blocks.AIR) {
             return 0;
         }
@@ -47,8 +129,7 @@ public class TileEntityLiquidStorageContainer extends TileEntity implements ILiq
         return actualAmount;
     }
 
-    @Override
-    public int tryTakeLiquid(Block substance, int amount) {
+    private int innerTryTakeLiquid(Block substance, int amount) {
         if (!isInputOk(substance, amount) || containedSubstance == Blocks.AIR) {
             return 0;
         }
@@ -67,11 +148,6 @@ public class TileEntityLiquidStorageContainer extends TileEntity implements ILiq
         markDirty();
 
         return actualAmount;
-    }
-
-    @Override
-    public Block getSubstance() {
-        return containedSubstance;
     }
 
     private boolean isInputOk(Block substance, int amount) {
