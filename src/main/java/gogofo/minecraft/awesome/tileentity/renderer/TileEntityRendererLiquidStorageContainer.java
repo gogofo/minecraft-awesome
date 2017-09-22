@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockModelShapes;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.model.animation.FastTESR;
 import net.minecraftforge.fluids.BlockFluidClassic;
@@ -15,7 +16,7 @@ public class TileEntityRendererLiquidStorageContainer extends FastTESR<TileEntit
     @Override
     public void renderTileEntityFast(TileEntityLiquidStorageContainer te, double x, double y, double z, float partialTicks, int destroyStage, float partial, BufferBuilder buffer) {
 
-        if (te.getContainedSubstance() == null || te.getContainedAmount() == 0) {
+        if (te.getContainedSubstance() == Blocks.AIR || te.getContainedAmount() == 0) {
             return;
         }
 
