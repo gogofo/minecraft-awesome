@@ -6,26 +6,30 @@ import java.util.Collections;
 
 import gogofo.minecraft.awesome.block.BlockPipe;
 import gogofo.minecraft.awesome.block.BlockSuctionPipe;
+import gogofo.minecraft.awesome.interfaces.IWrenchable;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 
-public class TileEntityPipe extends AwesomeTileEntityContainer implements ITickable {
-	public static final int TRANSFER_COOLDOWN = 8;
+public class TileEntityPipe extends AwesomeTileEntityContainer implements ITickable, IWrenchable {
+	public static final int TRANSFER_COOLDOWN = 20;
+
+	public final static int IS_TRANSPARENT_IDX = 0;
 	
 	private static final BlockPipe refBlockPipe = new BlockPipe();
-	
+
+	private boolean isTransparent = false;
+
 	@Override
 	public void update() {
 		if (world.isRemote) {
@@ -176,6 +180,8 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 														   				 world.getBlockState(pos).getBlock() instanceof BlockPipe));
 				decrStackSize(sentSlot, 1);
 				markDirty();
+				notifyUpdate(getPos());
+				notifyUpdate(pos);
 				
 				return true;
 			} else if (stack.getItem() == sentStack.getItem() && 
@@ -187,7 +193,9 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 				inventory.setInventorySlotContents(i, stack);
 				decrStackSize(sentSlot, 1);
 				markDirty();
-				
+				notifyUpdate(getPos());
+				notifyUpdate(pos);
+
 				return true;
 			}
 		}
@@ -221,7 +229,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		stack.getTagCompound().removeTag("pipe");
 	}
 	
-	private int getStackCooldown(ItemStack stack) {
+	public int getStackCooldown(ItemStack stack) {
 		return getTagCompound(stack).getInteger("transferCooldown");
 	}
 	
@@ -265,8 +273,8 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		
 		return -1;
 	}
-	
-	protected int getTransferSlotCount() {
+
+	public int getTransferSlotCount() {
 		return 27;
 	}
 	
@@ -314,17 +322,25 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 
 	@Override
 	public int getField(int id) {
+		switch (id) {
+			case IS_TRANSPARENT_IDX:
+				return isTransparent ? 1 : 0;
+		}
+
 		return 0;
 	}
 
 	@Override
 	public void setField(int id, int value) {
-		
+		switch (id) {
+			case IS_TRANSPARENT_IDX:
+				isTransparent = value == 1;
+		}
 	}
 
 	@Override
 	public int getFieldCount() {
-		return 0;
+		return 1;
 	}
 
 	@Override
@@ -396,6 +412,43 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		ItemStack stack = new ItemStack(itemStackArray[index].getItem(), 
 										itemStackArray[index].getCount(), 
 										itemStackArray[index].getMetadata());
+		stack.setTagCompound(itemStackArray[index].getTagCompound());
+
         return stack;
     }
+
+	public boolean isTransparent() {
+		return isTransparent;
+	}
+
+	public void setTransparent(boolean isTransparent) {
+		this.isTransparent = isTransparent;
+		BlockPipe.setState(isTransparent, world, pos);
+		markDirty();
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+
+		isTransparent = compound.getBoolean("isTransparent");
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
+		compound.setBoolean("isTransparent", isTransparent);
+
+		return compound;
+	}
+
+	protected void notifyUpdate(BlockPos blockPos) {
+		IBlockState state = world.getBlockState(blockPos);
+		world.notifyBlockUpdate(blockPos, state, state, 3);
+	}
+
+	@Override
+	public void onWrenchRightClicked(EntityPlayer player, ItemStack wrench) {
+		setTransparent(!isTransparent);
+	}
 }

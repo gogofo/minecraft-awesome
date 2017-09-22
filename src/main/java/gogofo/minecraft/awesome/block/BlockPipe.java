@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 
 import gogofo.minecraft.awesome.PowerManager;
+import gogofo.minecraft.awesome.colorize.ISingleColoredObject;
 import gogofo.minecraft.awesome.init.Blocks;
 import gogofo.minecraft.awesome.init.Items;
 import gogofo.minecraft.awesome.tileentity.AwesomeTileEntityContainer;
@@ -39,7 +40,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockPipe extends BlockContainer implements ITileEntityProvider {
+@SuppressWarnings("ALL")
+public class BlockPipe extends BlockContainer implements ITileEntityProvider, ISingleColoredObject {
 	
 	public static final PropertyBool UP = PropertyBool.create("up");
 	public static final PropertyBool DOWN = PropertyBool.create("down");
@@ -47,12 +49,13 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
 	public static final PropertyBool SOUTH = PropertyBool.create("south");
 	public static final PropertyBool EAST = PropertyBool.create("east");
 	public static final PropertyBool WEST = PropertyBool.create("west");
+	public static final PropertyBool TRANSPARENT = PropertyBool.create("transparent");
 
 	public BlockPipe() {
 		super(Material.ROCK);
 		
 		this.setHardness(0.5f);
-		this.setDefaultState(stateWithConnections(this.blockState.getBaseState(), false, false, false, false, false, false));
+		this.setDefaultState(stateWithConnections(this.blockState.getBaseState(), false, false, false, false, false, false, false));
 	}
 	
 	private IBlockState stateWithConnections(IBlockState state,
@@ -61,15 +64,17 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
 											 boolean north,
 											 boolean south,
 											 boolean east,
-											 boolean west) {
+											 boolean west,
+											 boolean transparent) {
 		return state.withProperty(UP, up).
 				withProperty(DOWN, down).
 				withProperty(NORTH, north).
 				withProperty(SOUTH, south).
 				withProperty(EAST, east).
-				withProperty(WEST,  west);
+				withProperty(WEST,  west).
+				withProperty(TRANSPARENT, transparent);
 	}
-	
+
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
 		return EnumBlockRenderType.MODEL;
@@ -79,7 +84,7 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return Item.getItemFromBlock(Blocks.pipe);
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube(IBlockState blockState) {
 		return false;
@@ -87,7 +92,7 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
 	
 	@Override
 	public BlockRenderLayer getBlockLayer() {
-		return BlockRenderLayer.CUTOUT;
+		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 	
 	@Override
@@ -107,8 +112,28 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
 		boolean south = canConnectTo(worldIn, pos.south());
 		boolean east = canConnectTo(worldIn, pos.east());
 		boolean west = canConnectTo(worldIn, pos.west());
-	
-		return stateWithConnections(state, up, down, north, south, east, west);
+
+		TileEntityPipe pipe = (TileEntityPipe) worldIn.getTileEntity(pos);
+		boolean transparent = pipe != null ? pipe.isTransparent() : false;
+
+		return stateWithConnections(state, up, down, north, south, east, west, transparent);
+	}
+
+	public static void setState(boolean transparent, World worldIn, BlockPos pos)
+	{
+		IBlockState iblockstate = worldIn.getBlockState(pos);
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+
+		worldIn.setBlockState(
+				pos,
+				iblockstate.withProperty(TRANSPARENT, transparent),
+				3);
+
+		if (tileentity != null)
+		{
+			tileentity.validate();
+			worldIn.setTileEntity(pos, tileentity);
+		}
 	}
 	
 	public boolean canConnectTo(IBlockAccess world, BlockPos pos) {
@@ -121,16 +146,19 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
 	
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return 0;
+		return state.getValue(TRANSPARENT) ? 1 : 0;
 	}
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return super.getStateFromMeta(meta);
+		return super.getStateFromMeta(meta)
+				.withProperty(TRANSPARENT, (meta & 0x1) == 1 ? true : false);
 	}
-    protected BlockStateContainer createBlockState()
+
+    @Override
+	protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {UP, DOWN, NORTH, SOUTH, EAST, WEST});
+        return new BlockStateContainer(this, UP, DOWN, NORTH, SOUTH, EAST, WEST, TRANSPARENT);
     }
 
 	@Override
@@ -276,4 +304,9 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider {
     public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
     	return 0;
     }
+
+	@Override
+	public int getColor() {
+		return 0x1F1F1F;
+	}
 }

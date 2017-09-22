@@ -1,0 +1,35 @@
+{
+    "display": {
+        "icon": {
+            "item": "awesome:platinum_ingot"
+        },
+        "title": "Platinum Platinum Platinum!",
+        "description": "Ho wonderful platinum"
+    },
+    "criteria": {
+        "industrialize": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "awesome:platinum_ingot",
+                        "data": 0
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "recipes": [
+            "awesome:platinum_pickaxe_recipe",
+            "awesome:platinum_axe_recipe",
+            "awesome:platinum_hoe_recipe",
+            "awesome:platinum_shovel_recipe",
+            "awesome:platinum_sword_recipe",
+            "awesome:platinum_chestplate_recipe",
+            "awesome:platinum_leggings_recipe",
+            "awesome:platinum_helmet_recipe",
+            "awesome:platinum_boots_recipe"
+        ]
+    }
+}

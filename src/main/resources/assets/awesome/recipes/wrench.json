@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"A A",
+		"AAA",
+		" A "
+	],
+	"key": {
+		"A": {
+			"item": "awesome:copper_ingot"
+		}
+	},
+	"result": {
+		"item": "awesome:wrench",
+		"count": 1
+	}
+}

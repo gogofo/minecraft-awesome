@@ -2,6 +2,7 @@ package gogofo.minecraft.awesome.init;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 
 import java.util.ArrayList;
 
@@ -10,6 +11,7 @@ public class Ores {
 
     public static void init() {
         Ore ore = new Ore("copper", 0xFFDA8A67, true, true, true, 2)
+                .setToolsConfig(new Ore.ToolsConfig(true, true, true, Materials.COPPER_TOOL, Materials.COPPER_ARMOR))
                 .addGenerationConfig(new Ore.GenerationConfig(0, 200, 100, 25, 10));
         ores.add(ore);
 
@@ -22,16 +24,27 @@ public class Ores {
         ores.add(ore);
 
         ore = new Ore("platinum", 0xE5E4E2, true, true, true, 2)
+                .setToolsConfig(new Ore.ToolsConfig(true, true, true, Materials.PLATINUM_TOOL, Materials.PLATINUM_ARMOR))
                 .addGenerationConfig(new Ore.GenerationConfig(0, 54, 100, 8, 6));
         ores.add(ore);
 
-        ore = new Ore("aluminium", 0x848789, true, true, true, 2)
+        ore = new Ore("aluminium", 0xD2D3D3, true, true, true, 2)
                 .addGenerationConfig(new Ore.GenerationConfig(0, 54, 100, 8, 6));
         ores.add(ore);
     }
 
     public static ArrayList<Ore> getOres() {
         return ores;
+    }
+
+    public static Ore getByName(String name) {
+        for (Ore ore : ores) {
+            if (ore.name.equals(name)) {
+                return ore;
+            }
+        }
+
+        return null;
     }
 
     public static class Ore {
@@ -42,10 +55,20 @@ public class Ores {
         private boolean hasDust;
         private int grindsToAmount;
         private ArrayList<GenerationConfig> generationConfigs;
+        private ToolsConfig toolsConfig;
 
         private Block block;
         private Item Ingot;
         private Item dust;
+        private Item sword;
+        private Item pickaxe;
+        private Item axe;
+        private Item hoe;
+        private Item shovel;
+        private Item chestplate;
+        private Item helmet;
+        private Item leggings;
+        private Item boots;
 
         public Ore(String name, int color, boolean hasBlock, boolean hasIngot, boolean hasDust, int grindsToAmount) {
             this.name = name;
@@ -55,10 +78,16 @@ public class Ores {
             this.hasDust = hasDust;
             this.grindsToAmount = grindsToAmount;
             this.generationConfigs = new ArrayList<>();
+            this.toolsConfig = null;
         }
 
-        public Ore addGenerationConfig(GenerationConfig config) {
+        Ore addGenerationConfig(GenerationConfig config) {
             generationConfigs.add(config);
+            return this;
+        }
+
+        Ore setToolsConfig(ToolsConfig toolsConfig) {
+            this.toolsConfig = toolsConfig;
             return this;
         }
 
@@ -118,6 +147,82 @@ public class Ores {
             return generationConfigs;
         }
 
+        public ToolsConfig getToolsConfig() {
+            return toolsConfig;
+        }
+
+        public Item getSword() {
+            return sword;
+        }
+
+        public void setSword(Item sword) {
+            this.sword = sword;
+        }
+
+        public Item getPickaxe() {
+            return pickaxe;
+        }
+
+        public void setPickaxe(Item pickaxe) {
+            this.pickaxe = pickaxe;
+        }
+
+        public Item getAxe() {
+            return axe;
+        }
+
+        public void setAxe(Item axe) {
+            this.axe = axe;
+        }
+
+        public Item getHoe() {
+            return hoe;
+        }
+
+        public void setHoe(Item hoe) {
+            this.hoe = hoe;
+        }
+
+        public Item getShovel() {
+            return shovel;
+        }
+
+        public void setShovel(Item shovel) {
+            this.shovel = shovel;
+        }
+
+        public Item getChestplate() {
+            return chestplate;
+        }
+
+        public void setChestplate(Item chestplate) {
+            this.chestplate = chestplate;
+        }
+
+        public Item getHelmet() {
+            return helmet;
+        }
+
+        public void setHelmet(Item helmet) {
+            this.helmet = helmet;
+        }
+
+        public Item getLeggings() {
+            return leggings;
+        }
+
+        public void setLeggings(Item leggings) {
+            this.leggings = leggings;
+        }
+
+        public Item getBoots() {
+            return boots;
+        }
+
+        public void setBoots(Item boots) {
+            this.boots = boots;
+        }
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -167,6 +272,42 @@ public class Ores {
 
             public int getMaxOrePerSpawn() {
                 return maxOrePerSpawn;
+            }
+        }
+
+        public static class ToolsConfig {
+            private boolean hasSword;
+            private boolean hasWorkingTools;
+            private boolean hasArmors;
+            private Item.ToolMaterial toolMaterial;
+            private ItemArmor.ArmorMaterial armorMaterial;
+
+            public ToolsConfig(boolean hasSword, boolean hasWorkingTools, boolean hasArmors, Item.ToolMaterial toolMaterial, ItemArmor.ArmorMaterial armorMaterial) {
+                this.hasSword = hasSword;
+                this.hasWorkingTools = hasWorkingTools;
+                this.hasArmors = hasArmors;
+                this.toolMaterial = toolMaterial;
+                this.armorMaterial = armorMaterial;
+            }
+
+            public boolean isHasSword() {
+                return hasSword;
+            }
+
+            public boolean isHasWorkingTools() {
+                return hasWorkingTools;
+            }
+
+            public boolean isHasArmors() {
+                return hasArmors;
+            }
+
+            public Item.ToolMaterial getToolMaterial() {
+                return toolMaterial;
+            }
+
+            public ItemArmor.ArmorMaterial getArmorMaterial() {
+                return armorMaterial;
             }
         }
     }

@@ -3,11 +3,14 @@ package gogofo.minecraft.awesome.init;
 import gogofo.minecraft.awesome.AwesomeMod;
 import gogofo.minecraft.awesome.colorize.ISingleColoredObject;
 import gogofo.minecraft.awesome.colorize.SingleColorProvider;
+import gogofo.minecraft.awesome.tileentity.TileEntityPipe;
+import gogofo.minecraft.awesome.tileentity.renderer.TileEntityRendererPipe;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class RendersRegisterer {
     public static void registerRender(ItemBlock itemBlock) {
@@ -35,5 +38,9 @@ public class RendersRegisterer {
         if (block instanceof ISingleColoredObject) {
             Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new SingleColorProvider((ISingleColoredObject)block), block);
         }
+    }
+
+    public static void registerTileEntityRenderers() {
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, new TileEntityRendererPipe());
     }
 }

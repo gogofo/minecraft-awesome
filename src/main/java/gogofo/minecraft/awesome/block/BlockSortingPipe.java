@@ -44,4 +44,9 @@ public class BlockSortingPipe extends BlockPipe {
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return Item.getItemFromBlock(Blocks.sorting_pipe);
 	}
+
+	@Override
+	public int getColor() {
+		return 0x2CCDB1;
+	}
 }

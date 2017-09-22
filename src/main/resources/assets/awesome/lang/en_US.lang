@@ -1,3 +1,5 @@
+itemGroup.awesome=Awesome Stuff
+
 # Machine Tiles
 tile.generator.name=Generator
 tile.fuser.name=Fuser
@@ -27,6 +29,7 @@ item.tool_core.name=Tool Core
 item.conductive.name=Conductive
 item.chainsaw.name=Chainsaw
 item.drill.name=Drill
+item.wrench.name=Wrench
 
 # Minecraft dusts
 item.iron_dust.name=Iron Dust
@@ -62,3 +65,26 @@ item.aluminium_ingot.name=Aluminium Ingot
 item.aluminium_dust.name=Aluminium Dust
 
 ## ORE_ADD_MARKER
+
+# Ore Items
+item.copper_sword.name=Copper Sword
+item.copper_pickaxe.name=Copper Pickaxe
+item.copper_axe.name=Copper Axe
+item.copper_hoe.name=Copper Hoe
+item.copper_shovel.name=Copper Shovel
+item.copper_chestplate.name=Copper Chestplate
+item.copper_helmet.name=Copper Helmet
+item.copper_leggings.name=Copper Leggings
+item.copper_boots.name=Copper Boots
+
+item.platinum_sword.name=Platinum Sword
+item.platinum_pickaxe.name=Platinum Pickaxe
+item.platinum_axe.name=Platinum Axe
+item.platinum_hoe.name=Platinum Hoe
+item.platinum_shovel.name=Platinum Shovel
+item.platinum_chestplate.name=Platinum Chestplate
+item.platinum_helmet.name=Platinum Helmet
+item.platinum_leggings.name=Platinum Leggings
+item.platinum_boots.name=Platinum Boots
+
+## ORE_ITEM_ADD_MARKER

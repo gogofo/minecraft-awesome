@@ -1,0 +1,22 @@
+{
+    "criteria": {
+        "industrialize": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "minecraft:iron_ingot",
+                        "data": 0
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "recipes": [
+            "awesome:machine_core",
+            "awesome:tool_core",
+            "awesome:conductive"
+        ]
+    }
+}

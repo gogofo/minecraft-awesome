@@ -1,0 +1,32 @@
+{
+    "display": {
+        "icon": {
+            "item": "awesome:multimeter"
+        },
+        "title": "Power Tools!",
+        "description": "Welcome to the age of convenience"
+    },
+    "criteria": {
+        "industrialize": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "awesome:tool_core",
+                        "data": 0
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "recipes": [
+            "awesome:chainsaw",
+            "awesome:drill",
+            "awesome:enchanted_drill",
+            "awesome:liquid_container",
+            "awesome:liquid_pump",
+            "awesome:multimeter"
+        ]
+    }
+}

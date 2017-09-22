@@ -1,295 +1,589 @@
 {
-    "variants": {
-    "down=false,east=false,north=false,south=false,up=false,west=false": { 
-                "model": "awesome:suction_pipe" 
-            },
-            
-            
-            
-            
-        "down=true,east=false,north=false,south=false,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_s",
-                "x": -90
-            },
-        "down=false,east=true,north=false,south=false,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_s",
-                "y": -90
-            },
-        "down=false,east=false,north=true,south=false,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_s",
-                "y": 180
-            },
-        "down=false,east=false,north=false,south=true,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_s"
-            },
-        "down=false,east=false,north=false,south=false,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_s",
-                "x": 90
-            },
-        "down=false,east=false,north=false,south=false,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_s",
-                "y": 90
-            },
-            
-            
-            
-    
-        "down=false,east=true,north=false,south=false,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_ns",
-                "y": 90
-            },
-         "down=false,east=false,north=true,south=true,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_ns"
-            },
-         "down=true,east=false,north=false,south=false,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_ns",
-                "x": 90
-            },
-            
-            
-            
-                
-         "down=true,east=true,north=false,south=false,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_se",
-                "x": -90
-            },
-         "down=true,east=false,north=true,south=false,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_se",
-                "x": -90,
-                "y": -90
-            },
-        "down=true,east=false,north=false,south=true,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_se",
-                "x": -90,
-                "y": 90
-            },
-        "down=true,east=false,north=false,south=false,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_se",
-                "x": -90,
-                "y": 180
-            },
-        "down=false,east=true,north=true,south=false,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_se",
-                "x": 180
-            },
-        "down=false,east=true,north=false,south=true,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_se"
-            },
-        "down=false,east=true,north=false,south=false,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_se",
-                "x": 90
-            },
-        "down=false,east=false,north=true,south=false,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_se",
-                "x": 90,
-                "y": -90
-            },
-        "down=false,east=false,north=true,south=false,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_se",
-                "y": 180
-            },     
-        "down=false,east=false,north=false,south=true,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_se",
-                "x": 90,
-                "y": 90
-            },
-        "down=false,east=false,north=false,south=true,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_se",
-                "y": 90
-            },
-        "down=false,east=false,north=false,south=false,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_se",
-                "x": 90,
-                "y": 180
-            },
-            
-        
-        
-        
-        "down=true,east=true,north=false,south=false,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_nse",
-                "x": 90,
-                "y": 0
-            },
-         "down=true,east=false,north=true,south=false,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_nse",
-                "x": 90,
-                "y": -90
-            },
-        "down=true,east=false,north=false,south=true,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_nse",
-                "x": 90,
-                "y": 90
-            },
-        "down=true,east=false,north=false,south=false,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_nse",
-                "x": 90,
-                "y": 180
-            },
-        "down=true,east=true,north=false,south=false,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_sew",
-                "x": -90
-            },
-        "down=false,east=true,north=true,south=false,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_sew",
-                "x": 180
-            },
-        "down=false,east=true,north=false,south=true,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_sew"
-            },
-        "down=false,east=true,north=false,south=false,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_sew",
-                "x": 90
-            },
-        "down=true,east=false,north=true,south=true,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_sew",
-                "y": 90,
-                "x": -90
-            },
-        "down=false,east=true,north=true,south=true,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_nse"
-            },
-        "down=false,east=false,north=true,south=true,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_sew",
-                "y": 90,
-                "x": 90
-            },
-        "down=false,east=false,north=true,south=true,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_nse",
-                "y": 180
-            },
-            
-            
-        "down=true,east=true,north=true,south=false,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_dse",
-                "y": -90
-            },
-        "down=true,east=true,north=false,south=true,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_dse"
-            },
-        "down=true,east=false,north=true,south=false,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_dse",
-                "y": 180
-            },
-        "down=true,east=false,north=false,south=true,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_dse",
-                "y": 90
-            },
-        "down=false,east=true,north=true,south=false,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_dse",
-                "x": 180,
-                "y": 0
-            },
-        "down=false,east=true,north=false,south=true,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_dse",
-                "x": 180,
-                "y": 90
-            },
-        "down=false,east=false,north=true,south=false,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_dse",
-                "x": 180,
-                "y": -90
-            },
-        "down=false,east=false,north=false,south=true,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_dse",
-                "x": 180,
-                "y": 180
-            },
-            
-            
-            
-            
-        "down=true,east=true,north=false,south=false,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_nsew",
-                "x": 90
-            },
-         "down=true,east=false,north=true,south=true,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_nsew",
-                "x": 90,
-                "y": 90
-            },
-        "down=false,east=true,north=true,south=true,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_nsew"
-            },
-        "down=true,east=true,north=true,south=false,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_dnse",
-                 "x": -90
-            },
-        "down=true,east=true,north=false,south=true,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_dnse",
-                 "x": 90
-            },
-        "down=true,east=false,north=true,south=false,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_dnse",
-                 "x": 90,
-                 "y": 180
-            },
-        "down=true,east=false,north=false,south=true,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_dnse",
-                 "x": 90,
-                 "y": 90
-            },
-        "down=true,east=true,north=true,south=false,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_dnse",
-                 "y": -90
-            },
-        "down=true,east=true,north=false,south=true,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_dnse",
-                 "y": 90
-            },
-        "down=false,east=true,north=true,south=false,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_unse",
-                 "y": -90
-            },
-        "down=false,east=true,north=false,south=true,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_unse",
-                 "y": 90
-            },
-        "down=true,east=true,north=true,south=true,up=false,west=false": { 
-                "model": "awesome:suction_pipe_connected_dnse"
-            },
-        "down=true,east=false,north=true,south=true,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_dnse",
-                y: 180
-            },
-        "down=false,east=true,north=true,south=true,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_unse"
-            },
-        "down=false,east=false,north=true,south=true,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_unse",
-                y: 180
-            },
-            
-            
-            
-        "down=false,east=true,north=true,south=true,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_dnsew",
-                "x": 180
-            },
-        "down=true,east=false,north=true,south=true,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_udnse",
-                "y": 180
-            },
-        "down=true,east=true,north=false,south=true,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_udnse",
-                "y": 90
-            },
-        "down=true,east=true,north=true,south=false,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_udnse",
-                "y": -90
-            },
-        "down=true,east=true,north=true,south=true,up=false,west=true": { 
-                "model": "awesome:suction_pipe_connected_dnsew"
-            },
-        "down=true,east=true,north=true,south=true,up=true,west=false": { 
-                "model": "awesome:suction_pipe_connected_udnse"
-            },
-            
-        
-            
-            
-        "down=true,east=true,north=true,south=true,up=true,west=true": { 
-                "model": "awesome:suction_pipe_connected_udnsew" 
-            }
+  "variants": {
+    "down=false,east=false,north=false,south=false,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe"
+    },
+
+
+
+
+    "down=true,east=false,north=false,south=false,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_s",
+      "x": -90
+    },
+    "down=false,east=true,north=false,south=false,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_s",
+      "y": -90
+    },
+    "down=false,east=false,north=true,south=false,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_s",
+      "y": 180
+    },
+    "down=false,east=false,north=false,south=true,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_s"
+    },
+    "down=false,east=false,north=false,south=false,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_s",
+      "x": 90
+    },
+    "down=false,east=false,north=false,south=false,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_s",
+      "y": 90
+    },
+
+
+
+
+    "down=false,east=true,north=false,south=false,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_ns",
+      "y": 90
+    },
+    "down=false,east=false,north=true,south=true,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_ns"
+    },
+    "down=true,east=false,north=false,south=false,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_ns",
+      "x": 90
+    },
+
+
+
+
+    "down=true,east=true,north=false,south=false,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_se",
+      "x": -90
+    },
+    "down=true,east=false,north=true,south=false,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_se",
+      "x": -90,
+      "y": -90
+    },
+    "down=true,east=false,north=false,south=true,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_se",
+      "x": -90,
+      "y": 90
+    },
+    "down=true,east=false,north=false,south=false,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_se",
+      "x": -90,
+      "y": 180
+    },
+    "down=false,east=true,north=true,south=false,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_se",
+      "x": 180
+    },
+    "down=false,east=true,north=false,south=true,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_se"
+    },
+    "down=false,east=true,north=false,south=false,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_se",
+      "x": 90
+    },
+    "down=false,east=false,north=true,south=false,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_se",
+      "x": 90,
+      "y": -90
+    },
+    "down=false,east=false,north=true,south=false,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_se",
+      "y": 180
+    },
+    "down=false,east=false,north=false,south=true,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_se",
+      "x": 90,
+      "y": 90
+    },
+    "down=false,east=false,north=false,south=true,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_se",
+      "y": 90
+    },
+    "down=false,east=false,north=false,south=false,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_se",
+      "x": 90,
+      "y": 180
+    },
+
+
+
+
+    "down=true,east=true,north=false,south=false,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_nse",
+      "x": 90,
+      "y": 0
+    },
+    "down=true,east=false,north=true,south=false,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_nse",
+      "x": 90,
+      "y": -90
+    },
+    "down=true,east=false,north=false,south=true,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_nse",
+      "x": 90,
+      "y": 90
+    },
+    "down=true,east=false,north=false,south=false,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_nse",
+      "x": 90,
+      "y": 180
+    },
+    "down=true,east=true,north=false,south=false,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_sew",
+      "x": -90
+    },
+    "down=false,east=true,north=true,south=false,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_sew",
+      "x": 180
+    },
+    "down=false,east=true,north=false,south=true,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_sew"
+    },
+    "down=false,east=true,north=false,south=false,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_sew",
+      "x": 90
+    },
+    "down=true,east=false,north=true,south=true,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_sew",
+      "y": 90,
+      "x": -90
+    },
+    "down=false,east=true,north=true,south=true,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_nse"
+    },
+    "down=false,east=false,north=true,south=true,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_sew",
+      "y": 90,
+      "x": 90
+    },
+    "down=false,east=false,north=true,south=true,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_nse",
+      "y": 180
+    },
+
+
+    "down=true,east=true,north=true,south=false,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_dse",
+      "y": -90
+    },
+    "down=true,east=true,north=false,south=true,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_dse"
+    },
+    "down=true,east=false,north=true,south=false,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_dse",
+      "y": 180
+    },
+    "down=true,east=false,north=false,south=true,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_dse",
+      "y": 90
+    },
+    "down=false,east=true,north=true,south=false,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_dse",
+      "x": 180,
+      "y": 0
+    },
+    "down=false,east=true,north=false,south=true,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_dse",
+      "x": 180,
+      "y": 90
+    },
+    "down=false,east=false,north=true,south=false,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_dse",
+      "x": 180,
+      "y": -90
+    },
+    "down=false,east=false,north=false,south=true,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_dse",
+      "x": 180,
+      "y": 180
+    },
+
+
+
+
+    "down=true,east=true,north=false,south=false,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_nsew",
+      "x": 90
+    },
+    "down=true,east=false,north=true,south=true,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_nsew",
+      "x": 90,
+      "y": 90
+    },
+    "down=false,east=true,north=true,south=true,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_nsew"
+    },
+    "down=true,east=true,north=true,south=false,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_dnse",
+      "x": -90
+    },
+    "down=true,east=true,north=false,south=true,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_dnse",
+      "x": 90
+    },
+    "down=true,east=false,north=true,south=false,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_dnse",
+      "x": 90,
+      "y": 180
+    },
+    "down=true,east=false,north=false,south=true,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_dnse",
+      "x": 90,
+      "y": 90
+    },
+    "down=true,east=true,north=true,south=false,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_dnse",
+      "y": -90
+    },
+    "down=true,east=true,north=false,south=true,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_dnse",
+      "y": 90
+    },
+    "down=false,east=true,north=true,south=false,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_unse",
+      "y": -90
+    },
+    "down=false,east=true,north=false,south=true,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_unse",
+      "y": 90
+    },
+    "down=true,east=true,north=true,south=true,transparent=false,up=false,west=false": {
+      "model": "awesome:pipe_connected_dnse"
+    },
+    "down=true,east=false,north=true,south=true,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_dnse",
+      "y": 180
+    },
+    "down=false,east=true,north=true,south=true,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_unse"
+    },
+    "down=false,east=false,north=true,south=true,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_unse",
+      "y": 180
+    },
+
+
+
+    "down=false,east=true,north=true,south=true,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_dnsew",
+      "x": 180
+    },
+    "down=true,east=false,north=true,south=true,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_udnse",
+      "y": 180
+    },
+    "down=true,east=true,north=false,south=true,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_udnse",
+      "y": 90
+    },
+    "down=true,east=true,north=true,south=false,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_udnse",
+      "y": -90
+    },
+    "down=true,east=true,north=true,south=true,transparent=false,up=false,west=true": {
+      "model": "awesome:pipe_connected_dnsew"
+    },
+    "down=true,east=true,north=true,south=true,transparent=false,up=true,west=false": {
+      "model": "awesome:pipe_connected_udnse"
+    },
+
+
+
+
+    "down=true,east=true,north=true,south=true,transparent=false,up=true,west=true": {
+      "model": "awesome:pipe_connected_udnsew"
+    },
+
+
+
+    "down=false,east=false,north=false,south=false,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent"
+    },
+
+
+
+
+    "down=true,east=false,north=false,south=false,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_s",
+      "x": -90
+    },
+    "down=false,east=true,north=false,south=false,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_s",
+      "y": -90
+    },
+    "down=false,east=false,north=true,south=false,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_s",
+      "y": 180
+    },
+    "down=false,east=false,north=false,south=true,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_s"
+    },
+    "down=false,east=false,north=false,south=false,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_s",
+      "x": 90
+    },
+    "down=false,east=false,north=false,south=false,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_s",
+      "y": 90
+    },
+
+
+
+
+    "down=false,east=true,north=false,south=false,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_ns",
+      "y": 90
+    },
+    "down=false,east=false,north=true,south=true,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_ns"
+    },
+    "down=true,east=false,north=false,south=false,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_ns",
+      "x": 90
+    },
+
+
+
+
+    "down=true,east=true,north=false,south=false,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_se",
+      "x": -90
+    },
+    "down=true,east=false,north=true,south=false,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_se",
+      "x": -90,
+      "y": -90
+    },
+    "down=true,east=false,north=false,south=true,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_se",
+      "x": -90,
+      "y": 90
+    },
+    "down=true,east=false,north=false,south=false,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_se",
+      "x": -90,
+      "y": 180
+    },
+    "down=false,east=true,north=true,south=false,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_se",
+      "x": 180
+    },
+    "down=false,east=true,north=false,south=true,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_se"
+    },
+    "down=false,east=true,north=false,south=false,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_se",
+      "x": 90
+    },
+    "down=false,east=false,north=true,south=false,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_se",
+      "x": 90,
+      "y": -90
+    },
+    "down=false,east=false,north=true,south=false,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_se",
+      "y": 180
+    },
+    "down=false,east=false,north=false,south=true,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_se",
+      "x": 90,
+      "y": 90
+    },
+    "down=false,east=false,north=false,south=true,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_se",
+      "y": 90
+    },
+    "down=false,east=false,north=false,south=false,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_se",
+      "x": 90,
+      "y": 180
+    },
+
+
+
+
+    "down=true,east=true,north=false,south=false,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_nse",
+      "x": 90,
+      "y": 0
+    },
+    "down=true,east=false,north=true,south=false,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_nse",
+      "x": 90,
+      "y": -90
+    },
+    "down=true,east=false,north=false,south=true,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_nse",
+      "x": 90,
+      "y": 90
+    },
+    "down=true,east=false,north=false,south=false,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_nse",
+      "x": 90,
+      "y": 180
+    },
+    "down=true,east=true,north=false,south=false,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_sew",
+      "x": -90
+    },
+    "down=false,east=true,north=true,south=false,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_sew",
+      "x": 180
+    },
+    "down=false,east=true,north=false,south=true,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_sew"
+    },
+    "down=false,east=true,north=false,south=false,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_sew",
+      "x": 90
+    },
+    "down=true,east=false,north=true,south=true,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_sew",
+      "y": 90,
+      "x": -90
+    },
+    "down=false,east=true,north=true,south=true,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_nse"
+    },
+    "down=false,east=false,north=true,south=true,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_sew",
+      "y": 90,
+      "x": 90
+    },
+    "down=false,east=false,north=true,south=true,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_nse",
+      "y": 180
+    },
+
+
+    "down=true,east=true,north=true,south=false,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_dse",
+      "y": -90
+    },
+    "down=true,east=true,north=false,south=true,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_dse"
+    },
+    "down=true,east=false,north=true,south=false,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_dse",
+      "y": 180
+    },
+    "down=true,east=false,north=false,south=true,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_dse",
+      "y": 90
+    },
+    "down=false,east=true,north=true,south=false,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_dse",
+      "x": 180,
+      "y": 0
+    },
+    "down=false,east=true,north=false,south=true,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_dse",
+      "x": 180,
+      "y": 90
+    },
+    "down=false,east=false,north=true,south=false,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_dse",
+      "x": 180,
+      "y": -90
+    },
+    "down=false,east=false,north=false,south=true,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_dse",
+      "x": 180,
+      "y": 180
+    },
+
+
+
+
+    "down=true,east=true,north=false,south=false,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_nsew",
+      "x": 90
+    },
+    "down=true,east=false,north=true,south=true,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_nsew",
+      "x": 90,
+      "y": 90
+    },
+    "down=false,east=true,north=true,south=true,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_nsew"
+    },
+    "down=true,east=true,north=true,south=false,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_dnse",
+      "x": -90
+    },
+    "down=true,east=true,north=false,south=true,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_dnse",
+      "x": 90
+    },
+    "down=true,east=false,north=true,south=false,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_dnse",
+      "x": 90,
+      "y": 180
+    },
+    "down=true,east=false,north=false,south=true,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_dnse",
+      "x": 90,
+      "y": 90
+    },
+    "down=true,east=true,north=true,south=false,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_dnse",
+      "y": -90
+    },
+    "down=true,east=true,north=false,south=true,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_dnse",
+      "y": 90
+    },
+    "down=false,east=true,north=true,south=false,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_unse",
+      "y": -90
+    },
+    "down=false,east=true,north=false,south=true,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_unse",
+      "y": 90
+    },
+    "down=true,east=true,north=true,south=true,transparent=true,up=false,west=false": {
+      "model": "awesome:pipe_transparent_connected_dnse"
+    },
+    "down=true,east=false,north=true,south=true,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_dnse",
+      "y": 180
+    },
+    "down=false,east=true,north=true,south=true,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_unse"
+    },
+    "down=false,east=false,north=true,south=true,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_unse",
+      "y": 180
+    },
+
+
+
+    "down=false,east=true,north=true,south=true,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_dnsew",
+      "x": 180
+    },
+    "down=true,east=false,north=true,south=true,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_udnse",
+      "y": 180
+    },
+    "down=true,east=true,north=false,south=true,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_udnse",
+      "y": 90
+    },
+    "down=true,east=true,north=true,south=false,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_udnse",
+      "y": -90
+    },
+    "down=true,east=true,north=true,south=true,transparent=true,up=false,west=true": {
+      "model": "awesome:pipe_transparent_connected_dnsew"
+    },
+    "down=true,east=true,north=true,south=true,transparent=true,up=true,west=false": {
+      "model": "awesome:pipe_transparent_connected_udnse"
+    },
+
+
+
+
+    "down=true,east=true,north=true,south=true,transparent=true,up=true,west=true": {
+      "model": "awesome:pipe_transparent_connected_udnsew"
     }
+  }
 }

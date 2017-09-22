@@ -9,7 +9,9 @@ import gogofo.minecraft.awesome.item.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemFood;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,6 +30,7 @@ public class Items {
 	public static Item conductive;
 	public static Item chainsaw;
 	public static Item drill;
+	public static Item wrench;
 	
 	public static Item iron_dust;
 	public static Item gold_dust;
@@ -69,6 +72,9 @@ public class Items {
 		
 		drill = registryItem(new ItemDrill(), "drill");
 		items.add(drill);
+
+		wrench = registryItem(new ItemWrench(), "wrench");
+		items.add(wrench);
 		
 		// Dusts
 		iron_dust = registryItem(new ItemOneColored(0xFFDEDEDE), "iron_dust");
@@ -108,6 +114,56 @@ public class Items {
 		
 		mob_essence = registryItem(new Item(), "mob_essence");
 		items.add(mob_essence);
+
+		// Swords, tools and armors
+		for (Ores.Ore ore : Ores.getOres()) {
+			Ores.Ore.ToolsConfig config = ore.getToolsConfig();
+			if (config == null) {
+				continue;
+			}
+
+			if (config.isHasSword()) {
+				Item sword = registryItem(new ItemAwesomeSword(config.getToolMaterial(), ore.getColor()), ore.getName() + "_sword");
+				items.add(sword);
+				ore.setSword(sword);
+			}
+
+			if (config.isHasWorkingTools()) {
+				Item pickaxe = registryItem(new ItemAwesomePickaxe(config.getToolMaterial(), ore.getColor()), ore.getName() + "_pickaxe");
+				items.add(pickaxe);
+				ore.setPickaxe(pickaxe);
+
+				Item axe = registryItem(new ItemAwesomeAxe(config.getToolMaterial(), ore.getColor()), ore.getName() + "_axe");
+				items.add(axe);
+				ore.setAxe(axe);
+
+				Item hoe = registryItem(new ItemAwesomeHoe(config.getToolMaterial(), ore.getColor()), ore.getName() + "_hoe");
+				items.add(hoe);
+				ore.setHoe(hoe);
+
+				Item shovel = registryItem(new ItemAwesomeShovel(config.getToolMaterial(), ore.getColor()), ore.getName() + "_shovel");
+				items.add(shovel);
+				ore.setShovel(shovel);
+			}
+
+			if (config.isHasArmors()) {
+				Item chestplate = registryItem(new ItemAwesomeArmor(Materials.COPPER_ARMOR, 2, EntityEquipmentSlot.CHEST, ore.getColor()), ore.getName() + "_chestplate");
+				items.add(chestplate);
+				ore.setChestplate(chestplate);
+
+				Item helmet = registryItem(new ItemAwesomeArmor(Materials.COPPER_ARMOR, 2, EntityEquipmentSlot.HEAD, ore.getColor()), ore.getName() + "_helmet");
+				items.add(helmet);
+				ore.setHelmet(helmet);
+
+				Item leggings = registryItem(new ItemAwesomeArmor(Materials.COPPER_ARMOR, 2, EntityEquipmentSlot.LEGS, ore.getColor()), ore.getName() + "_leggings");
+				items.add(leggings);
+				ore.setLeggings(leggings);
+
+				Item boots = registryItem(new ItemAwesomeArmor(Materials.COPPER_ARMOR, 2, EntityEquipmentSlot.FEET, ore.getColor()), ore.getName() + "_boots");
+				items.add(boots);
+				ore.setBoots(boots);
+			}
+		}
 	}
 	
 	public static void registerRenders() {
