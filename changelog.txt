@@ -9,6 +9,7 @@
 - Add recipe for liquid storage container
 - Add dead wood
 - Tree taps don't consume from dead trees
+- Enable only 1 tree tap per log
 
 -------------------
 0.48
