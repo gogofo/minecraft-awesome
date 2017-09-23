@@ -18,6 +18,7 @@ tile.extractor.name=Extractor
 tile.salt_block.name=Salt Block
 tile.liquid_storage_container.name=Liquid Storage Container
 tile.dead_wood.name=Dead Wood
+tile.tree_tap.name=Tree Tap
 
 # Liquids
 tile.oil.name=Oil
