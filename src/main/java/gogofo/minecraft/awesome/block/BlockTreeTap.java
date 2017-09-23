@@ -93,7 +93,8 @@ public class BlockTreeTap extends Block implements ITileEntityProvider, ISingleC
         }
 
         return worldIn.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.LOG ||
-                worldIn.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.LOG2;
+                worldIn.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.LOG2 ||
+                worldIn.getBlockState(pos.offset(side.getOpposite())).getBlock() == gogofo.minecraft.awesome.init.Blocks.dead_wood;
 
     }
 

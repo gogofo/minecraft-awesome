@@ -43,6 +43,10 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
             return;
         }
 
+        if (!canConsume()) {
+            return;
+        }
+
         if (consumedSap == maxConsumableSap) {
             return;
         }
@@ -54,6 +58,11 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
         }
 
         markDirty();
+    }
+
+    private boolean canConsume() {
+        EnumFacing facing = (EnumFacing) world.getBlockState(pos).getProperties().get(BlockTreeTap.FACING);
+        return world.getBlockState(pos.offset(facing.getOpposite())).getBlock() != Blocks.dead_wood;
     }
 
     private boolean validatePosition() {

@@ -8,6 +8,7 @@
 - Add tin casing
 - Add recipe for liquid storage container
 - Add dead wood
+- Tree taps don't consume from dead trees
 
 -------------------
 0.48
