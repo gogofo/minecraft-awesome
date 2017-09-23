@@ -2,6 +2,7 @@ package gogofo.minecraft.awesome.block;
 
 import gogofo.minecraft.awesome.colorize.ISingleColoredObject;
 import gogofo.minecraft.awesome.init.Fluids;
+import gogofo.minecraft.awesome.init.Ores;
 import gogofo.minecraft.awesome.tileentity.TileEntityLiquidStorageContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -60,7 +61,8 @@ public class BlockLiquidStorageContainer extends Block implements ITileEntityPro
 
     @Override
     public int getColor() {
-        return 0x000000;
+        Ores.Ore copper = Ores.getByName("copper");
+        return copper != null ? copper.getColor() : 0x000000;
     }
 
     @Override
