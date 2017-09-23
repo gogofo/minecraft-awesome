@@ -39,8 +39,9 @@ public class AwesomeMod {
         Ores.init();
         Fluids.init();
         Fluids.registerFluids();
-    	Items.init();
-    	Blocks.init();
+        // Blocks are initiated first some items like the chainsaw needs them
+        Blocks.init();
+        Items.init();
         TileEntities.register();
     	Messages.init();
     }

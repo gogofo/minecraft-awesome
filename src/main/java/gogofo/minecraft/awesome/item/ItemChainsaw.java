@@ -43,7 +43,7 @@ public class ItemChainsaw extends AwesomeItemChargable {
 		return 0;
 	}
 	
-    private static final Set LOGS = Sets.newHashSet(new Block[] {Blocks.LOG, Blocks.LOG2});
+    private static final Set LOGS = Sets.newHashSet(Blocks.LOG, Blocks.LOG2, gogofo.minecraft.awesome.init.Blocks.dead_wood);
 	
     @Override
 	public float getStrVsBlock(ItemStack stack, IBlockState blockState)
