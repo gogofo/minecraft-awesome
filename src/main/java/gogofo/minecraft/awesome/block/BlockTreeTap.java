@@ -92,7 +92,8 @@ public class BlockTreeTap extends Block implements ITileEntityProvider, ISingleC
             return false;
         }
 
-        return worldIn.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.LOG || worldIn.getBlockState(pos.offset(side.getOpposite())) == Blocks.LOG2;
+        return worldIn.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.LOG ||
+                worldIn.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.LOG2;
 
     }
 
