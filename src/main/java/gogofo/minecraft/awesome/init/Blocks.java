@@ -30,6 +30,7 @@ public class Blocks {
 	public static BlockOil oil;
 	public static Block salt_block;
 	public static Block liquid_storage_container;
+	public static Block tree_tap;
 	
 	private static ArrayList<Block> blocks = new ArrayList<>();
 	private static ArrayList<ItemBlock> itemBlocks = new ArrayList<>();
@@ -79,6 +80,9 @@ public class Blocks {
 
 		liquid_storage_container = registryBlock(new BlockLiquidStorageContainer(), "liquid_storage_container");
 		blocks.add(liquid_storage_container);
+
+		tree_tap = registryBlock(new BlockTreeTap(), "tree_tap");
+		blocks.add(tree_tap);
 
 		for (Ores.Ore ore : Ores.getOres()) {
 			if (ore.isHasBlock()) {

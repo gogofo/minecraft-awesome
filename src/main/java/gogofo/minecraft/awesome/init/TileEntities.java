@@ -18,5 +18,6 @@ public class TileEntities {
 		GameRegistry.registerTileEntity(TileEntitySortingPipe.class, "awesomeTileEntitySortingPipe");
 		GameRegistry.registerTileEntity(TileEntityExtractor.class, "awesomeTileEntityExtractor");
 		GameRegistry.registerTileEntity(TileEntityLiquidStorageContainer.class, "awesomeTileEntityLiquidStorageContainer");
+		GameRegistry.registerTileEntity(TileEntityTreeTap.class, "awesomeTileEntityTreeTap");
 	}
 }
