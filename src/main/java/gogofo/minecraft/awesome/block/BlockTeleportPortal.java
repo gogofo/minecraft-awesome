@@ -24,6 +24,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+
 public class BlockTeleportPortal extends BlockBreakable implements ITileEntityProvider {
     public static final PropertyEnum AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class, new EnumFacing.Axis[] {EnumFacing.Axis.X, EnumFacing.Axis.Z});
 
@@ -31,9 +33,10 @@ public class BlockTeleportPortal extends BlockBreakable implements ITileEntityPr
 		super(Material.PORTAL, false);
         this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
 	}
-	
-	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
-    {
+
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return null;
     }
 	
@@ -42,18 +45,17 @@ public class BlockTeleportPortal extends BlockBreakable implements ITileEntityPr
 		return new AxisAlignedBB(0, 0, 0, 0, 0, 0);
 	}
 
-    public boolean isFullCube()
-    {
+    @Override
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
-    
-    @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
-    {
-        EnumFacing.Axis axis = null;
-        IBlockState iblockstate = worldIn.getBlockState(pos);
 
-        if (worldIn.getBlockState(pos).getBlock() == this)
+    @Override
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        EnumFacing.Axis axis = null;
+        IBlockState iblockstate = blockAccess.getBlockState(pos);
+
+        if (blockAccess.getBlockState(pos).getBlock() == this)
         {
             axis = (EnumFacing.Axis)iblockstate.getValue(AXIS);
 
@@ -73,10 +75,10 @@ public class BlockTeleportPortal extends BlockBreakable implements ITileEntityPr
             }
         }
 
-        boolean flag = worldIn.getBlockState(pos.west()).getBlock() == this && worldIn.getBlockState(pos.west(2)).getBlock() != this;
-        boolean flag1 = worldIn.getBlockState(pos.east()).getBlock() == this && worldIn.getBlockState(pos.east(2)).getBlock() != this;
-        boolean flag2 = worldIn.getBlockState(pos.north()).getBlock() == this && worldIn.getBlockState(pos.north(2)).getBlock() != this;
-        boolean flag3 = worldIn.getBlockState(pos.south()).getBlock() == this && worldIn.getBlockState(pos.south(2)).getBlock() != this;
+        boolean flag = blockAccess.getBlockState(pos.west()).getBlock() == this && blockAccess.getBlockState(pos.west(2)).getBlock() != this;
+        boolean flag1 = blockAccess.getBlockState(pos.east()).getBlock() == this && blockAccess.getBlockState(pos.east(2)).getBlock() != this;
+        boolean flag2 = blockAccess.getBlockState(pos.north()).getBlock() == this && blockAccess.getBlockState(pos.north(2)).getBlock() != this;
+        boolean flag3 = blockAccess.getBlockState(pos.south()).getBlock() == this && blockAccess.getBlockState(pos.south(2)).getBlock() != this;
         boolean flag4 = flag || flag1 || axis == EnumFacing.Axis.X;
         boolean flag5 = flag2 || flag3 || axis == EnumFacing.Axis.Z;
         return flag4 && side == EnumFacing.WEST ? true : (flag4 && side == EnumFacing.EAST ? true : (flag5 && side == EnumFacing.NORTH ? true : flag5 && side == EnumFacing.SOUTH));
