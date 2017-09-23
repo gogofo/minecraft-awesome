@@ -5,6 +5,8 @@
 - Add tree tap
 - Add sap
 - Make tree tap work with liquid containers
+- Add tin casing
+- Add recipe for liquid storage container
 
 -------------------
 0.48

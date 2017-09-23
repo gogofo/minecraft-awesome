@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"CBC",
+		"BAB",
+		"CBC"
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:glass"
+		},
+		"B": {
+			"item": "awesome:tin_casing"
+		},
+		"C": {
+			"item": "awesome:copper_ingot"
+		}
+	},
+	"result": {
+		"item": "awesome:liquid_storage_container",
+		"count": 1
+	}
+}

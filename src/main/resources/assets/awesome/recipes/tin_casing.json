@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AAA",
+		"BBB",
+		"AAA"
+	],
+	"key": {
+		"A": {
+			"item": "awesome:tin_ingot"
+		},
+		"B": {
+			"item": "awesome:tin_dust"
+		}
+	},
+	"result": {
+		"item": "awesome:tin_casing",
+		"count": 6
+	}
+}
