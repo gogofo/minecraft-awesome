@@ -14,7 +14,9 @@ public class CommonProxy {
 	}
 	
 	public void registerRenders() {
-		
+	}
+
+	public void renderFluids() {
 	}
 
 	public void registerWorldGenerators() {

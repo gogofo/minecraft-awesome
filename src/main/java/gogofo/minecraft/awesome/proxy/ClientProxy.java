@@ -11,4 +11,9 @@ public class ClientProxy extends CommonProxy {
 		Blocks.registerRenders();
 		RendersRegisterer.registerTileEntityRenderers();
 	}
+
+	@Override
+	public void renderFluids() {
+		Blocks.renderFluids();
+	}
 }

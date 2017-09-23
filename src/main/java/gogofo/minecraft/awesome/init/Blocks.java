@@ -113,7 +113,7 @@ public class Blocks {
 		}
 	}
 
-	private static void renderFluids() {
+	public static void renderFluids() {
 		oil.render();
 		sap.render();
 	}
@@ -140,7 +140,7 @@ public class Blocks {
 				registry.register(block);
 			}
 
-			renderFluids();
+			AwesomeMod.proxy.renderFluids();
 		}
 		
 		@SubscribeEvent
