@@ -1,0 +1,28 @@
+{
+    "display": {
+        "icon": {
+            "item": "awesome:tin_ingot"
+        },
+        "title": "Tin Tin Tin!",
+        "description": "Ho wonderful tin"
+    },
+    "criteria": {
+        "industrialize": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "awesome:tin_ingot",
+                        "data": 0
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "recipes": [
+            "awesome:tin_casing",
+            "awesome:liquid_storage_container"
+        ]
+    }
+}
