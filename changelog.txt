@@ -10,6 +10,7 @@
 - Add dead wood
 - Tree taps don't consume from dead trees
 - Enable only 1 tree tap per log
+- Make tree taps "kill" the tree when they finish (yes, this enables a "hack" to remove the tap before done, enjoy)
 
 -------------------
 0.48

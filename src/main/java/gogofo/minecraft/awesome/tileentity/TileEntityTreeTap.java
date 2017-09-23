@@ -47,14 +47,15 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
             return;
         }
 
-        if (consumedSap == maxConsumableSap) {
-            return;
-        }
-
         nextConsume -= 1;
         if (nextConsume == 0) {
             setNextConsume();
             consumeSap();
+        }
+
+        if (consumedSap == maxConsumableSap) {
+            replaceTreeWithDeadTree();
+            return;
         }
 
         markDirty();
@@ -68,6 +69,11 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
     private boolean validatePosition() {
         EnumFacing facing = (EnumFacing) world.getBlockState(pos).getProperties().get(BlockTreeTap.FACING);
         return ((BlockTreeTap)Blocks.tree_tap).isValidOnSide(world, pos, facing);
+    }
+
+    private void replaceTreeWithDeadTree() {
+        EnumFacing facing = (EnumFacing) world.getBlockState(pos).getProperties().get(BlockTreeTap.FACING);
+        world.setBlockState(pos.offset(facing.getOpposite()), Blocks.dead_wood.getDefaultState());
     }
 
     private void consumeSap() {
