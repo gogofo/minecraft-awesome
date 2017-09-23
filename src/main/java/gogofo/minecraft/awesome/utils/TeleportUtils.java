@@ -141,6 +141,12 @@ public class TeleportUtils {
 
         if (player != null)
         {
+            if (!setInvulnerableDimensionChange(player))
+            {
+                System.out.println(String.format("ERROR: InvulnerableDimensionChange flag could not be set for player '%s' (ID: %s). Aborting teleportation.", player.getName(), player.getCachedUniqueIdString()));
+                return;
+            }
+
             if (interdimensional)
             {
                 if (ForgeHooks.onTravelToDimension(player, dimension))
