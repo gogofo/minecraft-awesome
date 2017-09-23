@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "awesome:dead_wood" },
+        "axis=z":   { "model": "awesome:dead_wood", "x": 90 },
+        "axis=x":   { "model": "awesome:dead_wood", "x": 90, "y": 90 },
+        "axis=none": { "model": "awesome:dead_wood" }
+    }
+}

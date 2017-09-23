@@ -7,6 +7,7 @@
 - Make tree tap work with liquid containers
 - Add tin casing
 - Add recipe for liquid storage container
+- Add dead wood
 
 -------------------
 0.48
