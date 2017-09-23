@@ -83,15 +83,17 @@ public class BlockTreeTap extends Block implements ITileEntityProvider, ISingleC
             return false;
         }
 
+        return isValidOnSide(worldIn, pos, side);
+
+    }
+
+    public boolean isValidOnSide(World worldIn, BlockPos pos, EnumFacing side) {
         if (side == EnumFacing.UP || side == EnumFacing.DOWN) {
             return false;
         }
 
-        if (worldIn.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.LOG || worldIn.getBlockState(pos).getBlock() == Blocks.LOG2) {
-            return true;
-        }
+        return worldIn.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.LOG || worldIn.getBlockState(pos).getBlock() == Blocks.LOG2;
 
-        return false;
     }
 
     @Override
