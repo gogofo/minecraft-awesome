@@ -2,7 +2,9 @@
 -------------------
 
 - Make liquid storage container support buckets
-- Add tree sap
+- Add tree tap
+- Add sap
+- Make tree tap work with liquid containers
 
 -------------------
 0.48

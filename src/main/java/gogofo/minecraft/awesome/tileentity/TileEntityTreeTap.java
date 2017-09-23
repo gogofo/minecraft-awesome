@@ -2,12 +2,15 @@ package gogofo.minecraft.awesome.tileentity;
 
 import gogofo.minecraft.awesome.block.BlockTreeTap;
 import gogofo.minecraft.awesome.init.Blocks;
+import gogofo.minecraft.awesome.interfaces.ILiquidContainer;
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;
 
@@ -60,6 +63,70 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
 
     private void consumeSap() {
         consumedSap += 1;
+
+        BlockPos firstBlockBelowTap = getFirstBlockBelowTap();
+
+        if (attemptToFillContainer(firstBlockBelowTap)) {
+            return;
+        }
+
+        attemptToDropSap(firstBlockBelowTap);
+    }
+
+    private boolean attemptToFillContainer(BlockPos firstBlockBelowTap) {
+        TileEntity te = world.getTileEntity(firstBlockBelowTap);
+
+        if (te instanceof ILiquidContainer) {
+            ILiquidContainer container = (ILiquidContainer) te;
+            Block substance = container.getSubstance();
+
+            if (substance == Blocks.sap || substance == net.minecraft.init.Blocks.AIR) {
+                int sapPlaced = container.tryPlaceLiquid(Blocks.sap, 1);
+
+                if (sapPlaced == 1) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean attemptToDropSap(BlockPos firstBlockBelowTap) {
+        BlockPos airBlockPos = getFirstAirBetweenPosAndTap(firstBlockBelowTap);
+
+        if (airBlockPos == null) {
+            return false;
+        }
+
+        world.setBlockState(airBlockPos, Blocks.sap.getDefaultState());
+
+        return true;
+    }
+
+    private BlockPos getFirstBlockBelowTap() {
+        BlockPos pos = getPos().offset(EnumFacing.DOWN);
+
+        while (world.getBlockState(pos).getBlock() == net.minecraft.init.Blocks.AIR) {
+            pos = pos.offset(EnumFacing.DOWN);
+        }
+
+        return pos;
+    }
+
+    private BlockPos getFirstAirBetweenPosAndTap(BlockPos pos) {
+        pos = pos.offset(EnumFacing.UP);
+
+        while (world.getBlockState(pos).getBlock() != net.minecraft.init.Blocks.AIR &&
+                world.getBlockState(pos).getBlock() != Blocks.tree_tap) {
+            pos = pos.offset(EnumFacing.UP);
+        }
+
+        if (world.getBlockState(pos).getBlock() == net.minecraft.init.Blocks.AIR) {
+            return pos;
+        }
+
+        return null;
     }
 
     private void setNextConsume() {

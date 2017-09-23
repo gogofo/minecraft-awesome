@@ -2,12 +2,14 @@ package gogofo.minecraft.awesome.tileentity;
 
 import gogofo.minecraft.awesome.interfaces.ILiquidContainer;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 
 public class TileEntityLiquidStorageContainer extends TileEntity implements ILiquidContainer {
 
@@ -125,6 +127,7 @@ public class TileEntityLiquidStorageContainer extends TileEntity implements ILiq
         containedAmount += actualAmount;
 
         markDirty();
+        notifyUpdate(pos);
 
         return actualAmount;
     }
@@ -146,6 +149,7 @@ public class TileEntityLiquidStorageContainer extends TileEntity implements ILiq
         }
 
         markDirty();
+        notifyUpdate(pos);
 
         return actualAmount;
     }
@@ -154,6 +158,11 @@ public class TileEntityLiquidStorageContainer extends TileEntity implements ILiq
         return (containedSubstance == Blocks.AIR || substance == Blocks.AIR || substance == containedSubstance) &&
                 substance != null &&
                 amount > 0;
+    }
+
+    protected void notifyUpdate(BlockPos blockPos) {
+        IBlockState state = world.getBlockState(blockPos);
+        world.notifyBlockUpdate(blockPos, state, state, 3);
     }
 
     @Override
