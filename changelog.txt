@@ -1,6 +1,7 @@
 0.49
 -------------------
 
+- Make liquid storage container support buckets
 
 -------------------
 0.48
