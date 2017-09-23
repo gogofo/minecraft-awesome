@@ -5,7 +5,6 @@
 
 package gogofo.minecraft.awesome.utils;
 
-import jline.internal.Log;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -142,12 +141,6 @@ public class TeleportUtils {
 
         if (player != null)
         {
-            if (!setInvulnerableDimensionChange(player))
-            {
-                Log.error(String.format("InvulnerableDimensionChange flag could not be set for player '%s' (ID: %s). Aborting teleportation.", player.getName(), player.getCachedUniqueIdString()));
-                return;
-            }
-
             if (interdimensional)
             {
                 if (ForgeHooks.onTravelToDimension(player, dimension))
@@ -156,7 +149,7 @@ public class TeleportUtils {
                 }
                 else
                 {
-                    Log.warn(String.format("Teleportation of player %s [%s] to dimension %d canceled by other mod.",
+                    System.out.println(String.format("WARN: Teleportation of player %s [%s] to dimension %d canceled by other mod.",
                             player.getName(), player.getPosition(), dimension));
                 }
             }
@@ -275,7 +268,7 @@ public class TeleportUtils {
             }
             else
             {
-                Log.error("Unable to remove boss hp bar: Could not access the DragonFightManagers 'bossInfo' field.");
+                System.out.println("ERROR: Unable to remove boss hp bar: Could not access the DragonFightManagers 'bossInfo' field.");
             }
         }
 
@@ -375,7 +368,12 @@ public class TeleportUtils {
         {
             if (invulnerableDimensionChange == null)
             {
-                invulnerableDimensionChange = EntityPlayerMP.class.getDeclaredField("invulnerableDimensionChange");  // invulnerableDimensionChange field
+                try {
+                    invulnerableDimensionChange = EntityPlayerMP.class.getDeclaredField("invulnerableDimensionChange");  // invulnerableDimensionChange field
+                } catch (Exception ignored) {
+                    invulnerableDimensionChange = EntityPlayerMP.class.getDeclaredField("field_184851_cj");
+                }
+
                 invulnerableDimensionChange.setAccessible(true);
             }
 

@@ -3,6 +3,7 @@ package gogofo.minecraft.awesome.tileentity;
 import gogofo.minecraft.awesome.TeleporterManager;
 import gogofo.minecraft.awesome.block.BlockTeleportPortal;
 import gogofo.minecraft.awesome.utils.TeleportUtils;
+import jline.internal.Log;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
@@ -71,7 +72,7 @@ public class TileEntityTeleportPortal extends TileEntity {
 			if (destTeleport == null) {
 				return;
 			}
-			
+
 			EnumFacing.Axis localAxis = (EnumFacing.Axis)state.getValue(BlockTeleportPortal.AXIS);
 			EnumFacing.Axis remoteAxis = (EnumFacing.Axis)world.getBlockState(destTeleport.up()).getValue(BlockTeleportPortal.AXIS);
 			
@@ -87,9 +88,6 @@ public class TileEntityTeleportPortal extends TileEntity {
 			}
 
 			entityIn.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 10));
-//			entityIn.setPositionAndUpdate(destTeleport.getX(),
-//										  destTeleport.getY(),
-//										  destTeleport.getZ());
 			TeleportUtils.teleportTo(entityIn, entityIn.dimension, new BlockPos(destTeleport.getX(), destTeleport.getY(), destTeleport.getZ()), entityIn.getHorizontalFacing());
 		}
 	}

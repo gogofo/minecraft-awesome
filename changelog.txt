@@ -1,6 +1,7 @@
 0.51
 -------------------
 
+- Fix another teleport issue (hopefully he last one)
 
 -------------------
 0.50
