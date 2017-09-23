@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"BAB",
+		"AAA",
+		" BA"
+	],
+	"key": {
+		"A": {
+			"item": "awesome:copper_ingot"
+		},
+		"B": {
+			"item": "awesome:tin_plating"
+		}
+	},
+	"result": {
+		"item": "awesome:tree_tap",
+		"count": 1
+	}
+}
