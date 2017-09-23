@@ -1,5 +1,8 @@
 {
     "variants": {
-        "normal": { "model": "awesome:tree_tap" }
+        "facing=north": { "model": "awesome:tree_tap", "y": 180 },
+        "facing=south": { "model": "awesome:tree_tap" },
+        "facing=west":  { "model": "awesome:tree_tap", "y": 90 },
+        "facing=east":  { "model": "awesome:tree_tap", "y": 270 }
     }
 }

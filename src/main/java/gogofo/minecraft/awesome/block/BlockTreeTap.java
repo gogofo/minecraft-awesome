@@ -7,8 +7,13 @@ import gogofo.minecraft.awesome.tileentity.TileEntityTreeTap;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
@@ -21,10 +26,13 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.*;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
 public class BlockTreeTap extends Block implements ITileEntityProvider, ISingleColoredObject {
+    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
     public BlockTreeTap() {
         super(Material.IRON);
@@ -61,5 +69,48 @@ public class BlockTreeTap extends Block implements ITileEntityProvider, ISingleC
     public int getColor() {
         Ores.Ore copper = Ores.getByName("copper");
         return copper != null ? copper.getColor() : 0x000000;
+    }
+
+    @Override
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+                                            float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+        return this.getDefaultState().withProperty(FACING, facing);
+    }
+
+    @Override
+    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
+        if (!super.canPlaceBlockOnSide(worldIn, pos, side)) {
+            return false;
+        }
+
+        if (side == EnumFacing.UP || side == EnumFacing.DOWN) {
+            return false;
+        }
+
+        if (worldIn.getBlockState(pos.offset(side.getOpposite())).getBlock() == Blocks.LOG || worldIn.getBlockState(pos).getBlock() == Blocks.LOG2) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta)
+    {
+        EnumFacing enumfacing = EnumFacing.getFront(meta & 0x7);
+
+        return this.getDefaultState().withProperty(FACING, enumfacing);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state)
+    {
+        return state.getValue(FACING).getIndex();
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, FACING);
     }
 }
