@@ -17,9 +17,6 @@ public class CommonProxy {
 		
 	}
 
-	public void renderFluids() {
-	}
-
 	public void registerWorldGenerators() {
 		GameRegistry.registerWorldGenerator(new AwesomeWorldGenerator(), 0);
 	}

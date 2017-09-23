@@ -2,6 +2,7 @@
 -------------------
 
 - Make liquid storage container support buckets
+- Add tree sap
 
 -------------------
 0.48

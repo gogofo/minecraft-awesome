@@ -28,6 +28,7 @@ public class Blocks {
 	public static Block sorting_pipe;
 	public static Block extractor;
 	public static BlockOil oil;
+	public static BlockSap sap;
 	public static Block salt_block;
 	public static Block liquid_storage_container;
 	public static Block tree_tap;
@@ -75,6 +76,9 @@ public class Blocks {
 		oil = (BlockOil) registryBlock(new BlockOil(), "oil");
 		blocks.add(oil);
 
+		sap = (BlockSap) registryBlock(new BlockSap(), "sap");
+		blocks.add(sap);
+
 		salt_block = registryBlock(new BlockSaltBlock(), "salt_block");
 		blocks.add(salt_block);
 
@@ -109,8 +113,9 @@ public class Blocks {
 		}
 	}
 
-	public static void renderFluids() {
+	private static void renderFluids() {
 		oil.render();
+		sap.render();
 	}
 	
 	private static Block registryBlock(Block block, String name) {
@@ -134,6 +139,8 @@ public class Blocks {
 			for (Block block : blocks) {
 				registry.register(block);
 			}
+
+			renderFluids();
 		}
 		
 		@SubscribeEvent

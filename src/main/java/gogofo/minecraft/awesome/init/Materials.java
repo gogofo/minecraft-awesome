@@ -15,6 +15,7 @@ public class Materials {
     public static ArmorMaterial PLATINUM_ARMOR;
 
     public static Material OIL = (new MaterialLiquid(MapColor.WATER));
+    public static Material SAP = (new MaterialLiquid(MapColor.WATER));
 
     static {
         COPPER_TOOL = EnumHelper.addToolMaterial("COPPER",

@@ -19,6 +19,9 @@ tile.salt_block.name=Salt Block
 tile.oil.name=Oil
 fluid.oil=Oil
 
+tile.sap.name=Sap
+fluid.sap=Sap
+
 # Items
 item.burnt_residue.name=Burnt Residue
 item.multimeter.name=Multimeter

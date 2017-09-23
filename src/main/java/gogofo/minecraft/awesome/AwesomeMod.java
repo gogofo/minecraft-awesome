@@ -43,7 +43,6 @@ public class AwesomeMod {
     	Blocks.init();
         TileEntities.register();
     	Messages.init();
-    	proxy.renderFluids();
     }
     
     @EventHandler
