@@ -21,7 +21,7 @@
     },
     "rewards": {
         "recipes": [
-            "awesome:tin_casing",
+            "awesome:tin_plating",
             "awesome:liquid_storage_container"
         ]
     }

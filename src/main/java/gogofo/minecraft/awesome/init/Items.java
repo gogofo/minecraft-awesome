@@ -3,15 +3,9 @@ package gogofo.minecraft.awesome.init;
 import java.util.ArrayList;
 
 import gogofo.minecraft.awesome.AwesomeMod;
-import gogofo.minecraft.awesome.colorize.ISingleColoredObject;
-import gogofo.minecraft.awesome.colorize.SingleColorProvider;
 import gogofo.minecraft.awesome.item.*;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemFood;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -31,7 +25,7 @@ public class Items {
 	public static Item chainsaw;
 	public static Item drill;
 	public static Item wrench;
-	public static Item tin_casing;
+	public static Item tin_plating;
 	
 	public static Item iron_dust;
 	public static Item gold_dust;
@@ -77,8 +71,8 @@ public class Items {
 		wrench = registryItem(new ItemWrench(), "wrench");
 		items.add(wrench);
 
-		tin_casing = registryItem(new Item(), "tin_casing");
-		items.add(tin_casing);
+		tin_plating = registryItem(new Item(), "tin_plating");
+		items.add(tin_plating);
 		
 		// Dusts
 		iron_dust = registryItem(new ItemOneColored(0xFFDEDEDE), "iron_dust");

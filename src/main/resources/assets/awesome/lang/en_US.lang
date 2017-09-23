@@ -36,7 +36,7 @@ item.conductive.name=Conductive
 item.chainsaw.name=Chainsaw
 item.drill.name=Drill
 item.wrench.name=Wrench
-item.tin_casing.name=Tin Casing
+item.tin_plating.name=Tin Plating
 
 # Minecraft dusts
 item.iron_dust.name=Iron Dust
