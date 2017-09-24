@@ -38,7 +38,7 @@ public class ItemBattery extends AwesomeItemChargable {
 
     @Override
     public int getMaxCharge() {
-        return 100;
+        return 300;
     }
 
     protected int getChargeSpeed() {
