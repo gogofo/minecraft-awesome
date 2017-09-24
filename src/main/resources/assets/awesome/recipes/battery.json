@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+        "ACA",
+        "ABA",
+        "ACA"
+    ],
+    "key": {
+        "A": {
+            "item": "awesome:aluminium_foil"
+		},
+		"B": {
+			"item": "minecraft:redstone_block"
+		},
+		"C": {
+			"item": "awesome:conductive"
+		}
+	},
+	"result": {
+		"item": "awesome:battery",
+		"count": 1
+	}
+}
