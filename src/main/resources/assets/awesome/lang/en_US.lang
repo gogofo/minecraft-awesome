@@ -13,6 +13,7 @@ tile.pipe.name=Pipe
 tile.suction_pipe.name=Suction Pipe
 tile.sorting_pipe.name=Sorting Pipe
 tile.extractor.name=Extractor
+tile.constructor.name=Constructor
 
 # Other Tiles
 tile.salt_block.name=Salt Block

@@ -33,6 +33,7 @@ public class Blocks {
 	public static Block liquid_storage_container;
 	public static Block tree_tap;
 	public static Block dead_wood;
+	public static Block constructor;
 	
 	private static ArrayList<Block> blocks = new ArrayList<>();
 	private static ArrayList<ItemBlock> itemBlocks = new ArrayList<>();
@@ -91,6 +92,9 @@ public class Blocks {
 
 		dead_wood = registryBlock(new BlockDeadWood(), "dead_wood");
 		blocks.add(dead_wood);
+
+		constructor = registryBlock(new BlockConstructor(), "constructor");
+		blocks.add(constructor);
 
 		for (Ores.Ore ore : Ores.getOres()) {
 			if (ore.isHasBlock()) {

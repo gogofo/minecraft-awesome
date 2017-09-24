@@ -8,8 +8,9 @@ public enum GuiEnum {
 	ELECTRIC_FURNACE("electric_furnace"),
 	TELEPORTER("teleporter"),
 	SORTING_PIPE("sorting_pipe"),
-	EXTRACTOR("extractor");
-	
+	EXTRACTOR("extractor"),
+	CONSTRUCTOR("constructor");
+
 	private String guiName;
 	
 	private GuiEnum(String guiName) {

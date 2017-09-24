@@ -1,21 +1,7 @@
 package gogofo.minecraft.awesome.gui;
 
-import gogofo.minecraft.awesome.inventory.ContainerCharger;
-import gogofo.minecraft.awesome.inventory.ContainerElectricFurnace;
-import gogofo.minecraft.awesome.inventory.ContainerExtractor;
-import gogofo.minecraft.awesome.inventory.ContainerFuser;
-import gogofo.minecraft.awesome.inventory.ContainerGenerator;
-import gogofo.minecraft.awesome.inventory.ContainerGrinder;
-import gogofo.minecraft.awesome.inventory.ContainerSortingPipe;
-import gogofo.minecraft.awesome.inventory.ContainerTeleporter;
-import gogofo.minecraft.awesome.tileentity.TileEntityCharger;
-import gogofo.minecraft.awesome.tileentity.TileEntityElectricFurnace;
-import gogofo.minecraft.awesome.tileentity.TileEntityExtractor;
-import gogofo.minecraft.awesome.tileentity.TileEntityFuser;
-import gogofo.minecraft.awesome.tileentity.TileEntityGenerator;
-import gogofo.minecraft.awesome.tileentity.TileEntityGrinder;
-import gogofo.minecraft.awesome.tileentity.TileEntitySortingPipe;
-import gogofo.minecraft.awesome.tileentity.TileEntityTeleporter;
+import gogofo.minecraft.awesome.inventory.*;
+import gogofo.minecraft.awesome.tileentity.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
@@ -57,6 +43,8 @@ public class GuiHandler implements IGuiHandler
 			return new ContainerSortingPipe(player.inventory, (IInventory)tileEntity);
 		case EXTRACTOR:
 			return new ContainerExtractor(player.inventory, (IInventory)tileEntity);
+        case CONSTRUCTOR:
+            return new ContainerConstructor(player.inventory, (IInventory)tileEntity);
 		default:
 			break;
     	}
@@ -95,6 +83,8 @@ public class GuiHandler implements IGuiHandler
 			return new GuiSortingPipe(player.inventory, (TileEntitySortingPipe)tileEntity);
 		case EXTRACTOR:
 			return new GuiExtractor(player.inventory, (TileEntityExtractor)tileEntity);
+		case CONSTRUCTOR:
+		    return new GuiConstructor(player.inventory, (TileEntityConstructor)tileEntity);
 		default:
 			break;
     	}
