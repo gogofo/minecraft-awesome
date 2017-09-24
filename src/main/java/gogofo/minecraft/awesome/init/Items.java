@@ -82,16 +82,16 @@ public class Items {
 		aluminium_foil = registryItem(new ItemOneColored(Ores.aluminium.getColor()), "aluminium_foil");
 		items.add(aluminium_foil);
 
-		battery = registryItem(new ItemBattery().setColor(0xA67007), "battery");
+		battery = registryItem(new ItemBattery().setColor(0xA67007).setMaxCharge(300), "battery");
 		items.add(battery);
 
 		big_battery = registryItem(new ItemBattery().setColor(0x56C640).setMaxCharge(1000), "big_battery");
 		items.add(big_battery);
 
-		battery_pack = registryItem(new ItemBattery().setColor(0xA67007).setMaxCharge(2000), "battery_pack");
+		battery_pack = registryItem(new ItemBattery().setColor(0xA67007).setMaxCharge(3000), "battery_pack");
 		items.add(battery_pack);
 
-		big_battery_pack = registryItem(new ItemBattery().setColor(0x56C640).setMaxCharge(3000), "big_battery_pack");
+		big_battery_pack = registryItem(new ItemBattery().setColor(0x56C640).setMaxCharge(10000), "big_battery_pack");
 		items.add(big_battery_pack);
 		
 		// Dusts
