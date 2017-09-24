@@ -2,7 +2,7 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"AAA",
-		"BBB",
+		"AAA",
 		"AAA"
 	],
 	"key": {
@@ -15,6 +15,6 @@
 	},
 	"result": {
 		"item": "awesome:aluminium_foil",
-		"count": 6
+		"count": 9
 	}
 }
