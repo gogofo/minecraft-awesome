@@ -52,7 +52,7 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 			charge -= usedCharge;
 			setTagCharge(stack, charge);
 		}
-		
+
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 	}
 	
@@ -62,10 +62,19 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 	}
 	
 	@Override
-	public void charge(ItemStack stack, int charge) {
+	public int charge(ItemStack stack, int charge) {
 		int newCharge = getTagCharge(stack);
 		newCharge += charge;
+
+		int maxCharge = getMaxCharge();
+		if (newCharge > maxCharge) {
+			charge -= newCharge - maxCharge;
+			newCharge = maxCharge;
+		}
+
 		setTagCharge(stack, newCharge);
+
+		return charge;
 	}
 	
 	private void ensureHasTag(ItemStack stack) {

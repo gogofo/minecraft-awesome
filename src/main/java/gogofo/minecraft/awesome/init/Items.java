@@ -26,6 +26,7 @@ public class Items {
 	public static Item drill;
 	public static Item wrench;
 	public static Item tin_plating;
+	public static Item battery;
 	
 	public static Item iron_dust;
 	public static Item gold_dust;
@@ -73,6 +74,9 @@ public class Items {
 
 		tin_plating = registryItem(new Item(), "tin_plating");
 		items.add(tin_plating);
+
+		battery = registryItem(new ItemBattery(), "battery");
+		items.add(battery);
 		
 		// Dusts
 		iron_dust = registryItem(new ItemOneColored(0xFFDEDEDE), "iron_dust");

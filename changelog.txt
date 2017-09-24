@@ -1,6 +1,7 @@
 0.53
 -------------------
 
+- Battery added (charges items when they are held in the offhand)
 
 -------------------
 0.52
