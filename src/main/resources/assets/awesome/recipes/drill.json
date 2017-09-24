@@ -3,7 +3,7 @@
 	"pattern": [
 		"AAA",
 		"ABA",
-		"AAA"
+		"ACA"
 	],
 	"key": {
 		"A": {
@@ -11,6 +11,9 @@
 		},
 		"B": {
 			"item": "awesome:tool_core"
+		},
+		"C": {
+			"item": "awesome:big_battery"
 		}
 	},
 	"result": {
