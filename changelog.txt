@@ -4,6 +4,7 @@
 - Added aluminium foil
 - Battery added (charges items when they are held in the offhand)
 - Drill now takes different charge depending on the block's hardness and requires at least 10 power to work
+- Added big battery (charge of 2 batteries)
 
 -------------------
 0.52

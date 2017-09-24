@@ -28,7 +28,8 @@ public class Items {
 	public static Item tin_plating;
 	public static Item aluminium_foil;
 	public static Item battery;
-	
+	public static Item big_battery;
+
 	public static Item iron_dust;
 	public static Item gold_dust;
 	
@@ -81,6 +82,9 @@ public class Items {
 
 		battery = registryItem(new ItemBattery().setColor(0xA67007), "battery");
 		items.add(battery);
+
+		big_battery = registryItem(new ItemBattery().setColor(0x56C640).setMaxCharge(1000), "big_battery");
+		items.add(big_battery);
 		
 		// Dusts
 		iron_dust = registryItem(new ItemOneColored(0xFFDEDEDE), "iron_dust");
