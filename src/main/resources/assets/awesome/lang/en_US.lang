@@ -42,6 +42,8 @@ item.tin_plating.name=Tin Plating
 item.aluminium_foil.name=Aluminium Foil
 item.battery.name=Battery
 item.big_battery.name=Big Battery
+item.battery_pack.name=Battery Pack
+item.big_battery_pack.name=Big Battery Pack
 
 # Minecraft dusts
 item.iron_dust.name=Iron Dust

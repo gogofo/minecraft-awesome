@@ -13,7 +13,9 @@
     },
     "rewards": {
         "recipes": [
-            "awesome:big_battery"
+            "awesome:big_battery",
+            "awesome:battery_pack",
+            "awesome:big_battery_pack"
         ]
     }
 }

@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+        "BBB",
+        "AAA",
+        "ACA"
+    ],
+    "key": {
+		"A": {
+			"item": "awesome:big_battery"
+		},
+        "B": {
+            "item": "awesome:aluminium_foil"
+		},
+		"C": {
+			"item": "awesome:battery_pack"
+		}
+	},
+	"result": {
+		"item": "awesome:big_battery_pack",
+		"count": 1
+	}
+}
