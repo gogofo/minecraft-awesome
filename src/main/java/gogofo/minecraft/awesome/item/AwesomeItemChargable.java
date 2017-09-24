@@ -90,13 +90,28 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 	}
 	
 	private int getTagCharge(ItemStack stack) {
-		ensureHasTag(stack);
-		return ((NBTTagCompound)stack.getTagCompound().getTag("chargeable")).getInteger("charge");
+		if (hasTag(stack)) {
+			return ((NBTTagCompound) stack.getTagCompound().getTag("chargeable")).getInteger("charge");
+		} else {
+			return 0;
+		}
 	}
 	
 	private void setTagCharge(ItemStack stack, int charge) {
 		ensureHasTag(stack);
-		((NBTTagCompound)stack.getTagCompound().getTag("chargeable")).setInteger("charge", charge);
+		((NBTTagCompound) stack.getTagCompound().getTag("chargeable")).setInteger("charge", charge);
+	}
+
+	private boolean hasTag(ItemStack stack) {
+		if (stack.getTagCompound() == null) {
+			return false;
+		}
+
+		if (stack.getTagCompound().getTag("chargeable") == null) {
+			return false;
+		}
+
+		return true;
 	}
 	
 	protected void reduceCharge(ItemStack stack, int charge) {
@@ -117,7 +132,7 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 	
 	@Override
 	public boolean isDamaged(ItemStack stack) {
-		return getTagCharge(stack) > 0;
+		return hasTag(stack);
 	}
 	
 	@Override
