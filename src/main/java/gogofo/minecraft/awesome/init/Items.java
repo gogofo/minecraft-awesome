@@ -79,7 +79,7 @@ public class Items {
 		aluminium_foil = registryItem(new ItemOneColored(Ores.aluminium.getColor()), "aluminium_foil");
 		items.add(aluminium_foil);
 
-		battery = registryItem(new ItemBattery(), "battery");
+		battery = registryItem(new ItemBattery().setColor(0xA67007), "battery");
 		items.add(battery);
 		
 		// Dusts
