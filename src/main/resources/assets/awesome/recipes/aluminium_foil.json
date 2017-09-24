@@ -8,9 +8,6 @@
 	"key": {
 		"A": {
 			"item": "awesome:aluminium_ingot"
-		},
-		"B": {
-			"item": "awesome:aluminium_dust"
 		}
 	},
 	"result": {
