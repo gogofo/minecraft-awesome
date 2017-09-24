@@ -39,6 +39,7 @@ item.chainsaw.name=Chainsaw
 item.drill.name=Drill
 item.wrench.name=Wrench
 item.tin_plating.name=Tin Plating
+item.aluminium_foil.name=Aluminium Foil
 
 # Minecraft dusts
 item.iron_dust.name=Iron Dust

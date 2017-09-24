@@ -1,0 +1,28 @@
+{
+    "display": {
+        "icon": {
+            "item": "awesome:aluminium_ingot"
+        },
+        "title": "Aluminium!",
+        "description": "Ho wonderful aluminium"
+    },
+    "criteria": {
+        "industrialize": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "awesome:aluminium_ingot",
+                        "data": 0
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "recipes": [
+            "awesome:aluminium_foil",
+            "awesome:battery"
+        ]
+    }
+}

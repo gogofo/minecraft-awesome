@@ -26,6 +26,7 @@ public class Items {
 	public static Item drill;
 	public static Item wrench;
 	public static Item tin_plating;
+	public static Item aluminium_foil;
 	public static Item battery;
 	
 	public static Item iron_dust;
@@ -72,8 +73,11 @@ public class Items {
 		wrench = registryItem(new ItemWrench(), "wrench");
 		items.add(wrench);
 
-		tin_plating = registryItem(new Item(), "tin_plating");
+		tin_plating = registryItem(new ItemOneColored(Ores.tin.getColor()), "tin_plating");
 		items.add(tin_plating);
+
+		aluminium_foil = registryItem(new ItemOneColored(Ores.aluminium.getColor()), "aluminium_foil");
+		items.add(aluminium_foil);
 
 		battery = registryItem(new ItemBattery(), "battery");
 		items.add(battery);

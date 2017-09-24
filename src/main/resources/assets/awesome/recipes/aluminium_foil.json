@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AAA",
+		"BBB",
+		"AAA"
+	],
+	"key": {
+		"A": {
+			"item": "awesome:aluminium_ingot"
+		},
+		"B": {
+			"item": "awesome:aluminium_dust"
+		}
+	},
+	"result": {
+		"item": "awesome:aluminium_foil",
+		"count": 6
+	}
+}
