@@ -117,7 +117,7 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 	
 	@Override
 	public boolean isDamaged(ItemStack stack) {
-		return true;
+		return getTagCharge(stack) > 0;
 	}
 	
 	@Override
