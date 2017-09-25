@@ -1,7 +1,12 @@
 package gogofo.minecraft.awesome.entity;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.MoverType;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -53,5 +58,35 @@ public class EntityConstructor extends Entity {
         this.posY = y;
         this.posZ = z;
         this.setEntityBoundingBox(new AxisAlignedBB(x, y, z, x + width, y + height, z + width));
+    }
+
+    public void moveToBlockPosAndAngles(BlockPos pos, float rotationYawIn, float rotationPitchIn)
+    {
+        this.setLocationAndAngles((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), rotationYawIn, rotationPitchIn);
+    }
+
+    @Override
+    public boolean canBeCollidedWith() {
+        return true;
+    }
+
+    /**
+     * Left click
+     */
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        return super.attackEntityFrom(source, amount);
+    }
+
+    /**
+     * Right click
+     */
+    @Override
+    public boolean processInitialInteract(EntityPlayer player, EnumHand hand) {
+        EnumFacing facing = player.getHorizontalFacing();
+        BlockPos npos = getPosition().offset(facing);
+        moveToBlockPosAndAngles(npos, rotationYaw, rotationPitch);
+
+      return true;
     }
 }
