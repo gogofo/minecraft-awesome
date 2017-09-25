@@ -3,9 +3,6 @@ package gogofo.minecraft.awesome;
 import gogofo.minecraft.awesome.creativetabs.AwesomeCreativeTab;
 import gogofo.minecraft.awesome.init.*;
 import gogofo.minecraft.awesome.proxy.CommonProxy;
-import gogofo.minecraft.awesome.recipe.RecipeFuser.Recipe;
-import net.minecraft.world.WorldProvider;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -13,7 +10,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = AwesomeMod.MODID, name = AwesomeMod.NAME, version = AwesomeMod.VERSION)
 public class AwesomeMod {
@@ -23,7 +19,10 @@ public class AwesomeMod {
 	
 	public static final String CLIENT_PROXY_CLASS = "gogofo.minecraft.awesome.proxy.ClientProxy";
     public static final String SERVER_PROXY_CLASS = "gogofo.minecraft.awesome.proxy.CommonProxy";
-    
+
+    @Mod.Instance(AwesomeMod.MODID)
+    public static AwesomeMod instance;
+
     @SidedProxy(clientSide = CLIENT_PROXY_CLASS, serverSide = SERVER_PROXY_CLASS)
 	public static CommonProxy proxy;
     
@@ -44,6 +43,8 @@ public class AwesomeMod {
         Items.init();
         TileEntities.register();
     	Messages.init();
+        Entities.registerEntities();
+        proxy.registerEntityRenders();
     }
     
     @EventHandler

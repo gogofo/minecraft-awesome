@@ -27,4 +27,7 @@ public class CommonProxy {
 		Blocks.registerOreDictEntries();
 		Items.registerOreDictEntries();
 	}
+
+	public void registerEntityRenders() {
+	}
 }

@@ -93,7 +93,7 @@ public class BlockTeleportPortal extends BlockBreakable implements ITileEntityPr
     }
 
     /**
-     * Called When an Entity Collided with the Block
+     * Called When an Entities Collided with the Block
      */
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {

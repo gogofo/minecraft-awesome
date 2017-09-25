@@ -111,7 +111,7 @@ public abstract class AwesomeBlockContainer extends BlockContainer {
 	}
     
     /**
-     * Possibly modify the given BlockState before rendering it on an Entity (Minecarts, Endermen, ...)
+     * Possibly modify the given BlockState before rendering it on an Entities (Minecarts, Endermen, ...)
      */
     @SideOnly(Side.CLIENT)
     public IBlockState getStateForEntityRender(IBlockState state)
