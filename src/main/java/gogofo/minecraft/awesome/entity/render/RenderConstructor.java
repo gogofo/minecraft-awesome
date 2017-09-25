@@ -1,8 +1,6 @@
 package gogofo.minecraft.awesome.entity.render;
 
 import gogofo.minecraft.awesome.entity.EntityConstructor;
-import gogofo.minecraft.awesome.models.ModelCube;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
@@ -13,8 +11,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 
 @SideOnly(Side.CLIENT)
-public class RenderConstructor extends RenderCube<EntityConstructor> {
-    
+public class RenderConstructor extends RenderBlock<EntityConstructor> {
+
     public RenderConstructor(RenderManager renderManagerIn)
     {
         super(renderManagerIn);

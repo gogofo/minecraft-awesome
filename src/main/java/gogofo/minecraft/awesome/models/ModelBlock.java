@@ -4,11 +4,11 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelCube extends ModelBase {
+public class ModelBlock extends ModelBase {
 
     private ModelRenderer cube;
 
-    public ModelCube() {
+    public ModelBlock() {
         cube = new ModelRenderer(this);
         cube.addBox(0, 0, 0, 16, 16, 16);
     }

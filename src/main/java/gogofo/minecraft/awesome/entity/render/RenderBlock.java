@@ -1,16 +1,16 @@
 package gogofo.minecraft.awesome.entity.render;
 
-import gogofo.minecraft.awesome.models.ModelCube;
+import gogofo.minecraft.awesome.models.ModelBlock;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 
-public abstract class RenderCube<T extends Entity> extends Render<T> {
+public abstract class RenderBlock<T extends Entity> extends Render<T> {
 
-    private ModelCube model = new ModelCube();
+    private ModelBlock model = new ModelBlock();
 
-    protected RenderCube(RenderManager renderManager) {
+    protected RenderBlock(RenderManager renderManager) {
         super(renderManager);
     }
 
