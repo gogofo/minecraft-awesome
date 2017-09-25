@@ -2,9 +2,13 @@ package gogofo.minecraft.awesome.entity;
 
 import gogofo.minecraft.awesome.init.Items;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -19,6 +23,8 @@ import static net.minecraft.block.Block.NULL_AABB;
 
 public class EntityConstructor extends Entity {
 
+    private static final DataParameter<Integer> FACING = EntityDataManager.createKey(EntityConstructor.class, DataSerializers.VARINT);
+
     public EntityConstructor(World world) {
         super(world);
         setSize(1, 1);
@@ -31,17 +37,27 @@ public class EntityConstructor extends Entity {
 
     @Override
     protected void entityInit() {
+        this.dataManager.register(FACING, EnumFacing.NORTH.ordinal());
+    }
 
+    public EnumFacing getFacing() {
+        return EnumFacing.values()[this.dataManager.get(FACING)];
+    }
+
+    public void setFacing(EnumFacing facing) {
+        this.dataManager.set(FACING, facing.ordinal());
     }
 
     @Override
     protected void readEntityFromNBT(NBTTagCompound compound) {
-
+        if (compound.hasKey("facing")) {
+            setFacing(EnumFacing.values()[compound.getInteger("facing")]);
+        }
     }
 
     @Override
     protected void writeEntityToNBT(NBTTagCompound compound) {
-
+        compound.setInteger("facing", getFacing().ordinal());
     }
 
     @Nullable
@@ -139,8 +155,11 @@ public class EntityConstructor extends Entity {
 
         if (ticksExisted % 20 == 0) {
             BlockPos prevPos = getPosition();
-            if (tryMove(EnumFacing.EAST)) {
+            EnumFacing facing = getFacing();
+            if (tryMove(facing)) {
                 world.setBlockState(prevPos, Blocks.COBBLESTONE.getDefaultState());
+            } else {
+                setFacing(facing.rotateY());
             }
         }
     }
