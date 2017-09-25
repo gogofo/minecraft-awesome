@@ -67,8 +67,7 @@ public class BlockTreeTap extends Block implements ITileEntityProvider, ISingleC
 
     @Override
     public int getColor() {
-        Ores.Ore copper = Ores.getByName("copper");
-        return copper != null ? copper.getColor() : 0x000000;
+        return Ores.copper.getColor();
     }
 
     @Override

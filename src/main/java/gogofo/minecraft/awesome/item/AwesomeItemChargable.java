@@ -52,7 +52,7 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 			charge -= usedCharge;
 			setTagCharge(stack, charge);
 		}
-		
+
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 	}
 	
@@ -62,10 +62,19 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 	}
 	
 	@Override
-	public void charge(ItemStack stack, int charge) {
+	public int charge(ItemStack stack, int charge) {
 		int newCharge = getTagCharge(stack);
 		newCharge += charge;
+
+		int maxCharge = getMaxCharge();
+		if (newCharge > maxCharge) {
+			charge -= newCharge - maxCharge;
+			newCharge = maxCharge;
+		}
+
 		setTagCharge(stack, newCharge);
+
+		return charge;
 	}
 	
 	private void ensureHasTag(ItemStack stack) {
@@ -81,13 +90,28 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 	}
 	
 	private int getTagCharge(ItemStack stack) {
-		ensureHasTag(stack);
-		return ((NBTTagCompound)stack.getTagCompound().getTag("chargeable")).getInteger("charge");
+		if (hasTag(stack)) {
+			return ((NBTTagCompound) stack.getTagCompound().getTag("chargeable")).getInteger("charge");
+		} else {
+			return 0;
+		}
 	}
 	
 	private void setTagCharge(ItemStack stack, int charge) {
 		ensureHasTag(stack);
-		((NBTTagCompound)stack.getTagCompound().getTag("chargeable")).setInteger("charge", charge);
+		((NBTTagCompound) stack.getTagCompound().getTag("chargeable")).setInteger("charge", charge);
+	}
+
+	private boolean hasTag(ItemStack stack) {
+		if (stack.getTagCompound() == null) {
+			return false;
+		}
+
+		if (stack.getTagCompound().getTag("chargeable") == null) {
+			return false;
+		}
+
+		return true;
 	}
 	
 	protected void reduceCharge(ItemStack stack, int charge) {
@@ -108,7 +132,7 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 	
 	@Override
 	public boolean isDamaged(ItemStack stack) {
-		return true;
+		return hasTag(stack);
 	}
 	
 	@Override

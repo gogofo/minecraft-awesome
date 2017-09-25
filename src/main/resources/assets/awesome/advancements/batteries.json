@@ -1,0 +1,21 @@
+{
+    "criteria": {
+        "industrialize": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "awesome:battery"
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "recipes": [
+            "awesome:big_battery",
+            "awesome:battery_pack",
+            "awesome:big_battery_pack"
+        ]
+    }
+}

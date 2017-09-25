@@ -1,32 +1,26 @@
 package gogofo.minecraft.awesome.item;
 
-import java.util.Set;
-
-import javax.annotation.Nullable;
-
-import com.google.common.collect.Sets;
-
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockTorch;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArrow;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class ItemDrill extends AwesomeItemChargable {
-	@Override
+
+    public static final int MAX_CHARGE_FOR_BLOCK = 10;
+
+    @Override
 	public int getMaxRequiredCharge(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos,
 			EnumFacing side, float hitX, float hitY, float hitZ) {
 		return 1;
@@ -109,11 +103,11 @@ public class ItemDrill extends AwesomeItemChargable {
 		
 		return 0;
 	}
-	
+
 	@Override
 	public float getStrVsBlock(ItemStack stack, IBlockState blockState)
     {
-		if (getCharge(stack) == 0) {
+		if (getCharge(stack) < MAX_CHARGE_FOR_BLOCK) {
 			return 0;
 		}
 		
@@ -126,21 +120,32 @@ public class ItemDrill extends AwesomeItemChargable {
 		return Items.DIAMOND_PICKAXE.canHarvestBlock(blockState) || 
 			   Items.DIAMOND_SHOVEL.canHarvestBlock(blockState);
 	}
-	
+
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState blockState, BlockPos pos, EntityLivingBase playerIn) {
-		final int chargeCost = 1;
+		final int chargeCost = getChargeForBlock(worldIn, blockState, pos);
 		
 		if (worldIn.isRemote) {
 			return false;
 		}
-		
-		if (getCharge(stack) < chargeCost) {
-			return false;
-		}
-		
-		reduceCharge(stack, chargeCost);
-		
-		return true;
-	}
+
+        reduceCharge(stack, chargeCost);
+
+        return true;
+    }
+
+	private int getChargeForBlock(World worldIn, IBlockState blockState, BlockPos pos) {
+        float hardness = blockState.getBlockHardness(worldIn, pos);
+        if (hardness < 1) {
+            return 1;
+        } else {
+            int charge = Math.round(hardness);
+
+            if (charge > MAX_CHARGE_FOR_BLOCK) {
+                charge = MAX_CHARGE_FOR_BLOCK;
+            }
+
+            return charge;
+        }
+    }
 }

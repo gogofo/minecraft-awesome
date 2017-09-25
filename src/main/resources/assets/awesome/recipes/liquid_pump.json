@@ -2,7 +2,8 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"ABA",
-		" A "
+		" A ",
+		" C "
 	],
 	"key": {
 	   "A": {
@@ -10,6 +11,9 @@
        },
 		"B": {
 			"item": "awesome:tool_core"
+		},
+		"C": {
+			"item": "awesome:big_battery"
 		}
 	},
 	"result": {

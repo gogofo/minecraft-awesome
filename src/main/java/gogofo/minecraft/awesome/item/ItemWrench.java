@@ -21,8 +21,7 @@ public class ItemWrench extends Item implements ISingleColoredObject {
 
     @Override
     public int getColor() {
-        Ores.Ore copper = Ores.getByName("copper");
-        return copper != null ? copper.getColor() : -1;
+        return Ores.copper.getColor();
     }
 
     @Override

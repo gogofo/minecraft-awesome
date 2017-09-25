@@ -16,7 +16,7 @@
 			"item": "minecraft:iron_block"
 		},
 		"D": {
-			"item": "minecraft:redstone_torch"
+			"item": "awesome:battery_pack"
 		}
 	},
 	"result": {

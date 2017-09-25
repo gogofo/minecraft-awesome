@@ -26,7 +26,12 @@ public class Items {
 	public static Item drill;
 	public static Item wrench;
 	public static Item tin_plating;
-	
+	public static Item aluminium_foil;
+	public static Item battery;
+	public static Item big_battery;
+	public static Item battery_pack;
+	public static Item big_battery_pack;
+
 	public static Item iron_dust;
 	public static Item gold_dust;
 	
@@ -71,8 +76,23 @@ public class Items {
 		wrench = registryItem(new ItemWrench(), "wrench");
 		items.add(wrench);
 
-		tin_plating = registryItem(new Item(), "tin_plating");
+		tin_plating = registryItem(new ItemOneColored(Ores.tin.getColor()), "tin_plating");
 		items.add(tin_plating);
+
+		aluminium_foil = registryItem(new ItemOneColored(Ores.aluminium.getColor()), "aluminium_foil");
+		items.add(aluminium_foil);
+
+		battery = registryItem(new ItemBattery().setColor(0xA67007).setMaxCharge(300), "battery");
+		items.add(battery);
+
+		big_battery = registryItem(new ItemBattery().setColor(0x56C640).setMaxCharge(1000), "big_battery");
+		items.add(big_battery);
+
+		battery_pack = registryItem(new ItemBattery().setColor(0xA67007).setMaxCharge(3000), "battery_pack");
+		items.add(battery_pack);
+
+		big_battery_pack = registryItem(new ItemBattery().setColor(0x56C640).setMaxCharge(10000), "big_battery_pack");
+		items.add(big_battery_pack);
 		
 		// Dusts
 		iron_dust = registryItem(new ItemOneColored(0xFFDEDEDE), "iron_dust");

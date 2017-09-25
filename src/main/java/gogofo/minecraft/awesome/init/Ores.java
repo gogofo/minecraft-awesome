@@ -9,42 +9,38 @@ import java.util.ArrayList;
 public class Ores {
     private static ArrayList<Ore> ores = new ArrayList<>();
 
+    public static Ore copper;
+    public static Ore tin;
+    public static Ore uranium;
+    public static Ore platinum;
+    public static Ore aluminium;
+
     public static void init() {
-        Ore ore = new Ore("copper", 0xFFDA8A67, true, true, true, 2)
+        copper = new Ore("copper", 0xFFDA8A67, true, true, true, 2)
                 .setToolsConfig(new Ore.ToolsConfig(true, true, true, Materials.COPPER_TOOL, Materials.COPPER_ARMOR))
                 .addGenerationConfig(new Ore.GenerationConfig(0, 200, 100, 25, 10));
-        ores.add(ore);
+        ores.add(copper);
 
-        ore = new Ore("tin", 0xFFD8D8D8, true, true, true, 2)
+        tin = new Ore("tin", 0xFFD8D8D8, true, true, true, 2)
                 .addGenerationConfig(new Ore.GenerationConfig(0, 200, 100, 25, 10));
-        ores.add(ore);
+        ores.add(tin);
 
-        ore = new Ore("uranium", 0x32CD32, true, true, true, 1)
+        uranium = new Ore("uranium", 0x32CD32, true, true, true, 1)
                 .addGenerationConfig(new Ore.GenerationConfig(0, 40, 100, 1, 3));
-        ores.add(ore);
+        ores.add(uranium);
 
-        ore = new Ore("platinum", 0xE5E4E2, true, true, true, 2)
+        platinum = new Ore("platinum", 0xE5E4E2, true, true, true, 2)
                 .setToolsConfig(new Ore.ToolsConfig(true, true, true, Materials.PLATINUM_TOOL, Materials.PLATINUM_ARMOR))
                 .addGenerationConfig(new Ore.GenerationConfig(0, 54, 100, 8, 6));
-        ores.add(ore);
+        ores.add(platinum);
 
-        ore = new Ore("aluminium", 0xD2D3D3, true, true, true, 2)
+        aluminium = new Ore("aluminium", 0xD2D3D3, true, true, true, 2)
                 .addGenerationConfig(new Ore.GenerationConfig(0, 54, 100, 8, 6));
-        ores.add(ore);
+        ores.add(aluminium);
     }
 
     public static ArrayList<Ore> getOres() {
         return ores;
-    }
-
-    public static Ore getByName(String name) {
-        for (Ore ore : ores) {
-            if (ore.name.equals(name)) {
-                return ore;
-            }
-        }
-
-        return null;
     }
 
     public static class Ore {
