@@ -13,6 +13,8 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
+import static net.minecraft.block.Block.NULL_AABB;
+
 public class EntityConstructor extends Entity {
 
     public EntityConstructor(World world) {
@@ -84,9 +86,14 @@ public class EntityConstructor extends Entity {
     @Override
     public boolean processInitialInteract(EntityPlayer player, EnumHand hand) {
         EnumFacing facing = player.getHorizontalFacing();
-        BlockPos npos = getPosition().offset(facing);
-        moveToBlockPosAndAngles(npos, rotationYaw, rotationPitch);
+        BlockPos new_pos = getPosition().offset(facing);
+        BlockPos below_pos = new_pos.offset(EnumFacing.DOWN);
+        
+        if (world.getBlockState(new_pos).getBlock().isReplaceable(world, new_pos) &&
+                world.getBlockState(below_pos).getCollisionBoundingBox(world, below_pos) != NULL_AABB) {
+            moveToBlockPosAndAngles(new_pos, rotationYaw, rotationPitch);
+        }
 
-      return true;
+        return true;
     }
 }
