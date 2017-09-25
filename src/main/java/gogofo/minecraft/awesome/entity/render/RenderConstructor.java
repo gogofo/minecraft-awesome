@@ -13,26 +13,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 
 @SideOnly(Side.CLIENT)
-public class RenderConstructor extends Render<EntityConstructor> {
-
-    private ModelCube model = new ModelCube();
-
+public class RenderConstructor extends RenderCube<EntityConstructor> {
+    
     public RenderConstructor(RenderManager renderManagerIn)
     {
         super(renderManagerIn);
-    }
-
-    @Override
-    public void doRender(EntityConstructor entity, double x, double y, double z, float entityYaw, float partialTicks)
-    {
-        GlStateManager.pushMatrix();
-        GlStateManager.translate(x, y, z);
-        this.bindEntityTexture(entity);
-
-        model.render(entity, partialTicks, 0, 0, 0, 0, 0.0625f);
-
-        GlStateManager.popMatrix();
-        super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 
     @Nullable
