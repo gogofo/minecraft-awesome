@@ -1,7 +1,7 @@
 package gogofo.minecraft.awesome.entity;
 
+import gogofo.minecraft.awesome.init.Items;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-
 import java.util.List;
 
 import static net.minecraft.block.Block.NULL_AABB;
@@ -86,7 +85,17 @@ public class EntityConstructor extends Entity {
      */
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        return super.attackEntityFrom(source, amount);
+        if (world.isRemote) {
+            return false;
+        }
+
+        if (!source.isCreativePlayer()) {
+            dropItem(Items.burnt_residue, 1);
+        }
+
+        setDead();
+
+        return false;
     }
 
     /**
