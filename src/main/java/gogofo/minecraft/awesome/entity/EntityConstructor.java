@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import static net.minecraft.block.Block.NULL_AABB;
 
-public class EntityConstructor extends EntityBlock {
+public class EntityConstructor extends EntityMachineBlock {
 
     public EntityConstructor(World world) {
         super(world);
@@ -76,13 +76,7 @@ public class EntityConstructor extends EntityBlock {
     }
 
     @Override
-    public void onUpdate() {
-        if (world.isRemote) {
-            return;
-        }
-
-        super.onUpdate();
-
+    protected void onElectricUpdate() {
         if (ticksExisted % 20 == 0) {
             BlockPos prevPos = getPosition();
             EnumFacing facing = getFacing();
@@ -93,6 +87,4 @@ public class EntityConstructor extends EntityBlock {
             }
         }
     }
-
-
 }
