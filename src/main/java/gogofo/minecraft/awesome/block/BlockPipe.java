@@ -263,22 +263,15 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider, IS
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
 		super.onBlockAdded(worldIn, pos, state);
-//		
-//		if (!worldIn.isRemote) {
-//			PowerManager.instance.registerWire(pos);
-//		}
 	}
     
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-//    	if (!worldIn.isRemote) {
-//    		PowerManager.instance.unregisterWire(pos);
-//    	}
-    	
     	TileEntity tileentity = worldIn.getTileEntity(pos);
 
-        if (tileentity instanceof IInventory)
+        if (tileentity instanceof TileEntityPipe)
         {
+			((TileEntityPipe)tileentity).clearAllStackTags();
             InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory)tileentity);
         }
 
