@@ -1,6 +1,13 @@
+0.56
+-------------------
+
+
+-------------------
 0.55
 -------------------
 
+- Fix sorting pipe using backwards with the same priority as all
+- Fix tags on items dropped from destroyed pipe
 
 -------------------
 0.54
