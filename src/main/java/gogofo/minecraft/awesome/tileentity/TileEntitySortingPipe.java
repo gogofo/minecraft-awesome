@@ -76,7 +76,8 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 	
 	@Override
 	protected ArrayList<BlockPos> getSecondaryDestsWithoutChecks(ItemStack stack) {
-		ArrayList<BlockPos> dests = super.getSecondaryDestsWithoutChecks(stack);
+		ArrayList<BlockPos> baseSecondaryDests = super.getSecondaryDestsWithoutChecks(stack);
+		ArrayList<BlockPos> dests = new ArrayList<>();
 		
 		for (EnumFacing facing : EnumFacing.VALUES) {
 			if (super.canTransferTo(stack, facing, false) && 
@@ -88,7 +89,7 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 		// Make sure the dests change if there are few with the same priority
 		Collections.shuffle(dests);
 		
-		ArrayList<BlockPos> priorityDest = new ArrayList<BlockPos>();
+		ArrayList<BlockPos> priorityDest = new ArrayList<>();
 		
 		for (BlockPos pos : dests) {
 			if (canTransferTo(stack, facingForCloseBlock(pos), true)) {
@@ -98,6 +99,7 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 		
 		dests.removeAll(priorityDest);
 		dests.addAll(0, priorityDest);
+		dests.addAll(baseSecondaryDests);
 		
 		return dests;
 	}

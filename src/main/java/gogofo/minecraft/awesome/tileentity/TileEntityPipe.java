@@ -227,6 +227,17 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		}
 		
 		stack.getTagCompound().removeTag("pipe");
+
+		if (stack.getTagCompound().getKeySet().isEmpty()) {
+			stack.setTagCompound(null);
+		}
+	}
+
+	public void clearAllStackTags() {
+		for (int i = 0; i < getTransferSlotCount(); i++) {
+			ItemStack stack = super.getStackInSlot(i);
+			clearTagCompound(stack);
+		}
 	}
 	
 	public int getStackCooldown(ItemStack stack) {
