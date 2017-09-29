@@ -3,6 +3,7 @@ package gogofo.minecraft.awesome.entity;
 import gogofo.minecraft.awesome.gui.GuiEnum;
 import gogofo.minecraft.awesome.init.Items;
 import gogofo.minecraft.awesome.inventory.ContainerConstructor;
+import javafx.util.Pair;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -39,7 +40,7 @@ public class EntityConstructor extends EntityMachineBlock {
     }
 
     @Override
-    protected void onElectricUpdate() {
+    protected int[] onElectricUpdate() {
         if (ticksExisted % 20 == 0) {
             BlockPos prevPos = getPosition();
             EnumFacing facing = getFacing();
@@ -49,6 +50,8 @@ public class EntityConstructor extends EntityMachineBlock {
                 setFacing(facing.rotateY());
             }
         }
+
+        return new int[] {1, 1};
     }
 
     @Override

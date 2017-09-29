@@ -8,6 +8,7 @@ import gogofo.minecraft.awesome.interfaces.ILiquidContainer;
 import gogofo.minecraft.awesome.item.ItemBattery;
 import gogofo.minecraft.awesome.item.ItemLiquidContainer;
 import gogofo.minecraft.awesome.utils.InventoryUtils;
+import javafx.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -117,7 +118,24 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
             return;
         }
 
-        onElectricUpdate();
+        ItemStack stackInSlot = getStackInSlot(0);
+
+        if (!(stackInSlot.getItem() instanceof ItemBattery) ||
+                !((ItemBattery)stackInSlot.getItem()).hasCharge(stackInSlot)) {
+            return;
+        }
+
+        int oilAmount = getOilAmount();
+
+        if (oilAmount == 0) {
+            return;
+        }
+
+        int[] usage = onElectricUpdate();
+
+        ((ItemBattery)stackInSlot.getItem()).reduceCharge(stackInSlot, usage[0]);
+        setOilAmount(oilAmount - usage[1]);
+        markDirty();
     }
 
     @Override
@@ -323,7 +341,7 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
     }
     //</editor-fold>
 
-    protected abstract void onElectricUpdate();
+    protected abstract int[] onElectricUpdate();
     protected abstract GuiEnum getGui();
     protected abstract Item getDroppedItem();
     public abstract int getOilCapacity();

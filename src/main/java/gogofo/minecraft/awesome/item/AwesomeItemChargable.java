@@ -114,7 +114,7 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 		return true;
 	}
 	
-	protected void reduceCharge(ItemStack stack, int charge) {
+	public void reduceCharge(ItemStack stack, int charge) {
 		int newCharge = getCharge(stack) - charge;
 		
 		if (newCharge < 0) {
@@ -122,6 +122,10 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 		}
 		
 		setTagCharge(stack, newCharge);
+	}
+
+	public boolean hasCharge(ItemStack stack) {
+		return getCharge(stack) > 0;
 	}
 	
 	@Override
