@@ -182,7 +182,6 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
 
     @Override
     public void markDirty() {
-//        notify();
         // TODO: What to do?
     }
 
