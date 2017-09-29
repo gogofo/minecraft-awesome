@@ -15,7 +15,7 @@ import java.util.List;
 
 public abstract class EntityBlock extends Entity {
 
-    private static final DataParameter<Integer> FACING = EntityDataManager.createKey(EntityConstructor.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> FACING = EntityDataManager.createKey(EntityBlock.class, DataSerializers.VARINT);
 
     public EntityBlock(World worldIn) {
         super(worldIn);

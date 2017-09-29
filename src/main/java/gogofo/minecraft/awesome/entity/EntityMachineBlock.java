@@ -3,11 +3,15 @@ package gogofo.minecraft.awesome.entity;
 import gogofo.minecraft.awesome.AwesomeMod;
 import gogofo.minecraft.awesome.gui.GuiEnum;
 import gogofo.minecraft.awesome.interfaces.IConfigurableSidedInventory;
+import gogofo.minecraft.awesome.item.ItemBattery;
 import gogofo.minecraft.awesome.utils.InventoryUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -19,6 +23,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class EntityMachineBlock extends EntityBlock implements IInteractionObject, IConfigurableSidedInventory {
+
+    private static final DataParameter<Integer> OIL_AMOUNT = EntityDataManager.createKey(EntityMachineBlock.class, DataSerializers.VARINT);
+    public static final int FIELD_ID_OIL_AMOUNT = 0;
 
     protected ItemStack[] itemStackArray;
     protected ArrayList<ArrayList<Integer>> slotsForFace;
@@ -39,6 +46,20 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
 
         Arrays.fill(itemStackArray, ItemStack.EMPTY);
         InventoryUtils.initSlotsForFace(slotsForFace, this, true);
+    }
+
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        dataManager.register(OIL_AMOUNT, 0);
+    }
+
+    public int getOilAmount() {
+        return dataManager.get(OIL_AMOUNT);
+    }
+
+    public void setOilAmount(int amount) {
+        dataManager.set(OIL_AMOUNT, amount);
     }
 
     @Override
@@ -99,6 +120,7 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
         super.writeEntityToNBT(compound);
 
         InventoryUtils.writeToNBT(itemStackArray, this, compound);
+        compound.setInteger("oilAmount", getOilAmount());
     }
 
     @Override
@@ -106,6 +128,10 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
         super.readEntityFromNBT(compound);
 
         InventoryUtils.readFromNBT(itemStackArray, slotsForFace, this, compound);
+
+        if (compound.hasKey("oilAmount")) {
+            setOilAmount(compound.getInteger("oilAmount"));
+        }
     }
 
     //<editor-fold desc="Inventory">
@@ -165,7 +191,11 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return false;
+        if (index == 0) {
+            return stack.getItem() instanceof ItemBattery;
+        }
+
+        return true;
     }
 
     @Override
@@ -206,10 +236,42 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
         slotsForFace.get(face.getIndex()).remove(slot);
         markDirty();
     }
+
+    protected int getSlotCount() {
+        return 1;
+    }
+
+    @Override
+    public int getField(int id) {
+        switch (id) {
+            case FIELD_ID_OIL_AMOUNT:
+                return getOilAmount();
+        }
+
+        return 0;
+    }
+
+    @Override
+    public void setField(int id, int value) {
+        switch (id) {
+            case FIELD_ID_OIL_AMOUNT:
+                setOilAmount(value);
+                break;
+        }
+    }
+
+    @Override
+    public int getFieldCount() {
+        return 1;
+    }
+
+    @Override
+    public Integer[] getDefaultSlotForFace(EnumFacing face) {
+        return new Integer[] {0};
+    }
     //</editor-fold>
 
     protected abstract void onElectricUpdate();
     protected abstract GuiEnum getGui();
-    protected abstract int getSlotCount();
     protected abstract Item getDroppedItem();
 }

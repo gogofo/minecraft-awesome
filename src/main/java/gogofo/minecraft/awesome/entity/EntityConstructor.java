@@ -8,7 +8,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -62,36 +61,8 @@ public class EntityConstructor extends EntityMachineBlock {
         return new ContainerConstructor(playerInventory, this);
     }
 
-    protected int getSlotCount() {
-        return 1;
-    }
-
     @Override
     protected Item getDroppedItem() {
         return Items.burnt_residue;
-    }
-
-    @Override
-    public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return false;
-    }
-
-    @Override
-    public int getField(int id) {
-        return 0;
-    }
-
-    @Override
-    public void setField(int id, int value) {
-    }
-
-    @Override
-    public int getFieldCount() {
-        return 0;
-    }
-
-    @Override
-    public Integer[] getDefaultSlotForFace(EnumFacing face) {
-        return new Integer[] {0};
     }
 }
