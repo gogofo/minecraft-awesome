@@ -63,7 +63,7 @@ public class EntityConstructor extends EntityMachineBlock {
     }
 
     protected int getSlotCount() {
-        return 3;
+        return 1;
     }
 
     @Override
@@ -92,6 +92,6 @@ public class EntityConstructor extends EntityMachineBlock {
 
     @Override
     public Integer[] getDefaultSlotForFace(EnumFacing face) {
-        return new Integer[] {0,1,2};
+        return new Integer[] {0};
     }
 }

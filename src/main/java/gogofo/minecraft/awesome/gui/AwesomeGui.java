@@ -238,4 +238,28 @@ public abstract class AwesomeGui extends GuiContainer {
 	    	offset += MAX_LEN;
     	}
     }
+
+    protected void drawGlassContainer(int x, int y, int height) {
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		drawTexturedModalRect(guiX() + x, guiY() + y,
+				176, 99,
+				20, 2);
+		y += 2;
+
+		height -= 4;
+
+		while (height > 0) {
+			int heightToDraw = Math.min(height, 16);
+			drawTexturedModalRect(guiX() + x, guiY() + y,
+					176, 101,
+					20, heightToDraw);
+
+			height -= heightToDraw;
+			y += heightToDraw;
+		}
+
+		drawTexturedModalRect(guiX() + x, guiY() + y,
+				176, 117,
+				20, 2);
+	}
 }

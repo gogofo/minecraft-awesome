@@ -4,17 +4,15 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 
 public class ContainerConstructor extends AwesomeContainer {
-    public ContainerConstructor(InventoryPlayer inventoryPlayer, IInventory generatorInventory)
+    public ContainerConstructor(InventoryPlayer inventoryPlayer, IInventory inventory)
     {
-    	super(inventoryPlayer, generatorInventory);
+    	super(inventoryPlayer, inventory);
     	
-        this.addSlotToContainer(new AwesomeSlot(generatorInventory, 0, 56, 20));
-        this.addSlotToContainer(new AwesomeSlot(generatorInventory, 1, 56, 45));
-        this.addSlotToContainer(new AwesomeSlotBigOutput(generatorInventory, 2, 116, 38));
+        this.addSlotToContainer(new AwesomeSlot(inventory, 0, 56, 20));
     }
 
 	@Override
 	protected int getCustomSlotCount() {
-		return 3;
+		return 1;
 	}
 }
