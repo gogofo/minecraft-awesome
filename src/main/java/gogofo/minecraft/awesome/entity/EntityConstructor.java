@@ -65,4 +65,9 @@ public class EntityConstructor extends EntityMachineBlock {
     protected Item getDroppedItem() {
         return Items.burnt_residue;
     }
+
+    @Override
+    protected int getOilCapacity() {
+        return 10;
+    }
 }

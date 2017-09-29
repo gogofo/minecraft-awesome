@@ -119,7 +119,7 @@ public class ItemLiquidContainer extends Item {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		ItemStack stack = playerIn.getHeldItem(handIn);
-		
+
 		RayTraceResult rayTraceResult = this.rayTrace(worldIn, playerIn, false);
 
         if (rayTraceResult == null)
@@ -143,24 +143,7 @@ public class ItemLiquidContainer extends Item {
 		if (tileEntity instanceof ILiquidContainer) {
 			ILiquidContainer container = (ILiquidContainer) tileEntity;
 
-			if (!playerIn.isSneaking()) {
-				if (getLiquidFill(stack) > 0) {
-					int liquidPlaced = container.tryPlaceLiquid(getLiquidType(stack), 1);
-					decLiquid(stack, liquidPlaced);
-				}
-			} else if (getLiquidFill(stack) < getMaxLiquid()){
-				Block liquidType = getLiquidType(stack);
-				if (liquidType == Blocks.AIR) {
-					liquidType = container.getSubstance();
-				}
-
-				int liquidTaken = container.tryTakeLiquid(liquidType, 1);
-
-				if (liquidTaken > 0) {
-					incLiquid(stack, liquidTaken);
-					setLiquidType(stack, liquidType);
-				}
-			}
+			interactWithLiquidContainer(playerIn, stack, container);
 		} else if (getLiquidFill(stack) > 0) {
 			BlockPos sideBlockPos = blockpos.offset(rayTraceResult.sideHit);
 			if (tryPlaceContainedLiquid(stack, worldIn, sideBlockPos)) {
@@ -168,7 +151,28 @@ public class ItemLiquidContainer extends Item {
 			}
 		}
 	}
-	
+
+	public void interactWithLiquidContainer(EntityPlayer playerIn, ItemStack stack, ILiquidContainer container) {
+		if (!playerIn.isSneaking()) {
+            if (getLiquidFill(stack) > 0) {
+                int liquidPlaced = container.tryPlaceLiquid(getLiquidType(stack), 1);
+                decLiquid(stack, liquidPlaced);
+            }
+        } else if (getLiquidFill(stack) < getMaxLiquid()){
+            Block liquidType = getLiquidType(stack);
+            if (liquidType == Blocks.AIR) {
+                liquidType = container.getSubstance();
+            }
+
+            int liquidTaken = container.tryTakeLiquid(liquidType, 1);
+
+            if (liquidTaken > 0) {
+                incLiquid(stack, liquidTaken);
+                setLiquidType(stack, liquidType);
+            }
+        }
+	}
+
 	public boolean tryPlaceContainedLiquid(ItemStack stack, World worldIn, BlockPos pos)
     {
         if (getLiquidType(stack) == Blocks.AIR)

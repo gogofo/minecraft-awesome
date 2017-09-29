@@ -2,9 +2,13 @@ package gogofo.minecraft.awesome.entity;
 
 import gogofo.minecraft.awesome.AwesomeMod;
 import gogofo.minecraft.awesome.gui.GuiEnum;
+import gogofo.minecraft.awesome.init.Blocks;
 import gogofo.minecraft.awesome.interfaces.IConfigurableSidedInventory;
+import gogofo.minecraft.awesome.interfaces.ILiquidContainer;
 import gogofo.minecraft.awesome.item.ItemBattery;
+import gogofo.minecraft.awesome.item.ItemLiquidContainer;
 import gogofo.minecraft.awesome.utils.InventoryUtils;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,7 +26,7 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public abstract class EntityMachineBlock extends EntityBlock implements IInteractionObject, IConfigurableSidedInventory {
+public abstract class EntityMachineBlock extends EntityBlock implements IInteractionObject, IConfigurableSidedInventory, ILiquidContainer {
 
     private static final DataParameter<Integer> OIL_AMOUNT = EntityDataManager.createKey(EntityMachineBlock.class, DataSerializers.VARINT);
     public static final int FIELD_ID_OIL_AMOUNT = 0;
@@ -84,6 +88,12 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
     public boolean processInitialInteract(EntityPlayer player, EnumHand hand) {
         if (player.isSneaking()) {
             return false;
+        }
+
+        ItemStack heldStack = player.getHeldItem(hand);
+        if (heldStack.getItem() instanceof ItemLiquidContainer) {
+            ((ItemLiquidContainer)heldStack.getItem()).interactWithLiquidContainer(player, heldStack, this);
+            return true;
         }
 
         if (!world.isRemote) {
@@ -271,7 +281,51 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
     }
     //</editor-fold>
 
+    //<editor-fold desc="LiquidContainer">
+    public int tryPlaceLiquid(Block substance, int amount) {
+        if (substance != Blocks.oil) {
+            return 0;
+        }
+
+        int addedAmount = amount;
+        int oilCapacity = getOilCapacity();
+        int curAmount = getOilAmount();
+
+        if (curAmount + addedAmount > oilCapacity) {
+            addedAmount = oilCapacity - amount;
+        }
+
+        setOilAmount(curAmount + addedAmount);
+        markDirty();
+
+        return addedAmount;
+    }
+
+    public int tryTakeLiquid(Block substance, int amount) {
+        if (substance != Blocks.oil) {
+            return 0;
+        }
+
+        int takenAmount = amount;
+        int curAmount = getOilAmount();
+
+        if (takenAmount > curAmount) {
+            takenAmount = curAmount;
+        }
+
+        setOilAmount(curAmount - takenAmount);
+        markDirty();
+
+        return takenAmount;
+    }
+
+    public Block getSubstance() {
+        return Blocks.oil;
+    }
+    //</editor-fold>
+
     protected abstract void onElectricUpdate();
     protected abstract GuiEnum getGui();
     protected abstract Item getDroppedItem();
+    protected abstract int getOilCapacity();
 }
