@@ -86,14 +86,14 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
 
     @Override
     public boolean processInitialInteract(EntityPlayer player, EnumHand hand) {
-        if (player.isSneaking()) {
-            return false;
-        }
-
         ItemStack heldStack = player.getHeldItem(hand);
         if (heldStack.getItem() instanceof ItemLiquidContainer) {
             ((ItemLiquidContainer)heldStack.getItem()).interactWithLiquidContainer(player, heldStack, this);
             return true;
+        }
+
+        if (player.isSneaking()) {
+            return false;
         }
 
         if (!world.isRemote) {
@@ -327,5 +327,5 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
     protected abstract void onElectricUpdate();
     protected abstract GuiEnum getGui();
     protected abstract Item getDroppedItem();
-    protected abstract int getOilCapacity();
+    public abstract int getOilCapacity();
 }

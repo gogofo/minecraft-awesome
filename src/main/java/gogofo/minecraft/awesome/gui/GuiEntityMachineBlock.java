@@ -1,9 +1,19 @@
 package gogofo.minecraft.awesome.gui;
 
 import gogofo.minecraft.awesome.entity.EntityMachineBlock;
+import gogofo.minecraft.awesome.init.Fluids;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class GuiEntityMachineBlock extends AwesomeGui{
+    public static final int OIL_X = 80;
+    public static final int OIL_Y = 30;
+    public static final int OIL_HEIGHT = 50;
+
+    public static final int GLASS_X = OIL_X + 2;
+    public static final int GLASS_Y = OIL_Y + 2;
+    public static final int GLASS_HEIGHT = OIL_HEIGHT - 4;
+    public static final int GLASS_WIDTH = 16;
+
     protected final EntityMachineBlock entity;
     protected InventoryPlayer playerInventory;
 
@@ -22,6 +32,20 @@ public class GuiEntityMachineBlock extends AwesomeGui{
     protected void drawCustomGui() {
         drawSlotsByCustomContainer(entity.createContainer(playerInventory, playerInventory.player));
 
-        drawGlassContainer(80, 30, 50);
+        float fill = entity.getOilAmount() * 1.0f / entity.getOilCapacity();
+
+        drawRect(guiX() + GLASS_X,
+                guiY() + GLASS_Y,
+                guiX() + GLASS_X + GLASS_WIDTH,
+                guiY() + GLASS_Y + GLASS_HEIGHT,
+                0xFF8B8B8B);
+
+        drawRect(guiX() + GLASS_X,
+                guiY() + GLASS_Y + Math.round(GLASS_HEIGHT * (1-fill)),
+                guiX() + GLASS_X + GLASS_WIDTH,
+                guiY() + GLASS_Y + GLASS_HEIGHT,
+                Fluids.oil.getColor());
+
+        drawGlassContainer(OIL_X, OIL_Y, OIL_HEIGHT);
     }
 }

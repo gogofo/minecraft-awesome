@@ -67,7 +67,7 @@ public class EntityConstructor extends EntityMachineBlock {
     }
 
     @Override
-    protected int getOilCapacity() {
+    public int getOilCapacity() {
         return 10;
     }
 }
