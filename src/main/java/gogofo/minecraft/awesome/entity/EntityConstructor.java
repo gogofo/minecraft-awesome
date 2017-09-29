@@ -1,15 +1,19 @@
 package gogofo.minecraft.awesome.entity;
 
+import gogofo.minecraft.awesome.gui.GuiEnum;
 import gogofo.minecraft.awesome.init.Items;
+import gogofo.minecraft.awesome.inventory.ContainerConstructor;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
+import net.minecraft.inventory.Container;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import static gogofo.minecraft.awesome.gui.GuiEnum.E_CONSTRUCTOR;
 import static net.minecraft.block.Block.NULL_AABB;
 
 public class EntityConstructor extends EntityMachineBlock {
@@ -25,46 +29,6 @@ public class EntityConstructor extends EntityMachineBlock {
     @Override
     protected void entityInit() {
         super.entityInit();
-    }
-
-    @Override
-    protected void writeEntityToNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
-    }
-
-    @Override
-    protected void readEntityFromNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
-    }
-
-    /**
-     * Left click
-     */
-    @Override
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (world.isRemote) {
-            return false;
-        }
-
-        if (!source.isCreativePlayer()) {
-            dropItem(Items.burnt_residue, 1);
-        }
-
-        setDead();
-
-        return false;
-    }
-
-    /**
-     * Right click
-     */
-    @Override
-    public boolean processInitialInteract(EntityPlayer player, EnumHand hand) {
-        EnumFacing facing = player.getHorizontalFacing();
-
-        tryMove(facing);
-
-        return true;
     }
 
     @Override
@@ -86,5 +50,48 @@ public class EntityConstructor extends EntityMachineBlock {
                 setFacing(facing.rotateY());
             }
         }
+    }
+
+    @Override
+    protected GuiEnum getGui() {
+        return E_CONSTRUCTOR;
+    }
+
+    @Override
+    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
+        return new ContainerConstructor(playerInventory, this);
+    }
+
+    protected int getSlotCount() {
+        return 3;
+    }
+
+    @Override
+    protected Item getDroppedItem() {
+        return Items.burnt_residue;
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public int getField(int id) {
+        return 0;
+    }
+
+    @Override
+    public void setField(int id, int value) {
+    }
+
+    @Override
+    public int getFieldCount() {
+        return 0;
+    }
+
+    @Override
+    public Integer[] getDefaultSlotForFace(EnumFacing face) {
+        return new Integer[] {0,1,2};
     }
 }

@@ -2,6 +2,7 @@ package gogofo.minecraft.awesome.gui;
 
 import gogofo.minecraft.awesome.AwesomeMod;
 import gogofo.minecraft.awesome.interfaces.IConfigurableSidedInventory;
+import gogofo.minecraft.awesome.interfaces.IPositionedSidedInventory;
 import gogofo.minecraft.awesome.inventory.AwesomeSlot;
 import gogofo.minecraft.awesome.inventory.AwesomeSlotBig;
 import gogofo.minecraft.awesome.inventory.ContainerGenerator;
@@ -21,14 +22,14 @@ public abstract class AwesomeGui extends GuiContainer {
 	
 	private ResourceLocation guiTextures;
     protected final InventoryPlayer playerInventory;
-    protected final IConfigurableSidedInventory customInventory;   
+    protected final IPositionedSidedInventory customInventory;
     
     protected abstract void drawCustomGui();
     
 
     public AwesomeGui(Container container,
-    				  InventoryPlayer playerInventory, 
-    				  IConfigurableSidedInventory customInventory)
+    				  InventoryPlayer playerInventory,
+					  IPositionedSidedInventory customInventory)
     {
         super(container);
         this.playerInventory = playerInventory;

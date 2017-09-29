@@ -378,7 +378,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	}
 	
 	@Override
-	protected Integer[] getDefaultSlotForFace(EnumFacing face) {
+	public Integer[] getDefaultSlotForFace(EnumFacing face) {
 		switch (face) {
 		case UP:
 			return getSlotsGeneric(27);

@@ -117,7 +117,7 @@ public class TileEntityCharger extends AwesomeTileEntityMachine {
 	}
 	
 	@Override
-	protected Integer[] getDefaultSlotForFace(EnumFacing face) {
+	public Integer[] getDefaultSlotForFace(EnumFacing face) {
 		switch (face) {
 		case UP:
 			return new Integer[] {0};

@@ -1,23 +1,16 @@
 package gogofo.minecraft.awesome.gui;
 
-import java.awt.Color;
 import java.io.IOException;
 
-import gogofo.minecraft.awesome.AwesomeMod;
 import gogofo.minecraft.awesome.gui.controls.ColorGuiButton;
-import gogofo.minecraft.awesome.interfaces.IConfigurableSidedInventory;
+import gogofo.minecraft.awesome.interfaces.IPositionedSidedInventory;
 import gogofo.minecraft.awesome.inventory.SlotCategoryIdToColor;
 import gogofo.minecraft.awesome.network.AwesomeControlSidesUpdateMessage;
 import gogofo.minecraft.awesome.network.AwesomeNetworkHandler;
-import gogofo.minecraft.awesome.tileentity.AwesomeTileEntityContainer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 
 public abstract class AwesomeGuiWithControls extends AwesomeGui {
 
@@ -35,14 +28,14 @@ public abstract class AwesomeGuiWithControls extends AwesomeGui {
 	private ColorGuiButton[] faceButtons;
 	
 	protected boolean controlActive = false;
-	private AwesomeTileEntityContainer tileEntity;
+	private IPositionedSidedInventory inventory;
 	
 	public AwesomeGuiWithControls(Container container, 
-								  InventoryPlayer playerInventory, 
-								  AwesomeTileEntityContainer customInventory) {
+								  InventoryPlayer playerInventory,
+								  IPositionedSidedInventory customInventory) {
 		super(container, playerInventory, customInventory);
 		
-		this.tileEntity = customInventory;
+		this.inventory = customInventory;
 		
 		faceButtons = new ColorGuiButton[EnumFacing.values().length];
 	}
@@ -97,7 +90,7 @@ public abstract class AwesomeGuiWithControls extends AwesomeGui {
         	background.visible = true;
 	        
 	        for (EnumFacing face : EnumFacing.values()) {
-	        	int[] slots = tileEntity.getSlotsForFace(face);
+	        	int[] slots = inventory.getSlotsForFace(face);
 		        int mainSlot = slots.length > 0 ? slots[0] : -1;
 		        
 		        ColorGuiButton button = faceButtons[face.getIndex()];
@@ -130,7 +123,7 @@ public abstract class AwesomeGuiWithControls extends AwesomeGui {
     	} else if (buttonId >= FIRST_FACE_BUTTON_ID && 
     			   buttonId < FIRST_FACE_BUTTON_ID + EnumFacing.values().length) {
     		AwesomeControlSidesUpdateMessage message = 
-					new AwesomeControlSidesUpdateMessage(tileEntity.getPos(),
+					new AwesomeControlSidesUpdateMessage(inventory.getPos(),
 														 EnumFacing.values()[buttonId - FIRST_FACE_BUTTON_ID]);
 			AwesomeNetworkHandler.wrapper.sendToServer(message);
     	}
