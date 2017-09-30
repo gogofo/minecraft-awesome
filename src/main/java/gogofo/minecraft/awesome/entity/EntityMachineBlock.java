@@ -309,7 +309,7 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
         int curAmount = getOilAmount();
 
         if (curAmount + addedAmount > oilCapacity) {
-            addedAmount = oilCapacity - amount;
+            addedAmount = oilCapacity - curAmount;
         }
 
         setOilAmount(curAmount + addedAmount);
