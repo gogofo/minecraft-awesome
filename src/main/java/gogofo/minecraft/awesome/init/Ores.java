@@ -21,7 +21,7 @@ public class Ores {
                 .addGenerationConfig(new Ore.GenerationConfig(0, 200, 100, 25, 10));
         ores.add(copper);
 
-        tin = new Ore("tin", 0xFFD8D8D8, true, true, true, 2)
+        tin = new Ore("tin", 0xFFF9D8D8, true, true, true, 2)
                 .addGenerationConfig(new Ore.GenerationConfig(0, 200, 100, 25, 10));
         ores.add(tin);
 
@@ -34,7 +34,7 @@ public class Ores {
                 .addGenerationConfig(new Ore.GenerationConfig(0, 54, 100, 8, 6));
         ores.add(platinum);
 
-        aluminium = new Ore("aluminium", 0xD2D3D3, true, true, true, 2)
+        aluminium = new Ore("aluminium", 0xD2D3F9, true, true, true, 2)
                 .addGenerationConfig(new Ore.GenerationConfig(0, 54, 100, 8, 6));
         ores.add(aluminium);
     }
