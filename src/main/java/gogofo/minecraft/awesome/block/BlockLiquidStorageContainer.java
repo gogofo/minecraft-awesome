@@ -84,16 +84,18 @@ public class BlockLiquidStorageContainer extends Block implements ITileEntityPro
     private boolean onBlockRightClickedWithBucket(EntityPlayer playerIn, EnumHand hand, TileEntityLiquidStorageContainer te, ItemStack heldStack, Item heldItem) {
         if (heldItem == Items.BUCKET) {
             Block substance = te.getSubstance();
-            int liquidTaken = te.tryTakeLiquid(substance, 1);
-            if (liquidTaken > 0) {
+            int liquidTaken = te.tryTakeLiquid(substance, Fluid.BUCKET_VOLUME);
+            if (liquidTaken == Fluid.BUCKET_VOLUME) {
                 Fluid fluid = FluidRegistry.lookupFluidForBlock(substance);
                 playerIn.setHeldItem(hand, FluidUtil.getFilledBucket(new FluidStack(fluid, Fluid.BUCKET_VOLUME)));
+            } else {
+                te.tryPlaceLiquid(substance, liquidTaken);
             }
 
             return true;
         } else {
             FluidStack fluidStack = FluidUtil.getFluidContained(heldStack);
-            int placedLiquid = te.tryPlaceLiquid(fluidStack.getFluid().getBlock(), 1);
+            int placedLiquid = te.tryPlaceLiquid(fluidStack.getFluid().getBlock(), Fluid.BUCKET_VOLUME);
             if (placedLiquid > 0) {
                 playerIn.setHeldItem(hand, new ItemStack(Items.BUCKET));
             }

@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 
 public class TileEntityLiquidStorageContainer extends TileEntity implements ILiquidContainer {
 
-    public static final int MAX_AMOUNT = 15;
+    public static final int MAX_AMOUNT = 15000;
 
     private Block containedSubstance = Blocks.AIR;
     private int containedAmount = 0;

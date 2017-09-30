@@ -1,30 +1,23 @@
 package gogofo.minecraft.awesome.item;
 
-import java.util.List;
-
 import gogofo.minecraft.awesome.interfaces.ILiquidContainer;
-import gogofo.minecraft.awesome.tileentity.TileEntityLiquidStorageContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
+
+import java.util.List;
 
 public class ItemLiquidContainer extends Item {
 	public ItemLiquidContainer() {
@@ -47,7 +40,7 @@ public class ItemLiquidContainer extends Item {
 	}
 	
 	public int getMaxLiquid() {
-		return 20;
+		return 5000;
 	}
 	
 	public void incLiquid(ItemStack stack, int amount) {
@@ -144,27 +137,27 @@ public class ItemLiquidContainer extends Item {
 			ILiquidContainer container = (ILiquidContainer) tileEntity;
 
 			interactWithLiquidContainer(playerIn, stack, container);
-		} else if (getLiquidFill(stack) > 0) {
+		} else if (getLiquidFill(stack) >= Fluid.BUCKET_VOLUME) {
 			BlockPos sideBlockPos = blockpos.offset(rayTraceResult.sideHit);
 			if (tryPlaceContainedLiquid(stack, worldIn, sideBlockPos)) {
-				decLiquid(stack, 1);
+				decLiquid(stack, Fluid.BUCKET_VOLUME);
 			}
 		}
 	}
 
 	public void interactWithLiquidContainer(EntityPlayer playerIn, ItemStack stack, ILiquidContainer container) {
 		if (!playerIn.isSneaking()) {
-            if (getLiquidFill(stack) > 0) {
-                int liquidPlaced = container.tryPlaceLiquid(getLiquidType(stack), 1);
-                decLiquid(stack, liquidPlaced);
-            }
+			int amountToPlace = Math.min(getLiquidFill(stack), Fluid.BUCKET_VOLUME);
+			int liquidPlaced = container.tryPlaceLiquid(getLiquidType(stack), amountToPlace);
+			decLiquid(stack, liquidPlaced);
         } else if (getLiquidFill(stack) < getMaxLiquid()){
             Block liquidType = getLiquidType(stack);
             if (liquidType == Blocks.AIR) {
                 liquidType = container.getSubstance();
             }
 
-            int liquidTaken = container.tryTakeLiquid(liquidType, 1);
+            int amountToTake = Math.min(getMaxLiquid() - getLiquidFill(stack), Fluid.BUCKET_VOLUME);
+            int liquidTaken = container.tryTakeLiquid(liquidType, amountToTake);
 
             if (liquidTaken > 0) {
                 incLiquid(stack, liquidTaken);

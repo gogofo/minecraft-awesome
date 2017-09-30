@@ -20,6 +20,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fluids.Fluid;
 
 public class ItemLiquidPump extends AwesomeItemChargable {
 
@@ -138,7 +139,7 @@ public class ItemLiquidPump extends AwesomeItemChargable {
 			
 			if (!container.isEmpty()) {
     			ItemLiquidContainer.setLiquidType(container, iblockstate.getBlock());
-    			((ItemLiquidContainer)container.getItem()).incLiquid(container, 1);
+    			((ItemLiquidContainer)container.getItem()).incLiquid(container, Fluid.BUCKET_VOLUME);
     			
     			if (!worldIn.isRemote) {
     				worldIn.setBlockToAir(pos);

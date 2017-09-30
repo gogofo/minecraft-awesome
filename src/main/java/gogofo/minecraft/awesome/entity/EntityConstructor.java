@@ -3,7 +3,6 @@ package gogofo.minecraft.awesome.entity;
 import gogofo.minecraft.awesome.gui.GuiEnum;
 import gogofo.minecraft.awesome.init.Items;
 import gogofo.minecraft.awesome.inventory.ContainerConstructor;
-import javafx.util.Pair;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -71,6 +70,6 @@ public class EntityConstructor extends EntityMachineBlock {
 
     @Override
     public int getOilCapacity() {
-        return 10;
+        return 10000;
     }
 }
