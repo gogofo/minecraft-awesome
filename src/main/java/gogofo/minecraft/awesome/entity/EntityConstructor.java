@@ -29,11 +29,6 @@ public class EntityConstructor extends EntityMachineBlock {
     }
 
     @Override
-    protected void entityInit() {
-        super.entityInit();
-    }
-
-    @Override
     protected boolean canMove(EnumFacing direction) {
         BlockPos below_pos = getPosition().offset(direction).offset(EnumFacing.DOWN);
 
@@ -94,7 +89,7 @@ public class EntityConstructor extends EntityMachineBlock {
 
     @Override
     protected Item getDroppedItem() {
-        return Items.burnt_residue;
+        return Items.constructor;
     }
 
     @Override
