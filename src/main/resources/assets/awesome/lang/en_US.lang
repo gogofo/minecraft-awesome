@@ -16,6 +16,7 @@ tile.extractor.name=Extractor
 
 # Machine Entities
 entity.constructor.name=Constructor
+item.constructor.name=Constructor
 
 # Other Tiles
 tile.salt_block.name=Salt Block
