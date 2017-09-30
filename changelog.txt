@@ -1,6 +1,8 @@
 0.56
 -------------------
 
+There are some major updates this time, please take your time to read before you update
+
 - Constructor added
     - Constructor requires oil, battery and blocks and it will build those blocks for you
     - Logic is: Try to add 1 block forward and down, move forward if possible (block below needed)
@@ -15,6 +17,8 @@
 - Electric wire texture fixed
 - Fuser now has 9 slots!
 - Added bronze (crafted by fusing 1 copper and 3 tin ingots)
+- Copper tools and armors have been removed (you will need to confirm this after you update)
+- Added bronze tools and armors
 
 -------------------
 0.55
