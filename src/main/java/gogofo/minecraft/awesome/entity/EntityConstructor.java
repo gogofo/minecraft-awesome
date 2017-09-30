@@ -40,17 +40,28 @@ public class EntityConstructor extends EntityMachineBlock {
 
     @Override
     protected int[] onElectricUpdate() {
+        int oilUsed = 0;
+        int chargeUsed = 0;
+
         if (ticksExisted % 20 == 0) {
             BlockPos prevPos = getPosition();
             EnumFacing facing = getFacing();
             if (tryMove(facing)) {
                 world.setBlockState(prevPos, Blocks.COBBLESTONE.getDefaultState());
+                chargeUsed = 2;
+                oilUsed = 1;
             } else {
                 setFacing(facing.rotateY());
+                chargeUsed = 1;
+                oilUsed = 1;
             }
         }
 
-        return new int[] {1, 1};
+        if (ticksExisted % 5 == 0) {
+            oilUsed = Math.max(1, oilUsed);
+        }
+
+        return new int[] {chargeUsed, oilUsed};
     }
 
     @Override
