@@ -17,7 +17,7 @@ public abstract class ItemEntitySpawner extends Item {
         if (!worldIn.isRemote) {
             BlockPos placement = pos.offset(EnumFacing.UP);
             if (worldIn.getBlockState(placement).getBlock() == Blocks.AIR) {
-                Entity entity = createEntityToSpawn(worldIn, placement);
+                Entity entity = createEntityToSpawn(worldIn, placement, player);
                 worldIn.spawnEntity(entity);
 
                 if (!player.isCreative()) {
@@ -29,5 +29,5 @@ public abstract class ItemEntitySpawner extends Item {
         return EnumActionResult.SUCCESS;
     }
 
-    protected abstract Entity createEntityToSpawn(World worldIn, BlockPos placement);
+    protected abstract Entity createEntityToSpawn(World worldIn, BlockPos placement, EntityPlayer player);
 }
