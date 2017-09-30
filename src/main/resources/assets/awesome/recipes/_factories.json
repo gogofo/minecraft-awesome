@@ -1,5 +1,6 @@
 {
     "ingredients": {
+        "filled_bucket": "gogofo.minecraft.awesome.recipe.custom.FilledUniversalBucketIngredientFactory"
     },
     "recipes": {
         "drill_enchant_shaped": "gogofo.minecraft.awesome.recipe.custom.UpgradeDrillRecipe$Factory"

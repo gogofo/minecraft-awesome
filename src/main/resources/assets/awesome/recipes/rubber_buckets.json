@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"type": "awesome:filled_bucket",
+			"fluid": "oil"
+		},
+		{
+			"type": "awesome:filled_bucket",
+			"fluid": "sap"
+		}
+	],
+	"result": {
+		"item": "awesome:rubber",
+		"count": 3
+	}
+}
