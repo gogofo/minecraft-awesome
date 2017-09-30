@@ -1,6 +1,13 @@
 0.56
 -------------------
 
+- Constructor added
+    - Constructor requires oil, battery and blocks and it will build those blocks for you
+    - Logic is: Try to add 1 block forward and down, move forward if possible (block below needed)
+    if adding a block or moving failed: rotate
+
+- All liquid containers have been translated to mB (instead of full buckets)
+- Liquid container was reduced to 5 buckets from 20 (now 5000mB)
 
 -------------------
 0.55
