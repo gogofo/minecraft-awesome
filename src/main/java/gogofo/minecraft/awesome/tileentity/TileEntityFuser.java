@@ -1,8 +1,6 @@
 package gogofo.minecraft.awesome.tileentity;
 
-import gogofo.minecraft.awesome.block.BlockFuser;
 import gogofo.minecraft.awesome.gui.GuiEnum;
-import gogofo.minecraft.awesome.init.Items;
 import gogofo.minecraft.awesome.init.Recipes;
 import gogofo.minecraft.awesome.inventory.ContainerFuser;
 import gogofo.minecraft.awesome.recipe.RecipeFuser;

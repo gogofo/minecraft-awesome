@@ -1,7 +1,5 @@
 package gogofo.minecraft.awesome.recipe;
 
-import java.util.HashMap;
-
 import gogofo.minecraft.awesome.init.Items;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -9,16 +7,14 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagString;
-import net.minecraft.util.datafix.walkers.EntityTag;
+
+import java.util.HashMap;
 
 public class RecipeFuser {
-	private HashMap<Item, HashMap<Item, Recipe>> recipes = 
-								new HashMap<Item, HashMap<Item, Recipe>>();
+	private HashMap<Item, HashMap<Item, Recipe>> recipes = new HashMap<>();
 	
 	public RecipeFuser() {
 		addRecipe(new Recipe(net.minecraft.init.Items.MELON, 
@@ -62,11 +58,11 @@ public class RecipeFuser {
 	
 	private void addRecipe(Item item1, Item item2, Recipe recp) {
 		if (!recipes.containsKey(item1)) {
-			recipes.put(item1, new HashMap<Item, Recipe>());
+			recipes.put(item1, new HashMap<>());
 		}
 		
 		if (!recipes.containsKey(item2)) {
-			recipes.put(item2, new HashMap<Item, Recipe>());
+			recipes.put(item2, new HashMap<>());
 		}
 		
 		recipes.get(item1).put(item2, recp);
