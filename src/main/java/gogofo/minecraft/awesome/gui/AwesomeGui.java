@@ -19,7 +19,9 @@ import net.minecraft.util.ResourceLocation;
 public abstract class AwesomeGui extends GuiContainer {
 	private static final int INBOX_START_Y = 131;
 	private static final int INBOX_HIGHT = 83;
-	
+	private static final int TEXTURE_BACKGROUND_HEIGHT = 214;
+	private static final int TEXTURE_EMPTY_BACKGROUND_HEIGHT = 120;
+
 	private ResourceLocation guiTextures;
     protected final InventoryPlayer playerInventory;
     protected final IPositionedSidedInventory customInventory;
@@ -72,7 +74,6 @@ public abstract class AwesomeGui extends GuiContainer {
         mc.getTextureManager().bindTexture(guiTextures);
         
         drawEmptyBackground();
-        drawInventory();
         drawCustomGui();
     }
     
@@ -86,16 +87,27 @@ public abstract class AwesomeGui extends GuiContainer {
     
     private void drawEmptyBackground() {
     	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-    	drawTexturedModalRect(guiX(), guiY(), 
-				  0, 0, 
-			  	  xSize, ySize);
-    }
-    
-    private void drawInventory() {
-    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-    	drawTexturedModalRect(guiX(), guiY() + (ySize-INBOX_HIGHT), 
-				  0, getInboxStartY(), 
-			  	  xSize, INBOX_HIGHT);
+		drawTexturedModalRect(guiX(), guiY(),
+				0, 0,
+				xSize, 4);
+
+
+		int backgroundToDraw = ySize - 8;
+		int curY = 4;
+
+		while (backgroundToDraw > 0) {
+			int actualDraw = Math.min(backgroundToDraw, TEXTURE_EMPTY_BACKGROUND_HEIGHT);
+			drawTexturedModalRect(guiX(), guiY() + curY,
+					0, 4,
+					xSize, actualDraw);
+
+			backgroundToDraw -= actualDraw;
+			curY += actualDraw;
+		}
+
+		drawTexturedModalRect(guiX(), guiY() + ySize - 4,
+				0, TEXTURE_BACKGROUND_HEIGHT - 4,
+				xSize, 4);
     }
     
     protected int getInboxStartY() {

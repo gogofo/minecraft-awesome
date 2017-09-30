@@ -1,5 +1,6 @@
 package gogofo.minecraft.awesome.inventory;
 
+import gogofo.minecraft.awesome.gui.GuiEntityMachineBlock;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

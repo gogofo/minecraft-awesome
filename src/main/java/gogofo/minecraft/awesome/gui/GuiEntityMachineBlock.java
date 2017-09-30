@@ -14,6 +14,8 @@ public class GuiEntityMachineBlock extends AwesomeGui {
     public static final int GLASS_HEIGHT = OIL_HEIGHT - 4;
     public static final int GLASS_WIDTH = 16;
 
+    public static final int CLEAR_HEIGHT = 140;
+
     protected final EntityMachineBlock entity;
     protected InventoryPlayer playerInventory;
 
@@ -47,5 +49,15 @@ public class GuiEntityMachineBlock extends AwesomeGui {
                 Fluids.oil.getColor());
 
         drawGlassContainer(OIL_X, OIL_Y, OIL_HEIGHT);
+    }
+
+    @Override
+    protected int getClearSectionHeight() {
+        return CLEAR_HEIGHT;
+    }
+
+    @Override
+    protected int getInboxStartY() {
+        return CLEAR_HEIGHT;
     }
 }
