@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class Entities {
 
     public static void registerEntities() {
-        EntityRegistry.registerModEntity(new ResourceLocation(AwesomeMod.MODID, "constructor"), EntityConstructor.class, "Constructor", 10, AwesomeMod.instance, 80, 1, true);
+        EntityRegistry.registerModEntity(new ResourceLocation(AwesomeMod.MODID, "constructor"), EntityConstructor.class, "constructor", 10, AwesomeMod.instance, 80, 1, true);
     }
 
     @SideOnly(Side.CLIENT)

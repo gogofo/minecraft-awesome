@@ -14,6 +14,9 @@ tile.suction_pipe.name=Suction Pipe
 tile.sorting_pipe.name=Sorting Pipe
 tile.extractor.name=Extractor
 
+# Machine Entities
+entity.constructor.name=Constructor
+
 # Other Tiles
 tile.salt_block.name=Salt Block
 tile.liquid_storage_container.name=Liquid Storage Container

@@ -8,6 +8,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -71,6 +72,20 @@ public class EntityConstructor extends EntityMachineBlock {
     @Override
     public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
         return new ContainerConstructor(playerInventory, this);
+    }
+
+    @Override
+    protected int getSlotCount() {
+        return super.getSlotCount() + 27;
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
+        if (index < super.getSlotCount()) {
+            return super.isItemValidForSlot(index, stack);
+        } else {
+            return true;
+        }
     }
 
     @Override

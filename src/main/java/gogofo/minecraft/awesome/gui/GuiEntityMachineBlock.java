@@ -4,7 +4,7 @@ import gogofo.minecraft.awesome.entity.EntityMachineBlock;
 import gogofo.minecraft.awesome.init.Fluids;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class GuiEntityMachineBlock extends AwesomeGui{
+public class GuiEntityMachineBlock extends AwesomeGui {
     public static final int OIL_X = 80;
     public static final int OIL_Y = 30;
     public static final int OIL_HEIGHT = 50;
