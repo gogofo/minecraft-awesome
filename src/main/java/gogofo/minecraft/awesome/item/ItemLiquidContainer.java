@@ -17,11 +17,13 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemLiquidContainer extends Item {
 	public ItemLiquidContainer() {
 		setMaxStackSize(1);
+		setContainerItem(this);
 	}
 	
 	@Override
@@ -38,7 +40,19 @@ public class ItemLiquidContainer extends Item {
 	public boolean isDamaged(ItemStack stack) {
 		return true;
 	}
-	
+
+	@Override
+	public ItemStack getContainerItem(ItemStack itemStack) {
+		if (getLiquidFill(itemStack) >= Fluid.BUCKET_VOLUME) {
+			decLiquid(itemStack, Fluid.BUCKET_VOLUME);
+		}
+
+		NBTTagCompound compound = new NBTTagCompound();
+		itemStack.writeToNBT(compound);
+		
+		return new ItemStack(compound);
+	}
+
 	public int getMaxLiquid() {
 		return 5000;
 	}
