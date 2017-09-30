@@ -11,11 +11,7 @@ public class ContainerConstructor extends ContainerEntityMachineBlock {
 
     	int CONSTRUCTOR_INVENTORY_START = GuiEntityMachineBlock.CLEAR_HEIGHT - 3*18 - 18;
 
-        for (int j = 0; j < 3; ++j) {
-            for (int k = 0; k < 9; ++k) {
-                this.addSlotToContainer(new Slot(inventory, super.getCustomSlotCount() + k + j * 9, 8 + k * 18, CONSTRUCTOR_INVENTORY_START + j * 18));
-            }
-        }
+        addSlotGrid(super.getCustomSlotCount(), 8, CONSTRUCTOR_INVENTORY_START, 3, 9);
     }
 
     @Override

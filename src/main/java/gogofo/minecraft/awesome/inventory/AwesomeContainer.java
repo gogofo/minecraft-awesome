@@ -148,4 +148,20 @@ public abstract class AwesomeContainer extends Container {
     	
     	return super.addSlotToContainer(slotIn);
     }
+
+    protected void addSlotGrid(int indexStart, int xStart, int yStart, int row, int col) {
+        for (int j = 0; j < row; ++j) {
+            for (int k = 0; k < col; ++k) {
+                addSlotToContainer(new Slot(inventory, indexStart + k + j * col, xStart + k * 18, yStart + j * 18));
+            }
+        }
+    }
+
+    protected void addAwesomeSlotGrid(int indexStart, int xStart, int yStart, int row, int col) {
+        for (int j = 0; j < row; ++j) {
+            for (int k = 0; k < col; ++k) {
+                addSlotToContainer(new AwesomeSlot(inventory, indexStart + k + j * col, xStart + k * 18, yStart + j * 18));
+            }
+        }
+    }
 }
