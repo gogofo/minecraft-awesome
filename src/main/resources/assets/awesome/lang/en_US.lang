@@ -89,16 +89,6 @@ item.bronze_dust.name=Bronze Dust
 ## ORE_ADD_MARKER
 
 # Ore Items
-item.copper_sword.name=Copper Sword
-item.copper_pickaxe.name=Copper Pickaxe
-item.copper_axe.name=Copper Axe
-item.copper_hoe.name=Copper Hoe
-item.copper_shovel.name=Copper Shovel
-item.copper_chestplate.name=Copper Chestplate
-item.copper_helmet.name=Copper Helmet
-item.copper_leggings.name=Copper Leggings
-item.copper_boots.name=Copper Boots
-
 item.bronze_sword.name=Bronze Sword
 item.bronze_pickaxe.name=Bronze Pickaxe
 item.bronze_axe.name=Bronze Axe
