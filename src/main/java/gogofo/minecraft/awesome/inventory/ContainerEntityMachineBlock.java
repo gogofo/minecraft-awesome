@@ -10,7 +10,7 @@ public class ContainerEntityMachineBlock extends AwesomeContainer {
     {
         super(inventoryPlayer, inventory, GuiEntityMachineBlock.CLEAR_HEIGHT);
 
-        this.addSlotToContainer(new AwesomeSlot(inventory, 0, 56, 20));
+        this.addSlotToContainer(new AwesomeSlot(inventory, 0, 10, 20));
     }
 
     @Override
