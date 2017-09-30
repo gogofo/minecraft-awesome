@@ -19,6 +19,9 @@ There are some major updates this time, please take your time to read before you
 - Added bronze (crafted by fusing 1 copper and 3 tin ingots)
 - Copper tools and armors have been removed (you will need to confirm this after you update)
 - Added bronze tools and armors
+- Added rubber
+- Added copper ring
+- Added wheel
 
 -------------------
 0.55
