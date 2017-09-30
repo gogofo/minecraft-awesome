@@ -79,9 +79,9 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
             if (droppedItem != null) {
                 dropItem(droppedItem, 1);
             }
-
-            InventoryHelper.dropInventoryItems(world, getPosition(), this);
         }
+
+        InventoryHelper.dropInventoryItems(world, getPosition(), this);
 
         setDead();
 
