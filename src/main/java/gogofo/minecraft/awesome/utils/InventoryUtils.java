@@ -4,6 +4,7 @@ import gogofo.minecraft.awesome.interfaces.IConfigurableSidedInventory;
 import gogofo.minecraft.awesome.interfaces.IPositionedSidedInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -157,5 +158,18 @@ public class InventoryUtils {
         compound.setTag("SlotFacing", nbtTagCompound);
 
         return compound;
+    }
+
+    public static ItemStack findStack(IInventory inventory, Item target, int from) {
+        for (int i = from; i < inventory.getSizeInventory(); i++) {
+            ItemStack stack = inventory.getStackInSlot(i);
+
+            if (!stack.isEmpty() &&
+                    (stack.getItem() == target || target == null)) {
+                return stack;
+            }
+        }
+
+        return ItemStack.EMPTY;
     }
 }

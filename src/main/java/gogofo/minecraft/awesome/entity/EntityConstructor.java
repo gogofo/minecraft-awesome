@@ -3,6 +3,8 @@ package gogofo.minecraft.awesome.entity;
 import gogofo.minecraft.awesome.gui.GuiEnum;
 import gogofo.minecraft.awesome.init.Items;
 import gogofo.minecraft.awesome.inventory.ContainerConstructor;
+import gogofo.minecraft.awesome.utils.InventoryUtils;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -47,13 +49,15 @@ public class EntityConstructor extends EntityMachineBlock {
         if (ticksExisted % 20 == 0) {
             EnumFacing facing = getFacing();
 
-            if (tryPlaceBlock() && tryMove(facing)) {
-                chargeUsed += 10;
-                oilUsed += 3;
-            } else {
-                setFacing(facing.rotateY());
-                chargeUsed += 1;
-                oilUsed += 1;
+            if (!getBlockToPlace().isEmpty()) {
+                if (tryPlaceBlock() && tryMove(facing)) {
+                    chargeUsed += 10;
+                    oilUsed += 3;
+                } else {
+                    setFacing(facing.rotateY());
+                    chargeUsed += 1;
+                    oilUsed += 1;
+                }
             }
         }
 
@@ -106,8 +110,30 @@ public class EntityConstructor extends EntityMachineBlock {
             return false;
         }
 
-        world.setBlockState(below_pos, Blocks.COBBLESTONE.getDefaultState());
+        ItemStack stack = getBlockToPlace();
+        if (stack.isEmpty()) {
+            return false;
+        }
+
+        Block block = Block.getBlockFromItem(stack.getItem());
+
+        world.setBlockState(below_pos, block.getStateFromMeta(stack.getItemDamage()));
+        stack.shrink(1);
 
         return true;
+    }
+
+    private ItemStack getBlockToPlace() {
+        ItemStack stack = InventoryUtils.findStack(this, null, super.getSlotCount());
+        if (stack.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
+
+        Block block = Block.getBlockFromItem(stack.getItem());
+        if (block == Blocks.AIR) {
+            return ItemStack.EMPTY;
+        }
+
+        return stack;
     }
 }
