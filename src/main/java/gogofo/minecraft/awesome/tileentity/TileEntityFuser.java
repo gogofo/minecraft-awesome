@@ -251,12 +251,12 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
 
 	@Override
 	protected int getSlotCount() {
-		return 3;
+		return 10;
 	}
 	
 	@Override
 	public int getCustomSlotCount() {
-		return 3;
+		return 10;
 	}
 
 	@Override
