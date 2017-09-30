@@ -254,12 +254,7 @@ public class BlockPipe extends BlockContainer implements ITileEntityProvider, IS
 		
 		return new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
 	}
-	
-	@Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox,
-			List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean p_185477_7_) {
-	}
-	
+
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
 		super.onBlockAdded(worldIn, pos, state);
