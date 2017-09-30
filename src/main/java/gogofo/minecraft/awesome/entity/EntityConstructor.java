@@ -44,16 +44,15 @@ public class EntityConstructor extends EntityMachineBlock {
         int chargeUsed = 0;
 
         if (ticksExisted % 20 == 0) {
-            BlockPos prevPos = getPosition();
             EnumFacing facing = getFacing();
-            if (tryMove(facing)) {
-                world.setBlockState(prevPos, Blocks.COBBLESTONE.getDefaultState());
-                chargeUsed = 2;
-                oilUsed = 1;
+
+            if (tryPlaceBlock() && tryMove(facing)) {
+                chargeUsed += 10;
+                oilUsed += 3;
             } else {
                 setFacing(facing.rotateY());
-                chargeUsed = 1;
-                oilUsed = 1;
+                chargeUsed += 1;
+                oilUsed += 1;
             }
         }
 
@@ -82,5 +81,18 @@ public class EntityConstructor extends EntityMachineBlock {
     @Override
     public int getOilCapacity() {
         return 10000;
+    }
+
+    private boolean tryPlaceBlock() {
+        BlockPos below_pos = getPosition().offset(getFacing()).offset(EnumFacing.DOWN);
+
+        if (world.getBlockState(below_pos).getCollisionBoundingBox(world, below_pos) != NULL_AABB ||
+                !world.getBlockState(below_pos).getBlock().isReplaceable(world, below_pos)) {
+            return false;
+        }
+
+        world.setBlockState(below_pos, Blocks.COBBLESTONE.getDefaultState());
+
+        return true;
     }
 }
