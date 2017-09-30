@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fluids.Fluid;
 
 import java.util.Random;
 
@@ -96,7 +97,7 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
             Block substance = container.getSubstance();
 
             if (substance == Blocks.sap || substance == net.minecraft.init.Blocks.AIR) {
-                int sapPlaced = container.tryPlaceLiquid(Blocks.sap, 1);
+                int sapPlaced = container.tryPlaceLiquid(Blocks.sap, Fluid.BUCKET_VOLUME);
 
                 if (sapPlaced == 1) {
                     return true;
