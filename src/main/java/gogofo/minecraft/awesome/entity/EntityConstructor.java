@@ -5,6 +5,8 @@ import gogofo.minecraft.awesome.init.Items;
 import gogofo.minecraft.awesome.inventory.ContainerConstructor;
 import gogofo.minecraft.awesome.utils.InventoryUtils;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -12,6 +14,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -111,9 +114,12 @@ public class EntityConstructor extends EntityMachineBlock {
         }
 
         Block block = Block.getBlockFromItem(stack.getItem());
+        IBlockState state = block.getStateFromMeta(stack.getItemDamage());
 
-        world.setBlockState(below_pos, block.getStateFromMeta(stack.getItemDamage()));
+        world.setBlockState(below_pos, state);
         stack.shrink(1);
+        SoundType soundType = block.getSoundType(state, world, below_pos, this);
+        world.playSound(null, below_pos, soundType.getPlaceSound(), SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F);
 
         return true;
     }
