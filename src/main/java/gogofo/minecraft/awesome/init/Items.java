@@ -32,6 +32,9 @@ public class Items {
 	public static Item battery_pack;
 	public static Item big_battery_pack;
 
+	// Entities
+	public static Item constructor;
+
 	public static Item iron_dust;
 	public static Item gold_dust;
 	
@@ -93,6 +96,10 @@ public class Items {
 
 		big_battery_pack = registryItem(new ItemBattery().setColor(0x56C640).setMaxCharge(10000), "big_battery_pack");
 		items.add(big_battery_pack);
+
+		// Entities
+		constructor = registryItem(new ItemConstructor(), "constructor");
+		items.add(constructor);
 		
 		// Dusts
 		iron_dust = registryItem(new ItemOneColored(0xFFDEDEDE), "iron_dust");
