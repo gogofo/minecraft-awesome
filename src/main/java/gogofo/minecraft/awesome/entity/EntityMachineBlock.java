@@ -8,9 +8,10 @@ import gogofo.minecraft.awesome.interfaces.ILiquidContainer;
 import gogofo.minecraft.awesome.item.ItemBattery;
 import gogofo.minecraft.awesome.item.ItemLiquidContainer;
 import gogofo.minecraft.awesome.utils.InventoryUtils;
-import javafx.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -78,6 +79,8 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
             if (droppedItem != null) {
                 dropItem(droppedItem, 1);
             }
+
+            InventoryHelper.dropInventoryItems(world, getPosition(), this);
         }
 
         setDead();
