@@ -12,6 +12,7 @@
 - Creative: sneaking + right clicking with a chargeable item will now charge it in 10% increments
 - Ore colors were changed to be more noticeable from each other
 - Pipes now collide (meaning you won't pass through them anymore)
+- Electric wire texture fixed
 
 -------------------
 0.55
