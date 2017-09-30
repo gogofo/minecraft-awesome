@@ -44,6 +44,10 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+		if (playerIn.isCreative() && playerIn.isSneaking()) {
+			charge(playerIn.getHeldItem(handIn), getMaxCharge() / 10);
+		}
+
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		int maxRequiredCharge = getMaxRequiredCharge(stack, worldIn, playerIn);
 		int charge = getTagCharge(stack);

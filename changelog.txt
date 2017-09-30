@@ -9,6 +9,7 @@
 - All liquid containers have been translated to mB (instead of full buckets)
 - Liquid container was reduced to 5 buckets from 20 (now 5000mB)
 - IMPORTANT: Because of ^ you will pretty much lose all liquid located in liquid containers and liquid storage containers, sorry.
+- Creative: sneaking + right clicking with a chargeable item will now charge it in 10% increments
 
 -------------------
 0.55
