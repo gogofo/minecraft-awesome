@@ -21,15 +21,6 @@
     },
     "rewards": {
         "recipes": [
-            "awesome:copper_pickaxe_recipe",
-            "awesome:copper_axe_recipe",
-            "awesome:copper_hoe_recipe",
-            "awesome:copper_shovel_recipe",
-            "awesome:copper_sword_recipe",
-            "awesome:copper_chestplate_recipe",
-            "awesome:copper_leggings_recipe",
-            "awesome:copper_helmet_recipe",
-            "awesome:copper_boots_recipe",
             "awesome:wrench"
         ]
     }

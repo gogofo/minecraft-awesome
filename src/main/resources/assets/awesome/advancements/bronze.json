@@ -1,0 +1,35 @@
+{
+    "display": {
+        "icon": {
+            "item": "awesome:bronze_ingot"
+        },
+        "title": "Bronze Bronze Bronze!",
+        "description": "Ho wonderful bronze"
+    },
+    "criteria": {
+        "industrialize": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "awesome:bronze_ingot",
+                        "data": 0
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "recipes": [
+            "awesome:bronze_pickaxe_recipe",
+            "awesome:bronze_axe_recipe",
+            "awesome:bronze_hoe_recipe",
+            "awesome:bronze_shovel_recipe",
+            "awesome:bronze_sword_recipe",
+            "awesome:bronze_chestplate_recipe",
+            "awesome:bronze_leggings_recipe",
+            "awesome:bronze_helmet_recipe",
+            "awesome:bronze_boots_recipe"
+        ]
+    }
+}
