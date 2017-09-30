@@ -31,6 +31,9 @@ public class Items {
 	public static Item big_battery;
 	public static Item battery_pack;
 	public static Item big_battery_pack;
+	public static Item wheel;
+	public static Item copper_ring;
+	public static Item rubber;
 
 	// Entities
 	public static Item constructor;
@@ -96,6 +99,15 @@ public class Items {
 
 		big_battery_pack = registryItem(new ItemBattery().setColor(0x56C640).setMaxCharge(10000), "big_battery_pack");
 		items.add(big_battery_pack);
+
+		wheel = registryItem(new Item(), "wheel");
+		items.add(wheel);
+
+		copper_ring = registryItem(new Item(), "copper_ring");
+		items.add(copper_ring);
+
+		rubber = registryItem(new Item(), "rubber");
+		items.add(rubber);
 
 		// Entities
 		constructor = registryItem(new ItemConstructor(), "constructor");

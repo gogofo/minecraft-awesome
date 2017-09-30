@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AAA",
+		"ABA",
+		"AAA"
+	],
+	"key": {
+		"A": {
+			"item": "awesome:rubber"
+		},
+		"B": {
+			"item": "awesome:copper_ring"
+		}
+	},
+	"result": {
+		"item": "awesome:wheel",
+		"count": 1
+	}
+}
