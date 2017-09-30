@@ -21,7 +21,7 @@ public class RenderConstructor extends RenderBlock<EntityConstructor> {
     @Nullable
     @Override
     protected ResourceLocation getEntityTexture(EntityConstructor entity) {
-        return new ResourceLocation("textures/blocks/planks_oak.png");
+        return new ResourceLocation("awesome", "textures/entities/constructor.png");
     }
 
     public static class RenderFactory implements IRenderFactory<EntityConstructor> {
