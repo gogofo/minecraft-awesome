@@ -13,6 +13,7 @@
 - Ore colors were changed to be more noticeable from each other
 - Pipes now collide (meaning you won't pass through them anymore)
 - Electric wire texture fixed
+- Fuser now has 9 slots!
 
 -------------------
 0.55
