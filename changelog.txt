@@ -14,6 +14,7 @@
 - Pipes now collide (meaning you won't pass through them anymore)
 - Electric wire texture fixed
 - Fuser now has 9 slots!
+- Added bronze (crafted by fusing 1 copper and 3 tin ingots)
 
 -------------------
 0.55

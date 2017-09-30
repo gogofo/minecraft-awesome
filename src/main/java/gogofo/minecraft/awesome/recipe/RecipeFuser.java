@@ -1,6 +1,7 @@
 package gogofo.minecraft.awesome.recipe;
 
 import gogofo.minecraft.awesome.init.Items;
+import gogofo.minecraft.awesome.init.Ores;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -12,8 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 
 public class RecipeFuser {
 	private ArrayList<Recipe> recipes = new ArrayList<>();
@@ -33,6 +32,13 @@ public class RecipeFuser {
 							 100,
 							 net.minecraft.init.Items.IRON_INGOT,
 							 net.minecraft.init.Items.QUARTZ));
+
+		addRecipe(new Recipe(Ores.bronze.getIngot(),
+							 100,
+							 Ores.copper.getIngot(),
+							 Ores.tin.getIngot(),
+							 Ores.tin.getIngot(),
+							 Ores.tin.getIngot()));
 		
 		addSpawnEggs();
 	}

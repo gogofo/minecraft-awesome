@@ -82,6 +82,10 @@ tile.aluminium_ore.name=Aluminium Ore
 item.aluminium_ingot.name=Aluminium Ingot
 item.aluminium_dust.name=Aluminium Dust
 
+tile.bronze_ore.name=Bronze Ore
+item.bronze_ingot.name=Bronze Ingot
+item.bronze_dust.name=Bronze Dust
+
 ## ORE_ADD_MARKER
 
 # Ore Items

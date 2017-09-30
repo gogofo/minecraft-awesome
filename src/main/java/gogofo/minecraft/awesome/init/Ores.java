@@ -14,14 +14,15 @@ public class Ores {
     public static Ore uranium;
     public static Ore platinum;
     public static Ore aluminium;
+    public static Ore bronze;
 
     public static void init() {
-        copper = new Ore("copper", 0xFFDA8A67, true, true, true, 2)
+        copper = new Ore("copper", 0xDA8A67, true, true, true, 2)
                 .setToolsConfig(new Ore.ToolsConfig(true, true, true, Materials.COPPER_TOOL, Materials.COPPER_ARMOR))
                 .addGenerationConfig(new Ore.GenerationConfig(0, 200, 100, 25, 10));
-        ores.add(copper);
+        ores.add(copper); // cd7f32
 
-        tin = new Ore("tin", 0xFFF9D8D8, true, true, true, 2)
+        tin = new Ore("tin", 0xF9D8D8, true, true, true, 2)
                 .addGenerationConfig(new Ore.GenerationConfig(0, 200, 100, 25, 10));
         ores.add(tin);
 
@@ -37,6 +38,9 @@ public class Ores {
         aluminium = new Ore("aluminium", 0xD2D3F9, true, true, true, 2)
                 .addGenerationConfig(new Ore.GenerationConfig(0, 54, 100, 8, 6));
         ores.add(aluminium);
+
+        bronze = new Ore("bronze", 0xCD7F32, false, true, true, 0);
+        ores.add(bronze);
     }
 
     public static ArrayList<Ore> getOres() {
