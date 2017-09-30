@@ -11,26 +11,28 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class RecipeFuser {
-	private HashMap<Item, HashMap<Item, Recipe>> recipes = new HashMap<>();
+	private ArrayList<Recipe> recipes = new ArrayList<>();
 	
 	public RecipeFuser() {
-		addRecipe(new Recipe(net.minecraft.init.Items.MELON, 
-							 net.minecraft.init.Items.MELON, 
-							 Items.rich_melon,
-							 20));
-		
-		addRecipe(new Recipe(Items.iron_dust, 
-							 net.minecraft.init.Items.GLOWSTONE_DUST, 
-							 Items.gold_dust,
-							 100));
-		
-		addRecipe(new Recipe(net.minecraft.init.Items.IRON_INGOT, 
-							 net.minecraft.init.Items.QUARTZ, 
-							 Items.quartz_iron_ingot,
-							 100));
+		addRecipe(new Recipe(Items.rich_melon,
+							 20,
+							 net.minecraft.init.Items.MELON,
+							 net.minecraft.init.Items.MELON));
+
+		addRecipe(new Recipe(Items.gold_dust,
+							 100,
+							 Items.iron_dust,
+							 net.minecraft.init.Items.GLOWSTONE_DUST));
+
+		addRecipe(new Recipe(Items.quartz_iron_ingot,
+							 100,
+							 net.minecraft.init.Items.IRON_INGOT,
+							 net.minecraft.init.Items.QUARTZ));
 		
 		addSpawnEggs();
 	}
@@ -44,54 +46,74 @@ public class RecipeFuser {
 	}
 	
 	private void addSpawnEggRecipe(Item item, Entity entity) {
-		addRecipe(new Recipe(Items.mob_essence, 
-							 item,
-							 spawnEgg(entity),
-							 100));
+		addRecipe(new Recipe(spawnEgg(entity),
+							 100,
+							 Items.mob_essence,
+							 item));
 	}
-
-
+	
 	public void addRecipe(Recipe recp) {
-		addRecipe(recp.item1, recp.item2, recp);
-		addRecipe(recp.item2, recp.item1, recp);
+		recipes.add(recp);
 	}
 	
-	private void addRecipe(Item item1, Item item2, Recipe recp) {
-		if (!recipes.containsKey(item1)) {
-			recipes.put(item1, new HashMap<>());
+	public Recipe getRecipe(Item[] items) {
+		Recipe attempt = new Recipe(items);
+
+		for (Recipe recipe : recipes) {
+			if (recipe.matchAttempt(attempt)) {
+				return recipe;
+			}
 		}
-		
-		if (!recipes.containsKey(item2)) {
-			recipes.put(item2, new HashMap<>());
-		}
-		
-		recipes.get(item1).put(item2, recp);
-		recipes.get(item2).put(item1, recp);
-	}
-	
-	public Recipe getRecipe(Item item1, Item item2) {
-		if (!recipes.containsKey(item1)) {
-			return null;
-		}
-		
-		return recipes.get(item1).get(item2);
+
+		return null;
 	}
 	
 	public class Recipe {
-		public Item item1;
-		public Item item2;
+		public Item[] items;
 		public ItemStack result;
 		public int fuseTime;
 		
-		public Recipe(Item item1, Item item2, ItemStack result, int fuseTime) {
-			this.item1 = item1;
-			this.item2 = item2;
+		public Recipe(ItemStack result, int fuseTime, Item... items) {
+			this.items = items;
 			this.result = result;
 			this.fuseTime = fuseTime;
 		}
 		
-		public Recipe(Item item1, Item item2, Item result, int fuseTime) {
-			this(item1, item2, stack(result, 1), fuseTime);
+		public Recipe(Item result, int fuseTime, Item... items) {
+			this(stack(result, 1), fuseTime, items);
+		}
+
+		public Recipe(Item[] items) {
+			this.items = items;
+		}
+
+		public boolean matchAttempt(Recipe attempt) {
+			if (attempt == this) {
+				return true;
+			}
+
+			if (attempt.items.length != items.length) {
+				return false;
+			}
+
+			boolean[] used = new boolean[attempt.items.length];
+			for (Item required : items) {
+				boolean found = false;
+
+				for (int i = 0; i < attempt.items.length; i++) {
+					if (!used[i] && attempt.items[i] == required) {
+						found = true;
+						used[i] = true;
+						break;
+					}
+				}
+
+				if (!found) {
+					return false;
+				}
+			}
+
+			return true;
 		}
 	}
 	
