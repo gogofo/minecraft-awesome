@@ -60,7 +60,7 @@ public class BlockLiquidStorageContainer extends Block implements ITileEntityPro
 
     @Override
     public int getColor() {
-        return Ores.copper.getColor();
+        return Ores.bronze.getColor();
     }
 
     //<editor-fold desc="'Hacks' to make getDrops still have a TileEntity">

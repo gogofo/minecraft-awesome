@@ -26,6 +26,7 @@ There are some major updates this time, please take your time to read before you
 - Liquid storage containers now show content when looked at
 - Add gear
 - Add gears
+- Liquid related stuff recipes changed to use bronze instead of iron
 
 -------------------
 0.55

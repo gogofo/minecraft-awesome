@@ -7,7 +7,7 @@
 	],
 	"key": {
 	   "A": {
-	       "item": "minecraft:iron_ingot"
+	       "item": "awesome:bronze_ingot"
        },
 		"B": {
 			"item": "awesome:tool_core"
