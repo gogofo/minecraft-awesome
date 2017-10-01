@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.client.model.animation.FastTESR;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
@@ -19,6 +20,8 @@ public class TileEntityRendererLiquidStorageContainer extends FastTESR<TileEntit
         if (te.getContainedSubstance() == Blocks.AIR || te.getContainedAmount() == 0) {
             return;
         }
+
+        drawNameplateIfNeeded(te, x, y, z);
 
         float percentFilled = te.getContainedAmount() * 1f / TileEntityLiquidStorageContainer.MAX_AMOUNT;
 
@@ -101,6 +104,40 @@ public class TileEntityRendererLiquidStorageContainer extends FastTESR<TileEntit
         finish(liquidBlock, buffer.pos(EAST, UP, SOUTH), flow.getMaxU(), flow.getMinV(), upLMa, upLMb);
         finish(liquidBlock, buffer.pos(EAST, DOWN, SOUTH), flow.getMaxU(), flow.getMaxV(), eastLMa, eastLMb);
         finish(liquidBlock, buffer.pos(EAST, DOWN, NORTH), flow.getMinU(), flow.getMaxV(), eastLMa, eastLMb);
+    }
+
+    private void drawNameplateIfNeeded(TileEntityLiquidStorageContainer te, double x, double y, double z) {
+        ITextComponent itextcomponent = te.getDisplayName();
+
+        if (itextcomponent != null && this.rendererDispatcher.cameraHitResult != null && te.getPos().equals(this.rendererDispatcher.cameraHitResult.getBlockPos()))
+        {
+            switch (this.rendererDispatcher.cameraHitResult.sideHit) {
+                case DOWN:
+                    return;
+                case UP:
+                    return;
+                case NORTH:
+                    z -= 0.6;
+                    y -= 0.8;
+                    break;
+                case SOUTH:
+                    z += 0.6;
+                    y -= 0.8;
+                    break;
+                case WEST:
+                    x -= 0.6;
+                    y -= 0.8;
+                    break;
+                case EAST:
+                    x += 0.6;
+                    y -= 0.8;
+                    break;
+            }
+
+            this.setLightmapDisabled(true);
+            this.drawNameplate(te, itextcomponent.getFormattedText(), x, y, z, 12);
+            this.setLightmapDisabled(false);
+        }
     }
 
     private void finish(Block liquidBlock, BufferBuilder buffer, float u, float v, int LMa, int LMb) {
