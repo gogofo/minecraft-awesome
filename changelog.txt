@@ -22,6 +22,7 @@ There are some major updates this time, please take your time to read before you
 - Added rubber
 - Added copper ring
 - Added wheel
+- Liquid storage containers now keep their contents when harvested
 
 -------------------
 0.55

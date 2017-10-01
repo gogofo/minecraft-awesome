@@ -4,6 +4,8 @@ import gogofo.minecraft.awesome.interfaces.ILiquidContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -197,5 +199,33 @@ public class TileEntityLiquidStorageContainer extends TileEntity implements ILiq
     @Override
     public NBTTagCompound getUpdateTag() {
         return writeToNBT(new NBTTagCompound());
+    }
+
+    public static Block getLiquidFromStack(ItemStack stack) {
+        if (stack.getTagCompound() == null || !stack.getTagCompound().hasKey("BlockEntityTag")) {
+            return Blocks.AIR;
+        }
+
+        NBTTagCompound compound = (NBTTagCompound) stack.getTagCompound().getTag("BlockEntityTag");
+
+        if (!compound.hasKey("contained_substance")) {
+            return Blocks.AIR;
+        }
+
+        return Block.getBlockById(compound.getInteger("contained_substance"));
+    }
+
+    public static int getAmountFromStack(ItemStack stack) {
+        if (stack.getTagCompound() == null || !stack.getTagCompound().hasKey("BlockEntityTag")) {
+            return 0;
+        }
+
+        NBTTagCompound compound = (NBTTagCompound) stack.getTagCompound().getTag("BlockEntityTag");
+
+        if (!compound.hasKey("contained_amount")) {
+            return 0;
+        }
+
+        return compound.getInteger("contained_amount");
     }
 }
