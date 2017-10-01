@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "awesome:gear"
+		},
+		{
+			"item": "awesome:gear"
+		},
+		{
+			"item": "awesome:gear"
+		}
+	],
+	"result": {
+		"item": "awesome:gears",
+		"count": 1
+	}
+}

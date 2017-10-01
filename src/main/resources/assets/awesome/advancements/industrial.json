@@ -32,7 +32,8 @@
             "awesome:sorting_pipe",
             "awesome:teleporter",
             "awesome:electric_furnace",
-            "awesome:torch"
+            "awesome:torch",
+            "awesome:constructor"
         ]
     }
 }

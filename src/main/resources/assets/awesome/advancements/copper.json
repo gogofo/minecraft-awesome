@@ -21,7 +21,11 @@
     },
     "rewards": {
         "recipes": [
-            "awesome:wrench"
+            "awesome:wrench",
+            "awesome:copper_ring",
+            "awesome:wheel",
+            "awesome:rubber_buckets",
+            "awesome:rubber_containers"
         ]
     }
 }

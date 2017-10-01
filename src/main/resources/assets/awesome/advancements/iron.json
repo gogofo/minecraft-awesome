@@ -16,7 +16,8 @@
         "recipes": [
             "awesome:machine_core",
             "awesome:tool_core",
-            "awesome:conductive"
+            "awesome:conductive",
+            "awesome:golden_conductive"
         ]
     }
 }

@@ -34,6 +34,9 @@ public class Items {
 	public static Item wheel;
 	public static Item copper_ring;
 	public static Item rubber;
+	public static Item gear;
+	public static Item gears;
+	public static Item golden_conductive;
 
 	// Entities
 	public static Item constructor;
@@ -108,6 +111,15 @@ public class Items {
 
 		rubber = registryItem(new Item(), "rubber");
 		items.add(rubber);
+
+		gear = registryItem(new Item(), "gear");
+		items.add(gear);
+
+		gears = registryItem(new Item(), "gears");
+		items.add(gears);
+
+		golden_conductive = registryItem(new Item(), "golden_conductive");
+		items.add(golden_conductive);
 
 		// Entities
 		constructor = registryItem(new ItemConstructor(), "constructor");

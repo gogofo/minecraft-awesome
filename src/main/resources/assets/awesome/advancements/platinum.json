@@ -29,7 +29,9 @@
             "awesome:platinum_chestplate_recipe",
             "awesome:platinum_leggings_recipe",
             "awesome:platinum_helmet_recipe",
-            "awesome:platinum_boots_recipe"
+            "awesome:platinum_boots_recipe",
+            "awesome:gear",
+            "awesome:gears"
         ]
     }
 }

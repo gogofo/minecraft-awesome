@@ -51,6 +51,9 @@ item.big_battery_pack.name=Big Battery Pack
 item.wheel.name=Wheel
 item.copper_ring.name=Copper Ring
 item.rubber.name=Rubber
+item.gear.name=Gear
+item.gears.name=Gears
+item.golden_conductive.name=Golden Conductive
 
 # Minecraft dusts
 item.iron_dust.name=Iron Dust

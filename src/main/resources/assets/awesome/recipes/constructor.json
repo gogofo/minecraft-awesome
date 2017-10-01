@@ -1,0 +1,35 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"ABC",
+		"EDE",
+		"FGF"
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:diamond_block"
+		},
+		"B": {
+			"item": "awesome:liquid_container"
+		},
+		"C": {
+			"item": "awesome:golden_conductive"
+		},
+		"D": {
+			"item": "awesome:machine_core"
+		},
+		"E": {
+			"item": "minecraft:chest"
+		},
+		"F": {
+			"item": "awesome:wheel"
+		},
+		"G": {
+			"item": "awesome:gears"
+		}
+	},
+	"result": {
+		"item": "awesome:constructor",
+		"count": 1
+	}
+}

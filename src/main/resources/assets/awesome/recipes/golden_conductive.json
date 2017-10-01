@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AAA",
+		"BBB",
+		"AAA"
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:gold_ingot"
+		},
+		"B": {
+			"item": "awesome:conductive"
+		}
+	},
+	"result": {
+		"item": "awesome:golden_conductive",
+		"count": 1
+	}
+}
