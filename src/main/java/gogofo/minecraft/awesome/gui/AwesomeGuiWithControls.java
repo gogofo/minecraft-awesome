@@ -123,7 +123,7 @@ public abstract class AwesomeGuiWithControls extends AwesomeGui {
     	} else if (buttonId >= FIRST_FACE_BUTTON_ID && 
     			   buttonId < FIRST_FACE_BUTTON_ID + EnumFacing.values().length) {
     		AwesomeControlSidesUpdateMessage message = 
-					new AwesomeControlSidesUpdateMessage(inventory.getPos(),
+					new AwesomeControlSidesUpdateMessage(inventory.getInventoryPos(),
 														 EnumFacing.values()[buttonId - FIRST_FACE_BUTTON_ID]);
 			AwesomeNetworkHandler.wrapper.sendToServer(message);
     	}

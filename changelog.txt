@@ -1,6 +1,7 @@
 0.57
 -------------------
 
+- Possibly fix a bug with the machine control section (its probably related to obfuscation so can't be entirely sure)
 
 -------------------
 0.56

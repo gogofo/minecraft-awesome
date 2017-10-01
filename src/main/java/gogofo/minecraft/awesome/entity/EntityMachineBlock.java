@@ -251,7 +251,7 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
     }
 
     @Override
-    public BlockPos getPos() {
+    public BlockPos getInventoryPos() {
         return getPosition();
     }
 

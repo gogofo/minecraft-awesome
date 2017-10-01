@@ -10,6 +10,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -164,5 +165,10 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
     @Override
     public boolean isEmpty() {
         return InventoryUtils.isEmpty(itemStackArray);
+    }
+
+    @Override
+    public BlockPos getInventoryPos() {
+        return getPos();
     }
 }

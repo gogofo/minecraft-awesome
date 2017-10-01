@@ -6,5 +6,5 @@ import net.minecraft.util.math.BlockPos;
 
 public interface IPositionedSidedInventory extends ISidedInventory {
     Integer[] getDefaultSlotForFace(EnumFacing face);
-    BlockPos getPos();
+    BlockPos getInventoryPos();
 }
