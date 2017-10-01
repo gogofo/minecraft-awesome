@@ -110,7 +110,7 @@ public class ItemLiquidContainer extends Item {
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		if (getLiquidType(stack) != Blocks.AIR) {
 			tooltip.add(String.format("Liquid Type: %s", getLiquidType(stack).getLocalizedName()));
-			tooltip.add(String.format("Amount: %d", getLiquidFill(stack)));
+			tooltip.add(String.format("Amount: %dmB", getLiquidFill(stack)));
 		}
 	}
 	
