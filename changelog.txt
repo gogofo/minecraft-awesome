@@ -27,6 +27,7 @@ There are some major updates this time, please take your time to read before you
 - Add gear
 - Add gears
 - Liquid related stuff recipes changed to use bronze instead of iron
+- !!! updated most machine textures !!! thanks to Itamar
 
 -------------------
 0.55
