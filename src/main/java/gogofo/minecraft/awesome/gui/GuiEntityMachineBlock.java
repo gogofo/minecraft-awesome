@@ -16,8 +16,12 @@ public class GuiEntityMachineBlock extends AwesomeGui {
 
     public static final int CLEAR_HEIGHT = 140;
 
+
+
     protected final EntityMachineBlock entity;
     protected InventoryPlayer playerInventory;
+
+    private Component componentOilContainer;
 
     public GuiEntityMachineBlock(InventoryPlayer playerInventory,
                                  EntityMachineBlock entity)
@@ -28,6 +32,16 @@ public class GuiEntityMachineBlock extends AwesomeGui {
 
         this.playerInventory = playerInventory;
         this.entity = entity;
+
+        createComponents();
+    }
+
+    private void createComponents() {
+        componentOilContainer = new Component(OIL_X,
+                                              OIL_Y,
+                                              OIL_X + GLASS_CONTAINER_WIDTH,
+                                              OIL_Y + OIL_HEIGHT);
+        components.add(componentOilContainer);
     }
 
     @Override
@@ -59,5 +73,12 @@ public class GuiEntityMachineBlock extends AwesomeGui {
     @Override
     protected int getInboxStartY() {
         return CLEAR_HEIGHT;
+    }
+
+    @Override
+    protected void mouseOverComponentEvent(Component component, int mouseX, int mouseY) {
+        if (component == componentOilContainer) {
+            drawHoveringText(String.format("%smB / %smB", entity.getOilAmount(), entity.getOilCapacity()), mouseX, mouseY);
+        }
     }
 }

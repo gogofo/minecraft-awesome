@@ -1,33 +1,33 @@
 package gogofo.minecraft.awesome.gui;
 
 import gogofo.minecraft.awesome.AwesomeMod;
-import gogofo.minecraft.awesome.interfaces.IConfigurableSidedInventory;
 import gogofo.minecraft.awesome.interfaces.IPositionedSidedInventory;
 import gogofo.minecraft.awesome.inventory.AwesomeSlot;
 import gogofo.minecraft.awesome.inventory.AwesomeSlotBig;
-import gogofo.minecraft.awesome.inventory.ContainerGenerator;
 import gogofo.minecraft.awesome.inventory.SlotCategoryIdToColor;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.ArrayList;
 
 public abstract class AwesomeGui extends GuiContainer {
 	private static final int INBOX_START_Y = 131;
 	private static final int INBOX_HIGHT = 83;
 	private static final int TEXTURE_BACKGROUND_HEIGHT = 214;
 	private static final int TEXTURE_EMPTY_BACKGROUND_HEIGHT = 120;
+	public static final int GLASS_CONTAINER_WIDTH = 20;
 
 	private ResourceLocation guiTextures;
     protected final InventoryPlayer playerInventory;
     protected final IPositionedSidedInventory customInventory;
+    protected ArrayList<Component> components;
     
     protected abstract void drawCustomGui();
-    
+
 
     public AwesomeGui(Container container,
     				  InventoryPlayer playerInventory,
@@ -36,6 +36,7 @@ public abstract class AwesomeGui extends GuiContainer {
         super(container);
         this.playerInventory = playerInventory;
         this.customInventory = customInventory;
+        this.components = new ArrayList<>();
         
         guiTextures = new ResourceLocation(AwesomeMod.MODID + ":" + getTexturePath());
         
@@ -49,7 +50,22 @@ public abstract class AwesomeGui extends GuiContainer {
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		super.drawScreen(mouseX, mouseY, partialTicks);
+
+		for (Component component : components) {
+			if (component.mouseIsOver(mouseX - guiX(), mouseY - guiY())) {
+				mouseOverComponentEvent(component, mouseX, mouseY);
+			}
+		}
+
 		renderHoveredToolTip(mouseX, mouseY);
+	}
+
+	protected void mouseOverComponentEvent(Component component, int mouseX, int mouseY) {
+	}
+
+	@Override
+	protected void renderHoveredToolTip(int p_191948_1_, int p_191948_2_) {
+		super.renderHoveredToolTip(p_191948_1_, p_191948_2_);
 	}
 
 	@Override
@@ -254,8 +270,8 @@ public abstract class AwesomeGui extends GuiContainer {
     protected void drawGlassContainer(int x, int y, int height) {
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		drawTexturedModalRect(guiX() + x, guiY() + y,
-				176, 99,
-				20, 2);
+							  176, 99,
+							  GLASS_CONTAINER_WIDTH, 2);
 		y += 2;
 
 		height -= 4;
@@ -263,15 +279,33 @@ public abstract class AwesomeGui extends GuiContainer {
 		while (height > 0) {
 			int heightToDraw = Math.min(height, 16);
 			drawTexturedModalRect(guiX() + x, guiY() + y,
-					176, 101,
-					20, heightToDraw);
+								  176, 101,
+								  GLASS_CONTAINER_WIDTH, heightToDraw);
 
 			height -= heightToDraw;
 			y += heightToDraw;
 		}
 
 		drawTexturedModalRect(guiX() + x, guiY() + y,
-				176, 117,
-				20, 2);
+							  176, 117,
+							  GLASS_CONTAINER_WIDTH, 2);
+	}
+
+	protected static class Component {
+    	public int left;
+		public int top;
+		public int right;
+		public int bottom;
+
+		public Component(int left, int top, int right, int bottom) {
+			this.left = left;
+			this.right = right;
+			this.top = top;
+			this.bottom = bottom;
+		}
+
+		public boolean mouseIsOver(int mouseX, int mouseY) {
+			return mouseX >= left && mouseX <= right && mouseY >= top && mouseY <= bottom;
+		}
 	}
 }
