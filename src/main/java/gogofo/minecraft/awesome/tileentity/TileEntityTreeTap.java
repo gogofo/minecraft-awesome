@@ -17,18 +17,22 @@ import java.util.Random;
 
 public class TileEntityTreeTap extends TileEntity implements ITickable {
 
-    private static final int MIN_CONSUMABLE_SAP_LIMIT = 5;
-    private static final int MAX_CONSUMABLE_SAP_LIMIT = 10;
-    private static final int MIN_TICKS_FOR_CONSUME = 300;
-    private static final int MAX_TICKS_FOR_CONSUME = 1000;
+    private static final int MIN_CONSUMABLE_SAP_LIMIT = 5000;
+    private static final int MAX_CONSUMABLE_SAP_LIMIT = 10000;
+    private static final int MIN_TICKS_FOR_CONSUME = 200;
+    private static final int MAX_TICKS_FOR_CONSUME = 600;
+    public static final int MIN_CONSUMPTION = Fluid.BUCKET_VOLUME / 5;
+    public static final int MAX_CONSUMPTION = Fluid.BUCKET_VOLUME;
     private static final Random RANDOM = new Random();
 
     private int consumedSap;
+    private int pendingSap;
     private int maxConsumableSap;
     private int nextConsume;
 
     public TileEntityTreeTap() {
         consumedSap = 0;
+        pendingSap = 0;
         maxConsumableSap = MIN_CONSUMABLE_SAP_LIMIT + RANDOM.nextInt(MAX_CONSUMABLE_SAP_LIMIT - MIN_CONSUMABLE_SAP_LIMIT);
         setNextConsume();
     }
@@ -78,7 +82,9 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
     }
 
     private void consumeSap() {
-        consumedSap += 1;
+        int amount = MIN_CONSUMPTION + RANDOM.nextInt(MAX_CONSUMPTION - MIN_CONSUMPTION);
+        consumedSap += amount;
+        pendingSap += amount;
 
         BlockPos firstBlockBelowTap = getFirstBlockBelowTap();
 
@@ -97,9 +103,10 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
             Block substance = container.getSubstance();
 
             if (substance == Blocks.sap || substance == net.minecraft.init.Blocks.AIR) {
-                int sapPlaced = container.tryPlaceLiquid(Blocks.sap, Fluid.BUCKET_VOLUME);
+                int sapPlaced = container.tryPlaceLiquid(Blocks.sap, pendingSap);
 
-                if (sapPlaced == 1) {
+                if (sapPlaced > 0) {
+                    pendingSap -= sapPlaced;
                     return true;
                 }
             }
@@ -109,6 +116,10 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
     }
 
     private boolean attemptToDropSap(BlockPos firstBlockBelowTap) {
+        if (pendingSap < Fluid.BUCKET_VOLUME) {
+            return false;
+        }
+
         BlockPos airBlockPos = getFirstAirBetweenPosAndTap(firstBlockBelowTap);
 
         if (airBlockPos == null) {
@@ -116,6 +127,7 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
         }
 
         world.setBlockState(airBlockPos, Blocks.sap.getDefaultState());
+        pendingSap -= Fluid.BUCKET_VOLUME;
 
         return true;
     }
@@ -154,6 +166,7 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
         super.writeToNBT(compound);
 
         compound.setInteger("consumed_sap", consumedSap);
+        compound.setInteger("pending_sap", pendingSap);
         compound.setInteger("max_consumable_sap", maxConsumableSap);
         compound.setInteger("next_consume", nextConsume);
 
@@ -164,7 +177,8 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
 
-        consumedSap =  compound.getInteger("consumed_sap");
+        consumedSap = compound.getInteger("consumed_sap");
+        pendingSap = compound.getInteger("pending_sap");
         maxConsumableSap = compound.getInteger("max_consumable_sap");
         nextConsume = compound.getInteger("next_consume");
     }
