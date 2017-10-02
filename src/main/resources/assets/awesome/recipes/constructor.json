@@ -10,8 +10,7 @@
 			"item": "minecraft:diamond_block"
 		},
 		"B": {
-			"type": "awesome:filled_liquid_container",
-			"fluid": "air"
+			"item": "awesome:liquid_storage_container"
 		},
 		"C": {
 			"item": "awesome:golden_conductive"
