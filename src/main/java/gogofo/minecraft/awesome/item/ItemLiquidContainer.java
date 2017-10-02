@@ -38,7 +38,7 @@ public class ItemLiquidContainer extends Item {
 	
 	@Override
 	public boolean isDamaged(ItemStack stack) {
-		return true;
+		return getLiquidFill(stack) > 0;
 	}
 
 	@Override
