@@ -83,6 +83,11 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
 
     private void consumeSap() {
         int amount = MIN_CONSUMPTION + RANDOM.nextInt(MAX_CONSUMPTION - MIN_CONSUMPTION);
+
+        if (consumedSap + amount > maxConsumableSap) {
+            amount = maxConsumableSap - consumedSap;
+        }
+
         consumedSap += amount;
         pendingSap += amount;
 
