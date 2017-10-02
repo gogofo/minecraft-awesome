@@ -2,6 +2,7 @@
 -------------------
 
 - Fix bucket stack gone when picking water from liquid storage container
+- Fix tree tap issues
 
 -------------------
 0.57
