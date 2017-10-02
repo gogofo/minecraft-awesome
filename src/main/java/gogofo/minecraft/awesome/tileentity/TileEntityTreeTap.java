@@ -120,6 +120,8 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
             return false;
         }
 
+        pendingSap -= Fluid.BUCKET_VOLUME;
+
         BlockPos airBlockPos = getFirstAirBetweenPosAndTap(firstBlockBelowTap);
 
         if (airBlockPos == null) {
@@ -127,7 +129,6 @@ public class TileEntityTreeTap extends TileEntity implements ITickable {
         }
 
         world.setBlockState(airBlockPos, Blocks.sap.getDefaultState());
-        pendingSap -= Fluid.BUCKET_VOLUME;
 
         return true;
     }
