@@ -1,8 +1,10 @@
 package gogofo.minecraft.awesome.item;
 
+import gogofo.minecraft.awesome.colorize.IDynamicColoredObjected;
 import gogofo.minecraft.awesome.interfaces.ILiquidContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -14,13 +16,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemLiquidContainer extends Item {
+public class ItemLiquidContainer extends Item implements IDynamicColoredObjected{
 	public ItemLiquidContainer() {
 		setMaxStackSize(1);
 		setContainerItem(this);
@@ -223,4 +228,29 @@ public class ItemLiquidContainer extends Item {
             }
         }
     }
+
+	@Override
+	public int getColorForBlock(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) {
+		return -1;
+	}
+
+	@Override
+	public int getColorForItem(ItemStack stack, int tintIndex) {
+		if (tintIndex == 0) {
+			Fluid fluid = FluidRegistry.lookupFluidForBlock(getLiquidType(stack));
+			if (fluid == null) {
+				return -1;
+			}
+
+			if (fluid.getBlock() == Blocks.WATER) {
+				return 0x40a4df;
+			} else if (fluid.getBlock() == Blocks.LAVA) {
+				return 0xcf1020;
+			}
+
+			return fluid.getColor();
+		} else {
+			return -1;
+		}
+	}
 }

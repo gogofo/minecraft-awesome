@@ -1,6 +1,8 @@
 package gogofo.minecraft.awesome.init;
 
 import gogofo.minecraft.awesome.AwesomeMod;
+import gogofo.minecraft.awesome.colorize.DynamicColorProvider;
+import gogofo.minecraft.awesome.colorize.IDynamicColoredObjected;
 import gogofo.minecraft.awesome.colorize.ISingleColoredObject;
 import gogofo.minecraft.awesome.colorize.SingleColorProvider;
 import gogofo.minecraft.awesome.tileentity.TileEntityLiquidStorageContainer;
@@ -23,6 +25,10 @@ public class RendersRegisterer {
         if (itemBlock.getBlock() instanceof ISingleColoredObject) {
             Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new SingleColorProvider((ISingleColoredObject)itemBlock.getBlock()), itemBlock);
         }
+
+        if (itemBlock.getBlock() instanceof IDynamicColoredObjected) {
+            Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new DynamicColorProvider((IDynamicColoredObjected) itemBlock.getBlock()), itemBlock);
+        }
     }
 
     public static void registerRender(Item item) {
@@ -34,11 +40,19 @@ public class RendersRegisterer {
         if (item instanceof ISingleColoredObject) {
             Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new SingleColorProvider((ISingleColoredObject)item), item);
         }
+
+        if (item instanceof IDynamicColoredObjected) {
+            Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new DynamicColorProvider((IDynamicColoredObjected) item), item);
+        }
     }
 
     public static void registerColorProviderIfNeeded(Block block) {
         if (block instanceof ISingleColoredObject) {
             Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new SingleColorProvider((ISingleColoredObject)block), block);
+        }
+
+        if (block instanceof IDynamicColoredObjected) {
+            Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new DynamicColorProvider((IDynamicColoredObjected) block), block);
         }
     }
 
