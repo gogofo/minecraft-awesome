@@ -133,8 +133,19 @@ public class BlockLiquidStorageContainer extends Block implements ITileEntityPro
             Block substance = te.getSubstance();
             int liquidTaken = te.tryTakeLiquid(substance, Fluid.BUCKET_VOLUME);
             if (liquidTaken == Fluid.BUCKET_VOLUME) {
+                heldStack.shrink(1);
+
                 Fluid fluid = FluidRegistry.lookupFluidForBlock(substance);
-                playerIn.setHeldItem(hand, FluidUtil.getFilledBucket(new FluidStack(fluid, Fluid.BUCKET_VOLUME)));
+                ItemStack filledBucket = FluidUtil.getFilledBucket(new FluidStack(fluid, Fluid.BUCKET_VOLUME));
+
+                if (heldStack.isEmpty())
+                {
+                    playerIn.setHeldItem(hand, filledBucket);
+                }
+                else if (!playerIn.inventory.addItemStackToInventory(filledBucket))
+                {
+                    playerIn.dropItem(filledBucket, false);
+                }
             } else {
                 te.tryPlaceLiquid(substance, liquidTaken);
             }

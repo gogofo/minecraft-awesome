@@ -1,6 +1,7 @@
 0.58
 -------------------
 
+- Fix bucket stack gone when picking water from liquid storage container
 
 -------------------
 0.57
