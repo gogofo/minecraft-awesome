@@ -1,7 +1,9 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "awesome:items/liquid_container"
+        "layer0": "awesome:items/liquidcontainer",
+        "layer1": "awesome:items/liquidcontainerfluid",
+        "layer2": "awesome:items/liquidcontainergloss"
     },
     "display": {
         "thirdperson": {

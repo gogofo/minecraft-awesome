@@ -1,6 +1,7 @@
 package gogofo.minecraft.awesome.item;
 
 import gogofo.minecraft.awesome.colorize.IDynamicColoredObjected;
+import gogofo.minecraft.awesome.init.Ores;
 import gogofo.minecraft.awesome.interfaces.ILiquidContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -236,16 +237,16 @@ public class ItemLiquidContainer extends Item implements IDynamicColoredObjected
 
 	@Override
 	public int getColorForItem(ItemStack stack, int tintIndex) {
-		if (tintIndex == 0) {
+		if (tintIndex == 1) {
 			Fluid fluid = FluidRegistry.lookupFluidForBlock(getLiquidType(stack));
 			if (fluid == null) {
-				return -1;
+				return 0x9c6c2e;
 			}
 
 			if (fluid.getBlock() == Blocks.WATER) {
-				return 0x40a4df;
+				return 0x2B3CF4;
 			} else if (fluid.getBlock() == Blocks.LAVA) {
-				return 0xcf1020;
+				return 0xC74209;
 			}
 
 			return fluid.getColor();
