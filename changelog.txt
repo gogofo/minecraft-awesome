@@ -1,6 +1,8 @@
 0.59
 -------------------
 
+- Batteries are now stackable
+- Chargeable items will not show charge (damage bar) when empty
 
 -------------------
 0.58

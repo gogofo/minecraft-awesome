@@ -26,6 +26,11 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 	public AwesomeItemChargable() {
 		setMaxStackSize(1);
 	}
+
+	@Override
+	public int getItemStackLimit(ItemStack stack) {
+		return hasTag(stack) && hasCharge(stack) ? 1 : maxStackSize;
+	}
 	
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand,
@@ -140,7 +145,7 @@ public abstract class AwesomeItemChargable extends Item implements IAwesomeCharg
 	
 	@Override
 	public boolean isDamaged(ItemStack stack) {
-		return hasTag(stack);
+		return hasTag(stack) && hasCharge(stack);
 	}
 	
 	@Override

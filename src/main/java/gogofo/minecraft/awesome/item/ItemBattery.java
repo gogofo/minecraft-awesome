@@ -14,6 +14,12 @@ public class ItemBattery extends AwesomeItemChargable implements ISingleColoredO
     private int chargeSpeed = 10;
     private int color = 0xFFFFFF;
 
+    public ItemBattery() {
+        super();
+
+        setMaxStackSize(16);
+    }
+
     @Override
     public int getMaxRequiredCharge(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
         return 0;
