@@ -5,6 +5,7 @@
 - Fix tree tap issues
 - Liquid container shows contents
 - Make aluminium foil less expensive
+- Sap changed color
 
 -------------------
 0.57
