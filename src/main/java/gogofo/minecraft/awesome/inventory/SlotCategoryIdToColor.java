@@ -21,6 +21,8 @@ public class SlotCategoryIdToColor {
 				return 0x4F000000;
 			case 8:
 				return 0x4FFF9100;
+			case 9:
+				return 0x4F2AFFA2;
     	}
     	
     	return 0;
