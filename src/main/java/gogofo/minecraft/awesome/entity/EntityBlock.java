@@ -41,12 +41,24 @@ public abstract class EntityBlock extends Entity {
     }
 
     @Override
-    protected void writeEntityToNBT(NBTTagCompound compound) {
-        compound.setInteger("facing", getFacing().ordinal());
+    protected final void writeEntityToNBT(NBTTagCompound compound) {
+        saveToNBT(compound, false);
     }
 
     @Override
-    protected void readEntityFromNBT(NBTTagCompound compound) {
+    protected final void readEntityFromNBT(NBTTagCompound compound) {
+        loadFromNBT(compound);
+    }
+
+    public void saveToNBT(NBTTagCompound compound, boolean isForItem) {
+        if (isForItem) {
+            return;
+        }
+
+        compound.setInteger("facing", getFacing().ordinal());
+    }
+
+    public void loadFromNBT(NBTTagCompound compound) {
         if (compound.hasKey("facing")) {
             setFacing(EnumFacing.values()[compound.getInteger("facing")]);
         }

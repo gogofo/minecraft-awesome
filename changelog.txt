@@ -3,6 +3,7 @@
 
 - Batteries are now stackable
 - Chargeable items will not show charge (damage bar) when empty
+- Constructor now retains oil on harvest
 
 -------------------
 0.58

@@ -77,7 +77,14 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
         if (!source.isCreativePlayer()) {
             Item droppedItem = getDroppedItem();
             if (droppedItem != null) {
-                dropItem(droppedItem, 1);
+
+                NBTTagCompound compound = new NBTTagCompound();
+                saveToNBT(compound, true);
+
+                ItemStack stack = new ItemStack(droppedItem);
+                stack.setTagCompound(compound);
+
+                entityDropItem(stack, 1);
             }
         }
 
@@ -147,16 +154,19 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
     }
 
     @Override
-    protected void writeEntityToNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
+    public void saveToNBT(NBTTagCompound compound, boolean isForItem) {
+        super.saveToNBT(compound, isForItem);
 
-        InventoryUtils.writeToNBT(itemStackArray, this, compound);
+        if (!isForItem) {
+            InventoryUtils.writeToNBT(itemStackArray, this, compound);
+        }
+
         compound.setInteger("oilAmount", getOilAmount());
     }
 
     @Override
-    protected void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
+    public void loadFromNBT(NBTTagCompound compound) {
+        super.loadFromNBT(compound);
 
         InventoryUtils.readFromNBT(itemStackArray, slotsForFace, this, compound);
 
