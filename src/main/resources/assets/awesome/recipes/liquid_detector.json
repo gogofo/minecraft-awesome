@@ -1,0 +1,32 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"CDE",
+		" A ",
+		" B "
+	],
+	"key": {
+		"A": {
+			"item": "awesome:tool_core"
+		},
+		"B": {
+			"item": "awesome:big_battery"
+		},
+		"C": {
+			"type": "awesome:filled_bucket",
+			"fluid": "water"
+		},
+		"D": {
+			"type": "awesome:filled_bucket",
+			"fluid": "lava"
+		},
+		"E": {
+			"type": "awesome:filled_bucket",
+			"fluid": "oil"
+		}
+	},
+	"result": {
+		"item": "awesome:liquid_detector",
+		"count": 1
+	}
+}

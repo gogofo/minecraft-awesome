@@ -54,6 +54,7 @@ item.rubber.name=Rubber
 item.gear.name=Gear
 item.gears.name=Gears
 item.golden_conductive.name=Golden Conductive
+item.liquid_detector.name=Liquid Detector
 
 # Minecraft dusts
 item.iron_dust.name=Iron Dust

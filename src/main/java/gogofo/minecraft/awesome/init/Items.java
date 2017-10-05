@@ -37,6 +37,7 @@ public class Items {
 	public static Item gear;
 	public static Item gears;
 	public static Item golden_conductive;
+	public static Item liquid_detector;
 
 	// Entities
 	public static Item constructor;
@@ -120,6 +121,9 @@ public class Items {
 
 		golden_conductive = registryItem(new Item(), "golden_conductive");
 		items.add(golden_conductive);
+
+		liquid_detector = registryItem(new ItemLiquidDetector(), "liquid_detector");
+		items.add(liquid_detector);
 
 		// Entities
 		constructor = registryItem(new ItemConstructor(), "constructor");

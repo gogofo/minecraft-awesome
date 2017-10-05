@@ -4,6 +4,8 @@
 - Batteries are now stackable
 - Chargeable items will not show charge (damage bar) when empty
 - Constructor now retains oil on harvest
+- Added liquid detector for detecting liquid
+    - Gives the sum value of liquids in a 17x17 area below you with water = 1, lava = 3, oil = 5
 
 -------------------
 0.58

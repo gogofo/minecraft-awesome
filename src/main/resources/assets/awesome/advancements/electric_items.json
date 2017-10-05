@@ -26,7 +26,8 @@
             "awesome:enchanted_drill",
             "awesome:liquid_container",
             "awesome:liquid_pump",
-            "awesome:multimeter"
+            "awesome:multimeter",
+            "awesome:liquid_detector"
         ]
     }
 }
