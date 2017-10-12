@@ -18,12 +18,13 @@ public class TileEntityRendererPerimeterMarker extends TileEntitySpecialRenderer
         float south = 0.62f + te.getSouthMatchDistance();
         float east = 0.62f + te.getEastMatchDistance();
 
-        GlStateManager.pushMatrix();
-        GlStateManager.translate(x, y, z);
         GlStateManager.disableCull();
         GlStateManager.disableTexture2D();
         GlStateManager.disableLighting();
         GlStateManager.disableBlend();
+
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x, y, z);
         GlStateManager.glBegin(GL11.GL_QUADS);
         GlStateManager.color(1.0f, 0f, 0f, 0.2f);
 
@@ -38,6 +39,10 @@ public class TileEntityRendererPerimeterMarker extends TileEntitySpecialRenderer
         GlStateManager.glEnd();
 
         GlStateManager.popMatrix();
+        GlStateManager.enableCull();
+        GlStateManager.enableTexture2D();
+        GlStateManager.enableLighting();
+        GlStateManager.enableBlend();
     }
 
     @Override
