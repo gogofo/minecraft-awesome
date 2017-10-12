@@ -79,4 +79,15 @@ public class BlockPerimeterMarker extends Block implements ITileEntityProvider {
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return new AxisAlignedBB(6f/16f, 0.0D, 6f/16f, 10f/16f, 12f/16f, 10f/16f);
     }
+
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        TileEntityPerimeterMarker te = (TileEntityPerimeterMarker) worldIn.getTileEntity(pos);
+
+        if (te != null) {
+            te.handleBreak();
+        }
+
+        super.breakBlock(worldIn, pos, state);
+    }
 }
