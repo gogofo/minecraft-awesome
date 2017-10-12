@@ -6,8 +6,10 @@ import gogofo.minecraft.awesome.colorize.IDynamicColoredObjected;
 import gogofo.minecraft.awesome.colorize.ISingleColoredObject;
 import gogofo.minecraft.awesome.colorize.SingleColorProvider;
 import gogofo.minecraft.awesome.tileentity.TileEntityLiquidStorageContainer;
+import gogofo.minecraft.awesome.tileentity.TileEntityPerimeterMarker;
 import gogofo.minecraft.awesome.tileentity.TileEntityPipe;
 import gogofo.minecraft.awesome.tileentity.renderer.TileEntityRendererLiquidStorageContainer;
+import gogofo.minecraft.awesome.tileentity.renderer.TileEntityRendererPerimeterMarker;
 import gogofo.minecraft.awesome.tileentity.renderer.TileEntityRendererPipe;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -59,5 +61,6 @@ public class RendersRegisterer {
     public static void registerTileEntityRenderers() {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, new TileEntityRendererPipe());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLiquidStorageContainer.class, new TileEntityRendererLiquidStorageContainer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPerimeterMarker.class, new TileEntityRendererPerimeterMarker());
     }
 }

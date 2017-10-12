@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "awesome:perimeter_marker" }
+    }
+}

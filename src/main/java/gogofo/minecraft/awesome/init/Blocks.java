@@ -33,7 +33,8 @@ public class Blocks {
 	public static Block liquid_storage_container;
 	public static Block tree_tap;
 	public static Block dead_wood;
-	
+	public static Block perimeter_marker;
+
 	private static ArrayList<Block> blocks = new ArrayList<>();
 	private static ArrayList<ItemBlock> itemBlocks = new ArrayList<>();
 
@@ -91,6 +92,9 @@ public class Blocks {
 
 		dead_wood = registryBlock(new BlockDeadWood(), "dead_wood");
 		blocks.add(dead_wood);
+
+		perimeter_marker = registryBlock(new BlockPerimeterMarker(), "perimeter_marker");
+		blocks.add(perimeter_marker);
 
 		for (Ores.Ore ore : Ores.getOres()) {
 			if (ore.isHasBlock()) {
