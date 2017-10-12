@@ -1,5 +1,6 @@
 package gogofo.minecraft.awesome.entity;
 
+import gogofo.minecraft.awesome.PerimeterManager;
 import gogofo.minecraft.awesome.gui.GuiEnum;
 import gogofo.minecraft.awesome.init.Items;
 import gogofo.minecraft.awesome.inventory.ContainerConstructor;
@@ -104,7 +105,8 @@ public class EntityConstructor extends EntityMachineBlock {
         BlockPos below_pos = getPosition().offset(getFacing()).offset(EnumFacing.DOWN);
 
         if (world.getBlockState(below_pos).getCollisionBoundingBox(world, below_pos) != NULL_AABB ||
-                !world.getBlockState(below_pos).getBlock().isReplaceable(world, below_pos)) {
+                !world.getBlockState(below_pos).getBlock().isReplaceable(world, below_pos) ||
+                PerimeterManager.instance.hasPerimeter(below_pos)) {
             return false;
         }
 
