@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"DCD",
+		" B ",
+		" A "
+	],
+	"key": {
+		"A": {
+			"item": "awesome:battery"
+		},
+		"B": {
+			"item": "minecraft:redstone_torch"
+		},
+		"C": {
+			"item": "awesome:platinum_ingot"
+		},
+		"D": {
+			"item": "minecraft:dye",
+			"data": 4
+		}
+	},
+	"result": {
+		"item": "awesome:perimeter_marker",
+		"count": 1
+	}
+}

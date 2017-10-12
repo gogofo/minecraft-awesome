@@ -33,7 +33,8 @@
             "awesome:teleporter",
             "awesome:electric_furnace",
             "awesome:torch",
-            "awesome:constructor"
+            "awesome:constructor",
+            "awesome:perimeter_marker"
         ]
     }
 }

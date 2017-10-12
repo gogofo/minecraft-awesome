@@ -13,6 +13,7 @@ tile.pipe.name=Pipe
 tile.suction_pipe.name=Suction Pipe
 tile.sorting_pipe.name=Sorting Pipe
 tile.extractor.name=Extractor
+tile.perimeter_marker.name=Perimeter Marker
 
 # Machine Entities
 entity.constructor.name=Constructor
