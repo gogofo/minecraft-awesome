@@ -32,6 +32,9 @@ public class TileEntityPerimeterMarker extends TileEntity implements ITickable {
 
         updatePerimeterGridAsNeeded(eastMatchDistance, newEastMatchDistance, EnumFacing.EAST);
         updatePerimeterGridAsNeeded(southMatchDistance, newSouthMatchDistance, EnumFacing.SOUTH);
+
+        eastMatchDistance = newEastMatchDistance;
+        southMatchDistance = newSouthMatchDistance;
     }
 
     private void updatePerimeterGridAsNeeded(int oldDistance, int newDistance, EnumFacing direction) {

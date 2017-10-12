@@ -1,6 +1,7 @@
 package gogofo.minecraft.awesome.entity;
 
 import gogofo.minecraft.awesome.AwesomeMod;
+import gogofo.minecraft.awesome.PerimeterManager;
 import gogofo.minecraft.awesome.gui.GuiEnum;
 import gogofo.minecraft.awesome.init.Blocks;
 import gogofo.minecraft.awesome.interfaces.IConfigurableSidedInventory;
@@ -146,6 +147,11 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
         ((ItemBattery)stackInSlot.getItem()).reduceCharge(stackInSlot, usage[0]);
         setOilAmount(oilAmount - usage[1]);
         markDirty();
+    }
+
+    @Override
+    protected boolean canMove(EnumFacing direction) {
+        return super.canMove(direction) && !PerimeterManager.instance.hasPerimeter(getPosition().offset(direction));
     }
 
     @Override

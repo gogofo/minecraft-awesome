@@ -34,7 +34,7 @@ public class PerimeterManager {
 
     public boolean hasPerimeter(BlockPos pos) {
         pos = cleanPos(pos);
-        
+
         return perimeterGrid.containsKey(pos);
     }
 
