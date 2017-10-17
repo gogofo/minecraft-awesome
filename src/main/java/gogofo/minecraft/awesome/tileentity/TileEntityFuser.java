@@ -131,6 +131,7 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
 			}
 
 			Arrays.stream(itemStackArray)
+					.limit(itemStackArray.length - getUpgradeCount())
 					.filter(stack -> stack != itemStackArray[RESULT_SLOT])
 					.forEach(stack -> stack.shrink(1));
 		}
@@ -175,6 +176,7 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
 	
 	private RecipeFuser.Recipe getCurrRecipe() {
 		Item[] items = Arrays.stream(itemStackArray)
+				.limit(itemStackArray.length - getUpgradeCount())
 				.filter(stack -> !stack.isEmpty() && stack != itemStackArray[RESULT_SLOT])
 				.map(ItemStack::getItem)
 				.toArray(Item[]::new);
