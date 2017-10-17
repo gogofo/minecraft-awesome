@@ -7,7 +7,6 @@ import gogofo.minecraft.awesome.inventory.ContainerCharger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -16,7 +15,6 @@ public class TileEntityCharger extends AwesomeTileEntityMachine {
 	private final static int BASE_CHARGE_SPEED = 1;
 	
 	private boolean wasCharging = false;
-	private int chargeSpeed = BASE_CHARGE_SPEED;
 	
 	@Override
 	public String getName() {
@@ -68,25 +66,12 @@ public class TileEntityCharger extends AwesomeTileEntityMachine {
 	@Override
 	public void electricUpdate() {
 		if (isCharging()) {
-			getChargedItem().charge(itemStackArray[0], chargeSpeed);
+			int speedBoost = BASE_CHARGE_SPEED * getUpgradeAmount(Items.machine_upgrade_speed);
+			getChargedItem().charge(itemStackArray[0], BASE_CHARGE_SPEED + speedBoost);
 		} 
 		
 		wasCharging = isCharging();
 		markDirty();
-	}
-
-	@Override
-	protected void onUpgradeAdded(Item upgrade) {
-		if (upgrade == Items.machine_upgrade_speed) {
-			chargeSpeed += BASE_CHARGE_SPEED;
-		}
-	}
-
-	@Override
-	protected void onUpgradeRemoved(Item upgrade) {
-		if (upgrade == Items.machine_upgrade_speed) {
-			chargeSpeed -= BASE_CHARGE_SPEED;
-		}
 	}
 
 	private boolean isCharging() {

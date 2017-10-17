@@ -8,6 +8,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.text.TextComponentString;
 
+import java.util.HashMap;
+
 public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContainer implements ITickable {
 	private TextComponentString displayName;
 	
@@ -15,6 +17,7 @@ public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContaine
 	private boolean isWorkingTmpFlag = true;
 	private boolean isFirstUpdate = true;
 	private boolean wasWorking;
+	private HashMap<Item, Integer> upgrades = new HashMap<>();
 	
 	protected abstract void electricUpdate();
 	public abstract int powerGeneratedWhenWorking();
@@ -129,8 +132,18 @@ public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContaine
 	}
 
 	protected void onUpgradeAdded(Item upgrade) {
+		upgrades.put(upgrade, getUpgradeAmount(upgrade) + 1);
 	}
 
 	protected void onUpgradeRemoved(Item upgrade) {
+		upgrades.put(upgrade, Math.max(getUpgradeAmount(upgrade) - 1, 0));
+	}
+
+	protected Integer getUpgradeAmount(Item upgrade) {
+		if (!upgrades.containsKey(upgrade)) {
+			return 0;
+		}
+
+		return upgrades.get(upgrade);
 	}
 }

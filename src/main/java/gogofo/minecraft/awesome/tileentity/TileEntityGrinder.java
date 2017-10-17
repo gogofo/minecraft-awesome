@@ -1,6 +1,7 @@
 package gogofo.minecraft.awesome.tileentity;
 
 import gogofo.minecraft.awesome.gui.GuiEnum;
+import gogofo.minecraft.awesome.init.Items;
 import gogofo.minecraft.awesome.init.Recipes;
 import gogofo.minecraft.awesome.inventory.ContainerGrinder;
 import gogofo.minecraft.awesome.recipe.RecipeGrinder;
@@ -24,7 +25,6 @@ public class TileEntityGrinder extends AwesomeTileEntityMachine {
 	private int remainingGrindTime;
 	private int currentRecpGrindTime;
 	private int currentGroundItem;
-	private float grindingBoost = 0;
 	
 	@Override
 	public String getName() {
@@ -110,8 +110,9 @@ public class TileEntityGrinder extends AwesomeTileEntityMachine {
 		boolean isDirty = false;
 		
 		if (isGrinding()) {
-			remainingGrindTime -= 1 + grindingBoost;
-			
+			float speedBoost = getUpgradeAmount(Items.machine_upgrade_speed) * GRINDING_BOOST_INCREMENTS;
+			remainingGrindTime -= 1 + speedBoost;
+
 			if (remainingGrindTime <= 0) {
 				generateGroundItem();
 			}
@@ -134,16 +135,6 @@ public class TileEntityGrinder extends AwesomeTileEntityMachine {
 		if (isDirty) {
 			markDirty();
 		}
-	}
-
-	@Override
-	protected void onUpgradeAdded(Item upgrade) {
-		grindingBoost += GRINDING_BOOST_INCREMENTS;
-	}
-
-	@Override
-	protected void onUpgradeRemoved(Item upgrade) {
-		grindingBoost -= GRINDING_BOOST_INCREMENTS;
 	}
 
 	private void generateGroundItem() {
