@@ -30,6 +30,7 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
 	public final static int CURRENT_RECP_FUSED_ITEM_9_IDX = 10;
 
 	public static final int RESULT_SLOT = 9;
+	public static final float SPEED_BOOST_INCREMENTS = 0.25f;
 
 	private int remainingFuseTime;
 	private int currentRecpFuseTime;
@@ -110,9 +111,10 @@ public class TileEntityFuser extends AwesomeTileEntityMachine {
 		boolean isDirty = false;
 		
 		if (isFusing()) {
-			remainingFuseTime -= 1;
+			float speedBoost = getUpgradeAmount(gogofo.minecraft.awesome.init.Items.machine_upgrade_speed) * SPEED_BOOST_INCREMENTS;
+			remainingFuseTime -= 1 + speedBoost;
 			
-			if (remainingFuseTime == 0) {
+			if (remainingFuseTime <= 0) {
 				generateFusedItem();
 			}
 		} 

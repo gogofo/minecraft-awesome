@@ -1,6 +1,7 @@
 package gogofo.minecraft.awesome.tileentity;
 
 import gogofo.minecraft.awesome.gui.GuiEnum;
+import gogofo.minecraft.awesome.init.Items;
 import gogofo.minecraft.awesome.init.Recipes;
 import gogofo.minecraft.awesome.inventory.ContainerExtractor;
 import gogofo.minecraft.awesome.recipe.RecipeExtractor;
@@ -18,7 +19,8 @@ public class TileEntityExtractor extends AwesomeTileEntityMachine {
 	public final static int REMAINING_EXTRACTION_TIME_IDX = 0;
 	public final static int CURRENT_RECP_EXTRACTION_TIME_IDX = 1;
 	public final static int CURRENT_EXTRACTED_ITEM_IDX = 2;
-	
+	public static final float SPEED_BOOST_INCREMENTS = 0.25f;
+
 	private int remainingExtractionTime;
 	private int currentRecpExtractionTime;
 	private int currentExtractedItem;
@@ -107,9 +109,10 @@ public class TileEntityExtractor extends AwesomeTileEntityMachine {
 		boolean isDirty = false;
 		
 		if (isExtracting()) {
-			remainingExtractionTime -= 1;
+			float speedBoost = getUpgradeAmount(Items.machine_upgrade_speed) * SPEED_BOOST_INCREMENTS;
+			remainingExtractionTime -= 1 + speedBoost;
 			
-			if (remainingExtractionTime == 0) {
+			if (remainingExtractionTime <= 0) {
 				generateExtractedItem();
 			}
 		} 

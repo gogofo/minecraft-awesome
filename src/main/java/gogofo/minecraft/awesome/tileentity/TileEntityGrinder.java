@@ -20,7 +20,7 @@ public class TileEntityGrinder extends AwesomeTileEntityMachine {
 	public final static int CURRENT_RECP_GRIND_TIME_IDX = 1;
 	public final static int CURRENT_GROUND_ITEM_IDX = 2;
 
-	private final static float GRINDING_BOOST_INCREMENTS = 0.25f;
+	private final static float SPEED_BOOST_INCREMENTS = 0.25f;
 	
 	private int remainingGrindTime;
 	private int currentRecpGrindTime;
@@ -110,7 +110,7 @@ public class TileEntityGrinder extends AwesomeTileEntityMachine {
 		boolean isDirty = false;
 		
 		if (isGrinding()) {
-			float speedBoost = getUpgradeAmount(Items.machine_upgrade_speed) * GRINDING_BOOST_INCREMENTS;
+			float speedBoost = getUpgradeAmount(Items.machine_upgrade_speed) * SPEED_BOOST_INCREMENTS;
 			remainingGrindTime -= 1 + speedBoost;
 
 			if (remainingGrindTime <= 0) {

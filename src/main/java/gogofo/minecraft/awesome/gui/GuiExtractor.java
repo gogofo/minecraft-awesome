@@ -1,6 +1,7 @@
 package gogofo.minecraft.awesome.gui;
 
 import gogofo.minecraft.awesome.gui.features.FeatureControls;
+import gogofo.minecraft.awesome.gui.features.FeatureUpgrades;
 import gogofo.minecraft.awesome.inventory.ContainerGrinder;
 import gogofo.minecraft.awesome.tileentity.TileEntityExtractor;
 import gogofo.minecraft.awesome.tileentity.TileEntityGrinder;
@@ -22,6 +23,7 @@ public class GuiExtractor extends AwesomeGui {
         this.tileEntity = tileEntity;
 
 		addFeature(new FeatureControls(this, tileEntity));
+		addFeature(new FeatureUpgrades(this, inventorySlots));
     }
 
 	@Override

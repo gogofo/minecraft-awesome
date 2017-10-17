@@ -23,7 +23,9 @@ public class TileEntityElectricFurnace extends AwesomeTileEntityMachine {
 	public final static int REMAINING_COOK_TIME_IDX = 0;
 	public final static int CURRENT_ITEM_COOK_TIME_IDX = 1;
 	public final static int CURRENT_COOK_RESULT = 2;
-	
+
+	public static final float SPEED_BOOST_INCREMENTS = 0.25f;
+
 	private int remainingCookTime;
 	private int currentItemCookTime;
 	private int currentCookResult;
@@ -114,9 +116,10 @@ public class TileEntityElectricFurnace extends AwesomeTileEntityMachine {
 		boolean isDirty = false;
 		
 		if (isCooking()) {
-			remainingCookTime -= 1;
+			float speedBoost = getUpgradeAmount(Items.machine_upgrade_speed) * SPEED_BOOST_INCREMENTS;
+			remainingCookTime -= 1 + speedBoost;
 			
-			if (remainingCookTime == 0) {
+			if (remainingCookTime <= 0) {
 				cookItem();
 			}
 		} 

@@ -1,6 +1,7 @@
 package gogofo.minecraft.awesome.gui;
 
 import gogofo.minecraft.awesome.gui.features.FeatureControls;
+import gogofo.minecraft.awesome.gui.features.FeatureUpgrades;
 import gogofo.minecraft.awesome.inventory.ContainerElectricFurnace;
 import gogofo.minecraft.awesome.tileentity.TileEntityElectricFurnace;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -21,6 +22,7 @@ public class GuiElectricFurnace extends AwesomeGui {
         this.tileEntityElectricFurnace = tileEntityElectricFurnace;
 
 		addFeature(new FeatureControls(this, tileEntityElectricFurnace));
+		addFeature(new FeatureUpgrades(this, inventorySlots));
     }
 
 	@Override
