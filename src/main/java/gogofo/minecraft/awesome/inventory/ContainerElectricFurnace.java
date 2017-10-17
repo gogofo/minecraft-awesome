@@ -9,7 +9,7 @@ public class ContainerElectricFurnace extends AwesomeMachineContainer
     {
     	super(inventoryPlayer, customInventory);
     	
-        this.addSlotToContainer(new AwesomeSlot(customInventory, 0, 56, 38));
+        this.addSlotToContainer(new SlotElectricFurnace(customInventory, 0, 56, 38));
         this.addSlotToContainer(new AwesomeSlotBigOutput(customInventory, 1, 116, 38));
     }
 }
