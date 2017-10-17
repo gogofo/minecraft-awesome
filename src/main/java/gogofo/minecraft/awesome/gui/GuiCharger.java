@@ -1,6 +1,7 @@
 package gogofo.minecraft.awesome.gui;
 
 import gogofo.minecraft.awesome.gui.features.FeatureControls;
+import gogofo.minecraft.awesome.gui.features.FeatureUpgrades;
 import gogofo.minecraft.awesome.inventory.ContainerCharger;
 import gogofo.minecraft.awesome.inventory.ContainerGenerator;
 import gogofo.minecraft.awesome.tileentity.TileEntityCharger;
@@ -27,7 +28,6 @@ public class GuiCharger extends AwesomeGui {
 
 	@Override
 	protected void drawCustomGui() {
-		drawSlotsByCustomContainer(tileEntity.createContainer(playerInventory, 
-														      playerInventory.player));
+		drawSlotsByCustomContainer(inventorySlots);
 	}
 }

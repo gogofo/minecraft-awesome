@@ -5,6 +5,7 @@ import gogofo.minecraft.awesome.gui.features.GuiFeature;
 import gogofo.minecraft.awesome.interfaces.IPositionedSidedInventory;
 import gogofo.minecraft.awesome.inventory.AwesomeSlot;
 import gogofo.minecraft.awesome.inventory.AwesomeSlotBig;
+import gogofo.minecraft.awesome.inventory.MachineUpgradeSlot;
 import gogofo.minecraft.awesome.inventory.SlotCategoryIdToColor;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -112,9 +113,8 @@ public abstract class AwesomeGui extends GuiContainer {
         mc.getTextureManager().bindTexture(guiTextures);
         
         drawEmptyBackground();
-        drawCustomGui();
-
 		features.forEach(f -> f.onDrawBackgroundLayer(partialTicks, mouseX, mouseY));
+        drawCustomGui();
     }
 
 	@Override
@@ -136,29 +136,33 @@ public abstract class AwesomeGui extends GuiContainer {
 	}
 
 	private void drawEmptyBackground() {
-    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-		drawTexturedModalRect(guiX(), guiY(),
-				0, 0,
-				xSize, 4);
+		drawWindow(guiX(), guiY(), xSize, ySize);
+    }
+
+    public void drawWindow(int x, int y, int width, int height) {
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		drawTexturedModalRect(x, y,
+							  0, 0,
+							  width, 4);
 
 
-		int backgroundToDraw = ySize - 8;
+		int backgroundToDraw = height - 8;
 		int curY = 4;
 
 		while (backgroundToDraw > 0) {
 			int actualDraw = Math.min(backgroundToDraw, TEXTURE_EMPTY_BACKGROUND_HEIGHT);
-			drawTexturedModalRect(guiX(), guiY() + curY,
-					0, 4,
-					xSize, actualDraw);
+			drawTexturedModalRect(x, y + curY,
+								  0, 4,
+								  width, actualDraw);
 
 			backgroundToDraw -= actualDraw;
 			curY += actualDraw;
 		}
 
-		drawTexturedModalRect(guiX(), guiY() + ySize - 4,
-				0, TEXTURE_BACKGROUND_HEIGHT - 4,
-				xSize, 4);
-    }
+		drawTexturedModalRect(x, y + height - 4,
+							  0, TEXTURE_BACKGROUND_HEIGHT - 4,
+							  width, 4);
+	}
     
     protected int getInboxStartY() {
     	return INBOX_START_Y;
@@ -195,7 +199,11 @@ public abstract class AwesomeGui extends GuiContainer {
     		} else if (slot instanceof AwesomeSlot) {
     			int color = SlotCategoryIdToColor.convert(((AwesomeSlot) slot).getCategoryId());
     			drawSlot(slot.xPos-2, slot.yPos-2, color);
-    		} else {
+    		} else if (slot instanceof MachineUpgradeSlot) {
+    			if (((MachineUpgradeSlot) slot).isVisible()) {
+					drawSlot(slot.xPos - 2, slot.yPos - 2, 0);
+				}
+			} else {
     			drawSlot(slot.xPos-2, slot.yPos-2, 0);
     		}
     	}

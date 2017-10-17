@@ -2,9 +2,10 @@ package gogofo.minecraft.awesome.gui.features;
 
 import gogofo.minecraft.awesome.gui.AwesomeGui;
 import gogofo.minecraft.awesome.gui.controls.ColorGuiButton;
-import gogofo.minecraft.awesome.interfaces.IPositionedSidedInventory;
+import gogofo.minecraft.awesome.inventory.MachineUpgradeSlot;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
 
 public class FeatureUpgrades implements GuiFeature {
 
@@ -15,18 +16,14 @@ public class FeatureUpgrades implements GuiFeature {
     protected static final int GEAR_HEIGHT = 14;
 
     private ColorGuiButton gearButton;
-    private ColorGuiButton background;
-    private ColorGuiButton[] faceButtons;
 
     protected boolean controlActive = false;
     private AwesomeGui gui;
-    private IPositionedSidedInventory inventory;
+    private Container container;
 
-    public FeatureUpgrades(AwesomeGui gui, IPositionedSidedInventory customInventory) {
+    public FeatureUpgrades(AwesomeGui gui, Container container) {
         this.gui = gui;
-        this.inventory = customInventory;
-
-        faceButtons = new ColorGuiButton[EnumFacing.values().length];
+        this.container = container;
     }
 
     public void onInitGui() {
@@ -36,24 +33,24 @@ public class FeatureUpgrades implements GuiFeature {
                                         GEAR_WIDTH, GEAR_HEIGHT,
                                         "BST");
         gui.addButton(gearButton);
-
-        background = new ColorGuiButton(-1,
-                                        gui.guiX() + gui.getXSize(),
-                                        gui.guiY(),
-                                        CONTROLS_WIDTH,
-                                        CONTROLS_HEIGHT,
-                                        "");
-        background.enabled = false;
-        background.setColor(0xFFC6C6C6);
-        gui.addButton(background);
     }
 
     public void onDrawBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
         if (controlActive) {
-            background.visible = true;
+            gui.drawWindow(gui.guiX() + gui.getXSize(), gui.guiY(), CONTROLS_WIDTH, CONTROLS_HEIGHT);
+
+            for (Slot inventorySlot : container.inventorySlots) {
+                if (inventorySlot instanceof MachineUpgradeSlot) {
+                    ((MachineUpgradeSlot) inventorySlot).setVisible(true);
+                }
+            }
         } else {
-            background.visible = false;
+            for (Slot inventorySlot : container.inventorySlots) {
+                if (inventorySlot instanceof MachineUpgradeSlot) {
+                    ((MachineUpgradeSlot) inventorySlot).setVisible(false);
+                }
+            }
         }
     }
 
