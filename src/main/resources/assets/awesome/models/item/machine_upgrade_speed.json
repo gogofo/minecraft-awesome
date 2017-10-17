@@ -1,7 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "awesome:items/chainsaw"
+        "layer0": "awesome:items/machine_upgrade_speed"
     },
     "display": {
         "thirdperson": {
