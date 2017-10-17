@@ -1,7 +1,9 @@
 package gogofo.minecraft.awesome.inventory;
 
+import gogofo.minecraft.awesome.interfaces.IMachineUpgrade;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class MachineUpgradeSlot extends Slot {
 
@@ -25,5 +27,10 @@ public class MachineUpgradeSlot extends Slot {
 	@Override
 	public boolean isEnabled() {
 		return isVisible;
+	}
+
+	@Override
+	public boolean isItemValid(ItemStack stack) {
+		return stack.getItem() instanceof IMachineUpgrade;
 	}
 }

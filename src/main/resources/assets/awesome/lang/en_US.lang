@@ -56,6 +56,7 @@ item.gear.name=Gear
 item.gears.name=Gears
 item.golden_conductive.name=Golden Conductive
 item.liquid_detector.name=Liquid Detector
+item.machine_upgrade_speed.name=Speed Upgrade
 
 # Minecraft dusts
 item.iron_dust.name=Iron Dust

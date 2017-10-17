@@ -52,6 +52,9 @@ public class Items {
 	// Food
 	public static Item rich_melon;
 	public static Item salt;
+
+	// Machine Upgrades
+	public static Item machine_upgrade_speed;
 	
 	private static ArrayList<Item> items = new ArrayList<Item>();
 	
@@ -162,6 +165,10 @@ public class Items {
 
 		salt = registryItem(new ItemFood(-1, -0.5F, false), "salt");
 		items.add(salt);
+
+		// Machine Upgrades
+		machine_upgrade_speed = registryItem(new ItemMachineUpgrade(), "machine_upgrade_speed");
+		items.add(machine_upgrade_speed);
 		
 		// Extractions
 		

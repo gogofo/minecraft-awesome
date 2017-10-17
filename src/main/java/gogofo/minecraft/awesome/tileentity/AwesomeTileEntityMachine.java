@@ -2,22 +2,11 @@ package gogofo.minecraft.awesome.tileentity;
 
 import gogofo.minecraft.awesome.PowerManager;
 import gogofo.minecraft.awesome.block.AwesomeBlockRunningMachine;
-import gogofo.minecraft.awesome.block.IElectricalBlock;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityLockable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.world.storage.WorldInfo;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.text.TextComponentString;
 
 public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContainer implements ITickable {
 	private TextComponentString displayName;
@@ -37,8 +26,23 @@ public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContaine
 	public AwesomeTileEntityMachine() {
 		displayName =  new TextComponentString(getName());
 	}
-    
-    public boolean hasPower() {
+
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+
+		initUpgrades();
+	}
+
+	private void initUpgrades() {
+		for (int i = getSlotCount(); i < getSlotCount() + getUpgradeCount(); i++) {
+			if (!itemStackArray[i].isEmpty()) {
+				onUpgradeAdded(itemStackArray[i].getItem());
+			}
+		}
+	}
+
+	public boolean hasPower() {
     	return PowerManager.instance.getPower(pos) > 0;
     }
     
@@ -102,5 +106,31 @@ public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContaine
 	@Override
 	public int getUpgradeCount() {
 		return 4;
+	}
+
+	@Override
+	public void setInventorySlotContents(int index, ItemStack stack) {
+		if (index >= getSlotCount() && index < getSlotCount() + getUpgradeCount()) {
+			if (itemStackArray[index].getItem() != stack.getItem()) {
+				onUpgradeAdded(stack.getItem());
+			}
+		}
+
+		super.setInventorySlotContents(index, stack);
+	}
+
+	@Override
+	public ItemStack decrStackSize(int index, int count) {
+		if (index >= getSlotCount() && index < getSlotCount() + getUpgradeCount()) {
+			onUpgradeRemoved(itemStackArray[index].getItem());
+		}
+
+		return super.decrStackSize(index, count);
+	}
+
+	protected void onUpgradeAdded(Item upgrade) {
+	}
+
+	protected void onUpgradeRemoved(Item upgrade) {
 	}
 }
