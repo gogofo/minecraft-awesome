@@ -1,10 +1,10 @@
 package gogofo.minecraft.awesome.inventory;
 
+import gogofo.minecraft.awesome.tileentity.AwesomeTileEntityMachine;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
 
-public class ContainerFuser extends AwesomeContainer {
-    public ContainerFuser(InventoryPlayer inventoryPlayer, IInventory inventory)
+public class ContainerFuser extends AwesomeMachineContainer {
+    public ContainerFuser(InventoryPlayer inventoryPlayer, AwesomeTileEntityMachine inventory)
     {
     	super(inventoryPlayer, inventory);
 
@@ -12,9 +12,4 @@ public class ContainerFuser extends AwesomeContainer {
 
         this.addSlotToContainer(new AwesomeSlotBigOutput(inventory, 9, 116, 38));
     }
-
-	@Override
-	protected int getCustomSlotCount() {
-		return 10;
-	}
 }

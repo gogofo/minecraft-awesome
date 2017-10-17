@@ -1,20 +1,14 @@
 package gogofo.minecraft.awesome.inventory;
 
+import gogofo.minecraft.awesome.tileentity.AwesomeTileEntityMachine;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 
-public class ContainerTeleporter extends AwesomeContainer
+public class ContainerTeleporter extends AwesomeMachineContainer
 {
-    public ContainerTeleporter(InventoryPlayer inventoryPlayer, IInventory customInventory)
+    public ContainerTeleporter(InventoryPlayer inventoryPlayer, AwesomeTileEntityMachine customInventory)
     {
     	super(inventoryPlayer, customInventory);
     	
         this.addSlotToContainer(new AwesomeSlot(customInventory, 0, 50, 38));
     }
-
-	@Override
-	protected int getCustomSlotCount() {
-		return 1;
-	}
 }

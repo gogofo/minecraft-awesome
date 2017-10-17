@@ -2,14 +2,7 @@ package gogofo.minecraft.awesome.gui;
 
 import gogofo.minecraft.awesome.entity.EntityConstructor;
 import gogofo.minecraft.awesome.inventory.*;
-import gogofo.minecraft.awesome.tileentity.TileEntityCharger;
-import gogofo.minecraft.awesome.tileentity.TileEntityElectricFurnace;
-import gogofo.minecraft.awesome.tileentity.TileEntityExtractor;
-import gogofo.minecraft.awesome.tileentity.TileEntityFuser;
-import gogofo.minecraft.awesome.tileentity.TileEntityGenerator;
-import gogofo.minecraft.awesome.tileentity.TileEntityGrinder;
-import gogofo.minecraft.awesome.tileentity.TileEntitySortingPipe;
-import gogofo.minecraft.awesome.tileentity.TileEntityTeleporter;
+import gogofo.minecraft.awesome.tileentity.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -37,21 +30,21 @@ public class GuiHandler implements IGuiHandler
         if (tileEntity != null) {
 			switch (GuiEnum.values()[ID]) {
 				case FUSER:
-					return new ContainerFuser(player.inventory, (IInventory) tileEntity);
+					return new ContainerFuser(player.inventory, (AwesomeTileEntityMachine) tileEntity);
 				case GENERATOR:
-					return new ContainerGenerator(player.inventory, (IInventory) tileEntity);
+					return new ContainerGenerator(player.inventory, (AwesomeTileEntityMachine) tileEntity);
 				case CHARGER:
-					return new ContainerCharger(player.inventory, (IInventory) tileEntity);
+					return new ContainerCharger(player.inventory, (AwesomeTileEntityMachine) tileEntity);
 				case GRINDER:
-					return new ContainerGrinder(player.inventory, (IInventory) tileEntity);
+					return new ContainerGrinder(player.inventory, (AwesomeTileEntityMachine) tileEntity);
 				case ELECTRIC_FURNACE:
-					return new ContainerElectricFurnace(player.inventory, (IInventory) tileEntity);
+					return new ContainerElectricFurnace(player.inventory, (AwesomeTileEntityMachine) tileEntity);
 				case TELEPORTER:
-					return new ContainerTeleporter(player.inventory, (IInventory) tileEntity);
+					return new ContainerTeleporter(player.inventory, (AwesomeTileEntityMachine) tileEntity);
 				case SORTING_PIPE:
 					return new ContainerSortingPipe(player.inventory, (IInventory) tileEntity);
 				case EXTRACTOR:
-					return new ContainerExtractor(player.inventory, (IInventory) tileEntity);
+					return new ContainerExtractor(player.inventory, (AwesomeTileEntityMachine) tileEntity);
 				default:
 					break;
 			}
