@@ -9,16 +9,15 @@ import gogofo.minecraft.awesome.network.AwesomeNetworkHandler;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.EnumFacing;
 
+import java.util.Arrays;
+
 public class FeatureControls implements GuiFeature {
 
     private static final int CONTROLS_WIDTH = 100;
     private static final int CONTROLS_HEIGHT = 100;
 
     protected static final int GEAR_WIDTH = 24;
-    protected static final int GEAR_HIGHT = 14;
-
-    private static final int GEAR_BUTTON_ID = 0;
-    private static final int FIRST_FACE_BUTTON_ID = 1;
+    protected static final int GEAR_HEIGHT = 14;
 
     private ColorGuiButton gearButton;
     private ColorGuiButton background;
@@ -33,13 +32,17 @@ public class FeatureControls implements GuiFeature {
         this.inventory = customInventory;
 
         faceButtons = new ColorGuiButton[EnumFacing.values().length];
+
+        for (int i = 0; i < faceButtons.length - 1; i++) {
+            gui.getNextButtonId();
+        }
     }
 
     public void onInitGui() {
-        gearButton = new ColorGuiButton(GEAR_BUTTON_ID,
+        gearButton = new ColorGuiButton(gui.getNextButtonId(),
                                         gui.guiX() + gearXPos(),
                                         gui.guiY() + gearYPos(),
-                                        GEAR_WIDTH, GEAR_HIGHT,
+                                        GEAR_WIDTH, GEAR_HEIGHT,
                                         "Ctrl");
         gui.addButton(gearButton);
 
@@ -58,7 +61,7 @@ public class FeatureControls implements GuiFeature {
 
     private void initFaceButtons() {
         for (EnumFacing face : EnumFacing.values()) {
-            ColorGuiButton button = new ColorGuiButton(FIRST_FACE_BUTTON_ID + face.getIndex(),
+            ColorGuiButton button = new ColorGuiButton(gui.getNextButtonId(),
                                                        gui.guiX() + gui.getXSize() + 8 + (38 * (face.getIndex() % 2)),
                                                        gui.guiY() + 8 + (24 * (int)Math.floor(face.getIndex() / 2)),
                                                        34, 20,
@@ -102,13 +105,12 @@ public class FeatureControls implements GuiFeature {
     public void onActionPerformed(GuiButton button) {
         int buttonId = button.id;
 
-        if (buttonId == GEAR_BUTTON_ID) {
+        if (buttonId == gearButton.id) {
             handleGearPressed();
-        } else if (buttonId >= FIRST_FACE_BUTTON_ID &&
-                buttonId < FIRST_FACE_BUTTON_ID + EnumFacing.values().length) {
+        } else if (Arrays.stream(faceButtons).filter(f -> f.id == buttonId).count() > 0) {
             AwesomeControlSidesUpdateMessage message =
                     new AwesomeControlSidesUpdateMessage(inventory.getInventoryPos(),
-                                                         EnumFacing.values()[buttonId - FIRST_FACE_BUTTON_ID]);
+                                                         EnumFacing.values()[buttonId - faceButtons[0].id]);
             AwesomeNetworkHandler.wrapper.sendToServer(message);
         }
     }

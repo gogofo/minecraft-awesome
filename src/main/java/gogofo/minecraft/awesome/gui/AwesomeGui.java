@@ -29,6 +29,7 @@ public abstract class AwesomeGui extends GuiContainer {
     protected final IPositionedSidedInventory customInventory;
     protected ArrayList<Component> components;
     protected ArrayList<GuiFeature> features;
+    private int nextButtonId = 0;
     
     protected abstract void drawCustomGui();
 
@@ -51,6 +52,10 @@ public abstract class AwesomeGui extends GuiContainer {
     public AwesomeGui addFeature(GuiFeature feature) {
     	features.add(feature);
     	return this;
+	}
+
+	public int getNextButtonId() {
+    	return nextButtonId++;
 	}
 
 	@Override
