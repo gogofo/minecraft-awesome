@@ -401,7 +401,12 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	protected int getSlotCount() {
 		return 27;
 	}
-	
+
+	@Override
+	protected int getUpgradeCount() {
+		return 0;
+	}
+
 	@Override
 	public int getCustomSlotCount() {
 		return 0;

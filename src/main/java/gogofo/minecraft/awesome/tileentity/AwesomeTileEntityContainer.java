@@ -22,10 +22,11 @@ public abstract class AwesomeTileEntityContainer extends TileEntityLockable impl
 	private ArrayList<ArrayList<Integer>> slotsForFace;
 
 	protected abstract int getSlotCount();
+	protected abstract int getUpgradeCount();
 	public abstract int getCustomSlotCount();
 	
 	public AwesomeTileEntityContainer() {
-		itemStackArray = new ItemStack[getSlotCount()];
+		itemStackArray = new ItemStack[getSlotCount() + getUpgradeCount()];
 		Arrays.fill(itemStackArray, ItemStack.EMPTY);
         slotsForFace = new ArrayList<>();
 

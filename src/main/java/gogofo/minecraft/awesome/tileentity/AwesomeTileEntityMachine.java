@@ -98,4 +98,9 @@ public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContaine
 			return powerRequiredWhenIdle();
 		}
 	}
+
+	@Override
+	protected int getUpgradeCount() {
+		return 4;
+	}
 }
