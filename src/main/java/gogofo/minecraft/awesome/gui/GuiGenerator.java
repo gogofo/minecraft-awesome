@@ -1,6 +1,7 @@
 package gogofo.minecraft.awesome.gui;
 
 import gogofo.minecraft.awesome.AwesomeMod;
+import gogofo.minecraft.awesome.gui.features.FeatureControls;
 import gogofo.minecraft.awesome.inventory.ContainerFuser;
 import gogofo.minecraft.awesome.inventory.ContainerGenerator;
 import gogofo.minecraft.awesome.tileentity.TileEntityGenerator;
@@ -10,7 +11,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiGenerator extends AwesomeGuiWithControls {
+public class GuiGenerator extends AwesomeGui {
 	
 	private final TileEntityGenerator tileEntityGenerator;
 	private InventoryPlayer playerInventory;
@@ -24,6 +25,8 @@ public class GuiGenerator extends AwesomeGuiWithControls {
         
         this.playerInventory = playerInventory;
         this.tileEntityGenerator = tileEntityGenerator;
+
+		addFeature(new FeatureControls(this, tileEntityGenerator));
     }
 
 	@Override

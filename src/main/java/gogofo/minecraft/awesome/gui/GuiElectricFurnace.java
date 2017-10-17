@@ -1,10 +1,11 @@
 package gogofo.minecraft.awesome.gui;
 
+import gogofo.minecraft.awesome.gui.features.FeatureControls;
 import gogofo.minecraft.awesome.inventory.ContainerElectricFurnace;
 import gogofo.minecraft.awesome.tileentity.TileEntityElectricFurnace;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class GuiElectricFurnace extends AwesomeGuiWithControls {
+public class GuiElectricFurnace extends AwesomeGui {
 	
 	private final TileEntityElectricFurnace tileEntityElectricFurnace;
 	private InventoryPlayer playerInventory;
@@ -18,6 +19,8 @@ public class GuiElectricFurnace extends AwesomeGuiWithControls {
         
         this.playerInventory = playerInventory;
         this.tileEntityElectricFurnace = tileEntityElectricFurnace;
+
+		addFeature(new FeatureControls(this, tileEntityElectricFurnace));
     }
 
 	@Override

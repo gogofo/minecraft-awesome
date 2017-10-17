@@ -1,10 +1,12 @@
 package gogofo.minecraft.awesome.gui;
 
 import gogofo.minecraft.awesome.AwesomeMod;
+import gogofo.minecraft.awesome.gui.features.GuiFeature;
 import gogofo.minecraft.awesome.interfaces.IPositionedSidedInventory;
 import gogofo.minecraft.awesome.inventory.AwesomeSlot;
 import gogofo.minecraft.awesome.inventory.AwesomeSlotBig;
 import gogofo.minecraft.awesome.inventory.SlotCategoryIdToColor;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -12,6 +14,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class AwesomeGui extends GuiContainer {
@@ -25,6 +28,7 @@ public abstract class AwesomeGui extends GuiContainer {
     protected final InventoryPlayer playerInventory;
     protected final IPositionedSidedInventory customInventory;
     protected ArrayList<Component> components;
+    protected ArrayList<GuiFeature> features;
     
     protected abstract void drawCustomGui();
 
@@ -37,13 +41,26 @@ public abstract class AwesomeGui extends GuiContainer {
         this.playerInventory = playerInventory;
         this.customInventory = customInventory;
         this.components = new ArrayList<>();
+        this.features = new ArrayList<>();
         
         guiTextures = new ResourceLocation(AwesomeMod.MODID + ":" + getTexturePath());
         
         this.ySize = getClearSectionHeight() + INBOX_HIGHT;
     }
-    
-    protected String getTexturePath() {
+
+    public AwesomeGui addFeature(GuiFeature feature) {
+    	features.add(feature);
+    	return this;
+	}
+
+	@Override
+	public void initGui() {
+		super.initGui();
+
+		features.forEach(GuiFeature::onInitGui);
+	}
+
+	protected String getTexturePath() {
     	return "textures/gui/container/awesome_gui_basic.png";
     }
 
@@ -91,17 +108,29 @@ public abstract class AwesomeGui extends GuiContainer {
         
         drawEmptyBackground();
         drawCustomGui();
+
+		features.forEach(f -> f.onDrawBackgroundLayer(partialTicks, mouseX, mouseY));
     }
-    
-    protected int guiX() {
+
+	@Override
+	protected void actionPerformed(GuiButton button) throws IOException {
+		features.forEach(f -> f.onActionPerformed(button));
+	}
+
+	public int guiX() {
     	return (width - xSize) / 2;
     }
     
-    protected int guiY() {
+    public int guiY() {
     	return (height - ySize) / 2;
     }
-    
-    private void drawEmptyBackground() {
+
+	@Override
+	public <T extends GuiButton> T addButton(T buttonIn) {
+		return super.addButton(buttonIn);
+	}
+
+	private void drawEmptyBackground() {
     	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		drawTexturedModalRect(guiX(), guiY(),
 				0, 0,
