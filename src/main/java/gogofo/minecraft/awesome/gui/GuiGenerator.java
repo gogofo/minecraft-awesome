@@ -31,8 +31,7 @@ public class GuiGenerator extends AwesomeGui {
 
 	@Override
 	protected void drawCustomGui() {
-		drawSlotsByCustomContainer(tileEntityGenerator.createContainer(playerInventory, 
-																	   playerInventory.player));
+		drawSlotsByCustomContainer(inventorySlots);
         drawArrow(80, 38);
         drawFilledArrow(80, 38, tileEntityGenerator.getCurrentBurntPercent());
 	}

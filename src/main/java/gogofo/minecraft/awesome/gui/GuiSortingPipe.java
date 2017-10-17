@@ -23,8 +23,7 @@ public class GuiSortingPipe extends AwesomeGui {
 
 	@Override
 	protected void drawCustomGui() {
-		drawSlotsByCustomContainer(tileEntity.createContainer(playerInventory, 
-														      playerInventory.player));
+		drawSlotsByCustomContainer(inventorySlots);
 	}
 	
 	@Override

@@ -46,7 +46,7 @@ public class GuiEntityMachineBlock extends AwesomeGui {
 
     @Override
     protected void drawCustomGui() {
-        drawSlotsByCustomContainer(entity.createContainer(playerInventory, playerInventory.player));
+        drawSlotsByCustomContainer(inventorySlots);
 
         float fill = entity.getOilAmount() * 1.0f / entity.getOilCapacity();
 

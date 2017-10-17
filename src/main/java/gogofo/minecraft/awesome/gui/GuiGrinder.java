@@ -25,8 +25,7 @@ public class GuiGrinder extends AwesomeGui {
 
 	@Override
 	protected void drawCustomGui() {
-		drawSlotsByCustomContainer(tileEntityGrinder.createContainer(playerInventory, 
-																	   playerInventory.player));
+		drawSlotsByCustomContainer(inventorySlots);
         drawArrow(80, 38);
         drawFilledArrow(80, 38, tileEntityGrinder.getCurrentGrindPercent());
 	}

@@ -24,8 +24,7 @@ public class GuiFuser extends AwesomeGui {
 
 	@Override
 	protected void drawCustomGui() {
-		drawSlotsByCustomContainer(tileEntityFuser.createContainer(playerInventory, 
-																   playerInventory.player));
+		drawSlotsByCustomContainer(inventorySlots);
         drawArrow(80, 38);
         drawFilledArrow(80, 38, tileEntityFuser.getCurrentFusePercent());
 	}
