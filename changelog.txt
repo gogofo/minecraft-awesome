@@ -4,6 +4,7 @@
 - Fix fuser texture
 - Add upgrades control to some of the machines
 - Add speed upgrade which makes the machines run faster (charger, grinder, fuser, electric furnace and extractor)
+- Fix shift-click in machines (should now transfer stacks as expected)
 
 -------------------
 0.60

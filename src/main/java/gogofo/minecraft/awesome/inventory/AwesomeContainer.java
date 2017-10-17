@@ -99,26 +99,29 @@ public abstract class AwesomeContainer extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int index) {
     	ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = (Slot)this.inventorySlots.get(index);
+        Slot slot = inventorySlots.get(index);
 
         if (slot != null && slot.getHasStack())
         {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index < getCustomSlotCount())
+            int firstCustomSlot = inventorySlots.size() - getCustomSlotCount();
+            if (index < firstCustomSlot)
             {
-                if (!this.mergeItemStack(itemstack1, getCustomSlotCount(), this.inventorySlots.size(), true))
+                if (!this.mergeItemStack(itemstack1, firstCustomSlot, inventorySlots.size(), true))
                 {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 0, getCustomSlotCount(), false))
-            {
-                return ItemStack.EMPTY;
+            else {
+                if (!this.mergeItemStack(itemstack1, 0, firstCustomSlot, false))
+                {
+                    return ItemStack.EMPTY;
+                }
             }
 
-            if (itemstack1.getCount() == 0)
+            if (itemstack1.isEmpty())
             {
                 slot.putStack(ItemStack.EMPTY);
             }
