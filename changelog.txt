@@ -1,6 +1,7 @@
 0.60
 -------------------
 
+- Added perimeter markers. they create a perimeter that limits machine movements
 
 -------------------
 0.59
