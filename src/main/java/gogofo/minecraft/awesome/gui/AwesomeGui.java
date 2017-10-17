@@ -23,6 +23,7 @@ public abstract class AwesomeGui extends GuiContainer {
 	private static final int INBOX_HIGHT = 83;
 	private static final int TEXTURE_BACKGROUND_HEIGHT = 214;
 	private static final int TEXTURE_EMPTY_BACKGROUND_HEIGHT = 120;
+	private static final int TEXTURE_BACKGROUND_WIDTH = 176;
 	public static final int GLASS_CONTAINER_WIDTH = 20;
 
 	private ResourceLocation guiTextures;
@@ -143,7 +144,10 @@ public abstract class AwesomeGui extends GuiContainer {
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		drawTexturedModalRect(x, y,
 							  0, 0,
-							  width, 4);
+							  width - 3, 4);
+		drawTexturedModalRect(x + width - 3, y,
+							  TEXTURE_BACKGROUND_WIDTH - 3, 0,
+							  3, 4);
 
 
 		int backgroundToDraw = height - 8;
@@ -153,7 +157,10 @@ public abstract class AwesomeGui extends GuiContainer {
 			int actualDraw = Math.min(backgroundToDraw, TEXTURE_EMPTY_BACKGROUND_HEIGHT);
 			drawTexturedModalRect(x, y + curY,
 								  0, 4,
-								  width, actualDraw);
+								  width - 3, actualDraw);
+			drawTexturedModalRect(x + width - 3, y + curY,
+								  TEXTURE_BACKGROUND_WIDTH - 3, 4,
+								  3, actualDraw);
 
 			backgroundToDraw -= actualDraw;
 			curY += actualDraw;
@@ -161,7 +168,11 @@ public abstract class AwesomeGui extends GuiContainer {
 
 		drawTexturedModalRect(x, y + height - 4,
 							  0, TEXTURE_BACKGROUND_HEIGHT - 4,
-							  width, 4);
+							  width - 3, 4);
+
+		drawTexturedModalRect(x + width - 3, y + height - 4,
+							  TEXTURE_BACKGROUND_WIDTH - 3, TEXTURE_BACKGROUND_HEIGHT - 4,
+							  3, 4);
 	}
     
     protected int getInboxStartY() {
