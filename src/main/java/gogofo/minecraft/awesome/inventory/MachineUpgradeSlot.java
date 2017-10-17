@@ -33,4 +33,9 @@ public class MachineUpgradeSlot extends Slot {
 	public boolean isItemValid(ItemStack stack) {
 		return stack.getItem() instanceof IMachineUpgrade;
 	}
+
+	@Override
+	public int getSlotStackLimit() {
+		return 1;
+	}
 }
