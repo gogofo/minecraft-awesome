@@ -100,7 +100,7 @@ public abstract class AwesomeTileEntityMachine extends AwesomeTileEntityContaine
 	}
 
 	@Override
-	protected int getUpgradeCount() {
+	public int getUpgradeCount() {
 		return 4;
 	}
 }

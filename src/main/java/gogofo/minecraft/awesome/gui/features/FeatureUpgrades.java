@@ -9,11 +9,13 @@ import net.minecraft.inventory.Slot;
 
 public class FeatureUpgrades implements GuiFeature {
 
-    private static final int CONTROLS_WIDTH = 100;
-    private static final int CONTROLS_HEIGHT = 100;
+    public static final int UPGRADES_WIDTH = 100;
+    public static final int UPGRADES_HEIGHT = 100;
 
     protected static final int GEAR_WIDTH = 24;
     protected static final int GEAR_HEIGHT = 14;
+
+    private static final int UPGRADE_SLOTS_PER_ROW = (UPGRADES_WIDTH - 16) / 20;
 
     private ColorGuiButton gearButton;
 
@@ -38,11 +40,15 @@ public class FeatureUpgrades implements GuiFeature {
     public void onDrawBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
         if (controlActive) {
-            gui.drawWindow(gui.guiX() + gui.getXSize(), gui.guiY(), CONTROLS_WIDTH, CONTROLS_HEIGHT);
+            gui.drawWindow(gui.guiX() + gui.getXSize(), gui.guiY(), UPGRADES_WIDTH, UPGRADES_HEIGHT);
 
+            int upgradeSlotCount = 0;
             for (Slot inventorySlot : container.inventorySlots) {
                 if (inventorySlot instanceof MachineUpgradeSlot) {
                     ((MachineUpgradeSlot) inventorySlot).setVisible(true);
+                    inventorySlot.xPos = gui.getXSize() + 8 + 20 * (upgradeSlotCount % UPGRADE_SLOTS_PER_ROW);
+                    inventorySlot.yPos = 8 + 20 * (upgradeSlotCount / UPGRADE_SLOTS_PER_ROW);
+                    upgradeSlotCount += 1;
                 }
             }
         } else {
