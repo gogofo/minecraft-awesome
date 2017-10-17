@@ -18,10 +18,13 @@ public class TileEntityGrinder extends AwesomeTileEntityMachine {
 	public final static int REMAINING_GRIND_TIME_IDX = 0;
 	public final static int CURRENT_RECP_GRIND_TIME_IDX = 1;
 	public final static int CURRENT_GROUND_ITEM_IDX = 2;
+
+	private final static float GRINDING_BOOST_INCREMENTS = 0.25f;
 	
 	private int remainingGrindTime;
 	private int currentRecpGrindTime;
 	private int currentGroundItem;
+	private float grindingBoost = 0;
 	
 	@Override
 	public String getName() {
@@ -107,9 +110,9 @@ public class TileEntityGrinder extends AwesomeTileEntityMachine {
 		boolean isDirty = false;
 		
 		if (isGrinding()) {
-			remainingGrindTime -= 1;
+			remainingGrindTime -= 1 + grindingBoost;
 			
-			if (remainingGrindTime == 0) {
+			if (remainingGrindTime <= 0) {
 				generateGroundItem();
 			}
 		} 
@@ -132,7 +135,17 @@ public class TileEntityGrinder extends AwesomeTileEntityMachine {
 			markDirty();
 		}
 	}
-	
+
+	@Override
+	protected void onUpgradeAdded(Item upgrade) {
+		grindingBoost += GRINDING_BOOST_INCREMENTS;
+	}
+
+	@Override
+	protected void onUpgradeRemoved(Item upgrade) {
+		grindingBoost -= GRINDING_BOOST_INCREMENTS;
+	}
+
 	private void generateGroundItem() {
 		Recipe recipe = Recipes.grinder.getRecipe(Item.getItemById(currentGroundItem));
 		if (recipe == null) {
