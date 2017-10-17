@@ -29,22 +29,6 @@ public class TileEntityExtractor extends AwesomeTileEntityMachine {
 	}
 
 	@Override
-	public void setInventorySlotContents(int index, ItemStack stack) {
-		boolean itemIsSame = !stack.isEmpty() && stack.isItemEqual(this.itemStackArray[index]) && ItemStack.areItemStackTagsEqual(stack, this.itemStackArray[index]);
-        this.itemStackArray[index] = stack;
-
-        if (!stack.isEmpty() && stack.getCount() > this.getInventoryStackLimit())
-        {
-            stack.setCount(this.getInventoryStackLimit());
-        }
-
-        if (index == 0 && !itemIsSame)
-        {
-            this.markDirty();
-        }
-	}
-
-	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
 		return index == 0 && Recipes.extractor.getRecipe(stack.getItem()) != null;
 	}

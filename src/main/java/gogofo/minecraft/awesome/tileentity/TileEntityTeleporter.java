@@ -58,22 +58,6 @@ public class TileEntityTeleporter extends AwesomeTileEntityMachine {
 	}
 
 	@Override
-	public void setInventorySlotContents(int index, ItemStack stack) {
-		boolean itemIsSame = !stack.isEmpty() && stack.isItemEqual(this.itemStackArray[index]) && ItemStack.areItemStackTagsEqual(stack, this.itemStackArray[index]);
-        this.itemStackArray[index] = stack;
-
-        if (!stack.isEmpty() && stack.getCount() > this.getInventoryStackLimit())
-        {
-            stack.setCount(this.getInventoryStackLimit());
-        }
-
-        if (index == 0 && !itemIsSame)
-        {
-            this.markDirty();
-        }
-	}
-
-	@Override
 	public int getInventoryStackLimit() {
 		return 1;
 	}
