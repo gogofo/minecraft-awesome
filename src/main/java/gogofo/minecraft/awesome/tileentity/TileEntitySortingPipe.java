@@ -5,19 +5,12 @@ import java.util.Collections;
 
 import gogofo.minecraft.awesome.block.BlockPipe;
 import gogofo.minecraft.awesome.block.BlockSortingPipe;
-import gogofo.minecraft.awesome.block.BlockSuctionPipe;
 import gogofo.minecraft.awesome.gui.GuiEnum;
-import gogofo.minecraft.awesome.gui.GuiSortingPipe;
 import gogofo.minecraft.awesome.inventory.ContainerSortingPipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ContainerChest;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 
@@ -75,8 +68,14 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 	}
 	
 	@Override
-	protected ArrayList<BlockPos> getSecondaryDestsWithoutChecks(ItemStack stack) {
-		ArrayList<BlockPos> baseSecondaryDests = super.getSecondaryDestsWithoutChecks(stack);
+	protected ArrayList<BlockPos> getSecondaryDestsWithoutChecks(ItemStack stack, boolean attemptedPrimaryTransfer) {
+		ArrayList<BlockPos> baseSecondaryDests = super.getSecondaryDestsWithoutChecks(stack, attemptedPrimaryTransfer);
+
+		// Do not go to all routes if there is a primary one we want to go to
+		if (attemptedPrimaryTransfer) {
+			return baseSecondaryDests;
+		}
+
 		ArrayList<BlockPos> dests = new ArrayList<>();
 		
 		for (EnumFacing facing : EnumFacing.VALUES) {

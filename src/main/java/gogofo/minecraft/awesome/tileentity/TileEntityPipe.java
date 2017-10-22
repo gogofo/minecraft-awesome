@@ -67,20 +67,24 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 				nonPipeIndex += 1;
 			}
 		}
-		
+
+		boolean attemptedPrimaryTransfer = false;
+
 		for (EnumFacing facing : checkOrder) {
 			BlockPos dest = getPos().offset(facing);
 			
 			if (!canTransferTo(stack, facing)) {
 				continue;
 			}
+
+			attemptedPrimaryTransfer = true;
 			
 			if (tryToTransfer(refBlock, stack, index, dest)) {
 				return;
 			}
 		}
 		
-		for (BlockPos secondaryDest : getSecondaryDestsWithoutChecks(stack)) {
+		for (BlockPos secondaryDest : getSecondaryDestsWithoutChecks(stack, attemptedPrimaryTransfer)) {
 			if (tryToTransfer(refBlock, stack, index, secondaryDest)) {
 				return;
 			}
@@ -106,7 +110,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		return true;
 	}
 	
-	protected ArrayList<BlockPos> getSecondaryDestsWithoutChecks(ItemStack stack) {
+	protected ArrayList<BlockPos> getSecondaryDestsWithoutChecks(ItemStack stack, boolean attemptedPrimaryTransfer) {
 		ArrayList<BlockPos> dests = new ArrayList<BlockPos>();
 		
 		BlockPos origin = getStackOrigin(stack);

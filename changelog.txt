@@ -7,6 +7,8 @@
     - No recipe for it yet
 - Fix shift-click in machines (should now transfer stacks as expected)
 - Make electric furnace accept only valid items
+- Sorting pipes changed so as directed items will never to to an "all" route, even if they can't go to their designated route
+ - This can also be used to block certain items if you use it correctly
 
 -------------------
 0.60
