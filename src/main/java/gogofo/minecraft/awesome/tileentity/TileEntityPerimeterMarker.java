@@ -17,8 +17,8 @@ public class TileEntityPerimeterMarker extends TileEntity implements ITickable {
 
     @Override
     public void update() {
-        int newEastMatchDistance = pos.getX();
-        int newSouthMatchDistance = pos.getZ();
+        int newEastMatchDistance = 0;
+        int newSouthMatchDistance = 0;
 
         RayTraceResult rayTraceResult = world.rayTraceBlocks(new Vec3d(pos.getX() + 1, pos.getY() + 0.5, pos.getZ() + 0.5), new Vec3d(pos.getX() + LASER_MAX_LENGTH, pos.getY() + 0.5, pos.getZ() + 0.5), false, true, false);
         if (rayTraceResult != null && world.getBlockState(rayTraceResult.getBlockPos()).getBlock() == Blocks.perimeter_marker) {
