@@ -9,8 +9,9 @@ public enum GuiEnum {
 	TELEPORTER("teleporter"),
 	SORTING_PIPE("sorting_pipe"),
 	EXTRACTOR("extractor"),
-	E_CONSTRUCTOR("constructor");
-	
+	E_CONSTRUCTOR("constructor"),
+	E_DIGGER("digger");
+
 	private String guiName;
 	
 	private GuiEnum(String guiName) {

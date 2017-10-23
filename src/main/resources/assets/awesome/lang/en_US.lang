@@ -19,6 +19,9 @@ tile.perimeter_marker.name=Perimeter Marker
 entity.constructor.name=Constructor
 item.constructor.name=Constructor
 
+entity.digger.name=Digger
+item.digger.name=Digger
+
 # Other Tiles
 tile.salt_block.name=Salt Block
 tile.liquid_storage_container.name=Liquid Storage Container

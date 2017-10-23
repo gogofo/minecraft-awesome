@@ -41,6 +41,7 @@ public class Items {
 
 	// Entities
 	public static Item constructor;
+	public static Item digger;
 
 	public static Item iron_dust;
 	public static Item gold_dust;
@@ -131,6 +132,9 @@ public class Items {
 		// Entities
 		constructor = registryItem(new ItemConstructor(), "constructor");
 		items.add(constructor);
+
+		digger = registryItem(new ItemDigger(), "digger");
+		items.add(digger);
 		
 		// Dusts
 		iron_dust = registryItem(new ItemOneColored(0xFFDEDEDE), "iron_dust");

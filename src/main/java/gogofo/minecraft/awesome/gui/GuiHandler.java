@@ -1,6 +1,7 @@
 package gogofo.minecraft.awesome.gui;
 
 import gogofo.minecraft.awesome.entity.EntityConstructor;
+import gogofo.minecraft.awesome.entity.EntityDigger;
 import gogofo.minecraft.awesome.inventory.*;
 import gogofo.minecraft.awesome.tileentity.*;
 import net.minecraft.entity.Entity;
@@ -60,6 +61,11 @@ public class GuiHandler implements IGuiHandler
 						return new ContainerConstructor(player.inventory, (IInventory) entity);
 					}
 					break;
+				case E_DIGGER:
+					if (entity instanceof EntityDigger) {
+						return new ContainerDigger(player.inventory, (IInventory) entity);
+					}
+					break;
 				default:
 					break;
 			}
@@ -109,6 +115,11 @@ public class GuiHandler implements IGuiHandler
 				case E_CONSTRUCTOR:
 					if (entity instanceof EntityConstructor) {
 						return new GuiConstructor(player.inventory, (EntityConstructor) entity);
+					}
+					break;
+				case E_DIGGER:
+					if (entity instanceof EntityDigger) {
+						return new GuiDigger(player.inventory, (EntityDigger) entity);
 					}
 					break;
 				default:

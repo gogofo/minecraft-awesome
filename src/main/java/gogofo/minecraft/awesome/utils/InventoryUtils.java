@@ -172,4 +172,35 @@ public class InventoryUtils {
 
         return ItemStack.EMPTY;
     }
+
+    public static ItemStack mergeStack(IInventory inventory, ItemStack stack, int startIndex, int endIndex) {
+        int emptyStackIndex = -1;
+
+        int maxStackSize = Math.min(stack.getMaxStackSize(), inventory.getInventoryStackLimit());
+
+        for (int i = startIndex; i < endIndex; i++) {
+            ItemStack inventoryStack = inventory.getStackInSlot(i);
+
+            if (emptyStackIndex == -1 && inventoryStack.isEmpty()) {
+                emptyStackIndex = i;
+            }
+
+            if (inventoryStack.getItem() == stack.getItem() && inventoryStack.getCount() < maxStackSize) {
+                int transferAmount = Math.min(stack.getCount(), maxStackSize - inventoryStack.getCount());
+                inventoryStack.grow(transferAmount);
+                stack.shrink(transferAmount);
+
+                if (stack.isEmpty()) {
+                    break;
+                }
+            }
+        }
+
+        if (!stack.isEmpty() && emptyStackIndex != -1) {
+            inventory.setInventorySlotContents(emptyStackIndex, stack);
+            stack = ItemStack.EMPTY;
+        }
+
+        return stack;
+    }
 }
