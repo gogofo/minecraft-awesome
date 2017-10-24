@@ -11,6 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 
+import java.util.ArrayList;
+
 public class TileEntitySuctionPipe extends TileEntityPipe {
 	public static final int SUCTION_COOLDOWN = 8;
 	protected int suctionCooldown = -1;
@@ -80,5 +82,10 @@ public class TileEntitySuctionPipe extends TileEntityPipe {
 		}
 		
 		return false;
+	}
+
+	@Override
+	protected ArrayList<BlockPos> getSecondaryDestsWithoutChecks(ItemStack stack, boolean attemptedPrimaryTransfer) {
+		return new ArrayList<>();
 	}
 }

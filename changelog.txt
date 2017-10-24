@@ -3,6 +3,7 @@
 
 - Fix marker bug
 - Fix a sorting pipe bug that still allows items to move to all when they have a primary if they came from that primaries direction
+- Prevent items returning from suction pipes back into containers
 
 -------------------
 0.61

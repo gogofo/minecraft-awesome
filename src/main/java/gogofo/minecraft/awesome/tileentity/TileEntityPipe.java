@@ -111,7 +111,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	}
 	
 	protected ArrayList<BlockPos> getSecondaryDestsWithoutChecks(ItemStack stack, boolean attemptedPrimaryTransfer) {
-		ArrayList<BlockPos> dests = new ArrayList<BlockPos>();
+		ArrayList<BlockPos> dests = new ArrayList<>();
 		
 		BlockPos origin = getStackOrigin(stack);
 		
