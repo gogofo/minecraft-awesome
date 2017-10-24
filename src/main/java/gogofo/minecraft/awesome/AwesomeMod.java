@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class AwesomeMod {
 	public final static String MODID = "awesome";
 	public final static String NAME = "awesome";
-	public final static String VERSION = "0.61";
+	public final static String VERSION = "0.62";
 	
 	public static final String CLIENT_PROXY_CLASS = "gogofo.minecraft.awesome.proxy.ClientProxy";
     public static final String SERVER_PROXY_CLASS = "gogofo.minecraft.awesome.proxy.CommonProxy";
