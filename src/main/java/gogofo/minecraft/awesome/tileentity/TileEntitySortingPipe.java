@@ -64,7 +64,7 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 			}
 		}
 		
-		return canTransfer && super.canTransferTo(stack, facing, allowOrigin);
+		return canTransfer && super.canTransferTo(stack, facing, true);
 	}
 	
 	@Override
