@@ -132,6 +132,7 @@ public class EntityDigger extends EntityMachineBlock {
 
                     if (ForgeHooks.canToolHarvestBlock(world, targetPos, tool)) {
                         harvestBlock(targetPos, targetBlockState, targetBlockState.getBlock());
+                        tool.setItemDamage(tool.getItemDamage() + 1);
                     }
                 }
             }
