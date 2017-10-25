@@ -18,7 +18,7 @@ public abstract class ItemEntityBlockSpawner extends Item {
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
+        if (!worldIn.isRemote && facing == EnumFacing.UP) {
             BlockPos placement = pos.offset(EnumFacing.UP);
             if (worldIn.getBlockState(placement).getBlock() == Blocks.AIR) {
                 EntityBlock entity = createEntityToSpawn(worldIn, placement, player);
