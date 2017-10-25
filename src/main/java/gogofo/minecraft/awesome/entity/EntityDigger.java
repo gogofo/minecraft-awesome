@@ -29,6 +29,9 @@ import static net.minecraft.block.Block.NULL_AABB;
 
 public class EntityDigger extends EntityMachineBlock {
 
+    public static final int INVENTORY_SLOTS = 27;
+    public static final int ATTACHMENT_SLOTS = 9;
+
     public EntityDigger(World world) {
         super(world);
     }
@@ -81,8 +84,8 @@ public class EntityDigger extends EntityMachineBlock {
     }
 
     @Override
-    protected int getSlotCount() {
-        return super.getSlotCount() + 27;
+    public int getSlotCount() {
+        return super.getSlotCount() + INVENTORY_SLOTS + ATTACHMENT_SLOTS;
     }
 
     @Override
@@ -120,7 +123,7 @@ public class EntityDigger extends EntityMachineBlock {
         ArrayList<ItemStack> leftovers = new ArrayList<>();
 
         for (ItemStack drop : drops) {
-            ItemStack stack = InventoryUtils.mergeStack(this, drop, super.getSlotCount(), getSlotCount());
+            ItemStack stack = InventoryUtils.mergeStack(this, drop, super.getSlotCount(), super.getSlotCount() + INVENTORY_SLOTS);
             if (!stack.isEmpty()) {
                 leftovers.add(stack);
             }

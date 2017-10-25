@@ -78,7 +78,7 @@ public class EntityConstructor extends EntityMachineBlock {
     }
 
     @Override
-    protected int getSlotCount() {
+    public int getSlotCount() {
         return super.getSlotCount() + 27;
     }
 

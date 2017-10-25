@@ -63,7 +63,7 @@ public class GuiHandler implements IGuiHandler
 					break;
 				case E_DIGGER:
 					if (entity instanceof EntityDigger) {
-						return new ContainerDigger(player.inventory, (IInventory) entity);
+						return new ContainerDigger(player.inventory, (EntityDigger) entity);
 					}
 					break;
 				default:

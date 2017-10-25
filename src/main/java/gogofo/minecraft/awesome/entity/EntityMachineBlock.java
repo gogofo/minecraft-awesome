@@ -283,7 +283,7 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
         markDirty();
     }
 
-    protected int getSlotCount() {
+    public int getSlotCount() {
         return 1;
     }
 
