@@ -1,5 +1,6 @@
 package gogofo.minecraft.awesome.inventory;
 
+import gogofo.minecraft.awesome.interfaces.SlotCreator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -152,19 +153,19 @@ public abstract class AwesomeContainer extends Container {
     	return super.addSlotToContainer(slotIn);
     }
 
-    protected void addSlotGrid(int indexStart, int xStart, int yStart, int row, int col) {
+    protected void addSlotGrid(int indexStart, int xStart, int yStart, int row, int col, SlotCreator slotCreator) {
         for (int j = 0; j < row; ++j) {
             for (int k = 0; k < col; ++k) {
-                addSlotToContainer(new Slot(inventory, indexStart + k + j * col, xStart + k * 18, yStart + j * 18));
+                addSlotToContainer(slotCreator.createSlot(inventory, indexStart + k + j * col, xStart + k * 18, yStart + j * 18));
             }
         }
     }
 
+    protected void addRegularSlotGrid(int indexStart, int xStart, int yStart, int row, int col) {
+        addSlotGrid(indexStart, xStart, yStart, row, col, Slot::new);
+    }
+
     protected void addAwesomeSlotGrid(int indexStart, int xStart, int yStart, int row, int col) {
-        for (int j = 0; j < row; ++j) {
-            for (int k = 0; k < col; ++k) {
-                addSlotToContainer(new AwesomeSlot(inventory, indexStart + k + j * col, xStart + k * 18, yStart + j * 18));
-            }
-        }
+        addSlotGrid(indexStart, xStart, yStart, row, col, AwesomeSlot::new);
     }
 }
