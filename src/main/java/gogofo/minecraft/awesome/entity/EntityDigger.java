@@ -15,6 +15,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
@@ -110,13 +111,34 @@ public class EntityDigger extends EntityMachineBlock {
     private boolean tryDestroyBlocks() {
 
         BlockPos front = getPosition().offset(getFacing());
-        IBlockState blockState = world.getBlockState(front);
-        Block block = blockState.getBlock();
 
         if (PerimeterManager.instance.hasPerimeter(front)) {
             return false;
         }
 
+        final int TOOLS_START = super.getSlotCount() + INVENTORY_SLOTS;
+
+        for (int y = 0; y <= 2; y++) {
+            for (int xz = -1; xz <= 1; xz++) {
+                ItemStack tool = getStackInSlot(TOOLS_START + y*3 + (xz+1));
+                if (!tool.isEmpty()) {
+                    BlockPos targetPos = front
+                            .offset(EnumFacing.EAST, getFacing().getFrontOffsetZ() * xz)
+                            .offset(EnumFacing.SOUTH, getFacing().getFrontOffsetX() * xz)
+                            .offset(EnumFacing.UP, 2 - y);
+
+                    IBlockState targetBlockState = world.getBlockState(targetPos);
+                    if (tool.getItem().canHarvestBlock(targetBlockState)) {
+                        harvestBlock(targetPos, targetBlockState, targetBlockState.getBlock());
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private void harvestBlock(BlockPos front, IBlockState blockState, Block block) {
         NonNullList<ItemStack> drops = NonNullList.create();
         block.getDrops(drops, world, front, blockState, 0);
 
@@ -140,7 +162,5 @@ public class EntityDigger extends EntityMachineBlock {
             SoundType soundType = block.getSoundType(blockState, world, front, this);
             world.playSound(null, front, soundType.getBreakSound(), SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F);
         }
-
-        return true;
     }
 }
