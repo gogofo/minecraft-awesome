@@ -21,6 +21,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,7 +129,8 @@ public class EntityDigger extends EntityMachineBlock {
                             .offset(EnumFacing.UP, 2 - y);
 
                     IBlockState targetBlockState = world.getBlockState(targetPos);
-                    if (tool.getItem().canHarvestBlock(targetBlockState)) {
+
+                    if (ForgeHooks.canToolHarvestBlock(world, targetPos, tool)) {
                         harvestBlock(targetPos, targetBlockState, targetBlockState.getBlock());
                     }
                 }
