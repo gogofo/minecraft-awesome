@@ -138,14 +138,14 @@ public abstract class EntityMachineBlock extends EntityBlock implements IInterac
 
         int oilAmount = getOilAmount();
 
-        if (oilAmount == 0) {
+        if (oilAmount <= 0) {
             return;
         }
 
         int[] usage = onElectricUpdate();
 
         ((ItemBattery)stackInSlot.getItem()).reduceCharge(stackInSlot, usage[0]);
-        setOilAmount(oilAmount - usage[1]);
+        setOilAmount(Math.max(oilAmount - usage[1], 0));
         markDirty();
     }
 
