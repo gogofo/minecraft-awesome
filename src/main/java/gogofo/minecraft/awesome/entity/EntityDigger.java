@@ -5,6 +5,7 @@ import gogofo.minecraft.awesome.gui.GuiEnum;
 import gogofo.minecraft.awesome.init.Items;
 import gogofo.minecraft.awesome.inventory.ContainerDigger;
 import gogofo.minecraft.awesome.utils.InventoryUtils;
+import javafx.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -15,7 +16,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
@@ -24,7 +24,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static gogofo.minecraft.awesome.gui.GuiEnum.E_DIGGER;
 import static net.minecraft.block.Block.NULL_AABB;
@@ -33,6 +32,10 @@ public class EntityDigger extends EntityMachineBlock {
 
     public static final int INVENTORY_SLOTS = 27;
     public static final int ATTACHMENT_SLOTS = 9;
+
+    private final int ATTACHMENT_START_INDEX = super.getSlotCount() + INVENTORY_SLOTS;
+    private final int ATTACHMENT_MAX_INDEX = ATTACHMENT_START_INDEX + ATTACHMENT_SLOTS - 1;
+    int nextAttachmentIndex = ATTACHMENT_START_INDEX;
 
     public EntityDigger(World world) {
         super(world);
@@ -58,13 +61,21 @@ public class EntityDigger extends EntityMachineBlock {
         if (ticksExisted % 20 == 0) {
             EnumFacing facing = getFacing();
 
-            if (tryDestroyBlocks() && tryMove(facing)) {
-                chargeUsed += 10;
-                oilUsed += 3;
-            } else {
-                setFacing(facing.rotateY());
-                chargeUsed += 1;
-                oilUsed += 1;
+            Pair<Integer, Boolean> nextToolResult = getNextAttachment();
+
+            Integer toolIndex = nextToolResult.getKey();
+            Boolean finalAttachment = nextToolResult.getValue();
+
+            tryDestroyBlock(getStackInSlot(toolIndex), getDiggingPositionByAttachmentIndex(toolIndex));
+
+            if (finalAttachment) {
+                if (tryMove(facing)) {
+
+                } else {
+                    setFacing(facing.rotateY());
+                    chargeUsed += 1;
+                    oilUsed += 1;
+                }
             }
         }
 
@@ -73,6 +84,38 @@ public class EntityDigger extends EntityMachineBlock {
         }
 
         return new int[] {chargeUsed, oilUsed};
+    }
+
+    /**
+     * @return attachment stack index (can be an empty stack) and true if its the final attachment, false otherwise
+     */
+    private Pair<Integer, Boolean> getNextAttachment() {
+        while (getStackInSlot(nextAttachmentIndex).isEmpty() && nextAttachmentIndex < ATTACHMENT_MAX_INDEX) {
+            nextAttachmentIndex += 1;
+        }
+
+        int retIndex = nextAttachmentIndex;
+        boolean isFinal = false;
+
+        if (nextAttachmentIndex == ATTACHMENT_MAX_INDEX) {
+            nextAttachmentIndex = ATTACHMENT_START_INDEX;
+            isFinal = true;
+        } else {
+            nextAttachmentIndex += 1;
+        }
+
+        return new Pair<>(retIndex, isFinal);
+    }
+
+    private BlockPos getDiggingPositionByAttachmentIndex(int index) {
+        index -= ATTACHMENT_START_INDEX;
+        int y = 2 - (index / 3);
+        int xz = index % 3 - 1;
+
+        return getPosition().offset(getFacing())
+                    .offset(EnumFacing.EAST, getFacing().getFrontOffsetZ() * xz)
+                    .offset(EnumFacing.SOUTH, getFacing().getFrontOffsetX() * xz)
+                    .offset(EnumFacing.UP, y);
     }
 
     @Override
@@ -109,7 +152,7 @@ public class EntityDigger extends EntityMachineBlock {
         return 10000;
     }
 
-    private boolean tryDestroyBlocks() {
+    private boolean tryDestroyBlock(ItemStack attachmentStack, BlockPos targetPos) {
 
         BlockPos front = getPosition().offset(getFacing());
 
@@ -117,28 +160,17 @@ public class EntityDigger extends EntityMachineBlock {
             return false;
         }
 
-        final int TOOLS_START = super.getSlotCount() + INVENTORY_SLOTS;
+        if (!attachmentStack.isEmpty()) {
+            IBlockState targetBlockState = world.getBlockState(targetPos);
 
-        for (int y = 0; y <= 2; y++) {
-            for (int xz = -1; xz <= 1; xz++) {
-                ItemStack tool = getStackInSlot(TOOLS_START + y*3 + (xz+1));
-                if (!tool.isEmpty()) {
-                    BlockPos targetPos = front
-                            .offset(EnumFacing.EAST, getFacing().getFrontOffsetZ() * xz)
-                            .offset(EnumFacing.SOUTH, getFacing().getFrontOffsetX() * xz)
-                            .offset(EnumFacing.UP, 2 - y);
-
-                    IBlockState targetBlockState = world.getBlockState(targetPos);
-
-                    if (ForgeHooks.canToolHarvestBlock(world, targetPos, tool)) {
-                        harvestBlock(targetPos, targetBlockState, targetBlockState.getBlock());
-                        tool.setItemDamage(tool.getItemDamage() + 1);
-                    }
-                }
+            if (ForgeHooks.canToolHarvestBlock(world, targetPos, attachmentStack)) {
+                harvestBlock(targetPos, targetBlockState, targetBlockState.getBlock());
+                attachmentStack.setItemDamage(attachmentStack.getItemDamage() + 1);
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     private void harvestBlock(BlockPos front, IBlockState blockState, Block block) {
