@@ -1,6 +1,7 @@
 package gogofo.minecraft.awesome.entity;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -73,7 +74,7 @@ public abstract class EntityBlock extends Entity {
     @Nullable
     @Override
     public AxisAlignedBB getCollisionBox(Entity entityIn) {
-        return getEntityBoundingBox();
+        return entityIn.canBePushed() ? entityIn.getEntityBoundingBox() : null;
     }
 
     @Override
