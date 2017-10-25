@@ -8,6 +8,7 @@ import gogofo.minecraft.awesome.utils.InventoryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -116,11 +117,21 @@ public class EntityDigger extends EntityMachineBlock {
         NonNullList<ItemStack> drops = NonNullList.create();
         block.getDrops(drops, world, front, blockState, 0);
 
+        ArrayList<ItemStack> leftovers = new ArrayList<>();
+
         for (ItemStack drop : drops) {
-            InventoryUtils.mergeStack(this, drop, super.getSlotCount(), getSlotCount());
+            ItemStack stack = InventoryUtils.mergeStack(this, drop, super.getSlotCount(), getSlotCount());
+            if (!stack.isEmpty()) {
+                leftovers.add(stack);
+            }
         }
 
         world.setBlockToAir(front);
+
+        for (ItemStack drop : leftovers) {
+            BlockPos dropZone = getPosition().offset(getFacing().getOpposite());
+            world.spawnEntity(new EntityItem(world, dropZone.getX(), dropZone.getY(), dropZone.getZ(), drop));
+        }
 
         if (block != Blocks.AIR) {
             SoundType soundType = block.getSoundType(blockState, world, front, this);
