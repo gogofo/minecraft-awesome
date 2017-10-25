@@ -60,17 +60,27 @@ public class EntityDigger extends EntityMachineBlock {
 
         if (ticksExisted % 20 == 0) {
             EnumFacing facing = getFacing();
+            boolean didDig = false;
+            Boolean finalAttachment = false;
 
-            Pair<Integer, Boolean> nextToolResult = getNextAttachment();
+            while (!didDig && !finalAttachment) {
+                Pair<Integer, Boolean> nextToolResult = getNextAttachment();
 
-            Integer toolIndex = nextToolResult.getKey();
-            Boolean finalAttachment = nextToolResult.getValue();
+                Integer toolIndex = nextToolResult.getKey();
+                finalAttachment = nextToolResult.getValue();
 
-            tryDestroyBlock(getStackInSlot(toolIndex), getDiggingPositionByAttachmentIndex(toolIndex));
+                didDig = tryDestroyBlock(getStackInSlot(toolIndex), getDiggingPositionByAttachmentIndex(toolIndex));
+            }
+
+            if (didDig) {
+                oilUsed += 2;
+                chargeUsed += 5;
+            }
 
             if (finalAttachment) {
                 if (tryMove(facing)) {
-
+                    oilUsed += 1;
+                    chargeUsed += 1;
                 } else {
                     setFacing(facing.rotateY());
                     chargeUsed += 1;
