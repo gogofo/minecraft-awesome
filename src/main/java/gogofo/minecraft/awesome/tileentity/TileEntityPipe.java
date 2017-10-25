@@ -27,6 +27,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	public final static int IS_TRANSPARENT_IDX = 0;
 	
 	private static final BlockPipe refBlockPipe = new BlockPipe();
+	public static final int PIPE_SLOT_COUNT = 27;
 
 	private boolean isTransparent = false;
 
@@ -111,7 +112,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	}
 	
 	protected ArrayList<BlockPos> getSecondaryDestsWithoutChecks(ItemStack stack, boolean attemptedPrimaryTransfer) {
-		ArrayList<BlockPos> dests = new ArrayList<BlockPos>();
+		ArrayList<BlockPos> dests = new ArrayList<>();
 		
 		BlockPos origin = getStackOrigin(stack);
 		
@@ -290,7 +291,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	}
 
 	public int getTransferSlotCount() {
-		return 27;
+		return PIPE_SLOT_COUNT;
 	}
 	
 	protected IInventory getInventoryAt(BlockPos pos) {
@@ -385,17 +386,17 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	public Integer[] getDefaultSlotForFace(EnumFacing face) {
 		switch (face) {
 		case UP:
-			return getSlotsGeneric(27);
+			return getSlotsGeneric(PIPE_SLOT_COUNT);
 		case DOWN:
-			return getSlotsGeneric(27);
+			return getSlotsGeneric(PIPE_SLOT_COUNT);
 		case NORTH:
-			return getSlotsGeneric(27);
+			return getSlotsGeneric(PIPE_SLOT_COUNT);
 		case SOUTH:
-			return getSlotsGeneric(27);
+			return getSlotsGeneric(PIPE_SLOT_COUNT);
 		case EAST:
-			return getSlotsGeneric(27);
+			return getSlotsGeneric(PIPE_SLOT_COUNT);
 		case WEST:
-			return getSlotsGeneric(27);
+			return getSlotsGeneric(PIPE_SLOT_COUNT);
 		default:
 			return new Integer[] {};
 		}
@@ -403,7 +404,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 
 	@Override
 	protected int getSlotCount() {
-		return 27;
+		return PIPE_SLOT_COUNT;
 	}
 
 	@Override

@@ -18,12 +18,12 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 	
 	private static final BlockPipe refBlockPipe = new BlockSortingPipe();
 	
-	private static final int[] up_slots = {27, 28, 29, 30, 31, 32, 33, 34, 35};
-	private static final int[] down_slots = {36, 37, 38, 39, 40, 41, 42, 43, 44};
-	private static final int[] north_slots = {45, 46, 47, 48, 49, 50, 51, 52, 53};
-	private static final int[] south_slots = {54, 55, 56, 57, 58, 59, 60, 61, 62};
-	private static final int[] east_slots = {63,64, 65, 66, 67, 68, 69, 70, 71};
-	private static final int[] west_slots = {72, 73, 74, 75, 76, 77, 78, 79, 80};
+	private static final int[] up_slots = {PIPE_SLOT_COUNT, PIPE_SLOT_COUNT + 1, PIPE_SLOT_COUNT + 2, PIPE_SLOT_COUNT + 3, PIPE_SLOT_COUNT + 4, PIPE_SLOT_COUNT + 5, PIPE_SLOT_COUNT + 6, PIPE_SLOT_COUNT + 7, PIPE_SLOT_COUNT + 8};
+	private static final int[] down_slots = {PIPE_SLOT_COUNT + 9, PIPE_SLOT_COUNT + 10, PIPE_SLOT_COUNT + 11, PIPE_SLOT_COUNT + 12, PIPE_SLOT_COUNT + 13, PIPE_SLOT_COUNT + 14, PIPE_SLOT_COUNT + 15, PIPE_SLOT_COUNT + 16, PIPE_SLOT_COUNT + 17};
+	private static final int[] north_slots = {PIPE_SLOT_COUNT + 18, PIPE_SLOT_COUNT + 19, PIPE_SLOT_COUNT + 20, PIPE_SLOT_COUNT + 21, PIPE_SLOT_COUNT + 22, PIPE_SLOT_COUNT + 23, PIPE_SLOT_COUNT + 24, PIPE_SLOT_COUNT + 25, PIPE_SLOT_COUNT + 26};
+	private static final int[] south_slots = {PIPE_SLOT_COUNT + 27, PIPE_SLOT_COUNT + 28, PIPE_SLOT_COUNT + 29, PIPE_SLOT_COUNT + 30, PIPE_SLOT_COUNT + 31, PIPE_SLOT_COUNT + 32, PIPE_SLOT_COUNT + 33, PIPE_SLOT_COUNT + 34, PIPE_SLOT_COUNT + 35};
+	private static final int[] east_slots = {PIPE_SLOT_COUNT + 36, PIPE_SLOT_COUNT + 37, PIPE_SLOT_COUNT + 38, PIPE_SLOT_COUNT + 39, PIPE_SLOT_COUNT + 40, PIPE_SLOT_COUNT + 40, PIPE_SLOT_COUNT + 42, PIPE_SLOT_COUNT + 43, PIPE_SLOT_COUNT + 44};
+	private static final int[] west_slots = {PIPE_SLOT_COUNT + 45, PIPE_SLOT_COUNT + 46, PIPE_SLOT_COUNT + 47, PIPE_SLOT_COUNT + 48, PIPE_SLOT_COUNT + 49, PIPE_SLOT_COUNT + 50, PIPE_SLOT_COUNT + 51, PIPE_SLOT_COUNT + 52, PIPE_SLOT_COUNT + 53};
 	
 	@Override
 	protected BlockPipe getRefPipeBlock() {
@@ -42,7 +42,7 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 	
 	@Override
 	protected int getSlotCount() {
-		return 27 + 54;
+		return super.getSlotCount() + 54;
 	}
 	
 	@Override
@@ -64,7 +64,7 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 			}
 		}
 		
-		return canTransfer && super.canTransferTo(stack, facing, allowOrigin);
+		return canTransfer && super.canTransferTo(stack, facing, true);
 	}
 	
 	@Override
@@ -139,9 +139,9 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 	}
 	
 	public boolean hasItems() {
-    	for (int i = 0; i < 27; i++) {
+    	for (int i = 0; i < super.getSlotCount(); i++) {
     		ItemStack stack = itemStackArray[i];
-    		if (stack.isEmpty() && stack.getCount() > 0) {
+    		if (!stack.isEmpty() && stack.getCount() > 0) {
     			return true;
     		}
     	}
