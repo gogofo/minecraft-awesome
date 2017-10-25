@@ -42,7 +42,7 @@ public class PerimeterManager {
         if (perimeterGrid.containsKey(pos)) {
             perimeterGrid.put(pos, perimeterGrid.get(pos) + 1);
         } else {
-            perimeterGrid.put(pos, 0);
+            perimeterGrid.put(pos, 1);
         }
     }
 

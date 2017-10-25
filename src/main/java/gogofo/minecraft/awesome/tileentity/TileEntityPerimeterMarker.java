@@ -43,6 +43,10 @@ public class TileEntityPerimeterMarker extends TileEntity implements ITickable {
     }
 
     private void updatePerimeterGridAsNeeded(int oldDistance, int newDistance, EnumFacing direction) {
+        if (world.isRemote) {
+            return;
+        }
+
         if (oldDistance == newDistance) {
             return;
         }
