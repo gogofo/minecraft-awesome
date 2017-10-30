@@ -1,7 +1,7 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "0": "awesome:blocks/ConstructorFront",
+        "0": "awesome:blocks/diggerfront",
         "1": "awesome:blocks/IronGradient"
     },
     "elements": [
