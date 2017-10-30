@@ -34,7 +34,8 @@
             "awesome:electric_furnace",
             "awesome:torch",
             "awesome:constructor",
-            "awesome:perimeter_marker"
+            "awesome:perimeter_marker",
+            "awesome:digger"
         ]
     }
 }
