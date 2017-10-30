@@ -69,6 +69,7 @@ public class Ores {
         private Item helmet;
         private Item leggings;
         private Item boots;
+        private Item pickaxeShovel;
 
         public Ore(String name, int color, boolean hasBlock, boolean hasIngot, boolean hasDust, int grindsToAmount) {
             this.name = name;
@@ -189,6 +190,14 @@ public class Ores {
 
         public void setShovel(Item shovel) {
             this.shovel = shovel;
+        }
+
+        public Item getPickaxeShovel() {
+            return pickaxeShovel;
+        }
+
+        public void setPickaxeShovel(Item pickaxeShovel) {
+            this.pickaxeShovel = pickaxeShovel;
         }
 
         public Item getChestplate() {

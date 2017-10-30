@@ -33,6 +33,7 @@ public class RecipeGenericTools {
                 addAxeRecipe(registry, ore);
                 addHoeRecipe(registry, ore);
                 addShovelRecipe(registry, ore);
+                addPickaxeShovelRecipe(registry, ore);
             }
 
             if (config.isHasArmors()) {
@@ -104,6 +105,19 @@ public class RecipeGenericTools {
                 " B ",
                 'A', ore.getIngot(),
                 'B', net.minecraft.init.Items.STICK);
+        recipe.setRegistryName(location);
+
+        registry.register(recipe);
+    }
+
+    private static void addPickaxeShovelRecipe(IForgeRegistry<IRecipe> registry, Ores.Ore ore) {
+        ResourceLocation location = new ResourceLocation(AwesomeMod.MODID, ore.getName() + "_pickaxe_shovel_recipe");
+        ShapedOreRecipe recipe = new ShapedOreRecipe(location, new ItemStack(ore.getPickaxeShovel()),
+                                                     "ACA",
+                                                     "ABA",
+                                                     'A', ore.getIngot(),
+                                                     'B', ore.getPickaxe(),
+                                                     'C', ore.getShovel());
         recipe.setRegistryName(location);
 
         registry.register(recipe);

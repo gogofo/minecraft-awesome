@@ -208,6 +208,10 @@ public class Items {
 				Item shovel = registryItem(new ItemAwesomeShovel(config.getToolMaterial(), ore.getColor()), ore.getName() + "_shovel");
 				items.add(shovel);
 				ore.setShovel(shovel);
+
+				Item pickaxe_shovel = registryItem(new ItemAwesomePickaxeShovel(config.getToolMaterial(), ore.getColor()), ore.getName() + "_pickaxe_shovel");
+				items.add(pickaxe_shovel);
+				ore.setPickaxeShovel(pickaxe_shovel);
 			}
 
 			if (config.isHasArmors()) {
