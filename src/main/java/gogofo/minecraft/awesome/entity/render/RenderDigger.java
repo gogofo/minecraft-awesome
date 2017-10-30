@@ -21,7 +21,7 @@ public class RenderDigger extends RenderBlock<EntityDigger> {
     @Nullable
     @Override
     protected ResourceLocation getEntityTexture(EntityDigger entity) {
-        return new ResourceLocation("awesome", "textures/entities/constructor.png"); // TODO: Change
+        return new ResourceLocation("awesome", "textures/entities/digger.png");
     }
 
     public static class RenderFactory implements IRenderFactory<EntityDigger> {
