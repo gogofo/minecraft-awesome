@@ -9,10 +9,12 @@ import javafx.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -174,7 +176,7 @@ public class EntityDigger extends EntityMachineBlock {
             IBlockState targetBlockState = world.getBlockState(targetPos);
 
             if (ForgeHooks.canToolHarvestBlock(world, targetPos, attachmentStack)) {
-                harvestBlock(targetPos, targetBlockState, targetBlockState.getBlock());
+                harvestBlock(targetPos, targetBlockState, targetBlockState.getBlock(), attachmentStack);
                 attachmentStack.setItemDamage(attachmentStack.getItemDamage() + 1);
                 return true;
             }
@@ -183,9 +185,10 @@ public class EntityDigger extends EntityMachineBlock {
         return false;
     }
 
-    private void harvestBlock(BlockPos front, IBlockState blockState, Block block) {
+    private void harvestBlock(BlockPos front, IBlockState blockState, Block block, ItemStack attachmentStack) {
         NonNullList<ItemStack> drops = NonNullList.create();
-        block.getDrops(drops, world, front, blockState, 0);
+        int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, attachmentStack);
+        block.getDrops(drops, world, front, blockState, fortune);
 
         ArrayList<ItemStack> leftovers = new ArrayList<>();
 
