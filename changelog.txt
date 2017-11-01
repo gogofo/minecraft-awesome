@@ -1,6 +1,7 @@
 0.65
 -------------------
 
+- Set pickaxe as the harvest tool for mod ores
 
 -------------------
 0.64

@@ -8,5 +8,6 @@ public class BlockGenericOre extends BlockOneColor {
         super(Material.ROCK, color);
 
         setHardness(3.0F);
+        setHarvestLevel("pickaxe", 1);
     }
 }
