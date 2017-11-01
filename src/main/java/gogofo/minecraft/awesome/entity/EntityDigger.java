@@ -5,7 +5,6 @@ import gogofo.minecraft.awesome.gui.GuiEnum;
 import gogofo.minecraft.awesome.init.Items;
 import gogofo.minecraft.awesome.inventory.ContainerDigger;
 import gogofo.minecraft.awesome.utils.InventoryUtils;
-import javafx.util.Pair;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -21,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
@@ -66,10 +66,10 @@ public class EntityDigger extends EntityMachineBlock {
             Boolean finalAttachment = false;
 
             while (!didDig && !finalAttachment) {
-                Pair<Integer, Boolean> nextToolResult = getNextAttachment();
+                Tuple<Integer, Boolean> nextToolResult = getNextAttachment();
 
-                Integer toolIndex = nextToolResult.getKey();
-                finalAttachment = nextToolResult.getValue();
+                Integer toolIndex = nextToolResult.getFirst();
+                finalAttachment = nextToolResult.getSecond();
 
                 didDig = tryDestroyBlock(getStackInSlot(toolIndex), getDiggingPositionByAttachmentIndex(toolIndex));
             }
@@ -101,7 +101,7 @@ public class EntityDigger extends EntityMachineBlock {
     /**
      * @return attachment stack index (can be an empty stack) and true if its the final attachment, false otherwise
      */
-    private Pair<Integer, Boolean> getNextAttachment() {
+    private Tuple<Integer, Boolean> getNextAttachment() {
         while (getStackInSlot(nextAttachmentIndex).isEmpty() && nextAttachmentIndex < ATTACHMENT_MAX_INDEX) {
             nextAttachmentIndex += 1;
         }
@@ -116,7 +116,7 @@ public class EntityDigger extends EntityMachineBlock {
             nextAttachmentIndex += 1;
         }
 
-        return new Pair<>(retIndex, isFinal);
+        return new Tuple<>(retIndex, isFinal);
     }
 
     private BlockPos getDiggingPositionByAttachmentIndex(int index) {
