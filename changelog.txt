@@ -6,6 +6,7 @@
 - Fix entity machines negative oil (you still need to re-fill them to 0. no free oil for you!)
 - Add digger - new entity machine that digs for you. it has a 3x3 slot grid to place tools at to be used while digging
 - New extractor texture
+- New constructor texture
 
 -------------------
 0.62
