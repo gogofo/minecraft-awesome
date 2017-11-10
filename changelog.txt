@@ -2,6 +2,7 @@
 -------------------
 
 - Increase perimeter max length to 64 (was 16)
+- Change bronze and platinum durability
 
 -------------------
 0.65

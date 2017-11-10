@@ -20,21 +20,21 @@ public class Materials {
     static {
         BRONZE_TOOL = EnumHelper.addToolMaterial("BRONZE",
                                                  ToolMaterial.IRON.getHarvestLevel(),
-                                                 200, // Less than iron
+                                                 400,
                                                  ToolMaterial.IRON.getEfficiencyOnProperMaterial(),
                                                  ToolMaterial.IRON.getDamageVsEntity(),
                                                  ToolMaterial.IRON.getEnchantability());
 
         PLATINUM_TOOL = EnumHelper.addToolMaterial("PLATINUM",
                                                    ToolMaterial.IRON.getHarvestLevel(),
-                                                   500, // Double from iron
+                                                   700,
                                                    ToolMaterial.IRON.getEfficiencyOnProperMaterial(),
                                                    ToolMaterial.IRON.getDamageVsEntity(),
                                                    ToolMaterial.IRON.getEnchantability());
 
         BRONZE_ARMOR = EnumHelper.addArmorMaterial("BRONZE",
                                                    "awesome:generic",
-                                                   10, // Less than iron
+                                                   20,
                                                    new int[]{2, 5, 6, 2},
                                                    ArmorMaterial.IRON.getEnchantability(),
                                                    ArmorMaterial.IRON.getSoundEvent(),
@@ -42,7 +42,7 @@ public class Materials {
 
         PLATINUM_ARMOR = EnumHelper.addArmorMaterial("PLATINUM",
                                                      "awesome:generic",
-                                                     20, // More than iron, less than diamond
+                                                     25,
                                                      new int[]{2, 5, 6, 2},
                                                      10, // More than iron, like diamond
                                                      ArmorMaterial.IRON.getSoundEvent(),
