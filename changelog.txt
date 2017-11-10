@@ -1,6 +1,7 @@
 0.66
 -------------------
 
+- Increase perimeter max length to 64 (was 16)
 
 -------------------
 0.65

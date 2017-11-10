@@ -11,7 +11,7 @@ import net.minecraft.util.math.Vec3d;
 
 public class TileEntityPerimeterMarker extends TileEntity implements ITickable {
 
-    public static final int LASER_MAX_LENGTH = 16;
+    public static final int LASER_MAX_LENGTH = 64;
     private int eastMatchDistance = 0;
     private int southMatchDistance = 0;
 
