@@ -193,7 +193,8 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 					   stack.isItemEqual(sentStack) &&
 					   stack.getMetadata() == sentStack.getMetadata() &&
 					   stack.getCount() < inventory.getInventoryStackLimit() &&
-					   stack.getCount() < stack.getMaxStackSize()) {
+					   stack.getCount() < stack.getMaxStackSize() &&
+					   compareEntityTag(stack, sentStack)) {
 				stack.grow(1);
 				inventory.setInventorySlotContents(i, stack);
 				decrStackSize(sentSlot, 1);
@@ -206,6 +207,18 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		}
 		
 		return false;
+	}
+
+	protected boolean compareEntityTag(ItemStack stack1, ItemStack stack2) {
+		if (stack1.getTagCompound() == null || !stack1.getTagCompound().hasKey("EntityTag")) {
+			return true;
+		}
+
+		if (stack2.getTagCompound() == null || !stack2.getTagCompound().hasKey("EntityTag")) {
+			return false;
+		}
+
+		return stack1.getTagCompound().getTag("EntityTag").equals(stack2.getTagCompound().getTag("EntityTag"));
 	}
 
 	private void decStackCooldown(ItemStack stack) {

@@ -4,6 +4,7 @@
 - Fix tools not breaking in digger
 - Fix sorting pipe treating sub-items the same
 - Fix sorting pipe treating all spawn eggs the same
+- Fix spawn eggs of different kind being merged by pipes
 
 -------------------
 0.66
