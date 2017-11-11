@@ -1,6 +1,7 @@
 0.67
 -------------------
 
+- Fix tools not breaking in digger
 
 -------------------
 0.66
