@@ -58,13 +58,25 @@ public class TileEntitySortingPipe extends TileEntityPipe {
 		
 		for (int i : slots) {
 			ItemStack sortStack = getStackInSlot(i);
-			if (!sortStack.isEmpty() && sortStack.getItem().equals(stack.getItem())) {
+			if (!sortStack.isEmpty() && sortStack.isItemEqualIgnoreDurability(stack) && compareEntityTag(sortStack, stack)) {
 				canTransfer = true;
 				break;
 			}
 		}
 		
 		return canTransfer && super.canTransferTo(stack, facing, true);
+	}
+
+	private boolean compareEntityTag(ItemStack stack1, ItemStack stack2) {
+		if (stack1.getTagCompound() == null || !stack1.getTagCompound().hasKey("EntityTag")) {
+			return true;
+		}
+
+		if (stack2.getTagCompound() == null || !stack2.getTagCompound().hasKey("EntityTag")) {
+			return false;
+		}
+
+		return stack1.getTagCompound().getTag("EntityTag").equals(stack2.getTagCompound().getTag("EntityTag"));
 	}
 	
 	@Override
