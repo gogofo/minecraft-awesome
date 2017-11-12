@@ -1,6 +1,7 @@
 0.68
 -------------------
 
+- Pipes now move entire stacks instead of single items (this is in attempt to make them more efficient)
 
 -------------------
 0.67

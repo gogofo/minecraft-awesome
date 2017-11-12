@@ -7,6 +7,7 @@ import java.util.Collections;
 import gogofo.minecraft.awesome.block.BlockPipe;
 import gogofo.minecraft.awesome.block.BlockSuctionPipe;
 import gogofo.minecraft.awesome.interfaces.IWrenchable;
+import gogofo.minecraft.awesome.utils.InventoryUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -176,14 +177,15 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 			if (!inventory.isItemValidForSlot(i, sentStack)) {
 				continue;
 			}
-			
+
 			ItemStack stack = inventory.getStackInSlot(i);
 			if (stack.isEmpty()) {
 				inventory.setInventorySlotContents(i,
 												   createTransferredItem(sentStack,
 																		 getPos(),
-																		 world.getBlockState(pos).getBlock() instanceof BlockPipe));
-				decrStackSize(sentSlot, 1);
+																		 world.getBlockState(pos).getBlock() instanceof BlockPipe,
+																		 sentStack.getCount()));
+				decrStackSize(sentSlot, sentStack.getCount());
 				markDirty();
 				notifyUpdate(getPos());
 				notifyUpdate(pos);
@@ -195,9 +197,11 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 					   stack.getCount() < inventory.getInventoryStackLimit() &&
 					   stack.getCount() < stack.getMaxStackSize() &&
 					   compareEntityTag(stack, sentStack)) {
-				stack.grow(1);
+				int available = Math.min(inventory.getInventoryStackLimit(), stack.getMaxStackSize()) - stack.getCount();
+				int transfer = Math.min(sentStack.getCount(), available);
+				stack.grow(transfer);
 				inventory.setInventorySlotContents(i, stack);
-				decrStackSize(sentSlot, 1);
+				decrStackSize(sentSlot, transfer);
 				markDirty();
 				notifyUpdate(getPos());
 				notifyUpdate(pos);
@@ -317,8 +321,8 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		return (IInventory)te;
 	}
 	
-	protected ItemStack createTransferredItem(ItemStack original, BlockPos origin, boolean isForPipeBlock) {
-		ItemStack transferredItem = new ItemStack(original.getItem(), 1, original.getMetadata());
+	protected ItemStack createTransferredItem(ItemStack original, BlockPos origin, boolean isForPipeBlock, int size) {
+		ItemStack transferredItem = new ItemStack(original.getItem(), size, original.getMetadata());
 		 if (original.getTagCompound() != null) {
             transferredItem.setTagCompound(original.getTagCompound().copy());
         }
@@ -433,7 +437,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 	@Override
     public int getInventoryStackLimit()
     {
-        return 1;
+        return 64;
     }
 	
 	@Override
