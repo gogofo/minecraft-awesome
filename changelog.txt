@@ -2,6 +2,7 @@
 -------------------
 
 - Pipes now move entire stacks instead of single items (this is in attempt to make them more efficient)
+- Pipes timings changed to accommodate for the change above. the result is that big stacks move slower, but are much more efficient
 
 -------------------
 0.67

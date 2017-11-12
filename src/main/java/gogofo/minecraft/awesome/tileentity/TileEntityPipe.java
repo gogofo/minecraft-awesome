@@ -7,7 +7,6 @@ import java.util.Collections;
 import gogofo.minecraft.awesome.block.BlockPipe;
 import gogofo.minecraft.awesome.block.BlockSuctionPipe;
 import gogofo.minecraft.awesome.interfaces.IWrenchable;
-import gogofo.minecraft.awesome.utils.InventoryUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -23,10 +22,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 
 public class TileEntityPipe extends AwesomeTileEntityContainer implements ITickable, IWrenchable {
-	public static final int TRANSFER_COOLDOWN = 20;
+	public static final int TRANSFER_COOLDOWN_BASE = 2;
+	public static final int TRANSFER_COOLDOWN_MIN = 20;
 
 	public final static int IS_TRANSPARENT_IDX = 0;
-	
+
 	private static final BlockPipe refBlockPipe = new BlockPipe();
 	public static final int PIPE_SLOT_COUNT = 27;
 
@@ -330,7 +330,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		setOiginalTagCompoundIfNotSet(transferredItem, original);
 		 
 		if (isForPipeBlock) {
-			setStackCooldown(transferredItem, TRANSFER_COOLDOWN);
+			setStackCooldown(transferredItem, Math.max(TRANSFER_COOLDOWN_MIN, TRANSFER_COOLDOWN_BASE * transferredItem.getCount()));
 			setStackOrigin(transferredItem, origin);
 		} else {
 			NBTTagCompound tag = getOiginalTagCompound(transferredItem);

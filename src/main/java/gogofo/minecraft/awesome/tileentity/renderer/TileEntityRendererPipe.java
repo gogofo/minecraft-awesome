@@ -30,7 +30,7 @@ public class TileEntityRendererPipe extends TileEntitySpecialRenderer<TileEntity
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, z);
         GlStateManager.translate(0.5, 0.125, 0.45);
-        GlStateManager.rotate((180 / TileEntityPipe.TRANSFER_COOLDOWN * te.getStackCooldown(stack)) % 360, 0, 1, 0);
+        GlStateManager.rotate((180 / TileEntityPipe.TRANSFER_COOLDOWN_MIN * te.getStackCooldown(stack)) % 360, 0, 1, 0);
         Minecraft.getMinecraft().getRenderManager().doRenderEntity(item, 0, 0, 0, 0, 0, true);
         GlStateManager.popMatrix();
     }
