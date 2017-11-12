@@ -2,19 +2,15 @@ package gogofo.minecraft.awesome.tileentity;
 
 import gogofo.minecraft.awesome.block.BlockPipe;
 import gogofo.minecraft.awesome.block.BlockSuctionPipe;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 
 import java.util.ArrayList;
 
 public class TileEntitySuctionPipe extends TileEntityPipe {
-	public static final int SUCTION_COOLDOWN = 8;
+	public static final int SUCTION_COOLDOWN = 20;
 	protected int suctionCooldown = -1;
 	
 	private static final BlockPipe refBlockPipe = new BlockSuctionPipe();
@@ -75,7 +71,7 @@ public class TileEntitySuctionPipe extends TileEntityPipe {
 		for (int i : getSlotIndexesForInventoryFacing(inventory, facing)) {
 			ItemStack stack = inventory.getStackInSlot(i);
 			if (!stack.isEmpty()) {
-				setInventorySlotContents(recvSlot, createTransfferedItem(stack, pos, true));
+				setInventorySlotContents(recvSlot, createTransferredItem(stack, pos, true));
 				inventory.decrStackSize(i, 1);
 				return true;
 			}

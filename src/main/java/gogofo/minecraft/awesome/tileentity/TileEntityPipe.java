@@ -179,10 +179,10 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 			
 			ItemStack stack = inventory.getStackInSlot(i);
 			if (stack.isEmpty()) {
-				inventory.setInventorySlotContents(i, 
-												   createTransfferedItem(sentStack, 
-														   				 getPos(),
-														   				 world.getBlockState(pos).getBlock() instanceof BlockPipe));
+				inventory.setInventorySlotContents(i,
+												   createTransferredItem(sentStack,
+																		 getPos(),
+																		 world.getBlockState(pos).getBlock() instanceof BlockPipe));
 				decrStackSize(sentSlot, 1);
 				markDirty();
 				notifyUpdate(getPos());
@@ -317,10 +317,10 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		return (IInventory)te;
 	}
 	
-	protected ItemStack createTransfferedItem(ItemStack original, BlockPos origin, boolean isForPipeBlock) {	
+	protected ItemStack createTransferredItem(ItemStack original, BlockPos origin, boolean isForPipeBlock) {
 		ItemStack transferredItem = new ItemStack(original.getItem(), 1, original.getMetadata());
 		 if (original.getTagCompound() != null) {
-            transferredItem.setTagCompound((NBTTagCompound)original.getTagCompound().copy());
+            transferredItem.setTagCompound(original.getTagCompound().copy());
         }
 		 
 		setOiginalTagCompoundIfNotSet(transferredItem, original);
@@ -331,7 +331,7 @@ public class TileEntityPipe extends AwesomeTileEntityContainer implements ITicka
 		} else {
 			NBTTagCompound tag = getOiginalTagCompound(transferredItem);
 			if (tag != null) {
-				transferredItem.setTagCompound((NBTTagCompound)tag.copy());
+				transferredItem.setTagCompound(tag.copy());
 			} else {
 				transferredItem.setTagCompound(null);
 			}
